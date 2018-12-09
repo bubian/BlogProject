@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="UiTableLayoutView">
+        <attr name="frameLineColor" format="color"/>
+        <attr name="frameLineWidth" format="integer"/>
+    </declare-styleable>
+</resources>

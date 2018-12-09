@@ -1,1 +1,1 @@
-include ':app', ':mode_ui'
+include ':app', ':mode_ui', ':lib_util'
