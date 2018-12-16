@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import com.pds.ui.R;
 import com.pds.util.StringUtils;
 import com.pds.util.UnitConversionUtils;
 
@@ -22,17 +23,12 @@ import com.pds.util.UnitConversionUtils;
  * @author pengdaosong
  */
 public class UiTableLayoutView extends View {
-
   private final int mTableContentTextSize;
-  /**
-   *  从右至左，分别表示有无left，top，right，bottom边框线（0 - 无，1 - 有）
-   */
+  //从右至左，分别表示有无left，top，right，bottom边框线（0 - 无，1 - 有）
   private int mFrameLine = 0x0101;
   private int mFrameLineColor;
   private int mFrameLineWidth = 2;
-  /**
-   * //从右至左，分别表示有无横向分割线，垂直分割线
-   */
+  //从右至左，分别表示有无横向分割线，垂直分割线
   private byte mContentLine = 0x11;
 
   private Path mHorizontalFrameLinePath = new Path();
@@ -53,21 +49,17 @@ public class UiTableLayoutView extends View {
   private Paint mTableImagePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
   private int mTableHeadColor = Color.RED;
-  private int mTableContentColor = Color.BLUE;
+  private int mTableContentColor;
 
   private String[] mHorizontalTitle;
   private String[] mVerticalTitle;
 
-  /**
-   * //是否绘制类似excel第一个单元格分类表格
-   */
+  //是否绘制类似excel第一个单元格分类表格
   private boolean mIsClassifyTitle = false;
   private boolean mIsPlaceholderOneCell = false;
   private boolean mIsOpenAutoUpdateEncoderData = true;
-  private boolean mIsInterceptTouchEvent = true;
-  private boolean isDataChange = true;
   private String[] mContentStrData;
-  private byte[] mContentIntData;
+  private int[] mContentIntData;
 
   private static final int MODE_STRING_DATA = 1;
   private static final int MODE_ENCODER_DATA = 2;
@@ -89,9 +81,11 @@ public class UiTableLayoutView extends View {
   private String oneStr;
 
   private Context mContext;
-  private Matrix mMatrix;
 
   private static final byte[] ENCODER = {4,2,1};
+  private boolean mIsInterceptTouchEvent = true;
+
+  private Matrix mMatrix;
 
   public UiTableLayoutView(Context context) {
     this(context,null);
@@ -104,14 +98,19 @@ public class UiTableLayoutView extends View {
   public UiTableLayoutView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
     mContext = context;
-    mFrameLineColor = Color.RED;
+    mFrameLineColor = context.getResources().getColor(R.color.color_e2e7f1);
     mFrameLinePaint.setColor(mFrameLineColor);
     mFrameLinePaint.setStrokeWidth(mFrameLineWidth);
-    mFrameLinePaint.setColor(Color.RED);
     mFrameLinePaint.setStyle(Style.STROKE);
     mTableHeadTextSize = UnitConversionUtils.sp2Px(mContext,13);
     mTableContentTextSize = UnitConversionUtils.sp2Px(mContext,12);
     setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+    mTableContentColor = context.getResources().getColor(R.color.color_9a9aa4);
+  }
+
+  public UiTableLayoutView setFrameLine(int frameLine){
+    mFrameLine = frameLine;
+    return this;
   }
 
   private int mInitialDownY;
@@ -120,15 +119,24 @@ public class UiTableLayoutView extends View {
   private int mPointerIndex;
   private boolean mIsMoveEvent;
 
+  public UiTableLayoutView  isInterceptTouchEvent(boolean isInterceptTouchEvent){
+    mIsInterceptTouchEvent = isInterceptTouchEvent;
+    return this;
+  }
   @Override
   public boolean onTouchEvent(MotionEvent ev) {
-    if (cellWidth <=0 || cellHeight <= 0 || !mIsInterceptTouchEvent){
+
+    if (!mIsInterceptTouchEvent){
+      return super.onTouchEvent(ev);
+    }
+
+    if (cellWidth <=0 || cellHeight <= 0){
       return false;
     }
 
     final int action = ev.getActionMasked();
     switch (action) {
-      case MotionEvent.ACTION_DOWN:{
+      case MotionEvent.ACTION_DOWN:
         mActivePointerId = ev.getPointerId(0);
         mPointerIndex = ev.findPointerIndex(mActivePointerId);
         if (mPointerIndex < 0) {
@@ -137,60 +145,105 @@ public class UiTableLayoutView extends View {
         mInitialDownY = (int) ev.getY(mPointerIndex);
         mInitialDownX = (int) ev.getX(mPointerIndex);
         return true;
-      }
       case MotionEvent.ACTION_MOVE:
         return false;
-      case MotionEvent.ACTION_UP:{
+      case MotionEvent.ACTION_UP:
         mPointerIndex = ev.findPointerIndex(mActivePointerId);
         if (mPointerIndex < 0 || mIsMoveEvent) {
           return false;
         }
-        int l = mInitialDownX;
-        int t = mInitialDownY;
-        int hS = (l - getLeft()) / cellWidth;
-        int vS = (t - getTop()) / cellHeight;
+
+        int x = (int) ev.getY(mPointerIndex);
+        int y = (int) ev.getX(mPointerIndex);
+        int l;
+        int t;
+        int r;
+        int b;
+
+//        if(x >= mInitialDownX){
+//          l = mInitialDownX;
+//          r = x;
+//        }else {
+//          l = x;
+//          r = mInitialDownX;
+//        }
+//
+//        if(y >= mInitialDownY){
+//          t = mInitialDownY;
+//          b = y;
+//        }else{
+//          t = y;
+//          b = mInitialDownY;
+//        }
+
+        l = mInitialDownX;
+        t = mInitialDownY;
+
+
+        int top = getTop();
+//
+//        int hS = (l - getLeft()) / cellWidth;
+//        int vS = (t - top) / cellHeight;
+
+        int hS = l  / cellWidth;
+        int vS = t / cellHeight;
+
+//        int hE = (r - getLeft()) / cellWidth;
+//        int vE = (b - getTop()) / cellHeight;
+
         if(vS < mStartRowIndex && mStartRowIndex > 0){
           return false;
         }
+
         if(hS < mStartColumnIndex && mStartColumnIndex >0){
           return false;
         }
-        int yS = vS*cellHeight + getTop();
-        int xS = hS*cellWidth + getLeft();
+
+//        if(hS != hE || vS != vE){
+//          return false;
+//        }
+
+//        int yS = vS*cellHeight + getTop();
+//        int xS = hS*cellWidth + getLeft();
+
+        int yS = vS*cellHeight;
+        int xS = hS*cellWidth;
 
         if(mInitialDownX - xS < 8 || mInitialDownY - yS < 8){
           return false;
         }
+
         return doCellClick(hS,vS);
-      }
-      default:return false;
     }
+
+    return super.onTouchEvent(ev);
   }
 
   private boolean doCellClick(int hS, int vS) {
     if (mIsOpenAutoUpdateEncoderData){
-        int d = vS - mStartRowIndex;
-        int q = hS - mStartColumnIndex;
+      int d = vS - mStartRowIndex;
+      int q = hS - mStartColumnIndex;
 
-        if (d < 0 || null == mContentIntData || d >= mContentIntData.length || q >= ENCODER.length){
-          return false;
-        }
 
-        int t = mContentIntData[d];
-        int encoder = ENCODER[q];
-        if ((t & encoder) == 0){
-          mContentIntData[d] += encoder;
-        }else {
-          mContentIntData[d] -= encoder;
-        }
-        isDataChange = true;
-        invalidate();
+
+      if (d < 0 || q >= ENCODER.length){
+        return false;
+      }
+
+      int t = mContentIntData[d];
+      int encoder = ENCODER[q];
+      if ((t & encoder) == 0){
+        mContentIntData[d] += encoder;
+      }else {
+        mContentIntData[d] -= encoder;
+      }
+      invalidate();
     }
     return true;
   }
 
 
-  public UiTableLayoutView bindTableTitleData(String[] horizontalTitle, String[] verticalTitle){
+  public UiTableLayoutView bindTableTitleData(String[] horizontalTitle,String[] verticalTitle){
     return bindTableTitleData(horizontalTitle,verticalTitle,false);
   }
 
@@ -205,7 +258,7 @@ public class UiTableLayoutView extends View {
    * @param isClassifyTitle 当存在水平和垂直分类时设置为true，模仿excel第一个单元格分类样式
    * @return 当前View对象 - 链式调度
    */
-  public UiTableLayoutView bindTableTitleData(String[] horizontalTitle, String[] verticalTitle, boolean isClassifyTitle){
+  public UiTableLayoutView bindTableTitleData(String[] horizontalTitle,String[] verticalTitle,boolean isClassifyTitle){
 
     if (null == horizontalTitle && verticalTitle == null){
       return this;
@@ -241,6 +294,10 @@ public class UiTableLayoutView extends View {
     mTableContentPaint.setColor(mTableContentColor);
     mTableContentPaint.setTextAlign(Align.CENTER);
     mTableHeadTextHeight = getTableHeadTextHeight(horizontalTitle[0]);
+
+    if (null == mContentIntData){
+      mContentIntData = new int[mVerticalGap - mStartRowIndex];
+    }
     return this;
   }
 
@@ -261,18 +318,23 @@ public class UiTableLayoutView extends View {
   }
 
   public String getEncoderData(){
-    return new String(mContentIntData);
+
+    String data = "";
+    for ( int i = 0;i < mContentIntData.length ; i++){
+      data += ""+mContentIntData[i];
+    }
+    return data;
   }
 
   public void updateData(String encoderStr){
     bindTableContentEncoderData(encoderStr,mZeroImageId,mOneImageId);
   }
 
-  public void updateEncoderData(byte[] contentIntData){
+  public void updateEncoderData(int[] contentIntData){
     bindTableContentEncoderData(contentIntData,mZeroImageId,mOneImageId);
   }
 
-  public void bindTableContentEncoderData(byte[] contentIntData, int zeroImageId, int oneImageId){
+  public void bindTableContentEncoderData(int[] contentIntData, int zeroImageId, int oneImageId){
     mMode = MODE_ENCODER_DATA;
     mContentIntData = contentIntData;
     mZeroImageId = zeroImageId;
@@ -285,9 +347,13 @@ public class UiTableLayoutView extends View {
     if (!mIsPlaceholderOneCell){
       throw new IllegalStateException("必须指定横向和垂直标题");
     }
+    createImageCache(zeroImageId,oneImageId);
+    invalidate();
+  }
 
+  private void createImageCache(int zeroImageId, int oneImageId){
     try {
-      if (zeroImageId > 0){
+      if (zeroImageId > 0 && null == zeroBitmap){
         Drawable drawable = mContext.getResources().getDrawable(zeroImageId);
         zeroBitmap = drawableToBitmap(drawable);
       }
@@ -300,7 +366,7 @@ public class UiTableLayoutView extends View {
     }
 
     try {
-      if (oneImageId > 0){
+      if (oneImageId > 0 && null == oneBitmap){
         Drawable drawable = mContext.getResources().getDrawable(oneImageId);
         oneBitmap = drawableToBitmap(drawable);
       }
@@ -311,7 +377,6 @@ public class UiTableLayoutView extends View {
         ex.printStackTrace();
       }
     }
-    invalidate();
   }
 
 
@@ -321,7 +386,7 @@ public class UiTableLayoutView extends View {
     int h = drawable.getIntrinsicHeight();
     // 取 drawable 的颜色格式
     Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
-        : Bitmap.Config.RGB_565;
+            : Bitmap.Config.RGB_565;
     // 建立对应 bitmap
     Bitmap bitmap = Bitmap.createBitmap(w, h, config);
     // 建立对应 bitmap 的画布
@@ -339,25 +404,29 @@ public class UiTableLayoutView extends View {
    * @param oneImageId 表示改位是1显示的类容
    * @return
    */
-  public void bindTableContentEncoderData(String encoderStr, int zeroImageId, int oneImageId){ if (StringUtils.isStrictEmpty(encoderStr)){
+  public void bindTableContentEncoderData(String encoderStr, int zeroImageId,int oneImageId){
+    if (StringUtils.isStrictEmpty(encoderStr) && mVerticalGap > 0){
+      mContentIntData = new int[mVerticalGap - mStartRowIndex];
+      createImageCache(zeroImageId,oneImageId);
+      invalidate();
       return;
     }
     int len = encoderStr.length();
-    byte[] l = new byte[len];
+    int[] l = new int[len];
     for (int i = 0;i < encoderStr.length() ; i++){
       char c = encoderStr.charAt(i);
       if (!Character.isDigit(c)){
         l[i] = 0;
         continue;
       }
-      l[i] = (byte) (c - '0');
+      l[i] = c - '0';
     }
     bindTableContentEncoderData(l,zeroImageId,oneImageId);
   }
 
   private boolean isDrawData(){
     return width < 1 || height < 1
-        || mHorizontalGap < 1;
+            || mHorizontalGap < 1;
   }
 
   private int getBackGroundColor(){
@@ -371,13 +440,13 @@ public class UiTableLayoutView extends View {
 
   @Override
   protected void onDraw(Canvas canvas) {
-    if (!isDataChange){
-      return;
-    }
-    isDataChange  = false;
     canvas.drawColor(getBackGroundColor());
     width = getWidth();
     height = getHeight();
+
+    if (mHorizontalGap<= 0 || mVerticalGap <= 0){
+      return;
+    }
 
     cellWidth = width / mHorizontalGap;
     cellHeight = height / mVerticalGap;
@@ -444,16 +513,7 @@ public class UiTableLayoutView extends View {
     canvas.drawPath(mVerticalFrameLinePath,mFrameLinePaint);
   }
 
-
-  private boolean isDrawTableContent(){
-    return (null == mContentIntData || mContentIntData.length < 1)
-            && (null == mContentStrData || mContentStrData.length < 1);
-  }
   private void drawTableContent(Canvas canvas) {
-    if (isDrawTableContent()){
-      return;
-    }
-
     if (mIsClassifyTitle){
       drawOneCell(canvas);
       drawText(canvas);
@@ -493,6 +553,10 @@ public class UiTableLayoutView extends View {
 
   private void drawText(Canvas canvas) {
     drawTableHeadText(canvas);
+    if ((null == mContentIntData || mContentIntData.length < 1)
+            && (null == mContentStrData || mContentStrData.length < 1)){
+      return;
+    }
     drawContentText(canvas);
   }
 
@@ -535,7 +599,7 @@ public class UiTableLayoutView extends View {
       }
 
       if (mMode == MODE_STRING_DATA){
-        int index = (vIndex - mStartRowIndex)*(mHorizontalGap - mStartColumnIndex) + hIndex - mStartColumnIndex;
+        int index = (hIndex - mStartColumnIndex)*(vIndex - mStartRowIndex);
         if(index < 0 || index >= mContentStrData.length){
           continue;
         }
@@ -573,7 +637,6 @@ public class UiTableLayoutView extends View {
       }
     }
   }
-
   private void drawCell(Canvas canvas, int position, String str){
     if (TextUtils.isEmpty(str)){
       return;
@@ -598,6 +661,9 @@ public class UiTableLayoutView extends View {
 
     int w = bitmap.getWidth();
     int h = bitmap.getHeight();
+    if (null == mMatrix){
+      mMatrix = new Matrix();
+    }
     mMatrix.setTranslate(l + (cellWidth - w) / 2,t + (cellHeight - h) / 2);
     canvas.drawBitmap(bitmap,mMatrix,mTableImagePaint);
   }
