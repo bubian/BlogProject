@@ -1,0 +1,16 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+
+dependencies {
+    // jdk gdk 引入 gdk
+    compile localGroovy()
+    compile gradleApi()
+    compile 'com.android.tools.build:gradle:3.0.1'
+
+}
+
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
+
+apply from: './upload.gradle'

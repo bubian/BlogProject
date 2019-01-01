@@ -1,0 +1,68 @@
+
+javadoc {
+    options{
+        encoding "UTF-8"
+        charSet 'UTF-8'
+    }
+}
+
+//源代码打包任务
+task sourcesJar(type: Jar) {
+    baseName 'optimizer'
+    classifier 'sources' //分类器 区分其他jar包
+    from sourceSets.main.allSource
+}
+
+task docJar(type: Jar, dependsOn: [javadoc, groovydoc]) {
+    baseName 'optimizer'
+    classifier 'doc' //分类器 区分其他jar包
+    from javadoc.destinationDir, groovydoc.destinationDir
+}
+//配置 工程工件 jar产出的配置
+artifacts {
+    archives sourcesJar
+    archives docJar
+}
+
+
+apply plugin: 'com.jfrog.bintray'
+
+/**
+ * 上传到本地仓库
+ */
+apply plugin: 'maven-publish'
+group 'com.dongnao.optimizer'
+version '2.0.0'
+publishing {
+    publications {
+        OptimizerPlugin(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact docJar
+//            groupId = 'com.dongnao.optimizer'
+            artifactId = 'optimizer-picture'
+//            version = '2.0.0'
+        }
+    }
+}
+
+/**
+ * 上传到jcenter
+ */
+bintray {
+    user = 'lance2017'
+    //key 改乱 不是真实的！
+    key = 'xxxxxxxxx'
+    publications = ['OptimizerPlugin']
+    pkg {
+        repo = 'gradle-plugin'
+        name = 'optimizer-picture'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'http://www.dongnaoedu.com/'
+        version {
+            desc = 'Because of aapt2, the implementation has been modified'
+            released = new Date()
+            vcsTag = '2.0.0'
+        }
+    }
+}

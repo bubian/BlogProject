@@ -30,7 +30,7 @@ public class TableActivity extends AppCompatActivity {
         uiTableLayoutView = findViewById(R.id.table);
         uiTableLayoutView
                 .bindTableTitleData(mHorizontalTitle,mVerticalTitle,true)
-//                .bindTableContentData(data);
-                .bindTableContentEncoderData("76543210",-1,R.mipmap.hook);
+                .bindTableContentData(data);
+//                .bindTableContentEncoderData("76543210",-1,R.mipmap.hook);
     }
 }

@@ -1,1 +1,4 @@
-include ':app', ':mode_ui', ':lib_util'
+include ':app'
+include ':mode_ui'
+include ':lib_util'
+include ':plugin_webP'
