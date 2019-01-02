@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+    "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+<module name="Checker">
+
+    <property name="severity" value="error" />
+    <property name="charset" value="UTF-8" />
+
+    <module name="SuppressionFilter">
+        <property name="file" value="/suppressions.xml" />
+    </module>
+
+
+    <!-- 文件长度不超过2000行 -->
+    <module name="FileLength">
+        <property name="max" value="2000" />
+    </module>
+
+
+    <module name="TreeWalker">
+
+        <!-- Checks the policy on the padding of parentheses for typecasts. !-->
+        <!-- See http://checkstyle.sf.net/config_whitespace.html !-->
+        <module name="TypecastParenPad">
+            <property name="option" value="nospace" />
+            <property name="tokens" value="TYPECAST, RPAREN" />
+        </module>
+
+        <!-- Checks that a token is followed by whitespace. !-->
+        <!-- See http://checkstyle.sf.net/config_whitespace.html !-->
+        <module name="WhitespaceAfter">
+            <property name="tokens" value="COMMA, SEMI, TYPECAST" />
+        </module>
+
+        <!-- Checks that a token is surrounded by whitespace. !-->
+        <!-- See http://checkstyle.sf.net/config_whitespace.html !-->
+        <module name="WhitespaceAround">
+            <property name="tokens" value="ASSIGN, BAND, BAND_ASSIGN, BOR, BOR_ASSIGN, BSR, BSR_ASSIGN,
+                                           BXOR, BXOR_ASSIGN, COLON, DIV, DIV_ASSIGN, EQUAL, GE, GT, LAND,
+                                           LCURLY, LE, LITERAL_ASSERT, LITERAL_CATCH, LITERAL_DO, LITERAL_ELSE,
+                                           LITERAL_FINALLY, LITERAL_FOR, LITERAL_IF, LITERAL_RETURN,
+                                           LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_WHILE, LOR, LT,
+                                           MINUS, MINUS_ASSIGN, MOD, MOD_ASSIGN, NOT_EQUAL, PLUS, PLUS_ASSIGN,
+                                           QUESTION, RCURLY, SL, SLIST, SL_ASSIGN, SR, SR_ASSIGN, STAR, STAR_ASSIGN" />
+            <property name="allowEmptyConstructors" value="false" />
+            <property name="allowEmptyMethods" value="false" />
+        </module>
+        <!-- Checks the padding of an empty for initializer. !-->
+        <!-- See http://checkstyle.sf.net/config_whitespace.html !-->
+        <module name="EmptyForInitializerPad">
+            <property name="option" value="nospace" />
+        </module>
+
+        <!-- Checks the padding of an empty for iterator. !-->
+        <!-- See http://checkstyle.sf.net/config_whitespace.html !-->
+        <module name="EmptyForIteratorPad">
+            <property name="option" value="space" />
+        </module>
+
+        <!-- Checks that the whitespace around the Generic tokens < and > is correct to the typical convention. !-->
+        <!-- See http://checkstyle.sourceforge.net/config_whitespace.html#GenericWhitespace !-->
+        <module name="GenericWhitespace" />
+
+        <!-- Checks the padding between the identifier of a method definition, !-->
+        <!-- constructor definition, method call, or constructor invocation; and the left parenthesis of the parameter list. !-->
+        <!-- See http://checkstyle.sf.net/config_whitespace.html !-->
+        <module name="MethodParamPad">
+            <property name="allowLineBreaks" value="false" />
+            <property name="option" value="nospace" />
+            <property name="tokens"
+                value="CTOR_DEF, LITERAL_NEW, METHOD_CALL, METHOD_DEF, SUPER_CTOR_CALL " />
+        </module>
+        <!-- 检查所有的interface和class -->
+        <module name="JavadocType">
+            <property name="allowUnknownTags" value="true" />
+        </module>
+        <!-- 检查方法 -->
+        <module name="JavadocMethod">
+            <property name="tokens" value="METHOD_DEF" />
+            <property name="scope" value="public" />
+            <property name="allowMissingParamTags" value="true" />
+            <property name="allowMissingReturnTag" value="true" />
+            <property name="allowMissingThrowsTags" value="true" />
+            <property name="allowThrowsTagsForSubclasses" value="true" />
+            <property name="allowMissingPropertyJavadoc" value="true" />
+            <property name="ignoreMethodNamesRegex"
+                value="(^(inject))|(^(expose)+([a-zA-Z_0-9_]*)*$)|(^(provide)+([a-zA-Z_0-9_]*)*$)" />
+        </module>
+        <!--成员变量的格式 -->
+        <module name="MemberName">
+            <property name="format" value="^m[A-Z][a-zA-Z0-9]+" />
+            <property name="applyToPublic" value="false" />
+        </module>
+        <!--局部变量格式 -->
+        <module name="LocalVariableName">
+            <property name="format" value="^[a-z]*[a-zA-Z0-9]*$" />
+        </module>
+        <!--常量格式 -->
+        <module name="ConstantName">
+            <property name="format" value="^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$" />
+        </module>
+        <!--方法名格式 -->
+        <module name="MethodName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]+$" />
+        </module>
+        <!-- 类名、接口、枚举-->
+        <module name="TypeName">
+            <property name="format" value="^[A-Z][a-zA-Z0-9]+$" />
+        </module>
+        <!-- 包名格式-->
+        <module name="PackageName">
+            <property name="format" value="^[a-z]+(\.[a-zA-Z_][a-zA-Z0-9_]*)*$" />
+        </module>
+        <!-- Checks for static variable name naming conventions. !-->
+        <!-- See http://checkstyle.sf.net/config_naming.html !-->
+        <module name="StaticVariableName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+        </module>
+
+
+        <!-- 避免.*，重复多余的和不使用的import-->
+        <module name="AvoidStarImport" />
+        <module name="RedundantImport" />
+        <module name="UnusedImports" />
+        <!--代码块检查：起始大括号和if等同行，不能有空的代码块，结束大括号另起一行 -->
+        <module name="LeftCurly" />
+        <module name="NeedBraces" />
+        <!--<module name="RightCurly"/>-->
+        <!-- 当有多重修饰符时，采用以下顺序(public,protected,private,abstract,static,final,transient,volatile,synchronized,native,strictfp)-->
+        <module name="ModifierOrder" />
+        <!-- 多余的关键字 -->
+        <module name="RedundantModifier" />
+        <!-- 确保一个类有package声明 -->
+        <module name="PackageDeclaration" />
+        <!-- if最多嵌套3层 -->
+        <module name="NestedIfDepth">
+            <property name="max" value="3" />
+        </module>
+        <!-- try最多被嵌套2层 -->
+        <module name="NestedTryDepth">
+            <property name="max" value="2" />
+        </module>
+        <!-- clone方法必须调用了super.clone() -->
+        <module name="SuperClone" />
+        <!-- finalize 必须调用了super.finalize() -->
+        <module name="SuperFinalize" />
+        <!-- String的比较不能用!= 和 == -->
+        <module name="StringLiteralEquality" />
+        <!-- 允许方法名后紧跟左边圆括号"(" -->
+        <module name="MethodParamPad" />
+        <!-- 在类型转换时，不允许左圆括号右边有空格，也不允许与右圆括号左边有空格 -->
+        <module name="TypecastParenPad" />
+        <!-- 不必要的圆括号 -->
+        <module name="UnnecessaryParentheses" />
+
+
+        <!-- 长度方面的检查 -->
+        <!-- 每行不超过200个字-->
+        <module name="LineLength">
+            <property name="max" value="200" />
+            <property name="tabWidth" value="4" />
+        </module>
+        <!-- 方法不超过200行 -->
+        <module name="MethodLength">
+            <property name="countEmpty" value="false" />
+            <property name="tokens" value="METHOD_DEF" />
+            <property name="max" value="200" />
+        </module>
+        <!-- 方法的参数个数不超过个。 并且不对构造方法进行检查-->
+        <!--<module name="ParameterNumber">
+            <property name="max" value="5" />
+            <property name="tokens" value="METHOD_DEF" />
+        </module>  -->
+
+
+        <!--检查boolean值是否冗余的地方 -->
+        <module name="SimplifyBooleanExpression" />
+        <!--数组初始化使用java风格 -->
+        <module name="ArrayTypeStyle" />
+        <!-- 检查代码中存在的TODO-->
+        <module name="TodoComment" />
+        <!--丢失Default语句-->
+        <!--<module name="MissingSwitchDefault"/>-->
+        <!--不允许内联条件判断 -->
+        <!--<module name="AvoidInlineConditionals"/>-->
+
+
+        <!-- 不能出现空白区域 -->
+        <module name="EmptyBlock" />
+        <!-- 所有区域都要使用大括号 -->
+        <module name="NeedBraces" />
+        <!-- 多余的括号 -->
+        <module name="AvoidNestedBlocks">
+            <property name="allowInSwitchCase" value="true" />
+        </module>
+
+        <!-- 可能为null的字符串是否在equals的左边-->
+        <module name="EqualsAvoidNull" />
+        <!-- 是否有过于复杂的布尔返回值-->
+        <module name="SimplifyBooleanExpression" />
+        <!-- 检查未使用过的类-->
+        <module name="IllegalType">
+            <!--检查返回的类型不能是如下定义的类http://checkstyle.sourceforge.net/config_coding.html#IllegalType-->
+            <property name="illegalClassNames" value="java.util.GregorianCalendar" />
+        </module>
+        <!--检查是否有使用不需要的圆括号。 -->
+        <module name="UnnecessaryParentheses" />
+        <!--检查公有和保护的成员变量必须写注释-->
+        <!--<module name="JavadocVariable">-->
+        <!--<property name="scope" value="public"/>-->
+        <!--</module>-->
+        <!--<module name="JavadocVariable">-->
+        <!--<property name="scope" value="protected"/>-->
+        <!--</module>-->
+        <!--检查定义了没有使用的参数和方法 -->
+        <!--<module name="usage.UnusedLocalVariable">
+        <property name="ignoreFormat" value="^$"/>
+        </module>
+        <module name="usage.UnusedParameter">
+            <property name="ignoreFormat" value="^$"/>
+            <property name="ignoreCatch" value="true"/>
+            <property name="ignoreNonLocal" value="false"/>
+        </module>
+        <module name="usage.UnusedPrivateField">
+            <property name="ignoreFormat" value="^$"/>
+        </module>
+        <module name="usage.UnusedPrivateMethod">
+            <property name="ignoreFormat" value="^$"/>
+        </module>   -->
+    </module>
+
+</module>
