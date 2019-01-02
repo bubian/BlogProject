@@ -1,0 +1,106 @@
+/**
+ * 生成jar包
+ */
+task makeJar(type: Jar) {
+    //指定生成的jar名称
+    baseName 'fix'
+    //从哪里打包class文件
+    from('build/intermediates/classes/blue/debug/com/pds/blog/ndk/')
+    //打包到jar后的目录结构
+    into('com.pds.blog.ndk/')
+    //去掉不需要打包的目录和文件
+    exclude('text/', 'AndroidFixActivity.class','Bzip2Activity.class','CAppUninstallListener.class','CVideoSplitAndMerge.class','DexManager.class')
+    //去掉Android开头的文件
+    exclude { it.name.startsWith('Android') }
+}
+
+/**
+ * 修改生成的apk名字
+ */
+android.applicationVariants.all{ variant->
+
+    def application = "xxx"
+    //渠道名字
+    def buildName
+    //最终输出文件名
+    def outApkName
+    def outDir
+
+    def versionName = 'v' + variant.getVersionName() //版本名称
+    def versionCode = 'c' + variant.getVersionCode()//版本号
+
+    variant.outputs.each { output ->
+
+        def outputFile = output.outputFile
+        def fileName = "myapp_v${android.defaultConfig.versionName}_${releaseTime()}.apk"
+        output.outputFile = new File(outputFile.parent, fileName)
+
+        variant.productFlavors.each { product ->
+            buildName = product.name //获取渠道名字
+        }
+        outDir = output.outputFile.parent
+        outApkName = application + '_' + versionName + '_' + versionCode + '_' + variant.buildType.name + buildName + '.apk'
+        output.outputFile = new File(outDir, outApkName)
+    }
+
+    variant.outputs.each { output->
+        def oldFile = output.outputFile
+        def newName = ''
+        if(variant.buildType.name.equals('release')){
+            // APK输出文件名规则：aiyou-版本名-市场-release.apk
+            def releaseApkName = 'aiyou-' +versionName + '-' + variant.productFlavors[0].name + '-release.apk'
+            // appReleaseDir对应local.properties里面定义的路径，再加上日期（格式：201503011230）文件夹
+            output.outputFile = new File(appReleaseDir + '/' + getDate(), releaseApkName)
+        }
+        if(variant.buildType.name == 'beta'){
+        }
+        if(variant.buildType.name == 'debug'){
+
+        }
+    }
+}
+
+/**
+ * 获取时间
+ * @return
+ */
+static def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
+static void bumpVersionCodeInFile(File file) {
+    def text = file.text
+    def matcher = (text =~ /versionCode ([0-9]+)/)
+    if (matcher.size() != 1 || !matcher.hasGroup()) {
+        throw new GradleException("Could not find versionCode in app/build.gradle")
+    }
+    String versionCodeStr = matcher[0][1]
+    def versionCode = Integer.valueOf(versionCodeStr)
+    def newVersionCode = versionCode + 1
+    def newContent = matcher.replaceFirst("versionCode " + newVersionCode)
+    file.write(newContent)
+}
+
+task(bumpVersionCode) << {
+    def appGradleFile = file('app/build.gradle')
+    if (appGradleFile.canRead()) {
+        bumpVersionCodeInFile(appGradleFile)
+    } else {
+        throw new GradleException("Could not read app/build.gradle");
+    }
+    def wearGradleFile = file('wear/build.gradle')
+    if (wearGradleFile.canRead()) {
+        bumpVersionCodeInFile(wearGradleFile)
+    }
+    // No exception here since projects are not required to have a wearable app
+}
+
+/**
+ * 获取时间戳
+ * @return
+ */
+def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMddHHmm')
+    return formattedDate
+}

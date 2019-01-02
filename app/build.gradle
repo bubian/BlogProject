@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+apply from: '../config.gradle'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -11,13 +13,56 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        externalNativeBuild{
+            cmake{
+                cppFlags "-frtti -fexceptions"
+            }
+        }
+
+        ndk{
+            moduleName "app"
+            abiFilters "armeabi","x86" //指定平台
+            cFlags "-DANDROID_NDK"
+        }
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+
     buildTypes {
+        debug{
+
+        }
+
+        releaseWithLog {
+            splitsEnabled = true
+        }
+        release.initWith(releaseWithLog)
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+//    splits{
+//        abi{
+//            enable !project.hasProperty('dbgBld')
+//            reset()
+//            include 'armeabi', 'armeabi-v7a', 'x86', 'mips'
+//            ext.splitsEnabled true
+//        }
+//    }
+
 }
 
 dependencies {
