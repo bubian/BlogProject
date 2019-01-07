@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        suitLines = (SuitLines) findViewById(R.id.suitlines);
+        suitLines =  findViewById(R.id.suitlines);
         onBtnClick2(null);
         onBtnClick101(null);
     }
@@ -111,9 +111,6 @@ public class MainActivity extends Activity {
         }
         if (count == 1) {
             List<Unit> lines = new ArrayList<>();
-//            for (int i = 0; i < 14; i++) {
-//                lines.add(new Unit(new SecureRandom().nextInt(48), i + "d"));
-//            }
             lines.add(new Unit(0, "dd"));
             lines.add(new Unit(30, "dd"));
             lines.add(new Unit(42, "dd"));
