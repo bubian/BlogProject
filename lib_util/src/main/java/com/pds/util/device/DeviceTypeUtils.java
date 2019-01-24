@@ -1,4 +1,4 @@
-package com.pds.util;
+package com.pds.util.device;
 
 import android.os.Environment;
 

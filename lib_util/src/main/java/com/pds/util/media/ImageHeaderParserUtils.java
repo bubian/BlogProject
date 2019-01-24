@@ -28,7 +28,7 @@
  * Adapted for the uCrop library.
  */
 
-package com.pds.util;
+package com.pds.util.media;
 
 import android.media.ExifInterface;
 import android.text.TextUtils;

@@ -1,4 +1,4 @@
-package com.pds.util;
+package com.pds.util.permission;
 
 import android.app.AppOpsManager;
 import android.content.Context;

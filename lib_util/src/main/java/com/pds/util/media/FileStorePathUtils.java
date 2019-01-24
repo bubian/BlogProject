@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.pds.util;
+package com.pds.util.media;
 
 import android.content.ContentUris;
 import android.content.Context;
