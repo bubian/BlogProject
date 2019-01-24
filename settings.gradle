@@ -1,4 +1,4 @@
-include ':app'
+include ':app', ':lib_net'
 include ':mode_ui'
 include ':lib_util'
 include ':plugin_webP'
