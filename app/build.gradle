@@ -14,6 +14,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        // ndk
         externalNativeBuild{
             cmake{
                 cppFlags "-frtti -fexceptions"
@@ -24,6 +25,12 @@ android {
             moduleName "app"
             abiFilters "armeabi","x86" //指定平台
             cFlags "-DANDROID_NDK"
+        }
+
+        defaultConfig {
+            //只支持中文
+            resConfigs "zh"
+
         }
     }
 

@@ -9,6 +9,9 @@ import android.provider.Settings;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+/**
+ * @author pengdaosong
+ */
 public class SpecialPermissionsCheckUtils {
 
     /**
@@ -17,8 +20,9 @@ public class SpecialPermissionsCheckUtils {
      * @return true 允许  false禁止
      */
     public static boolean checkAlertWindowsPermission(Context context) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             return true;
+        }
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             try {
                 Class cls = Class.forName("android.content.Context");
@@ -42,8 +46,9 @@ public class SpecialPermissionsCheckUtils {
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 AppOpsManager appOpsMgr = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-                if (appOpsMgr == null)
+                if (appOpsMgr == null) {
                     return false;
+                }
                 int mode = appOpsMgr.checkOpNoThrow("android:system_alert_window", android.os.Process.myUid(), context
                         .getPackageName());
                 return mode == AppOpsManager.MODE_ALLOWED || mode == AppOpsManager.MODE_IGNORED;

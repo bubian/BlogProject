@@ -10,7 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import com.pds.util.UnitConversionUtils;
+import com.pds.ui.window.WindowUi;
+import com.pds.util.unit.UnitConversionUtils;
 
 /**
  * @author: pengdaosong.
@@ -42,7 +43,7 @@ public class ToastTestActivity1 extends AppCompatActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new UploadingCommunityToast(ToastTestActivity1.this,UploadingCommunityToast.UPLOAD_TYPE.START).show();
+                new WindowUi(ToastTestActivity1.this).show();
             }
         });
         return textView;

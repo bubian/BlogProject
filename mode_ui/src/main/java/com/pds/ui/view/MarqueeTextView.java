@@ -9,21 +9,21 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import com.pds.ui.R;
-import com.pds.util.UnitConversionUtils;
 
 import java.util.ArrayList;
 
 /**
- * @author shenjj
- * @date 2016/12/26
+ * @author pengdaosong
  */
-
+@RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
 public class MarqueeTextView extends AppCompatTextView {
 
     private static final int DEFAULT_VERTICAL_SPEED = 500;
@@ -45,22 +45,23 @@ public class MarqueeTextView extends AppCompatTextView {
     private int contentColor = Color.WHITE;
     private int contentTextSize = 100;
     private boolean hasInited = false;
-    //垂直方向滚动是否已经初始化
+    /**
+     * 垂直方向滚动是否已经初始化
+     */
     private boolean hasVerticalInited = false;
 
     private int currentY = 0;
-    private int currnetX = 0;
+    private int currentX = 0;
     private int xOffset = 0;
     private int yStartPos = 0;
     private int xStartPos = 0;
-    private int currnetIndex = 0;
+    private int currentIndex = 0;
     private Paint contentPaint;
     private int maxContentWidth = 0;
     private int maxContentHeight = 0;
     private boolean isHorizontalRunning = false;
     private boolean isVerticalRunning = false;
     private boolean horizontalOriLeft = true;
-
 
     public MarqueeTextView(Context context) {
         super(context);
@@ -86,7 +87,7 @@ public class MarqueeTextView extends AppCompatTextView {
         horizontalScrollSpeed = array.getInt(R.styleable.MarqueeTextView_horizontal_scroll_speed, DEFAULT_HORIZONTAL_SPEED);
         horizontalLoopSpeed = array.getInt(R.styleable.MarqueeTextView_horizontal_loop_speed, DEFAULT_HORIZONTAL_LOOP_SPEED);
         contentColor = array.getColor(R.styleable.MarqueeTextView_content_text_color, Color.BLACK);
-        contentTextSize = (int) array.getDimension(R.styleable.MarqueeTextView_content_text_size, UnitConversionUtils.sp2Px(getContext(),15));
+        contentTextSize =array.getDimensionPixelSize(R.styleable.MarqueeTextView_content_text_size, 15);
         singleText = array.getString(R.styleable.MarqueeTextView_content_single_text);
         array.recycle();
     }
@@ -137,97 +138,93 @@ public class MarqueeTextView extends AppCompatTextView {
         }
     }
 
+    private Rect contentBound = new Rect();
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        int contentWidth;
         if (null != contentList && contentList.size() > 1) {
-            if (currnetIndex >= contentList.size()) {
-                currnetIndex = 0;
-            }
-            viewHeight = getMeasuredHeight();
-            viewWidth = getMeasuredWidth();
-
-            String currentString = contentList.get(currnetIndex);
-            int nextIndex = currnetIndex + 1;
-            if (currnetIndex + 1 >= contentList.size()) {
-                nextIndex = 0;
-            }
-            String nextString = contentList.get(nextIndex);
-
-            Rect contentBound = new Rect();
-            contentPaint.getTextBounds(currentString, 0, currentString.length(), contentBound);
-            contentWidth = contentBound.width();
-            xOffset = contentWidth - viewWidth;
-
-            Paint.FontMetrics fontMetrics = contentPaint.getFontMetrics();
-            int textHeight = (int) ((-fontMetrics.ascent - fontMetrics.descent) / 2);
-            yStartPos = viewHeight / 2 + maxContentHeight / 4 + textHeight / 4;
-
-            //delete by kexi
-//            if (!hasInited) {
-//                hasInited = true;
-//                currentY = yStartPos;
-//            }
-
-
-
-            //add by kexi
-            if (!hasVerticalInited) {
-                hasVerticalInited = true;
-                currentY = yStartPos;
-            }
-
-
-
-            if (xOffset > 0) {
-                xOffset += contentTextSize * 2;
-                //另外加点留白.设留白两个字宽
-                if (!isHorizontalRunning && !isVerticalRunning) {
-                    isHorizontalRunning = true;
-                    if (mIOnHorizontalScroll != null) {
-                        mIOnHorizontalScroll.isHorizontalOnScroll(true);
-                    }
-                    startHorizontalScroll();
-                    currnetX = 0;
-                }
-            } else {
-                if (!isVerticalRunning) {
-                    isVerticalRunning = true;
-                    startVerticalInterval();
-                    currnetX = 0;
-                }
-            }
-            canvas.drawText(currentString, currnetX, currentY, contentPaint);
-            canvas.drawText(nextString, 0, currentY + viewHeight, contentPaint);
+            doMultiLineText(canvas);
         } else if (!TextUtils.isEmpty(singleText)) {
-            viewHeight = getMeasuredHeight() + 10;
-            viewWidth = getMeasuredWidth();
-            Rect contentBound = new Rect();
-            contentPaint.getTextBounds(singleText, 0, singleText.length(), contentBound);
-            contentWidth = contentBound.width();
-            xOffset = contentWidth - viewWidth;
-            Paint.FontMetrics fontMetrics = contentPaint.getFontMetrics();
-            int textHeight = (int) ((-fontMetrics.ascent - fontMetrics.descent) / 2);
-            yStartPos = viewHeight / 2 + maxContentHeight / 4 + textHeight / 4;
+            doSingleLineText(canvas);
+        }
+    }
 
-            if (!hasInited) {
-                hasInited = true;
-                currnetX = 0;
-                xStartPos = currnetX;
-            }
-            if (xOffset > 0) {
-                xOffset += contentTextSize * 2;
-                if (!isHorizontalRunning) {
-                    isHorizontalRunning = true;
-                    if (mIOnHorizontalScroll != null) {
-                        mIOnHorizontalScroll.isHorizontalOnScroll(true);
-                    }
+    private void doSingleLineText(Canvas canvas){
+        viewHeight = getMeasuredHeight() + 10;
+        viewWidth = getMeasuredWidth();
+        contentBound.set(0,0,0,0);
+        contentPaint.getTextBounds(singleText, 0, singleText.length(), contentBound);
+        xOffset = contentBound.width() - viewWidth;
+
+        Paint.FontMetrics fontMetrics = contentPaint.getFontMetrics();
+        int textHeight = (int) ((-fontMetrics.ascent - fontMetrics.descent) / 2);
+        yStartPos = viewHeight / 2 + maxContentHeight / 4 + textHeight / 4;
+
+        if (!hasInited) {
+            hasInited = true;
+            currentX = 0;
+            xStartPos = currentX;
+        }
+        if (xOffset > 0) {
+            xOffset += contentTextSize * 2;
+            if (!isHorizontalRunning) {
+                isHorizontalRunning = true;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                     startHorizontalLoop();
                 }
             }
-            canvas.drawText(singleText, currnetX, yStartPos, contentPaint);
         }
+        canvas.drawText(singleText, currentX, yStartPos, contentPaint);
+    }
+
+    private void doMultiLineText(Canvas canvas){
+        if (currentIndex >= contentList.size()) {
+            currentIndex = 0;
+        }
+        viewHeight = getMeasuredHeight();
+        viewWidth = getMeasuredWidth();
+
+        String currentString = contentList.get(currentIndex);
+        int nextIndex = currentIndex + 1;
+        if (currentIndex + 1 >= contentList.size()) {
+            nextIndex = 0;
+        }
+        String nextString = contentList.get(nextIndex);
+
+        contentBound.set(0,0,0,0);
+        contentPaint.getTextBounds(currentString, 0, currentString.length(), contentBound);
+        xOffset = contentBound.width() - viewWidth;
+
+        Paint.FontMetrics fontMetrics = contentPaint.getFontMetrics();
+        int textHeight = (int) ((-fontMetrics.ascent - fontMetrics.descent) / 2);
+        yStartPos = viewHeight / 2 + maxContentHeight / 4 + textHeight / 4;
+
+        if (!hasVerticalInited) {
+            hasVerticalInited = true;
+            currentY = yStartPos;
+        }
+
+        if (xOffset > 0) {
+            //另外加点留白.设留白两个字宽
+            xOffset += contentTextSize * 2;
+            if (!isHorizontalRunning && !isVerticalRunning) {
+                isHorizontalRunning = true;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                    startHorizontalScroll();
+                }
+                currentX = 0;
+            }
+        } else {
+            if (!isVerticalRunning) {
+                isVerticalRunning = true;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                    startVerticalInterval();
+                }
+                currentX = 0;
+            }
+        }
+        canvas.drawText(currentString, currentX, currentY, contentPaint);
+        canvas.drawText(nextString, 0, currentY + viewHeight, contentPaint);
     }
 
     public void setContentList(final ArrayList<String> list, final String text, String marqueeTextViewType) {
@@ -239,110 +236,91 @@ public class MarqueeTextView extends AppCompatTextView {
         } else {
             singleText = text;
         }
-
-       // hasInited = false;
-        /** 原代码是每次点击时，都将hasInited置为false，导致重新绘制的时候，
-         控件的水平位置初始化了一遍，当控件在往右滚动的时候，
-         就会滚动太多距离而出现字符消失或者留白过多的情况
-         */
-
-        /**
-         * add by kexi
-         * 判断是小组还是时空，由于小组在点击的时候会清空全部数据，而时空不会清空全部数据，
-         * 所以小组点击的时候重新重新初始化一遍hasInited = false;否则会偶现点击后文字显示不全的情况
-         */
-
-        switch (marqueeTextViewType){
-            case "Team":
-                hasInited = false;
-                break;
-            case "Time":
-                break;
-            default:
-                break;
-
-
-        }
-
+        hasInited = false;
         //解决垂直方向一开始滚动卡顿问题
         hasVerticalInited = false;
-
         requestLayout();
         postInvalidate();
     }
 
+    private LinearInterpolator  mLinearInterpolator = new LinearInterpolator();
+
     private void startVerticalInterval() {
         ValueAnimator verticalIntervalAnimator = ValueAnimator.ofFloat(0, 1);
         verticalIntervalAnimator.setDuration(verticalSwitchInterval);
-        verticalIntervalAnimator.setInterpolator(new LinearInterpolator());
+        verticalIntervalAnimator.setInterpolator(mLinearInterpolator);
         verticalIntervalAnimator.start();
-        verticalIntervalAnimator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                if (mIOnHorizontalScroll != null) {
-                    mIOnHorizontalScroll.isHorizontalOnScroll(false);
-                }
-                startVerticalSwitch();
-            }
-        });
+        verticalIntervalAnimator.addListener(mVerticalIntervalListenerAdapter);
     }
 
+    private AnimatorListenerAdapter mVerticalIntervalListenerAdapter = new AnimatorListenerAdapter() {
+        @Override
+        public void onAnimationEnd(Animator animation) {
+            super.onAnimationEnd(animation);
+            startVerticalSwitch();
+        }
+    };
 
     private void startVerticalSwitch() {
         ValueAnimator verticalSwitchAnimator = ValueAnimator.ofFloat(0, 1);
         verticalSwitchAnimator.setDuration(verticalSwitchSpeed);
-        verticalSwitchAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         verticalSwitchAnimator.start();
-        verticalSwitchAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float value = (float) animation.getAnimatedValue();
-                currentY = (int) (yStartPos - value * viewHeight * 1);
-                postInvalidate();
-            }
-        });
-        verticalSwitchAnimator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                currnetIndex++;
-                currentY = yStartPos;
-                isVerticalRunning = false;
-                postInvalidate();
-            }
-        });
+        verticalSwitchAnimator.addUpdateListener(mVerticalSwitchUpdateListener);
+        verticalSwitchAnimator.addListener(mVerticalSwitchListenerAdapter);
     }
+
+    private AnimatorListenerAdapter mVerticalSwitchListenerAdapter = new AnimatorListenerAdapter() {
+        @Override
+        public void onAnimationEnd(Animator animation) {
+            super.onAnimationEnd(animation);
+            currentIndex++;
+            currentY = yStartPos;
+            isVerticalRunning = false;
+            postInvalidate();
+        }
+    };
+
+    private ValueAnimator.AnimatorUpdateListener mVerticalSwitchUpdateListener = new ValueAnimator.AnimatorUpdateListener() {
+        @Override
+        public void onAnimationUpdate(ValueAnimator animation) {
+            float value = (float) animation.getAnimatedValue();
+            currentY = (int) (yStartPos - value * viewHeight * 1);
+            postInvalidate();
+        }
+    };
 
     private void startHorizontalScroll() {
         ValueAnimator horizontalScrollAnimator = ValueAnimator.ofFloat(0, 1);
-        //在崩溃统计上看到值<0的bug
         if (horizontalScrollSpeed * xOffset / contentTextSize < 0) {
             isHorizontalRunning = false;
             return;
         }
         horizontalScrollAnimator.setDuration(horizontalScrollSpeed * xOffset / contentTextSize);
-        horizontalScrollAnimator.setInterpolator(new LinearInterpolator());
+        horizontalScrollAnimator.setInterpolator(mLinearInterpolator);
         horizontalScrollAnimator.start();
-        horizontalScrollAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float value = (float) animation.getAnimatedValue();
-                currnetX = (int) (-xOffset * value);
-                postInvalidate();
-            }
-        });
-        horizontalScrollAnimator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                isHorizontalRunning = false;
-                isVerticalRunning = true;
-                startVerticalInterval();
-                postInvalidate();
-            }
-        });
+        horizontalScrollAnimator.addUpdateListener(mHorizontalScrollUpdateListener);
+        horizontalScrollAnimator.addListener(mHorizontalScrollListenerAdapter);
     }
+
+    private AnimatorListenerAdapter mHorizontalScrollListenerAdapter = new AnimatorListenerAdapter() {
+        @Override
+        public void onAnimationEnd(Animator animation) {
+            super.onAnimationEnd(animation);
+            isHorizontalRunning = false;
+            isVerticalRunning = true;
+            startVerticalInterval();
+            postInvalidate();
+        }
+    };
+
+    private ValueAnimator.AnimatorUpdateListener mHorizontalScrollUpdateListener = new ValueAnimator.AnimatorUpdateListener() {
+        @Override
+        public void onAnimationUpdate(ValueAnimator animation) {
+            float value = (float) animation.getAnimatedValue();
+            currentX = (int) (-xOffset * value);
+            postInvalidate();
+        }
+    };
 
     private void startHorizontalLoop() {
         ValueAnimator horizontalScrollAnimator;
@@ -356,43 +334,35 @@ public class MarqueeTextView extends AppCompatTextView {
             return;
         }
         horizontalScrollAnimator.setDuration(horizontalLoopSpeed * xOffset / contentTextSize);
-        horizontalScrollAnimator.setInterpolator(new LinearInterpolator());
+        horizontalScrollAnimator.setInterpolator(mLinearInterpolator);
         horizontalScrollAnimator.start();
-        horizontalScrollAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float value = (float) animation.getAnimatedValue();
-                currnetX = (int) (xStartPos - xOffset * value);
-                postInvalidate();
-            }
-        });
-        horizontalScrollAnimator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                isHorizontalRunning = false;
-                horizontalOriLeft = !horizontalOriLeft;
-                xStartPos = currnetX;
-                postInvalidate();
-            }
-        });
+        horizontalScrollAnimator.addUpdateListener(mHorizontalLoopUpdateListener);
+        horizontalScrollAnimator.addListener(mHorizontalLoopListenerAdapter);
     }
 
-    private IOnHorizontalScroll mIOnHorizontalScroll;
 
-    public void setOnHorizontalScroll(IOnHorizontalScroll iOnHorizontalScroll) {
-        this.mIOnHorizontalScroll = iOnHorizontalScroll;
-    }
+    private AnimatorListenerAdapter mHorizontalLoopListenerAdapter = new AnimatorListenerAdapter() {
+        @Override
+        public void onAnimationEnd(Animator animation) {
+            super.onAnimationEnd(animation);
+            isHorizontalRunning = false;
+            horizontalOriLeft = !horizontalOriLeft;
+            xStartPos = currentX;
+            postInvalidate();
+        }
+    };
+
+    private ValueAnimator.AnimatorUpdateListener mHorizontalLoopUpdateListener = new ValueAnimator.AnimatorUpdateListener() {
+        @Override
+        public void onAnimationUpdate(ValueAnimator animation) {
+            float value = (float) animation.getAnimatedValue();
+            currentX = (int) (xStartPos - xOffset * value);
+            postInvalidate();
+        }
+    };
 
     public void setSingleText(String singleText) {
         this.singleText = singleText;
         postInvalidate();
     }
-
-    public interface IOnHorizontalScroll {
-
-        void isHorizontalOnScroll(boolean isHorizontalRunning);
-
-    }
-
 }
