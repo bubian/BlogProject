@@ -41,4 +41,10 @@
         <!--水平循环速度-->
         <attr name="horizontal_loop_speed" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="RadiusTextView">
+        <attr name="rtvRadius" format="dimension"/>
+        <attr name="rtvStrokeWidth" format="dimension"/>
+        <attr name="rtvStrokeColor" format="color"/>
+    </declare-styleable>
 </resources>
