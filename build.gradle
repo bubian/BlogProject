@@ -1,12 +1,16 @@
 buildscript {
-    ext.kotlin_version = '1.2.71'
     repositories {
         google()
         jcenter()
+        maven {
+            url uri('./repo')
+        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath 'org.aspectj:aspectjtools:1.8.6'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath 'com.plugin:aspect:1.0.0'
     }
 }
 
@@ -14,6 +18,9 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            url uri('../repo')
+        }
     }
 }
 

@@ -13,8 +13,12 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
-            android:fullBackupContent="true" tools:targetApi="m">
-        <activity android:name=".MainActivity">
+            android:fullBackupContent="true"
+            android:appComponentFactory=""
+            tools:replace="android:appComponentFactory"
+            android:name=".BlogApplication"
+            tools:targetApi="m">
+        <activity android:name=".aop.AspectActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>
