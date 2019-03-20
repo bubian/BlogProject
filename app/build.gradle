@@ -4,55 +4,74 @@ apply plugin: 'aspect'
 apply from: '../config.gradle'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.pds.blog"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
         multiDexEnabled true
 
-
-        javaCompileOptions{
-            annotationProcessorOptions{
+        javaCompileOptions {
+            annotationProcessorOptions {
                 includeCompileClasspath = true
             }
         }
         // ndk
-        externalNativeBuild{
-            cmake{
+        externalNativeBuild {
+            cmake {
                 cppFlags "-frtti -fexceptions"
             }
         }
-
-        ndk{
+        ndk {
             moduleName "app"
-            abiFilters "armeabi","x86" //指定平台
+            abiFilters "armeabi", "x86" //指定平台
             cFlags "-DANDROID_NDK"
         }
-
-
-//        //指定jdk版本
+        //指定jdk版本
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
         }
 
-
-
         defaultConfig {
             //只支持中文
             resConfigs "zh"
-
         }
     }
 
+//    productFlavors {
+//        wm {}
+//        mt {}
+//    }
+
     sourceSets {
+        def dirs = ['p_restaurant', 'p_goods_detail', 'p_comment', 'p_compose_order',
+                    'p_shopping_cart', 'p_base', 'p_product_set']
         main {
             jniLibs.srcDirs = ['libs']
         }
+
+//        main {
+//            manifest.srcFile 'src/p_restaurant/main/AndroidManifest.xml'
+//            dirs.each { dir ->
+//                java.srcDir("src/${dir}/main/java")
+//                res.srcDir("src/${dir}/main/res")
+//            }
+//        }
+//        wm {
+//            dirs.each { dir ->
+//                java.srcDir("src/${dir}/wm/java")
+//                res.srcDir("src/${dir}/wm/res")
+//            }
+//        }
+//        mt {
+//            dirs.each { dir ->
+//                java.srcDir("src/${dir}/mt/java")
+//                res.srcDir("src/${dir}/mt/res")
+//            }
+//        }
     }
 
     externalNativeBuild {
@@ -62,7 +81,7 @@ android {
     }
 
     buildTypes {
-        debug{
+        debug {
 
         }
 
@@ -91,17 +110,4 @@ android {
 //    }
 
 }
-
-repositories {
-    flatDir{
-        dirs 'libs'
-    }
-}
-
-dependencies {
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:multidex:1.0.3'
-
-    compile(name: 'aspect-runtime-1.0.0', ext: 'aar')
-}
+apply from: 'config.gradle'
