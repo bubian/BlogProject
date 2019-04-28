@@ -4,7 +4,7 @@ apply plugin: 'aspect'
 apply from: '../config.gradle'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.pds.blog"
         minSdkVersion 19
