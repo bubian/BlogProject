@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+def TEST = 1
+def ONLINE = 2
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -11,6 +13,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //获取命令行输入参数,获取后控制使用测试环境，还是线上环境
+        def urlType = project.hasProperty('platformService') ? Integer.parseInt(platformService) : TEST
     }
     buildTypes {
         release {
