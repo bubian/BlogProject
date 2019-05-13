@@ -3,10 +3,10 @@
 
 #keystore信息
 #Windows 下路径分割线请注意使用\\转义
-keystorePath = "../medlinker.keystore"
-keyAlias = "medlinker"
-keystorePassword = "medlinker"
-keyPassword = "medlinker"
+keystorePath = ""
+keyAlias = ""
+keystorePassword = ""
+keyPassword = ""
 
 #加固后的源文件名（未重签名）
 protectedSourceApkName = ""

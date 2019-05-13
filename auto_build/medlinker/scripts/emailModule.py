@@ -9,9 +9,9 @@ from email.utils import formataddr
 
 class EmailSender:
     def __init__(self):
-        self.user = 'ci@medlinker.com'
-        self.passwd = 'Med123'
-        self.to_list = ['group_yanfa@medlinker.net', 'group_dcm_test@medlinker.com','group_pm@medlinker.com','group_dcm_fe@medlinker.com','yangxuewei@medlinker.com','gaoyu@medlinker.com']
+        self.user = ''
+        self.passwd = ''
+        self.to_list = []
         self.cc_list = []
         self.tag = "安卓最新测试包(本邮件是程序自动下发的，请勿回复！)"
         self.doc = None

@@ -47,7 +47,7 @@ def exeGradleCmd(buildEnv):
          print ("Other System tasks")
 
     suffix = '-PhostType=4'
-    assemble = 'assembleOnlineReleaseChannels -PchannelList=medlinker'
+    assemble = 'assembleOnlineReleaseChannels -PchannelList=pds'
     if(buildEnv == 'online'):
         suffix = '-PhostType=3'
         assemble = 'assembleRelease'
@@ -80,7 +80,7 @@ def getUsageStr():
             + ' -m, --message <message> 打包日志信息 \n'
             + ' -e, --env <env>  打包环境：[qa,online], 不传默认为qa。\n'
             + ' -r, --apkReceiverEmail <apkReceiverEmail> '
-            + '基准包的接收者的邮件（乐固加固后的未签名apk，由发包者用脚本打渠道包）,不传则生成medlinker渠道上传到蒲公英\n'
+            + '基准包的接收者的邮件（乐固加固后的未签名apk，由发包者用脚本打渠道包）,pds\n'
             + ' noemail  不发邮件，默认要发送（上传蒲公英后）。\n'
             + ' haveOutputApk  已经打包apk成功，不需要再次打包（qa、online有效，online包需要加固）'
             + ' haveLeguApk 已经打包apk成功，并已获取加固未签名的apk（online有效）')
@@ -152,7 +152,7 @@ def jiaGuAndSendApk(apkReceiverEmail, buildEnv, message):
         cmdWalleStr = 'cd %s && python ApkResigner.py' %(apkResignerForWallePath)
         print(cmdWalleStr)
         os.system(cmdWalleStr)
-        # 将medlinker渠道apk上传蒲公英
+        # 将360渠道apk上传蒲公英
         medlinkerLeguAlignedSignedApk = ''
         for fpath, dirname, fnames in os.walk(apkResignerForWallePath + '/channels'):
             for fname in fnames:
