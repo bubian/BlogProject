@@ -1,21 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="blog.pds.com.socket">
+          xmlns:tools="http://schemas.android.com/tools" package="blog.pds.com.socket">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
-            android:allowBackup="true"
+            android:allowBackup="false"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ClientActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".core.service.SService"
+            android:exported="true"
+            android:process=":sService"/>
+
+        <service
+            android:name=".core.client.CService"
+            android:exported="true"
+            android:process=":cService"/>
+
+        <service
+            android:name=".core.client.CService$GrayInnerService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":cService"/>
+
     </application>
 
 </manifest>
