@@ -2,6 +2,7 @@ package blog.pds.com.socket
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -16,7 +17,11 @@ class ClientActivity : AppCompatActivity() {
     private lateinit var socketIp : EditText
     private lateinit var openConnect : Button
 
-
+    companion object {
+        init {
+            System.loadLibrary("socket_client-lib")
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +37,9 @@ class ClientActivity : AppCompatActivity() {
 //            socketConnectState.text = "正在创建连接!"
 //            it.isEnabled = false
         }
+
+        Log.e("loadLibrary"," class_loader = ${this.classLoader}" )
+        Log.e("loadLibrary"," system lib path = ${System.getProperty("java.library.path")}" )
     }
 
     private fun startSocketService(){

@@ -1,4 +1,4 @@
-include ':app', ':socket'
+include ':app', ':socket', ':lib_three_lib'
 include ':mode_ui'
 include ':lib_util'
 include ':plugin_webP'

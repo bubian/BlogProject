@@ -41,27 +41,30 @@ object CSocket : ISocket {
         this.sCallback = sCallback
     }
 
-    override fun connect(ip: String, port: Int) {
 
+    override fun connect(ip: String, port: Int) {
         lock.lock()
         if (isConnected()){
             disConnect(false)
         }
-
         connectState = SState.STATE_CONNECTING
         this.ip = ip
         this.port = port
         Log.i(TAG,"connecting  ip=$ip , port = $port")
-
+        CSocket.connect(ip,port,50)
         try {
             while (true){
                 try {
                     socket = Socket()
+                    if (null == socket){
+                        throw (Exception("connect failed,unknown error"))
+                    }
+                    val address = InetSocketAddress(ip,port)
                     socket!!.keepAlive = false
                     //inputStream read 超时时间
                     socket!!.soTimeout = 2 * 3 * 60 * 1000
                     socket!!.tcpNoDelay = true
-                    socket!!.connect(InetSocketAddress(ip,port))
+                    socket!!.connect(address)
                     if (socket!!.isConnected){
                         dataInputStream = DataInputStream(socket!!.getInputStream())
                         dataOutputStream = DataOutputStream(socket!!.getOutputStream())
@@ -77,7 +80,6 @@ object CSocket : ISocket {
                     Log.i(TAG,"connect IOException =${e.message} , and retry count = ${cRetryPolicy?.getCurrentRetryCount()}")
                 }
             }
-
         }catch (e:Exception){
             e.printStackTrace()
             Log.i(TAG,"connect IOException =  ${e.message}")
@@ -86,7 +88,6 @@ object CSocket : ISocket {
         }finally {
             lock.unlock()
         }
-
         if (connectState == SState.STATE_CONNECTED){
             receiveData()
         }
@@ -94,23 +95,18 @@ object CSocket : ISocket {
 
     private fun receiveData(){
         Log.i(TAG,"receiveData ing isConnect = ${isConnected()}")
-
         while (isConnected()){
             try {
-
 //                val type = dataInputStream?.readByte()!!.toInt()
 //                val length = dataInputStream?.readChar()!!.toInt()
                 val c = dataInputStream?.readChar()
 
                 Log.i(TAG,"receiveData connected receiveData type = $c")
-
                 val t  = dataInputStream?.available()
-
                 val data = ByteArray(t!!)
                 dataInputStream?.readFully(data)
                 Log.i(TAG,"receiveData connected receiveData type = ${String(data)}")
 //                sCallback.onReceive(type,data)
-
             }catch (e:SocketTimeoutException){
                 Log.e(TAG,"receiveData SocketTimeoutException = ${e.message}")
                 break
@@ -199,5 +195,11 @@ object CSocket : ISocket {
     override fun getConnectState(): SState {
        return connectState
     }
+
+    /**
+     * A native method that is implemented by the 'native-lib' native library,
+     * which is packaged with this application.
+     */
+    external fun connect(ip: String, port: Int,time: Int): Int
 
 }

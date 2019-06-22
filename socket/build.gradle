@@ -15,6 +15,24 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        externalNativeBuild {
+            cmake {
+                cppFlags "-frtti -fexceptions"
+            }
+        }
+
+        ndk{
+            moduleName "app"
+            abiFilters "armeabi","x86" //指定平台
+            cFlags "-DANDROID_NDK"
+        }
+
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
     }
 
     buildTypes {
