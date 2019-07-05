@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'aspect'
+
+apply from: '../config.gradle'
 
 def TEST = 1
 def ONLINE = 2
@@ -29,13 +30,89 @@ android {
 //        incremental true
 //    }
 
+        multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+        // ndk
+        externalNativeBuild {
+            cmake {
+                cppFlags "-frtti -fexceptions"
+            }
+        }
+        ndk {
+            moduleName "app"
+            abiFilters "armeabi", "x86" //指定平台
+            cFlags "-DANDROID_NDK"
+        }
+        //指定jdk版本
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+
+        defaultConfig {
+            //只支持中文
+            resConfigs "zh"
+        }
+    }
+
+//    productFlavors {
+//        wm {}
+//        mt {}
+//    }
+
+    sourceSets {
+        def dirs = ['p_restaurant', 'p_goods_detail', 'p_comment', 'p_compose_order',
+                    'p_shopping_cart', 'p_base', 'p_product_set']
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+
+//        main {
+//            manifest.srcFile 'src/p_restaurant/main/AndroidManifest.xml'
+//            dirs.each { dir ->
+//                java.srcDir("src/${dir}/main/java")
+//                res.srcDir("src/${dir}/main/res")
+//            }
+//        }
+//        wm {
+//            dirs.each { dir ->
+//                java.srcDir("src/${dir}/wm/java")
+//                res.srcDir("src/${dir}/wm/res")
+//            }
+//        }
+//        mt {
+//            dirs.each { dir ->
+//                java.srcDir("src/${dir}/mt/java")
+//                res.srcDir("src/${dir}/mt/res")
+//            }
+//        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+
     buildTypes {
+        debug {
+
+        }
+
+        releaseWithLog {
+            splitsEnabled = true
+        }
+        release.initWith(releaseWithLog)
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
 
 dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -48,4 +125,20 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation("com.squareup.okhttp3:okhttp:3.14.1")
     implementation project(':lib_package')
+//    splits{
+//        abi{
+//            enable !project.hasProperty('dbgBld')
+//            reset()
+//            include 'armeabi', 'armeabi-v7a', 'x86', 'mips'
+//            ext.splitsEnabled true
+//        }
+//    }
+
+//    dexOptions {
+//        preDexLibraries = false
+//        additionalParameters=['--core-library']
+//    }
+
 }
+
+apply from: 'config.gradle'

@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.pds.blog">
 
+    <!-- android:extractNativeLibs="false"  阻止把本地库从 APK 拷贝到文件系统上。唯一的要求是文件已经经过整理并且未压缩地存于 APK 里,这个功能仅在高于 2.2.0 版本的 Android Gradle 插件中使用-->
+
     <application
+            android:extractNativeLibs="false"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+            android:theme="@style/AppTheme"
+            android:fullBackupContent="true"
+            android:appComponentFactory=""
+            tools:replace="android:appComponentFactory"
+            android:name=".BlogApplication"
+            tools:targetApi="m">
+        <activity android:name=".aop.AspectActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
+                <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
