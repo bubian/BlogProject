@@ -17,11 +17,11 @@ class ClientActivity : AppCompatActivity() {
     private lateinit var socketIp : EditText
     private lateinit var openConnect : Button
 
-    companion object {
-        init {
-            System.loadLibrary("socket_client-lib")
-        }
-    }
+//    companion object {
+//        init {
+//            System.loadLibrary("socket_client-lib")
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,19 +34,16 @@ class ClientActivity : AppCompatActivity() {
 
         openConnect.setOnClickListener {
             startSocketService()
-//            socketConnectState.text = "正在创建连接!"
-//            it.isEnabled = false
+            socketConnectState.text = "正在创建连接!"
+            it.isEnabled = false
         }
-
-        Log.e("loadLibrary"," class_loader = ${this.classLoader}" )
-        Log.e("loadLibrary"," system lib path = ${System.getProperty("java.library.path")}" )
     }
 
     private fun startSocketService(){
         var ip : String?= socketIp.text.toString()
 
         if (null == ip || ip.isEmpty()){
-            ip = "10.0.4.16"
+            ip = "192.168.1.3"
         }
         SocketServiceHelper.connect(this,10000,ip,Constants.SOCKET_PORT)
     }

@@ -11,6 +11,7 @@ import android.text.TextUtils
 import android.util.Log
 import blog.pds.com.socket.SocketAIDLService
 import blog.pds.com.socket.core.common.*
+import blog.pds.com.socket.core.manager.SocketManager
 import blog.pds.com.socket.core.thread.AsyncTaskExecutor
 import blog.pds.com.socket.core.thread.RunnablePool
 import java.lang.ref.SoftReference

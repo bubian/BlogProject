@@ -28,5 +28,23 @@ class Constants{
         const val KEY_REMOTE_SOCKET_MSG_DATA = "key_remote_socket_msg_data"
 
         const val SOCKET_PORT = 6666
+
+        const val IM_RECEIVER_ACTION = "android.intent.action.im.receiver_action"
+        const val KEY_REMOTE_SOCKET_MSG_TYPE = "key_remote_socket_msg_type"
+        const val KEY_MESSAGE_TYPE = "key_message_type"
+        const val KEY_LOCAL_SOCKET_MSG = "key_local_socket_msg"
+
+        /**
+         * 远程socket消息
+         */
+        const val MESSAGE_TYPE_REMOTE = 20
+        /**
+         * 本地socket消息。主要是连接相关消息。
+         */
+        const val MESSAGE_TYPE_LOCAL = 21
+        const val LOCAL_MSG_CONNECT = 30
+        const val LOCAL_MSG_DISCONNECTED = 31
+        const val LOCAL_MSG_CONNECT_FAILED = 32
+
     }
 }

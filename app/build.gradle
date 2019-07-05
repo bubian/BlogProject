@@ -47,5 +47,5 @@ dependencies {
 
     implementation 'com.android.support:multidex:1.0.3'
     implementation("com.squareup.okhttp3:okhttp:3.14.1")
-    implementation project(':lib_three_lib')
+    implementation project(':lib_package')
 }

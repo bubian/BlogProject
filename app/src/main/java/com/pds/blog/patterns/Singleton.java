@@ -26,7 +26,6 @@ public class Singleton implements Serializable {
     public static void main(String[] args) throws IOException {
         testSingleton();
         Singleton4.INSTANCE.test();
-
     }
 
     private static void testSingleton() {

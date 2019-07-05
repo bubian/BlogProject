@@ -51,7 +51,7 @@ object CSocket : ISocket {
         this.ip = ip
         this.port = port
         Log.i(TAG,"connecting  ip=$ip , port = $port")
-        CSocket.connect(ip,port,50)
+//        connect(ip,port,50)
         try {
             while (true){
                 try {
