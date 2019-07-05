@@ -27,7 +27,7 @@ class AspectPlugin implements Plugin<Project> {
         }
 
         project.dependencies {
-            compile 'com.plugin:aspect:1.0.0'
+            compile 'com.lib:aspect:1.0.0'
 //            debugCompile 'com.lib:aspect-runtime:1.0.0'
             debugCompile 'org.aspectj:aspectjrt:1.8.13'
         }
