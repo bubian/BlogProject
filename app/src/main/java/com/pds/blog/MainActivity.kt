@@ -9,7 +9,7 @@ import blog.pds.com.three.gson.entity.GsonItem
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        const val TAG = "MainActivity"
+        const val TAG = "HtmlCompatActivity"
     }
 
 

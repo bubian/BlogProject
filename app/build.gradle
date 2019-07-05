@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'aspect'
-
 apply from: '../config.gradle'
 
 def TEST = 1
@@ -19,18 +18,6 @@ android {
 
         //获取命令行输入参数,获取后控制使用测试环境，还是线上环境
         def urlType = project.hasProperty('platformService') ? Integer.parseInt(platformService) : TEST
-    }
-
-    compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
-    }
-
-//    dexOptions {
-//        incremental true
-//    }
-
-        multiDexEnabled true
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -48,22 +35,28 @@ android {
             abiFilters "armeabi", "x86" //指定平台
             cFlags "-DANDROID_NDK"
         }
-        //指定jdk版本
-        compileOptions {
-            sourceCompatibility JavaVersion.VERSION_1_8
-            targetCompatibility JavaVersion.VERSION_1_8
-        }
+    }
 
-        defaultConfig {
-            //只支持中文
-            resConfigs "zh"
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
         }
     }
 
-//    productFlavors {
-//        wm {}
-//        mt {}
-//    }
+    dexOptions {
+        incremental true
+    }
+
+    //指定jdk版本
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        //只支持中文
+        resConfigs "zh"
+    }
 
     sourceSets {
         def dirs = ['p_restaurant', 'p_goods_detail', 'p_comment', 'p_compose_order',
@@ -93,11 +86,10 @@ android {
 //        }
     }
 
-    externalNativeBuild {
-        cmake {
-            path "CMakeLists.txt"
-        }
-    }
+    //    productFlavors {
+//        wm {}
+//        mt {}
+//    }
 
     buildTypes {
         debug {
@@ -113,6 +105,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
 
 dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -125,20 +119,5 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation("com.squareup.okhttp3:okhttp:3.14.1")
     implementation project(':lib_package')
-//    splits{
-//        abi{
-//            enable !project.hasProperty('dbgBld')
-//            reset()
-//            include 'armeabi', 'armeabi-v7a', 'x86', 'mips'
-//            ext.splitsEnabled true
-//        }
-//    }
-
-//    dexOptions {
-//        preDexLibraries = false
-//        additionalParameters=['--core-library']
-//    }
 
 }
-
-apply from: 'config.gradle'

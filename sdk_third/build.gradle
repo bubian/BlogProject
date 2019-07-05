@@ -22,4 +22,5 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.anko:anko-commons:0.10.4"
+    api 'com.google.guava:guava:28.0-android'
 }

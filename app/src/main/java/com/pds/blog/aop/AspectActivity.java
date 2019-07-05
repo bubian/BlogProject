@@ -6,7 +6,6 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.widget.TextView;
 import lib.pds.com.aspect.anno.DebugLog;
-import lib.pds.com.runtime.AspectBlog;
 
 /**
  * @author pengdaosong
