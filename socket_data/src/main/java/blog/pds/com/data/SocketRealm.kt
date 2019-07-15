@@ -8,7 +8,7 @@ import io.realm.RealmObject
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-class SocketRealm : RealmObject(){
+open class SocketRealm : RealmObject(){
 
     var id: Long = 0
     var name: String?= null

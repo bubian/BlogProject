@@ -12,9 +12,9 @@ import io.realm.annotations.PrimaryKey
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-class Person: RealmObject(){
+open class Person: RealmObject(){
     @PrimaryKey
-    val id: Long = 0
-    val name: String? = null
-    val dogs: RealmList<SocketRealm>? = null
+    var id: Long = 0
+    var name: String? = null
+    var dogs: RealmList<SocketRealm>? = null
 }

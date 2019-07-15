@@ -6,7 +6,7 @@ import android.util.Log
 import blog.pds.com.three.gson.GsonHelper
 import blog.pds.com.three.gson.entity.GsonItem
 
-class MainActivity : AppCompatActivity() {
+class MainActivityK : AppCompatActivity() {
 
     companion object {
         const val TAG = "HtmlCompatActivity"

@@ -16,7 +16,7 @@
             android:theme="@style/AppTheme"
             android:name=".BaseApplication"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ClientActivity">
+        <activity android:name=".ServiceActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
