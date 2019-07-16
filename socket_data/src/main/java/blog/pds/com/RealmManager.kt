@@ -3,6 +3,8 @@ package blog.pds.com
 import android.content.Context
 import blog.pds.com.data.Person
 import blog.pds.com.data.SocketRealm
+import com.facebook.stetho.Stetho
+import com.uphyca.stetho_realm.RealmInspectorModulesProvider
 import io.realm.*
 
 
@@ -58,5 +60,16 @@ class RealmManager{
 //            .migration( MyMigration())
             .build()
         val realm = Realm.getInstance(config);
+    }
+
+    /**
+     * 用于浏览器查看realm数据库
+     */
+    private fun initStetho(context: Context){
+        Stetho.initialize(
+            Stetho.newInitializerBuilder(context)
+                .enableDumpapp(Stetho.defaultDumperPluginsProvider(context))
+                .enableWebKitInspector(RealmInspectorModulesProvider.builder(context).build())
+                .build());
     }
 }

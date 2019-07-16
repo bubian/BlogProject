@@ -25,6 +25,10 @@ allprojects {
         maven {
             url uri('../repo')
         }
+        // 添加，下载stetho_realm
+        maven {
+            url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'
+        }
     }
 }
 

@@ -27,6 +27,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':sdk_third')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // realm数据库查看--chrome://inspect/#devices
+    debugCompile 'com.facebook.stetho:stetho:1.5.0'
+    debugCompile 'com.uphyca:stetho_realm:2.1.0'
 }
 repositories {
     mavenCentral()
