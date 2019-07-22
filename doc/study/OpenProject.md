@@ -22,3 +22,7 @@
 ### Android 字节码编辑插件
 - 作用：面向切面编程（AOP）
 - 项目地址：https://github.com/didi/DroidAssist/blob/master/README_CN.md
+
+### Flutter
+- 性质：很好的Flutter学习库
+- 项目地址：https://github.com/shichunlei/flutter_app
