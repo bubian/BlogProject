@@ -9,8 +9,8 @@ import android.os.IBinder
 import android.os.Process
 import android.text.TextUtils
 import android.util.Log
-import blog.pds.com.socket.SocketAIDLService
 import blog.pds.com.socket.core.common.*
+import blog.pds.com.socket.core.dispatch.SocketSendDataBinder
 import blog.pds.com.socket.core.manager.SocketManager
 import blog.pds.com.socket.core.thread.AsyncTaskExecutor
 import blog.pds.com.socket.core.thread.RunnablePool
@@ -31,12 +31,11 @@ class CService : Service(){
         private const val TAG = Constants.SOCKET_TAG_CLIENT_PRE +"cs:"
     }
 
-
     private lateinit var iClientSoft : SoftReference<ISocket>
     private var startSocketId : Long = 0
 
     override fun onBind(intent: Intent?): IBinder? {
-        return binder
+        return SocketSendDataBinder.asBinder()
     }
 
     override fun onCreate() {
@@ -51,7 +50,7 @@ class CService : Service(){
         if (null == intent){
             Log.i(TAG, "onStartCommand intent == null , pid=${Process.myPid()} , mIClient = $cSocket")
             AsyncTaskExecutor.execute(RunnablePool.obtain(mRunnableExecutorImpl, SAction.OP_TYPE_RECONNECT))
-            return Service.START_STICKY
+            return START_STICKY
         }
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N) {
             val innerIntent = Intent(this, GrayInnerService::class.java)
@@ -61,11 +60,7 @@ class CService : Service(){
 
         val opType = intent.getIntExtra(SAction.KEY_OP_TYPE, -1)
 
-        Log.i(
-            TAG,
-            "onStartCommand intent: $intent , flags=$flags, startId=$startId , pid=${Process.myPid()} , " +
-                    "opType = $opType, isConnected = ${cSocket.isConnected()}, connectStatus = ${cSocket.getConnectState()}"
-        )
+        Log.i(TAG, "onStartCommand intent:opType = $opType")
 
         when(opType){
             SAction.OP_TYPE_INIT -> {
@@ -103,8 +98,13 @@ class CService : Service(){
 
         }
 
-        return Service.START_STICKY
+        return START_STICKY
 
+    }
+
+    private fun createImClient() {
+        CSocket.registerCallback(socketCallback)
+        iClientSoft = SoftReference(CSocket)
     }
 
     private fun connectSocket(intent: Intent) {
@@ -140,6 +140,14 @@ class CService : Service(){
      * socket连接匿名内部类
      */
     private val socketCallback = object : SCallback {
+        override fun onReceive(data: ByteArray) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun connected() {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
         override fun onConnect() {
 
         }
@@ -171,19 +179,12 @@ class CService : Service(){
             when (what) {
                 SAction.OP_TYPE_CONNECT -> iClient.connect(params[0].toString(), params[1] as Int)
                 SAction.OP_TYPE_SEND -> iClient.send(params[0] as ByteArray, params[1] as ISendCallBack)
-                SAction.OP_TYPE_DISCONNECT ->
-                    //手动断开，不需要重连。
-                    iClient.disConnect(false)
+                SAction.OP_TYPE_DISCONNECT -> iClient.disConnect(false)
                 SAction.OP_TYPE_RECONNECT -> iClient.reConnect()
                 else -> {
                 }
             }
         }
-    }
-
-    private fun createImClient() {
-        CSocket.registerCallback(socketCallback)
-        iClientSoft = SoftReference(CSocket)
     }
 
     private fun imClient(): CSocket {
@@ -210,14 +211,6 @@ class CService : Service(){
 
         override fun onBind(intent: Intent): IBinder? {
             return null
-        }
-
-    }
-
-    private val binder = object : SocketAIDLService.Stub(){
-        override fun isSocketConnected(): Boolean {
-            val iClient = imClient()
-            return iClient.isConnected()
         }
 
     }

@@ -2,6 +2,7 @@ package blog.pds.com.socket.core.client
 
 import android.util.Log
 import blog.pds.com.socket.core.common.*
+import blog.pds.com.socket.core.policy.CRetryPolicy
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.io.IOException
@@ -51,7 +52,7 @@ object CSocket : ISocket {
         this.ip = ip
         this.port = port
         Log.i(TAG,"connecting  ip=$ip , port = $port")
-//        connect(ip,port,50)
+        this.sCallback.onConnect()
         try {
             while (true){
                 try {
@@ -69,7 +70,7 @@ object CSocket : ISocket {
                         dataInputStream = DataInputStream(socket!!.getInputStream())
                         dataOutputStream = DataOutputStream(socket!!.getOutputStream())
                         connectState = SState.STATE_CONNECTED
-                        this.sCallback.onConnect()
+                        this.sCallback.connected()
                         break
                     }else{
                         throw (Exception("connect failed,unknown error"))
@@ -90,11 +91,13 @@ object CSocket : ISocket {
         }
         if (connectState == SState.STATE_CONNECTED){
             receiveData()
+        }else{
+            disConnect(false)
+            sCallback.onConnectFailed(Exception("connect failed,unknown error"))
         }
     }
 
     private fun receiveData(){
-        Log.i(TAG,"receiveData ing isConnect = ${isConnected()}")
         while (isConnected()){
             try {
 //                val type = dataInputStream?.readByte()!!.toInt()
@@ -106,16 +109,16 @@ object CSocket : ISocket {
                 val data = ByteArray(t!!)
                 dataInputStream?.readFully(data)
                 Log.i(TAG,"receiveData connected receiveData type = ${String(data)}")
-//                sCallback.onReceive(type,data)
+                sCallback.onReceive(data)
             }catch (e:SocketTimeoutException){
                 Log.e(TAG,"receiveData SocketTimeoutException = ${e.message}")
                 break
-
             }catch (e: IOException){
                 Log.e(TAG,"receiveData IOException = ${e.message}")
                 break
             }
         }
+        sCallback.onDisconnect()
     }
 
     override fun send(bytes: ByteArray, callback: ISendCallBack) {
@@ -138,12 +141,18 @@ object CSocket : ISocket {
         }
     }
 
+    /**
+     * 重新连接socket
+     */
     fun reConnect(){
         if (!ip.isNullOrBlank() && port > 0){
             connect(ip!!, port)
         }
     }
 
+    /**
+     * 关闭socket
+     */
     override fun disConnect(reconnect:Boolean) {
         Log.i(TAG,"disConnect")
         if(null != socket){
@@ -166,6 +175,9 @@ object CSocket : ISocket {
         }
     }
 
+    /**
+     * 关闭socket输入流
+     */
     private fun closeInputStream(){
         try {
             dataInputStream!!.close()
@@ -174,6 +186,9 @@ object CSocket : ISocket {
         }
     }
 
+    /**
+     * 关闭socket输出流
+     */
     private fun closeOutputStream(){
         try {
             dataOutputStream!!.close()

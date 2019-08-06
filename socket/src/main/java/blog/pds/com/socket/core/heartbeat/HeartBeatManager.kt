@@ -1,8 +1,6 @@
 package blog.pds.com.socket.core.heartbeat
 
-import android.util.Log
 import android.util.Log.*
-import blog.pds.com.socket.BaseApplication
 import blog.pds.com.socket.core.manager.SocketManager
 import blog.pds.com.socket.core.manager.TimeIntervalManager
 

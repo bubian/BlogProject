@@ -3,8 +3,7 @@ package blog.pds.com.socket.core.manager
 import android.app.ActivityManager
 import android.content.Context
 import android.util.Log
-import blog.pds.com.socket.BaseApplication
-import blog.pds.com.socket.core.client.SocketServiceHelper
+import blog.pds.com.socket.core.utils.SocketServiceHelper
 import blog.pds.com.socket.core.heartbeat.HeartBeatManager
 import java.nio.ByteBuffer
 

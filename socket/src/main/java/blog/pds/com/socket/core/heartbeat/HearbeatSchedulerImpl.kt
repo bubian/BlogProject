@@ -7,7 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.Log
-import blog.pds.com.socket.core.client.MedImReceiver
+import blog.pds.com.socket.core.dispatch.MedImReceiver
 import blog.pds.com.socket.utils.NetworkUtil
 import java.util.*
 import java.util.concurrent.CopyOnWriteArrayList
