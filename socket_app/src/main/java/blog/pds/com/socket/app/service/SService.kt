@@ -1,10 +1,9 @@
-package blog.pds.com.socket.app
+package blog.pds.com.socket.app.service
 
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
-import blog.pds.com.socket.control.Constants
 
 /**
  * @author: pengdaosong
@@ -16,14 +15,14 @@ import blog.pds.com.socket.control.Constants
 class SService : Service(){
 
     companion object {
-        private const val TAG = Constants.SOCKET_TAG_SERVICE_PRE+"SS:"
+//        private const val TAG = Constants.SOCKET_TAG_SERVICE_PRE+"SS:"
     }
 
     private val sSocket = SSocket()
 
     override fun onCreate() {
         super.onCreate()
-        Log.i(TAG,"onCreate")
+//        Log.i(TAG,"onCreate")
         Thread(Runnable {
             sSocket.startAccept()
         }).start()

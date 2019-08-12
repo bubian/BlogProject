@@ -14,19 +14,19 @@ import blog.pds.com.socket.core.manager.TimeIntervalManager
 object HeartBeatManager {
     private const val TAG = "HeartBeatManager"
     private val heartbeatScheduler = HearbeatSchedulerImpl()
-    private val context = BaseApplication.app()
+    private val context = null
     private const val period = 1000L
 
     private val timeIntervalManager =
         TimeIntervalManager.instance(object : TimeIntervalManager.SimpleTimeIntervalCallback() {
             override fun accept() {
-                heartbeatScheduler.receiveHeartbeatFailed(context)
+//                heartbeatScheduler.receiveHeartbeatFailed(context)
                 SocketManager.reconnect()
             }
         })
 
     fun beginHeartBeat() {
-        heartbeatScheduler.start(context)
+//        heartbeatScheduler.start(context)
         i(TAG, "begin heart beat")
     }
 
@@ -41,7 +41,7 @@ object HeartBeatManager {
     fun receivedPong() {
         i(TAG, "received pong")
         //成功获得心跳，调整稳定心跳值
-        heartbeatScheduler.receiveHeartbeatSuccess(context)
+//        heartbeatScheduler.receiveHeartbeatSuccess(context)
         i(TAG, "stop interval")
         timeIntervalManager.stop()
     }
@@ -53,9 +53,9 @@ object HeartBeatManager {
     fun cancleLastHeartBeat() {
         i(TAG, "cancel last heart beat")
         //如果有消息在socket发送，则取消上一个心跳延迟
-        heartbeatScheduler.stop(context)
+//        heartbeatScheduler.stop(context)
         //重新开始心跳逻辑
-        heartbeatScheduler.start(context)
+//        heartbeatScheduler.start(context)
     }
 
     /**
@@ -63,7 +63,7 @@ object HeartBeatManager {
      */
     fun stopHeatBeat() {
         i(TAG, "stop heat beat")
-        heartbeatScheduler.start(context)
-        heartbeatScheduler.clear(context)
+//        heartbeatScheduler.start(context)
+//        heartbeatScheduler.clear(context)
     }
 }

@@ -1,8 +1,8 @@
 // ISocketAIDLReciveData.aidl
-package blog.pds.com.socket.control;
+package blog.pds.com.socket;
 
 // Declare any non-default types here with import statements
 
-interface ISocketAIDLReciveData {
+interface ISocketAIDLReceiveData {
       void receiveSocketData(in byte[] data);
 }

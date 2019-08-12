@@ -1,6 +1,8 @@
 package blog.pds.com.socket.core.dispatch
 
+import blog.pds.com.socket.ISocketAIDLReceiveData
 import blog.pds.com.socket.ISocketAIDLSendData
+
 
 /**
  * @author: pengdaosong
@@ -9,8 +11,18 @@ import blog.pds.com.socket.ISocketAIDLSendData
  * Description:
  */
 object SocketSendDataBinder : ISocketAIDLSendData.Stub(){
+
+
     override fun sendSocketData(data: ByteArray?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return true
+    }
+
+    override fun reregisterCallback(socketAIDLReciveData: ISocketAIDLReceiveData?): Boolean {
+        return true
+    }
+
+    override fun unReregisterCallback(): Boolean {
+        return true
     }
 
 }

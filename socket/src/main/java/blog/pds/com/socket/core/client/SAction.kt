@@ -13,6 +13,12 @@ class SAction{
          * 操作service类型key
          */
        const val KEY_OP_TYPE = "KEY_OP_TYPE"
+
+        /**
+         * service 初始化
+         */
+        const val OP_TYPE_INIT = 0
+
         /**
          * socket连接
          */
@@ -36,9 +42,5 @@ class SAction{
          */
         const val OP_TYPE_SEND = 4
 
-        /**
-         * service 初始化
-         */
-        const val OP_TYPE_INIT = 10
     }
 }

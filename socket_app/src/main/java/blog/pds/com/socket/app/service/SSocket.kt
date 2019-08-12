@@ -1,7 +1,6 @@
-package blog.pds.com.socket.app
+package blog.pds.com.socket.app.service
 
 import android.util.Log
-import blog.pds.com.socket.control.Constants
 import java.io.*
 import java.net.ServerSocket
 
@@ -15,17 +14,17 @@ import java.net.ServerSocket
 class SSocket{
 
     companion object {
-        private const val TAG = Constants.SOCKET_TAG_SERVICE_PRE + "SSocket:"
+//        private const val TAG = Constants.SOCKET_TAG_SERVICE_PRE + "SSocket:"
     }
 
     /**
      * 创建一个服务器端socket，指定绑定的端口号，并监听此端口
      */
-    private var serverSocket: ServerSocket = ServerSocket(Constants.SOCKET_PORT)
+            private var serverSocket: ServerSocket = ServerSocket(6666)
 
     fun startAccept(){
         try {
-            Log.i(TAG,"start accept")
+//            Log.i(TAG,"start accept")
             //调用accept()方法开始监听，等待客户端的连接
             val socket = serverSocket.accept()
             //向客户端传递的信息
@@ -42,7 +41,7 @@ class SSocket{
             var data :String? = bufferedReader.readLine()
 
             while (data != null){
-                Log.i(TAG,"accept data = $data")
+//                Log.i(TAG,"accept data = $data")
                 data = bufferedReader.readLine()
             }
 

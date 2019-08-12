@@ -19,7 +19,7 @@ class SocketManager{
         fun reconnect(){
             TimeIntervalManager.instance(object: TimeIntervalManager.SimpleTimeIntervalCallback(){
                 override fun accept() {
-                    SocketServiceHelper.connect(BaseApplication.app(),11,"192.168.1.2",6666)
+//                    SocketServiceHelper.connect(BaseApplication.app(),11,"192.168.1.2",6666)
                 }
             })
         }
@@ -28,14 +28,14 @@ class SocketManager{
          *
          */
         fun connect(startSocketId: Long, ip: String, port: Int) {
-            SocketServiceHelper.connect(BaseApplication.app(),startSocketId, ip, port)
+//            SocketServiceHelper.connect(BaseApplication.app(),startSocketId, ip, port)
         }
 
         /**
          *
          */
         fun disConnect() {
-            SocketServiceHelper.disConnect(BaseApplication.app())
+//            SocketServiceHelper.disConnect(BaseApplication.app())
             HeartBeatManager.stopHeatBeat()
         }
 
@@ -65,7 +65,7 @@ class SocketManager{
          * @param msg
          */
         private fun sendMessage(msg: ByteArray) {
-            SocketServiceHelper.sendMessage(BaseApplication.app(),msg)
+//            SocketServiceHelper.sendMessage(BaseApplication.app(),msg)
         }
 
         /**
@@ -73,20 +73,20 @@ class SocketManager{
          * net.medlinker.medlinker:imremote
          */
         fun checkImRomoteProcessAlive() {
-            val activityManager = BaseApplication.app().getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-            val infos = activityManager.getRunningAppProcesses()
-            var isAlive = false
-            for (info in infos) {
-                isAlive = info.processName == "blog.pds.com.socket:cService"
-                if (isAlive) {
-                    break
-                }
-            }
-            Log.i("ImManager", "$isAlive--进程存活状态")
-            if (!isAlive) {
-                //如果发消息的时候，进程没有在运行，就重新初始化IM
-                reconnect()
-            }
+//            val activityManager = BaseApplication.app().getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+//            val infos = activityManager.getRunningAppProcesses()
+//            var isAlive = false
+//            for (info in infos) {
+//                isAlive = info.processName == "blog.pds.com.socket:cService"
+//                if (isAlive) {
+//                    break
+//                }
+//            }
+//            Log.i("ImManager", "$isAlive--进程存活状态")
+//            if (!isAlive) {
+//                //如果发消息的时候，进程没有在运行，就重新初始化IM
+//                reconnect()
+//            }
         }
     }
 }

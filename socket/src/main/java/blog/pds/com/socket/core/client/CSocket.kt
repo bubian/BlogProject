@@ -42,7 +42,6 @@ object CSocket : ISocket {
         this.sCallback = sCallback
     }
 
-
     override fun connect(ip: String, port: Int) {
         lock.lock()
         if (isConnected()){
@@ -216,5 +215,4 @@ object CSocket : ISocket {
      * which is packaged with this application.
      */
     external fun connect(ip: String, port: Int,time: Int): Int
-
 }

@@ -10,6 +10,7 @@ import android.os.Process
 import android.text.TextUtils
 import android.util.Log
 import blog.pds.com.socket.core.common.*
+import blog.pds.com.socket.core.dispatch.ReceiveSocketDataDispatch
 import blog.pds.com.socket.core.dispatch.SocketSendDataBinder
 import blog.pds.com.socket.core.manager.SocketManager
 import blog.pds.com.socket.core.thread.AsyncTaskExecutor
@@ -33,6 +34,17 @@ class CService : Service(){
 
     private lateinit var iClientSoft : SoftReference<ISocket>
     private var startSocketId : Long = 0
+    private val receiveSocketDataDispatch = ReceiveSocketDataDispatch()
+
+    private fun imClient(): CSocket {
+        if (null == iClientSoft.get()) {
+            createImClient()
+        }
+        if (null == iClientSoft.get()) {
+            throw NullPointerException("im client is null")
+        }
+        return iClientSoft.get() as CSocket
+    }
 
     override fun onBind(intent: Intent?): IBinder? {
         return SocketSendDataBinder.asBinder()
@@ -45,7 +57,6 @@ class CService : Service(){
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-
         val cSocket = imClient()
         if (null == intent){
             Log.i(TAG, "onStartCommand intent == null , pid=${Process.myPid()} , mIClient = $cSocket")
@@ -58,65 +69,91 @@ class CService : Service(){
             startForeground(GRAY_SERVICE_ID, Notification())
         }
 
+        // 执行动作类型
         val opType = intent.getIntExtra(SAction.KEY_OP_TYPE, -1)
-
         Log.i(TAG, "onStartCommand intent:opType = $opType")
 
         when(opType){
-            SAction.OP_TYPE_INIT -> {
-
-            }
+            SAction.OP_TYPE_INIT -> {}
+            // 连接socket
             SAction.OP_TYPE_CONNECT -> {
-                val newStartSocketId = intent.getLongExtra(Constants.KEY_START_SOCKET_ID, -1L)
-                if (newStartSocketId <= 0 || newStartSocketId == startSocketId
-                    && (cSocket.getConnectState() === SState.STATE_CONNECTING || cSocket.getConnectState() === SState.STATE_CONNECTED)) {
-                    //userid 不合法 或者 socket已经连接、或者正在连接
-                    Log.e(
-                        TAG,
-                        "onStartCommand intent op connect , intercept newstartUserId = $newStartSocketId, startUserid = $startSocketId, socket connectState = ${cSocket.getConnectState()}"
-                    )
-                }
-                startSocketId = newStartSocketId
-                connectSocket(intent)
+                if (!isAbortSocketConnectRequest(cSocket)) connectSocket(intent)
             }
+            // 断开socket
             SAction.OP_TYPE_DISCONNECT -> {
                 startSocketId = -1
                 AsyncTaskExecutor.execute(RunnablePool.obtain(mRunnableExecutorImpl, SAction.OP_TYPE_DISCONNECT))
             }
+            // 重新连接socket
             SAction.OP_TYPE_RECONNECT -> {
                 if (!cSocket.isConnected()) {
                     AsyncTaskExecutor.execute(RunnablePool.obtain(mRunnableExecutorImpl, SAction.OP_TYPE_RECONNECT))
                 }
             }
-
+            // 发送消息
             SAction.OP_TYPE_SEND -> {
                 sendMessage(intent)
             }
-            else -> {
-
-            }
-
+            else -> {}
         }
-
         return START_STICKY
-
     }
 
+    /**
+     *  socket已经连接、或者正在连接
+     */
+    private fun isAbortSocketConnectRequest(cSocket:CSocket): Boolean {
+        return cSocket.getConnectState() == SState.STATE_CONNECTING
+                || cSocket.getConnectState() == SState.STATE_CONNECTED
+    }
+
+    /**
+     * 创建socket连接实例
+     */
     private fun createImClient() {
-        CSocket.registerCallback(socketCallback)
+        CSocket.registerCallback(receiveSocketDataDispatch.socketCallback)
         iClientSoft = SoftReference(CSocket)
     }
 
+    /**
+     * 连接socket
+     */
     private fun connectSocket(intent: Intent) {
         val ip = intent.getStringExtra(Constants.KEY_IP)
         val port = intent.getIntExtra(Constants.KEY_PORT, -1)
+        Log.d(TAG,"connectSocket:ip = $ip port = $port")
         if (TextUtils.isEmpty(ip) || port < 0) {
+            Log.e(TAG,"socket parameter exception")
             return
         }
-        Log.d(TAG,"connectSocket:ip = $ip port = $port")
         AsyncTaskExecutor.execute(RunnablePool.obtain(mRunnableExecutorImpl, SAction.OP_TYPE_CONNECT, ip, port))
     }
 
+    /**
+     * 异步执行
+     */
+    private val mRunnableExecutorImpl = object : RunnablePool.IRunnbleExecutor {
+        override fun execute(what: Int,  params: Array<out Any>) {
+            // 检测实例是否被系统回收
+            val iClient = imClient()
+
+            for (c in params!!){
+                Log.d(TAG,"runner.params = $c")
+            }
+            when (what) {
+                SAction.OP_TYPE_CONNECT -> iClient.connect(params[0].toString(), params[1] as Int)
+                SAction.OP_TYPE_SEND -> iClient.send(params[0] as ByteArray, params[1] as ISendCallBack)
+                SAction.OP_TYPE_DISCONNECT -> iClient.disConnect(false)
+                SAction.OP_TYPE_RECONNECT -> iClient.reConnect()
+                else -> {
+                }
+            }
+        }
+    }
+
+    /**
+     * 发送消息
+     */
     private fun sendMessage(intent: Intent) {
         val bytes = intent.getByteArrayExtra(Constants.KEY_REMOTE_SOCKET_MSG_DATA)
         AsyncTaskExecutor.execute(
@@ -134,69 +171,6 @@ class CService : Service(){
                     }
                 })
         )
-    }
-
-    /**
-     * socket连接匿名内部类
-     */
-    private val socketCallback = object : SCallback {
-        override fun onReceive(data: ByteArray) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
-
-        override fun connected() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
-
-        override fun onConnect() {
-
-        }
-
-        override fun onDisconnect() {
-
-        }
-
-        override fun onConnectFailed(ex: Exception) {
-
-        }
-
-        override fun onReceive(type: Int, data: ByteArray) {
-
-        }
-
-        override fun send(bytes: ByteArray, callback: ISendCallBack) {
-
-        }
-
-    }
-
-    private val mRunnableExecutorImpl = object : RunnablePool.IRunnbleExecutor {
-        override fun execute(what: Int,  params: Array<out Any>) {
-            val iClient = imClient()
-            for (c in params!!){
-                Log.d(TAG,"runner.params = $c")
-            }
-            when (what) {
-                SAction.OP_TYPE_CONNECT -> iClient.connect(params[0].toString(), params[1] as Int)
-                SAction.OP_TYPE_SEND -> iClient.send(params[0] as ByteArray, params[1] as ISendCallBack)
-                SAction.OP_TYPE_DISCONNECT -> iClient.disConnect(false)
-                SAction.OP_TYPE_RECONNECT -> iClient.reConnect()
-                else -> {
-                }
-            }
-        }
-    }
-
-    private fun imClient(): CSocket {
-        if (null == iClientSoft.get()) {
-            Log.i(TAG, "iClientSoft is null again create")
-            createImClient()
-        }
-        if (null == iClientSoft.get()) {
-            Log.i(TAG, "fetch im client error")
-            throw NullPointerException("im client is null")
-        }
-        return iClientSoft.get() as CSocket
     }
 
 
