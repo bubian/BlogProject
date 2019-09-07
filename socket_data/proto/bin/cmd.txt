@@ -1,0 +1,2 @@
+// 编译命令
+./protoc_mac -I=../ --java_out=../java ../socket.proto

@@ -120,7 +120,7 @@ class CService : Service(){
      */
     private fun connectSocket(intent: Intent) {
         val ip = intent.getStringExtra(Constants.KEY_IP)
-        val port = intent.getIntExtra(Constants.KEY_PORT, -1)
+        val port = intent.getIntExtra(Constants.KEY_PORT, 80)
         Log.d(TAG,"connectSocket:ip = $ip port = $port")
         if (TextUtils.isEmpty(ip) || port < 0) {
             Log.e(TAG,"socket parameter exception")
@@ -137,7 +137,7 @@ class CService : Service(){
             // 检测实例是否被系统回收
             val iClient = imClient()
 
-            for (c in params!!){
+            for (c in params){
                 Log.d(TAG,"runner.params = $c")
             }
             when (what) {

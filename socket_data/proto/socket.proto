@@ -1,0 +1,28 @@
+/* socket数据 结构*/
+
+// 不加默认使用proto2
+syntax = "proto3";
+
+//  包名，如果不指定，这生成文件在输出路径的根目录
+package google.protobuf;
+
+// 引入其它proto文件，使用其中的message
+import  "body.proto";
+import  "header.proto";
+
+//  生成的java文件包名
+option java_package = "blog.pds.com.data.protobuf";
+
+// 自定生成的class类名
+option java_outer_classname = "SocketPackage";
+
+// 是否将proto中的message编译成多个文件
+// option java_multiple_files = true;
+
+message Package{
+    Header header = 1;
+    Body body = 2;
+}
+
+
+

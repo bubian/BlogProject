@@ -25,7 +25,7 @@ interface ISocket{
     /**
      * @return 返回socket连接状态
      */
-    fun getConnectState(): SState
+    fun getConnectState(): Int
 
     /**
      * 发送socket数据

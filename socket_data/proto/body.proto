@@ -1,0 +1,16 @@
+// 不加默认使用proto2
+syntax = "proto3";
+//  生成的java文件包名
+option java_package = "blog.pds.com.data.protobuf";
+
+// 自定生成的class类名
+option java_outer_classname = "SocketBody";
+message Body {
+    uint64 id = 1;
+    string content = 2;
+    string ext = 3;
+    // 保留字段编号
+    reserved 7, 15, 9 to 11;
+    // 保留字段
+    reserved "type", "source";
+}

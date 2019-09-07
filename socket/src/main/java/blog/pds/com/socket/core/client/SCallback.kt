@@ -35,11 +35,6 @@ interface SCallback{
     fun onReceive(type: Int, data: ByteArray)
 
     /**
-     * 接收socket消息
-     */
-    fun onReceive(data: ByteArray)
-
-    /**
      * 发送socket消息
      */
     fun send(bytes: ByteArray, callback: ISendCallBack)

@@ -16,17 +16,16 @@ class ReceiveSocketDataDispatch{
         private const val TAG = Constants.SOCKET_TAG_CLIENT_PRE +"rsdd:"
     }
 
-
     /**
      * socket消息回执
      */
     val socketCallback = object : SCallback {
-        override fun onReceive(data: ByteArray) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        override fun onReceive(type: Int, data: ByteArray) {
+            SocketSendDataBinder.onReceive(type,data)
         }
 
         override fun connected() {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
         }
 
         override fun onConnect() {
@@ -38,10 +37,6 @@ class ReceiveSocketDataDispatch{
         }
 
         override fun onConnectFailed(ex: Exception) {
-
-        }
-
-        override fun onReceive(type: Int, data: ByteArray) {
 
         }
 

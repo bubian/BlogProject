@@ -7,7 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.Log
-import blog.pds.com.socket.core.dispatch.MedImReceiver
+import blog.pds.com.socket.core.dispatch.SocketImReceiver
 import blog.pds.com.socket.utils.NetworkUtil
 import java.util.*
 import java.util.concurrent.CopyOnWriteArrayList
@@ -61,7 +61,7 @@ class HearbeatSchedulerImpl : IHeartbeatScheduler {
     }
 
     protected fun createPendingIntent(context: Context, requestCode: Int, heartType: Int): PendingIntent {
-        val intent = Intent(context, MedImReceiver::class.java)
+        val intent = Intent(context, SocketImReceiver::class.java)
         intent.setPackage(context.packageName)
         intent.action = IHeartbeatScheduler1.HEART_BEAT_ACTION
         intent.putExtra(IHeartbeatScheduler.HEART_TYPE_TAG, heartType)

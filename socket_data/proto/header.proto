@@ -1,0 +1,12 @@
+// 不加默认使用proto2
+syntax = "proto3";
+//  生成的java文件包名
+option java_package = "blog.pds.com.data.protobuf";
+// 自定生成的class类名
+option java_outer_classname = "SocketHeader";
+
+message Header {
+    // singular默认规则，message可以拥有一个或者零个该字段
+    int32 type = 1;
+    int32 length = 2;
+}

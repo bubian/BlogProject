@@ -29,7 +29,7 @@ object CSocket : ISocket {
     private var ip: String? = null
     private var port: Int = 0
     private var lock: Lock = ReentrantLock()
-    private var connectState : SState = SState.STATE_NONE
+    private var connectState : Int = SState.STATE_NONE
     private var cRetryPolicy : CRetryPolicy? = null
 
     private lateinit var sCallback: SCallback
@@ -99,16 +99,19 @@ object CSocket : ISocket {
     private fun receiveData(){
         while (isConnected()){
             try {
-//                val type = dataInputStream?.readByte()!!.toInt()
-//                val length = dataInputStream?.readChar()!!.toInt()
-                val c = dataInputStream?.readChar()
+                val type = dataInputStream?.readByte()!!.toInt()
+                Log.i(TAG,"receiveData:type = $type")
 
-                Log.i(TAG,"receiveData connected receiveData type = $c")
-                val t  = dataInputStream?.available()
-                val data = ByteArray(t!!)
+                val length = dataInputStream?.readChar()!!.toInt()
+                Log.i(TAG,"receiveData:length = $length")
+                val data = ByteArray(length)
+
+                Log.i(TAG,"receiveData:data-length = ${data.size}")
+
                 dataInputStream?.readFully(data)
-                Log.i(TAG,"receiveData connected receiveData type = ${String(data)}")
-                sCallback.onReceive(data)
+                Log.i(TAG,"receiveData:data = ${String(data,Charsets.ISO_8859_1)}")
+
+                sCallback.onReceive(type,data)
             }catch (e:SocketTimeoutException){
                 Log.e(TAG,"receiveData SocketTimeoutException = ${e.message}")
                 break
@@ -206,7 +209,7 @@ object CSocket : ISocket {
         return socket!!.isConnected && connectState == SState.STATE_CONNECTED
     }
 
-    override fun getConnectState(): SState {
+    override fun getConnectState(): Int {
        return connectState
     }
 
