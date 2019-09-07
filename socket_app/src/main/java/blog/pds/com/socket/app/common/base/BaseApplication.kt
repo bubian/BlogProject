@@ -1,4 +1,4 @@
-package blog.pds.com.socket.app
+package blog.pds.com.socket.app.common.base
 
 import android.support.multidex.MultiDexApplication
 import blog.pds.com.socket.control.config.ApiManager
@@ -25,7 +25,10 @@ class BaseApplication : MultiDexApplication(){
     override fun onCreate() {
         super.onCreate()
         application = this
-        ApiManager.ipAndPort(ip, port)
+        ApiManager.ipAndPort(
+            ip,
+            port
+        )
     }
 
 }

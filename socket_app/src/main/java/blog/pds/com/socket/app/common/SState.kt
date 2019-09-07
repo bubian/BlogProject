@@ -1,4 +1,4 @@
-package blog.pds.com.socket.app.client
+package blog.pds.com.socket.app.common
 
 import android.support.annotation.IntDef
 

@@ -1,6 +1,6 @@
-package blog.pds.com.socket.app.util
+package blog.pds.com.socket.app.common.util
 
-import blog.pds.com.socket.app.client.SState
+import blog.pds.com.socket.app.common.SState
 
 /**
  * @author: pengdaosong

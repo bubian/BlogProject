@@ -8,11 +8,10 @@ import android.widget.EditText
 import android.widget.TextView
 import blog.pds.com.data.protobuf.SocketPackage
 import blog.pds.com.socket.app.R
-import blog.pds.com.socket.app.util.SocketConnectStateUtils
+import blog.pds.com.socket.app.common.util.SocketConnectStateUtils
 import blog.pds.com.socket.control.SocketControl
 import blog.pds.com.socket.control.dispatch.SimpleSocketCallback
 import blog.pds.com.socket.control.dispatch.SocketCallbackManager
-import java.net.Socket
 
 class ClientActivity : AppCompatActivity(){
 
