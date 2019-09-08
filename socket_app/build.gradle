@@ -3,9 +3,9 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
+apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion 28
-
 
     defaultConfig {
         applicationId "blog.pds.com.socket.app"
@@ -24,6 +24,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 dependencies {
@@ -33,7 +38,11 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     compile 'com.jakewharton.rxbinding:rxbinding-kotlin:0.4.0'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    // local
     implementation project(path: ':socket_control')
     implementation project(path: ':sdk_third')
     implementation project(path: ':socket_data')
+    // butterknife
+    implementation 'com.jakewharton:butterknife:9.0.0'
+    kapt 'com.jakewharton:butterknife-compiler:9.0.0'
 }

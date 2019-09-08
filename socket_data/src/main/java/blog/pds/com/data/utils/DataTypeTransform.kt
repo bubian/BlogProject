@@ -1,5 +1,6 @@
 package blog.pds.com.data.utils
 
+import java.io.*
 import java.nio.ByteBuffer
 import java.nio.CharBuffer
 import java.nio.charset.Charset
@@ -41,6 +42,43 @@ class DataTypeTransform{
             bb.flip()
             val cb = cs.decode(bb)
             return cb.array()
+        }
+
+        fun obj2Byte(obj: Any): ByteArray? {
+            var bytes: ByteArray? = null
+            var byteArrayOutputStream: ByteArrayOutputStream? = null
+            var objectOutputStream: ObjectOutputStream? = null
+            try {
+                byteArrayOutputStream = ByteArrayOutputStream()
+                objectOutputStream = ObjectOutputStream(byteArrayOutputStream)
+                objectOutputStream.writeObject(obj)
+                objectOutputStream.flush()
+                bytes = byteArrayOutputStream.toByteArray()
+
+            } catch (e: IOException) {
+                // ignore
+            } finally {
+                CloseUtil.close(objectOutputStream)
+                CloseUtil.close(byteArrayOutputStream)
+            }
+            return bytes
+        }
+
+        fun byte2Obj(bytes: ByteArray): Any? {
+            var obj: Any? = null
+            var byteArrayInputStream: ByteArrayInputStream? = null
+            var objectInputStream: ObjectInputStream? = null
+            try {
+                byteArrayInputStream = ByteArrayInputStream(bytes)
+                objectInputStream = ObjectInputStream(byteArrayInputStream)
+                obj = objectInputStream.readObject()
+            } catch (e: Exception) {
+                // ignore
+            } finally {
+                CloseUtil.close(objectInputStream)
+                CloseUtil.close(byteArrayInputStream)
+            }
+            return obj
         }
     }
 }

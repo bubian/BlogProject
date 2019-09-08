@@ -16,6 +16,7 @@ import blog.pds.com.socket.control.SocketControl
 import blog.pds.com.socket.control.config.ApiManager
 import blog.pds.com.socket.control.dispatch.SocketReceiveDataBinder
 import java.io.FileInputStream
+import java.util.concurrent.atomic.AtomicBoolean
 
 
 /**
@@ -33,6 +34,7 @@ class SocketServiceManager {
 
     private var socketSendDataBinder : ISocketAIDLSendData? = null
     private var intent : Intent? = null
+    private val bServiceBinded = AtomicBoolean(false)
 
     fun socketInit(context: Context) {
         val intent = createSocketServiceIntent(context, SAction.OP_TYPE_INIT)
@@ -58,6 +60,7 @@ class SocketServiceManager {
 
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             Log.d(TAG,"service binder success")
+            bServiceBinded.set(true)
             socketSendDataBinder = ISocketAIDLSendData.Stub.asInterface(service)
             try {
                 socketSendDataBinder?.reregisterCallback(SocketReceiveDataBinder)
@@ -68,6 +71,8 @@ class SocketServiceManager {
 
         override fun onServiceDisconnected(name: ComponentName?) {
             Log.d(TAG,"service binder failed")
+            bServiceBinded.set(false)
+            socketSendDataBinder = null
             SocketControl.context?.let { startAndBinderService(it,SAction.OP_TYPE_RECONNECT) }
         }
 
@@ -140,7 +145,9 @@ class SocketServiceManager {
     }
 
     fun bindSocketService(context: Context,intent: Intent?){
-        context.bindService(intent,serviceConnection,Service.BIND_AUTO_CREATE)
+        if (!isServiceRunning()){
+            context.bindService(intent,serviceConnection,Service.BIND_AUTO_CREATE)
+        }
     }
 
     /**
@@ -150,5 +157,9 @@ class SocketServiceManager {
         context.unbindService(serviceConnection)
     }
 
-
+    private fun isServiceRunning(): Boolean {
+        return (socketSendDataBinder != null
+                && socketSendDataBinder?.asBinder() != null
+                && socketSendDataBinder?.asBinder()?.isBinderAlive!!)
+    }
 }
