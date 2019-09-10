@@ -30,5 +30,5 @@ interface ISocket{
     /**
      * 发送socket数据
      */
-    fun send(bytes: ByteArray, callback: ISendCallBack)
+    fun write(bytes: ByteArray, callback: ISendCallBack)
 }

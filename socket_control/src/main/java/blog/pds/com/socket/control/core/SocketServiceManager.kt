@@ -157,7 +157,13 @@ class SocketServiceManager {
         context.unbindService(serviceConnection)
     }
 
-    private fun isServiceRunning(): Boolean {
+    fun checkSocketService(context: Context){
+        if(!isServiceRunning()){
+            startAndBinderService(context,SAction.OP_TYPE_CONNECT)
+        }
+    }
+
+    fun isServiceRunning(): Boolean {
         return (socketSendDataBinder != null
                 && socketSendDataBinder?.asBinder() != null
                 && socketSendDataBinder?.asBinder()?.isBinderAlive!!)

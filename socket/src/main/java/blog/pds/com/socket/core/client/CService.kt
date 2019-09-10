@@ -142,7 +142,7 @@ class CService : Service(){
             }
             when (what) {
                 SAction.OP_TYPE_CONNECT -> iClient.connect(params[0].toString(), params[1] as Int)
-                SAction.OP_TYPE_SEND -> iClient.send(params[0] as ByteArray, params[1] as ISendCallBack)
+                SAction.OP_TYPE_SEND -> iClient.write(params[0] as ByteArray, params[1] as ISendCallBack)
                 SAction.OP_TYPE_DISCONNECT -> iClient.disConnect(false)
                 SAction.OP_TYPE_RECONNECT -> iClient.reConnect()
                 else -> {

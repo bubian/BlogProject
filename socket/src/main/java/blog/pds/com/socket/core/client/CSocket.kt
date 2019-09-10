@@ -89,14 +89,14 @@ object CSocket : ISocket {
             lock.unlock()
         }
         if (connectState == SState.STATE_CONNECTED){
-            receiveData()
+            read()
         }else{
             disConnect(false)
             sCallback.onConnectFailed(Exception("connect failed,unknown error"))
         }
     }
 
-    private fun receiveData(){
+    private fun read(){
         while (isConnected()){
             try {
                 val type = dataInputStream?.readByte()!!.toInt()
@@ -123,7 +123,7 @@ object CSocket : ISocket {
         sCallback.onDisconnect()
     }
 
-    override fun send(bytes: ByteArray, callback: ISendCallBack) {
+    override fun write(bytes: ByteArray, callback: ISendCallBack) {
         synchronized(CSocket.javaClass){
             if (isConnected()){
                 try {
