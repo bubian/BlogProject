@@ -40,6 +40,8 @@ class SSocket {
 
             val dataS = "-----------socket connect success------------"
 
+            Log.i(TAG,"dataS len = ${dataS.toByteArray().size}")
+
             val socketProtoBody = SocketBody.Body
                 .newBuilder()
                 .setId(1111)
