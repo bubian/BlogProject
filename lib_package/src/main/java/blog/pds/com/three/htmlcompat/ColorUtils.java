@@ -1,6 +1,6 @@
 package blog.pds.com.three.htmlcompat;
 
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 import blog.pds.com.three.htmlcompat.utils.XmlUtils;
 
 import java.util.HashMap;

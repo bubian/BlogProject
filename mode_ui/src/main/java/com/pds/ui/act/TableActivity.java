@@ -1,8 +1,8 @@
 package com.pds.ui.act;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.pds.ui.R;
 import com.pds.ui.view.UiTableLayoutView;

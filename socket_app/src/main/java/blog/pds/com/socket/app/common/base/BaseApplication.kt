@@ -1,6 +1,6 @@
 package blog.pds.com.socket.app.common.base
 
-import android.support.multidex.MultiDexApplication
+import androidx.multidex.MultiDexApplication
 import blog.pds.com.socket.control.config.ApiManager
 
 /**

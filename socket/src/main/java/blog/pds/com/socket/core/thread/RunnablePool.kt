@@ -2,7 +2,7 @@ package blog.pds.com.socket.core.thread
 
 import android.app.Activity
 import android.os.Build
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import blog.pds.com.socket.core.common.Constants
 import java.lang.ref.WeakReference
@@ -65,7 +65,7 @@ class RunnablePool private constructor(){
         var executor: IRunnbleExecutor? = null
             get() = if (weakExecutor != null) weakExecutor!!.get() else field
 
-            set(executor) = if (executor is Fragment || executor is android.app.Fragment
+            set(executor) = if (executor is androidx.fragment.app.Fragment || executor is android.app.Fragment
                 || executor is Activity) {
                 this.weakExecutor = WeakReference(executor)
             } else {
@@ -89,8 +89,8 @@ class RunnablePool private constructor(){
                     Log.i(TAG, "executor is Activity and isDestroyed() = true. ")
                     shouldExecute = false
                 }
-            } else if (executor is Fragment) {
-                if ((executor as Fragment).isDetached || (executor as Fragment).isRemoving) {
+            } else if (executor is androidx.fragment.app.Fragment) {
+                if ((executor as androidx.fragment.app.Fragment).isDetached || (executor as androidx.fragment.app.Fragment).isRemoving) {
                     // ((Fragment) executor).isVisible()
                     Log.i(
                         TAG,

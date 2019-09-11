@@ -1,6 +1,6 @@
 package blog.pds.com.socket.core.client
 
-import android.support.annotation.IntDef
+import androidx.annotation.IntDef
 
 /**
  * @author: pengdaosong

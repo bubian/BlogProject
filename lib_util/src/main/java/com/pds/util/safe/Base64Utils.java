@@ -1,7 +1,7 @@
 package com.pds.util.safe;
 
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;

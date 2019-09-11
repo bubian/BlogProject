@@ -1,7 +1,7 @@
 package blog.pds.com.socket.app.common.base
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 /**
  * @author: pengdaosong

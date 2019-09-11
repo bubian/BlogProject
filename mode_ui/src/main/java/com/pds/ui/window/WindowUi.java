@@ -1,12 +1,11 @@
 package com.pds.ui.window;
 
-import android.Manifest;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.os.Binder;
 import android.os.Build;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.view.*;
 import android.widget.LinearLayout;
@@ -15,8 +14,6 @@ import android.widget.Toast;
 import com.pds.ui.R;
 import com.pds.util.permission.SpecialPermissionsCheckUtils;
 import com.pds.util.unit.UnitConversionUtils;
-
-import static android.content.pm.PackageManager.PERMISSION_DENIED;
 
 /**
  * CreateTime:  2016/9/21 10:22

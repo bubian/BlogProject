@@ -1,6 +1,6 @@
 package com.pds.blog;
 
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDexApplication;
 
 /**
  * @author: pengdaosong

@@ -1,6 +1,6 @@
 package com.pds.blog
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import blog.pds.com.three.gson.GsonHelper

@@ -21,7 +21,7 @@ import com.pds.ui.R;
  * Description:
  * @author pengdaosong
  */
-public class RadiusTextView extends android.support.v7.widget.AppCompatTextView {
+public class RadiusTextView extends androidx.appcompat.widget.AppCompatTextView {
 
     private int mRadius;
     private int mStrokeWidth;
