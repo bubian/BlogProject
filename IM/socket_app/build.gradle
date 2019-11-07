@@ -39,9 +39,10 @@ dependencies {
     compile 'com.jakewharton.rxbinding:rxbinding-kotlin:0.4.0'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
     // local
-    implementation project(path: ':socket_control')
     implementation project(path: ':sdk_third')
-    implementation project(path: ':socket_data')
+    implementation project(path: ':IM:socket_data')
+    implementation project(path: ':IM:socket')
+    implementation project(path: ':IM:socket_control')
     // butterknife
     implementation 'com.jakewharton:butterknife:10.1.0'
     kapt 'com.jakewharton:butterknife-compiler:10.1.0'

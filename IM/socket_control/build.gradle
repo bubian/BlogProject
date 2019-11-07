@@ -23,6 +23,6 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':socket_data')
-    implementation project(path: ':socket')
+    implementation project(path: ':IM:socket_data')
+    implementation project(path: ':IM:socket')
 }

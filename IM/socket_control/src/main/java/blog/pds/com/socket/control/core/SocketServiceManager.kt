@@ -32,7 +32,7 @@ class SocketServiceManager {
         private const val TAG = Constants.SOCKET_TAG_CLIENT_PRE+"ssm:"
     }
 
-    private var socketSendDataBinder : ISocketAIDLSendData? = null
+    private var socketSendDataBinder : blog.pds.com.socket.ISocketAIDLSendData? = null
     private var intent : Intent? = null
     private val bServiceBinded = AtomicBoolean(false)
 
@@ -61,7 +61,7 @@ class SocketServiceManager {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             Log.d(TAG,"service binder success")
             bServiceBinded.set(true)
-            socketSendDataBinder = ISocketAIDLSendData.Stub.asInterface(service)
+            socketSendDataBinder = blog.pds.com.socket.ISocketAIDLSendData.Stub.asInterface(service)
             try {
                 socketSendDataBinder?.reregisterCallback(SocketReceiveDataBinder)
             } catch (e: Exception) {
