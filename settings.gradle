@@ -1,4 +1,4 @@
-include ':lib_package'
+include ':lib_package', ':nettyim'
 
 //include ':lib_aspect_annotations'
 //include ':lib_aspect_runtime'
