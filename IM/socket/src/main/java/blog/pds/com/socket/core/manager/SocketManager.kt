@@ -1,92 +1,67 @@
 package blog.pds.com.socket.core.manager
 
-import android.app.ActivityManager
 import android.content.Context
-import android.util.Log
-import blog.pds.com.socket.core.utils.SocketServiceHelper
-import blog.pds.com.socket.core.heartbeat.HeartBeatManager
-import java.nio.ByteBuffer
+import android.content.Intent
+import blog.pds.com.socket.core.client.CService
+import blog.pds.com.socket.core.client.SAction
+import blog.pds.com.socket.core.common.Constants
 
 /**
  * @author: pengdaosong
- * CreateTime:  2019/5/14 2:41 PM
+ * CreateTime:  2019/5/14 2:53 PM
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-
 class SocketManager{
     companion object {
-        fun reconnect(){
-            TimeIntervalManager.instance(object: TimeIntervalManager.SimpleTimeIntervalCallback(){
-                override fun accept() {
-//                    SocketServiceHelper.connect(BaseApplication.app(),11,"192.168.1.2",6666)
-                }
-            })
+        fun connect(context: Context,startSocketId: Long, ip: String, port: Int) {
+            val intent =
+                createImServiceIntent(
+                    context,
+                    SAction.OP_TYPE_CONNECT
+                )
+            intent.putExtra(Constants.KEY_IP, ip)
+            intent.putExtra(Constants.KEY_PORT, port)
+            intent.putExtra(Constants.KEY_START_SOCKET_ID, startSocketId)
+            context.startService(intent)
         }
 
-        /**
-         *
-         */
-        fun connect(startSocketId: Long, ip: String, port: Int) {
-//            SocketServiceHelper.connect(BaseApplication.app(),startSocketId, ip, port)
+        fun disConnect(context: Context) {
+            val intent =
+                createImServiceIntent(
+                    context,
+                    SAction.OP_TYPE_DISCONNECT
+                )
+            context.startService(intent)
         }
 
-        /**
-         *
-         */
-        fun disConnect() {
-//            SocketServiceHelper.disConnect(BaseApplication.app())
-            HeartBeatManager.stopHeatBeat()
+        fun reConnect(context: Context) {
+            val intent =
+                createImServiceIntent(
+                    context,
+                    SAction.OP_TYPE_RECONNECT
+                )
+            context.startService(intent)
         }
 
-        /**
-         * 发送ping给服务器
-         */
-        fun sendPing() {
-            HeartBeatManager.interval()
-            val byteBuffer = ByteBuffer.allocate(3)
-            val ping = byteArrayOf(3, 0, 0)
-            byteBuffer.put(ping)
-            sendMessage(byteBuffer.array())
+        fun sendMessage(context: Context,msg: ByteArray) {
+            val intent =
+                createImServiceIntent(
+                    context,
+                    SAction.OP_TYPE_SEND
+                )
+            intent.putExtra(Constants.KEY_REMOTE_SOCKET_MSG_DATA, msg)
+            try {
+                context.startService(intent)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
-        /**
-         * 发送pong给服务器
-         */
-        fun sendPong() {
-            val byteBuffer = ByteBuffer.allocate(3)
-            val pong = byteArrayOf(4, 0, 0)
-            byteBuffer.put(pong)
-            sendMessage(byteBuffer.array())
-        }
-
-
-        /**
-         * @param msg
-         */
-        private fun sendMessage(msg: ByteArray) {
-//            SocketServiceHelper.sendMessage(BaseApplication.app(),msg)
-        }
-
-        /**
-         * 检测消息进程是否还存活，不存活重新连接
-         * net.medlinker.medlinker:imremote
-         */
-        fun checkImRomoteProcessAlive() {
-//            val activityManager = BaseApplication.app().getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-//            val infos = activityManager.getRunningAppProcesses()
-//            var isAlive = false
-//            for (info in infos) {
-//                isAlive = info.processName == "blog.pds.com.socket:cService"
-//                if (isAlive) {
-//                    break
-//                }
-//            }
-//            Log.i("ImManager", "$isAlive--进程存活状态")
-//            if (!isAlive) {
-//                //如果发消息的时候，进程没有在运行，就重新初始化IM
-//                reconnect()
-//            }
+        private fun createImServiceIntent(context: Context,opType: Int): Intent {
+            val i = Intent(context, CService::class.java)
+            i.putExtra(SAction.KEY_OP_TYPE, opType)
+            return i
         }
     }
 }

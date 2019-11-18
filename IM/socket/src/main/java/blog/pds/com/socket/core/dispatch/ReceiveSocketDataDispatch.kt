@@ -1,8 +1,12 @@
 package blog.pds.com.socket.core.dispatch
 
+import android.util.Log
 import blog.pds.com.socket.core.client.ISendCallBack
 import blog.pds.com.socket.core.client.SCallback
 import blog.pds.com.socket.core.common.Constants
+import blog.pds.com.socket.core.common.PacketType
+import blog.pds.com.socket.core.heartbeat.HeartBeatManager
+import blog.pds.com.socket.core.manager.SocketDispatch
 
 /**
  * @author: pengdaosong
@@ -21,6 +25,40 @@ class ReceiveSocketDataDispatch{
      */
     val socketCallback = object : SCallback {
         override fun onReceive(type: Int, data: ByteArray) {
+            when(type){
+                // 开始链接socket
+                PacketType.CONNECT -> {
+
+                }
+                // 收到服务器确认链接成功消息
+                PacketType.CONNECTED ->{
+                    HeartBeatManager.beginHeartBeat()//连接成功，开始心跳
+                }
+                // socket关闭
+                PacketType.CLOSE ->{
+
+                }
+
+                PacketType.RECONNECT ->{
+
+                }
+                // 发送心跳包
+                PacketType.PING ->{
+                    SocketDispatch.sendPong()
+                }
+                // 收到服务器返回的心跳包
+                PacketType.PONG ->{
+                    HeartBeatManager.cancelLastHeartBeat()
+                }
+
+                PacketType.MESSAGE ->{
+                    HeartBeatManager.cancelLastHeartBeat()
+                }
+
+                else ->{
+                    Log.e(TAG,"unknown socket data package!")
+                }
+            }
             SocketSendDataBinder.onReceive(type,data)
         }
 

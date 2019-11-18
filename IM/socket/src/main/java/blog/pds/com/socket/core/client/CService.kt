@@ -12,7 +12,8 @@ import android.util.Log
 import blog.pds.com.socket.core.common.*
 import blog.pds.com.socket.core.dispatch.ReceiveSocketDataDispatch
 import blog.pds.com.socket.core.dispatch.SocketSendDataBinder
-import blog.pds.com.socket.core.manager.SocketManager
+import blog.pds.com.socket.core.manager.GlobalVar
+import blog.pds.com.socket.core.manager.SocketDispatch
 import blog.pds.com.socket.core.thread.AsyncTaskExecutor
 import blog.pds.com.socket.core.thread.RunnablePool
 import java.lang.ref.SoftReference
@@ -53,6 +54,7 @@ class CService : Service(){
     override fun onCreate() {
         super.onCreate()
         Log.i(TAG, "onCreate pid=${Process.myPid()}")
+        GlobalVar.init(applicationContext)
         createImClient()
     }
 
@@ -133,20 +135,25 @@ class CService : Service(){
      * 异步执行
      */
     private val mRunnableExecutorImpl = object : RunnablePool.IRunnbleExecutor {
-        override fun execute(what: Int,  params: Array<out Any>) {
-            // 检测实例是否被系统回收
-            val iClient = imClient()
+        override fun execute(what: Int,  params: Array<out Any>){
+            doExecute(what,params)
+        }
+    }
 
-            for (c in params){
-                Log.d(TAG,"runner.params = $c")
-            }
-            when (what) {
-                SAction.OP_TYPE_CONNECT -> iClient.connect(params[0].toString(), params[1] as Int)
-                SAction.OP_TYPE_SEND -> iClient.write(params[0] as ByteArray, params[1] as ISendCallBack)
-                SAction.OP_TYPE_DISCONNECT -> iClient.disConnect(false)
-                SAction.OP_TYPE_RECONNECT -> iClient.reConnect()
-                else -> {
-                }
+    private fun doExecute(what: Int,  params: Array<out Any>){
+        // 检测实例是否被系统回收
+        val iClient = imClient()
+
+        for (c in params){
+            Log.d(TAG,"runner.params = $c")
+        }
+        when (what) {
+            SAction.OP_TYPE_CONNECT -> iClient.connect(params[0].toString(), params[1] as Int)
+            SAction.OP_TYPE_SEND -> iClient.write(params[0] as ByteArray, params[1] as ISendCallBack)
+            SAction.OP_TYPE_PING ->  SocketDispatch.sendPing()
+            SAction.OP_TYPE_DISCONNECT -> iClient.disConnect(false)
+            SAction.OP_TYPE_RECONNECT -> iClient.reConnect()
+            else -> {
             }
         }
     }
@@ -167,7 +174,7 @@ class CService : Service(){
                     }
 
                     override fun onFailed(e: Exception) {
-                        SocketManager.reconnect()
+                        SocketDispatch.reconnect()
                     }
                 })
         )

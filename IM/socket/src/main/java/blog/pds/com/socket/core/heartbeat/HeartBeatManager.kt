@@ -1,7 +1,8 @@
 package blog.pds.com.socket.core.heartbeat
 
 import android.util.Log.*
-import blog.pds.com.socket.core.manager.SocketManager
+import blog.pds.com.socket.core.manager.GlobalVar
+import blog.pds.com.socket.core.manager.SocketDispatch
 import blog.pds.com.socket.core.manager.TimeIntervalManager
 
 /**
@@ -20,14 +21,16 @@ object HeartBeatManager {
     private val timeIntervalManager =
         TimeIntervalManager.instance(object : TimeIntervalManager.SimpleTimeIntervalCallback() {
             override fun accept() {
-//                heartbeatScheduler.receiveHeartbeatFailed(context)
-                SocketManager.reconnect()
+                val context = GlobalVar.application() ?: return
+                heartbeatScheduler.receiveHeartbeatFailed(context)
+                SocketDispatch.reconnect()
             }
         })
 
     fun beginHeartBeat() {
-//        heartbeatScheduler.start(context)
+        val context = GlobalVar.application() ?: return
         i(TAG, "begin heart beat")
+        heartbeatScheduler.start(context)
     }
 
     fun interval() {
@@ -39,9 +42,10 @@ object HeartBeatManager {
      * 收到服务器返回的pong,
      */
     fun receivedPong() {
+        val context = GlobalVar.application() ?: return
         i(TAG, "received pong")
         //成功获得心跳，调整稳定心跳值
-//        heartbeatScheduler.receiveHeartbeatSuccess(context)
+        heartbeatScheduler.receiveHeartbeatSuccess(context)
         i(TAG, "stop interval")
         timeIntervalManager.stop()
     }
@@ -50,20 +54,22 @@ object HeartBeatManager {
     /**
      * 如果有消息再传输，则取消上一次的心跳，由于上行没有通过socket所以这里暂时没有添加上行
      */
-    fun cancleLastHeartBeat() {
+    fun cancelLastHeartBeat() {
+        val context = GlobalVar.application() ?: return
         i(TAG, "cancel last heart beat")
         //如果有消息在socket发送，则取消上一个心跳延迟
-//        heartbeatScheduler.stop(context)
+        heartbeatScheduler.stop(context)
         //重新开始心跳逻辑
-//        heartbeatScheduler.start(context)
+        heartbeatScheduler.start(context)
     }
 
     /**
      * 断开连接停止心跳
      */
     fun stopHeatBeat() {
+        val context = GlobalVar.application() ?: return
         i(TAG, "stop heat beat")
-//        heartbeatScheduler.start(context)
-//        heartbeatScheduler.clear(context)
+        heartbeatScheduler.start(context)
+        heartbeatScheduler.clear(context)
     }
 }

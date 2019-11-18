@@ -19,7 +19,7 @@ import blog.pds.com.socket.core.heartbeat.IHeartbeatScheduler.Companion as IHear
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-class HearbeatSchedulerImpl : IHeartbeatScheduler {
+open class HearbeatSchedulerImpl : IHeartbeatScheduler {
 
     companion object{
         private const val TAG = "HearbeatSchedulerImpl"
@@ -60,7 +60,7 @@ class HearbeatSchedulerImpl : IHeartbeatScheduler {
         return heartbeat
     }
 
-    protected fun createPendingIntent(context: Context, requestCode: Int, heartType: Int): PendingIntent {
+    private fun createPendingIntent(context: Context, requestCode: Int, heartType: Int): PendingIntent {
         val intent = Intent(context, SocketImReceiver::class.java)
         intent.setPackage(context.packageName)
         intent.action = IHeartbeatScheduler1.HEART_BEAT_ACTION

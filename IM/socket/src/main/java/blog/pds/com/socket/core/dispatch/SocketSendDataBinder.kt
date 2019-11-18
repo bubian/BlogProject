@@ -12,7 +12,7 @@ import blog.pds.com.socket.core.common.Constants
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-object SocketSendDataBinder : blog.pds.com.socket.ISocketAIDLSendData.Stub(){
+object SocketSendDataBinder : ISocketAIDLSendData.Stub(){
 
     private const val TAG = Constants.SOCKET_TAG_CLIENT_PRE + "ssdb:"
 

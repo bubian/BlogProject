@@ -42,5 +42,10 @@ class SAction{
          */
         const val OP_TYPE_SEND = 4
 
+        /**
+         * 发送PING
+         */
+        const val OP_TYPE_PING = 4
+
     }
 }

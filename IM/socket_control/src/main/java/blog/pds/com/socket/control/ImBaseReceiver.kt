@@ -6,7 +6,7 @@ import android.content.Intent
 import android.os.Process
 import android.util.Log
 import blog.pds.com.socket.core.heartbeat.IHeartbeatScheduler
-import blog.pds.com.socket.core.manager.SocketManager
+import blog.pds.com.socket.core.manager.SocketDispatch
 
 /**
  * @author: pengdaosong
@@ -32,7 +32,7 @@ open class ImBaseReceiver: BroadcastReceiver(){
             }
         } else if (intent != null && intent.action!!.equals(IHeartbeatScheduler.HEART_BEAT_ACTION, ignoreCase = true)) {
             //接受到心跳包发送心跳
-            SocketManager.sendPing()
+            SocketDispatch.sendPing()
         }
     }
 
