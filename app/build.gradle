@@ -97,10 +97,10 @@ android {
 
         }
 
-        releaseWithLog {
-            splitsEnabled = true
-        }
-        release.initWith(releaseWithLog)
+//        releaseWithLog {
+//            splitsEnabled = true
+//        }
+//        release.initWith(releaseWithLog)
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
