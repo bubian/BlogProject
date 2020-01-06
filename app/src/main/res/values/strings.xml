@@ -2,6 +2,7 @@
     <string name="app_name">BlogProject</string>
 
     <string name="use_native">Use native conversion</string>
+    <string name="refresh">refresh</string>
 
     <string name="html">
         <![CDATA[

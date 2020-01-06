@@ -1,5 +1,5 @@
 // socket
-include ':IM:socket_control', ':lib_preloader'
+include ':IM:socket_control', ':lib_preloader', ':lib_aspect_annotations'
 include ':IM:socket_app'
 include ':IM:socket'
 include ':IM:socket_data'
@@ -14,8 +14,8 @@ include ':lib_net'
 // netty
 include ':nettyim'
 // aspect
-//include ':lib_aspect_annotations'
-//include ':lib_aspect_runtime'
-//include ':plugin_aspect'
+include ':lib_aspect_annotations'
+include ':lib_aspect_runtime'
+include ':plugin_aspect'
 // webP
 //include ':plugin_webP'
