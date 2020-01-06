@@ -28,7 +28,7 @@ class AspectPlugin implements Plugin<Project> {
 
         project.dependencies {
             compile 'com.lib:aspect:1.0.0'
-//            debugCompile 'com.lib:aspect-runtime:1.0.0'
+            debugCompile 'com.lib:aspect-runtime:1.0.0'
             debugCompile 'org.aspectj:aspectjrt:1.8.13'
         }
 
@@ -51,7 +51,7 @@ class AspectPlugin implements Plugin<Project> {
                         "-aspectpath", javaCompile.classpath.asPath,
                         "-d", javaCompile.destinationDir.toString(),
                         "-classpath", javaCompile.classpath.asPath,
-//                        "-bootclasspath", android.bootClasspath.join(File.pathSeparator)
+                        "-bootclasspath", android.bootClasspath.join(File.pathSeparator)
                 ]
                 log.debug "ajc args: " + Arrays.toString(args)
 

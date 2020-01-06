@@ -45,6 +45,7 @@ public class MethodPrint {
             builder.append(" [Thread:\"").append(Thread.currentThread().getName()).append("\"]");
         }
 
+        Log.v(asTag(cls), "log start");
         Log.v(asTag(cls), builder.toString());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {

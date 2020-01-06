@@ -1,5 +1,5 @@
-apply plugin: 'java-library'
-//apply plugin: 'java'
+//apply plugin: 'java-library'
+apply plugin: 'java'
 sourceCompatibility = "7"
 targetCompatibility = "7"
 

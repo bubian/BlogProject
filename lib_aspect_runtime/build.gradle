@@ -32,7 +32,8 @@ android {
 
 dependencies {
     compile 'org.aspectj:aspectjrt:1.8.13'
-    compile project(':lib_aspect_annotations')
+    // 放在这里始终编译报错，于是移动到主工程build.gradle中配置
+//    compile project(':lib_aspect_annotations')
 }
 
 android.libraryVariants.all { variant ->

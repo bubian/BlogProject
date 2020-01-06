@@ -17,7 +17,7 @@ public class AspectBlog {
         AspectBlog.enabled = enabled;
     }
 
-    @Pointcut("within(@lib.pds.com.aspect.anno.DebugLog *)")
+    @Pointcut("within(@com.pds.annotations.DebugLog *)")
     public void withinAnnotatedClass() {
     }
 
@@ -29,11 +29,11 @@ public class AspectBlog {
     public void constructorInsideAnnotatedType() {
     }
 
-    @Pointcut("execution(@lib.pds.com.aspect.anno.DebugLog * *(..)) || methodInsideAnnotatedType()")
+    @Pointcut("execution(@com.pds.annotations.DebugLog * *(..)) || methodInsideAnnotatedType()")
     public void method() {
     }
 
-    @Pointcut("execution(@lib.pds.com.aspect.anno.DebugLog *.new(..)) || constructorInsideAnnotatedType()")
+    @Pointcut("execution(@com.pds.annotations.DebugLog *.new(..)) || constructorInsideAnnotatedType()")
     public void constructor() {
     }
 
