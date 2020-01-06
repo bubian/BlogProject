@@ -51,7 +51,7 @@ class AspectPlugin implements Plugin<Project> {
                         "-aspectpath", javaCompile.classpath.asPath,
                         "-d", javaCompile.destinationDir.toString(),
                         "-classpath", javaCompile.classpath.asPath,
-                        "-bootclasspath", project.android.bootstrapClasspath.join(File.pathSeparator)
+//                        "-bootclasspath", android.bootClasspath.join(File.pathSeparator)
                 ]
                 log.debug "ajc args: " + Arrays.toString(args)
 
