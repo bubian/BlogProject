@@ -46,6 +46,7 @@ android.libraryVariants.all { variant ->
                 "-aspectpath", javaCompile.classpath.asPath,
                 "-d", javaCompile.destinationDir.toString(),
                 "-classpath", javaCompile.classpath.asPath,
+                // 老版本gradle使用"-bootclasspath", android.bootClasspath.join(File.pathSeparator)
                 "-bootclasspath", android.bootClasspath.join(File.pathSeparator)
         ]
 
