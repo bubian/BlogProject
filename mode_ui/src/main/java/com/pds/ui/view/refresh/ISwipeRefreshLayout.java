@@ -36,15 +36,7 @@ import android.view.animation.Transformation;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 
-/**
- * 修改官方SwipeRefreshLayout源码自定义刷新控件
- * 主要修改：
- * 1、内置默认下拉效果
- * 2、允许添加自定义的下拉效果
- *
- * @author 彭道松
- * @date 2019/1/7
- */
+import com.pds.ui.view.refresh.cb.IRefreshTrigger;
 
 public class ISwipeRefreshLayout extends ViewGroup implements NestedScrollingParent,
         NestedScrollingChild {
@@ -208,21 +200,10 @@ public class ISwipeRefreshLayout extends ViewGroup implements NestedScrollingPar
         reset();
     }
 
-    /**
-     * Simple constructor to use when creating a ISwipeRefreshLayout from code.
-     *
-     * @param context
-     */
     public ISwipeRefreshLayout(Context context) {
         this(context, null);
     }
 
-    /**
-     * Constructor that is called when inflating ISwipeRefreshLayout from XML.
-     *
-     * @param context
-     * @param attrs
-     */
     public ISwipeRefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -235,7 +216,11 @@ public class ISwipeRefreshLayout extends ViewGroup implements NestedScrollingPar
         mDecelerateInterpolator = new DecelerateInterpolator(DECELERATE_INTERPOLATION_FACTOR);
 
         final DisplayMetrics metrics = getResources().getDisplayMetrics();
+
+
         mHeaderViewHeight = (int) (DEFAULT_HEADER_HEIGHT * metrics.density);
+
+
         HEADER_VIEW_MIN_HEIGHT = mHeaderViewHeight;
         ViewCompat.setChildrenDrawingOrderEnabled(this, true);
         mTotalDragDistance = (int) (DEFAULT_HEADER_TARGET * metrics.density);
@@ -249,7 +234,7 @@ public class ISwipeRefreshLayout extends ViewGroup implements NestedScrollingPar
         a.recycle();
 
         //add default refreshview
-        setRefreshHeaderView(new MedlinkerRefreshHeaderView(getContext()));
+        setRefreshHeaderView(new BaseRefreshHeaderView(getContext()));
     }
 
     @Override

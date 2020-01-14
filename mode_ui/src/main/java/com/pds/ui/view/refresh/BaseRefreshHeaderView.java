@@ -9,16 +9,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.pds.ui.R;
+import com.pds.ui.view.refresh.cb.IRefreshTrigger;
 
 import java.util.Random;
 
-
-/**
- * 医联下拉刷新效果
- * Created by jiantao on 2017/6/20.
- */
-
-public class MedlinkerRefreshHeaderView extends FrameLayout implements IRefreshTrigger {
+public class BaseRefreshHeaderView extends FrameLayout implements IRefreshTrigger {
 
     private ImageView loadingView;
     private TextView refreshState;
@@ -32,15 +27,15 @@ public class MedlinkerRefreshHeaderView extends FrameLayout implements IRefreshT
     private int tipsIndex;
     private Random mRandom;
 
-    public MedlinkerRefreshHeaderView(Context context) {
+    public BaseRefreshHeaderView(Context context) {
         this(context, null);
     }
 
-    public MedlinkerRefreshHeaderView(Context context, @Nullable AttributeSet attrs) {
+    public BaseRefreshHeaderView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MedlinkerRefreshHeaderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public BaseRefreshHeaderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setupViews();
         mRandom = new Random();

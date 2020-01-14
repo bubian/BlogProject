@@ -122,5 +122,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.14.1'
     implementation project(':lib_package')
     compile project(path: ':lib_preloader')
+    implementation project(path: ':mode_ui')
+    compile project(path: ':lib_util')
 //    compile project(':lib_aspect_annotations')
 }

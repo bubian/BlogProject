@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.pds.ui.view.refresh.CustomSwipeToRefresh
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:id="@+id/refresh_st">
+
+<com.pds.ui.view.rl.VLayoutRecycleView
+        android:id="@+id/refresh_vl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</com.pds.ui.view.refresh.CustomSwipeToRefresh>

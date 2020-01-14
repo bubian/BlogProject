@@ -1,9 +1,5 @@
-package com.pds.ui.view.refresh;
+package com.pds.ui.view.refresh.cb;
 
-/**
- * 下拉刷新各个状态触发接口
- * Created by jiantao on 17/6/15.
- */
 public interface IRefreshTrigger {
 
     /**

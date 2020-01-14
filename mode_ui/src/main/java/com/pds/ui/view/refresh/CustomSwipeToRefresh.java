@@ -5,12 +5,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
-/**
- * Author: KindyFung.
- * CreateTime:  2015/12/14 20:04
- * Email：fangjing@medlinker.com.
- * Description: 解决首页SwipRefreshLay和ViewPager冲突的问题
- */
 public class CustomSwipeToRefresh extends ISwipeRefreshLayout {
     private final int mTouchSlop;
     private float mPrevX;

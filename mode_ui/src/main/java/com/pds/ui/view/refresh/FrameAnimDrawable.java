@@ -11,11 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.view.animation.LinearInterpolator;
 
-/**
- * 帧动画Drawable。避免内存泄漏。
- * Created by jiantao on 2017/7/30.
- */
-
 public class FrameAnimDrawable extends Drawable implements Animatable {
     private Resources mResources;
     private int fps = 25;
