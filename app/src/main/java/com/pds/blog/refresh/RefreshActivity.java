@@ -19,9 +19,10 @@ import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.pds.blog.R;
 import com.pds.blog.base.BaseActivity;
-import com.pds.ui.view.refresh.BaseRefreshHeaderView;
+import com.pds.ui.view.refresh.view.TwoPointRefreshView;
 import com.pds.ui.view.refresh.CustomSwipeToRefresh;
-import com.pds.ui.view.refresh.header.ZoomHeaderView;
+import com.pds.ui.view.refresh.view.CircleImageRefreshView;
+import com.pds.ui.view.refresh.view.ZoomRefreshHeaderView;
 import com.pds.ui.view.rl.VLayoutRecycleView;
 import com.pds.util.unit.UnitConversionUtils;
 
@@ -41,7 +42,8 @@ public class RefreshActivity extends BaseActivity {
     private HeaderAdapter headerAdapter;
     private ContentAdapter contentAdapter;
 
-    private ZoomHeaderView zoomHeaderView;
+    private ZoomRefreshHeaderView zoomHeaderView;
+    private CircleImageRefreshView defaultRefreshHeaderView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,7 +51,8 @@ public class RefreshActivity extends BaseActivity {
         setContentView(R.layout.activity_refresh);
         initView();
 
-//        zoomHeaderView = new ZoomHeaderView(this);
+//        zoomHeaderView = new ZoomRefreshHeaderView(this);
+        defaultRefreshHeaderView = new CircleImageRefreshView(this);
 //        swipeToRefresh.setRefreshHeaderView(zoomHeaderView);
         // 初始化内容数据
         initData();
@@ -147,7 +150,7 @@ public class RefreshActivity extends BaseActivity {
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
             RefreshHolder h = (RefreshHolder) holder;
             View itemView = holder.itemView;
-            if (itemView instanceof BaseRefreshHeaderView){
+            if (itemView instanceof TwoPointRefreshView){
 //                zoomHeaderView.callback(((BaseRefreshHeaderView)itemView)
 //                        .bindSwipeToRefresh(swipeToRefresh));
             }

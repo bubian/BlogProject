@@ -1,4 +1,4 @@
-package com.pds.ui.view.refresh.header;
+package com.pds.ui.view.refresh.view;
 
 /**
  * @author: pengdaosong
@@ -21,7 +21,7 @@ import com.pds.ui.view.refresh.cb.IRefreshTrigger;
 
 import java.util.Random;
 
-public class ZoomHeaderView extends FrameLayout implements IRefreshTrigger {
+public class ZoomRefreshHeaderView extends FrameLayout implements IRefreshTrigger {
 
     private ImageView loadingView;
     private TextView refreshState;
@@ -34,20 +34,20 @@ public class ZoomHeaderView extends FrameLayout implements IRefreshTrigger {
     private Random mRandom;
     private IRefreshTrigger mRefreshTrigger;
 
-    public ZoomHeaderView(Context context) {
+    public ZoomRefreshHeaderView(Context context) {
         this(context, null);
     }
 
-    public ZoomHeaderView callback(IRefreshTrigger refreshTrigger){
+    public ZoomRefreshHeaderView callback(IRefreshTrigger refreshTrigger){
         this.mRefreshTrigger = refreshTrigger;
         return this;
     }
 
-    public ZoomHeaderView(Context context, @Nullable AttributeSet attrs) {
+    public ZoomRefreshHeaderView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ZoomHeaderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ZoomRefreshHeaderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setupViews();
         mRandom = new Random();

@@ -1,0 +1,18 @@
+apply plugin: 'java-library'
+
+dependencies {
+    api 'com.google.guava:guava:28.0-android'
+    // https://github.com/google/auto/tree/master/value/userguide
+    implementation "com.google.auto.value:auto-value-annotations:1.7"
+    // https://github.com/cbeust/jcommander
+    implementation "com.beust:jcommander:1.48"
+    implementation "com.opencsv:opencsv:3.7"
+    implementation "com.google.truth:truth:0.28"
+    implementation "javax.inject:javax.inject:1"
+    implementation "aopalliance:aopalliance:1.0"
+    annotationProcessor "com.google.auto.value:auto-value:1.7"
+    implementation files('libs/guice-4.2.2.jar')
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"

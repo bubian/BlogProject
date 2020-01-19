@@ -17,7 +17,7 @@ android {
 
         ndk{
             moduleName "app"
-            abiFilters "armeabi","x86" //指定平台
+            abiFilters "armeabi-v7a","x86" //指定平台
             cFlags "-DANDROID_NDK"
         }
 

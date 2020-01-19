@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
-public class CustomSwipeToRefresh extends ISwipeRefreshLayout {
+public class CustomSwipeToRefresh extends MultipleSwipeRefreshLayout {
     private final int mTouchSlop;
     private float mPrevX;
     private float mPrevY;

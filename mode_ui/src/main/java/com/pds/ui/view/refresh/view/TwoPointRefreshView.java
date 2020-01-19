@@ -1,4 +1,4 @@
-package com.pds.ui.view.refresh;
+package com.pds.ui.view.refresh.view;
 
 import android.content.Context;
 import androidx.annotation.Nullable;
@@ -9,11 +9,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.pds.ui.R;
+import com.pds.ui.view.refresh.FrameAnimDrawable;
 import com.pds.ui.view.refresh.cb.IRefreshTrigger;
+
 
 import java.util.Random;
 
-public class BaseRefreshHeaderView extends FrameLayout implements IRefreshTrigger {
+public class TwoPointRefreshView extends FrameLayout implements IRefreshTrigger {
 
     private ImageView loadingView;
     private TextView refreshState;
@@ -27,15 +29,15 @@ public class BaseRefreshHeaderView extends FrameLayout implements IRefreshTrigge
     private int tipsIndex;
     private Random mRandom;
 
-    public BaseRefreshHeaderView(Context context) {
+    public TwoPointRefreshView(Context context) {
         this(context, null);
     }
 
-    public BaseRefreshHeaderView(Context context, @Nullable AttributeSet attrs) {
+    public TwoPointRefreshView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public BaseRefreshHeaderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public TwoPointRefreshView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setupViews();
         mRandom = new Random();

@@ -1,5 +1,5 @@
 // socket
-include ':IM:socket_control', ':lib_preloader'
+include ':IM:socket_control'
 include ':IM:socket_app'
 include ':IM:socket'
 include ':IM:socket_data'
@@ -19,3 +19,7 @@ include ':lib_aspect_runtime'
 include ':plugin_aspect'
 // webP
 include ':plugin_webP'
+// optimization
+include':lib_preloader'
+// utils
+include':utils:lib_arsc'

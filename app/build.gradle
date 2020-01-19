@@ -32,7 +32,7 @@ android {
         }
         ndk {
             moduleName "app"
-            abiFilters "armeabi", "x86" //指定平台
+            abiFilters "armeabi-v7a", "x86" //指定平台
             cFlags "-DANDROID_NDK"
         }
     }
@@ -124,5 +124,5 @@ dependencies {
     compile project(path: ':lib_preloader')
     implementation project(path: ':mode_ui')
     compile project(path: ':lib_util')
-//    compile project(':lib_aspect_annotations')
+    //    compile project(':lib_aspect_annotations')
 }
