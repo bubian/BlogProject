@@ -1,7 +1,6 @@
 package com.plugin.webp
 
 import org.apache.tools.ant.taskdefs.condition.Os
-import org.gradle.api.GradleException
 import org.gradle.api.Project
 
 import javax.imageio.ImageIO

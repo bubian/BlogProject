@@ -16,9 +16,9 @@ include ':nettyim'
 // aspect
 include ':lib_aspect_annotations'
 include ':lib_aspect_runtime'
-include ':plugin_aspect'
+include ':plugin:plugin_aspect'
 // webP
-include ':plugin_webP'
+include ':plugin:plugin_webP'
 // optimization
 include':lib_preloader'
 // utils
