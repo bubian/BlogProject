@@ -2,7 +2,10 @@ package com.pds.blog.refresh;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +40,7 @@ import java.util.List;
  */
 public class RefreshActivity extends BaseActivity {
 
+    private static final String TAG = "RefreshActivity";
     private VLayoutRecycleView vLayoutRecycleView;
     private CustomSwipeToRefresh swipeToRefresh;
     private HeaderAdapter headerAdapter;
@@ -56,6 +60,23 @@ public class RefreshActivity extends BaseActivity {
 //        swipeToRefresh.setRefreshHeaderView(zoomHeaderView);
         // 初始化内容数据
         initData();
+        boolean isProxy = isProxy();
+        Log.e(TAG,"isProxy="+isProxy);
+    }
+
+    public  boolean isProxy() {
+        final boolean IS_ICS_OR_LATER = Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH;
+        String proxyAddress;
+        int proxyPort;
+        if (IS_ICS_OR_LATER) {
+            proxyAddress = System.getProperty("http.proxyHost");
+            String portStr = System.getProperty("http.proxyPort");
+            proxyPort = Integer.parseInt((portStr != null ? portStr : "-1"));
+        } else {
+            proxyAddress = android.net.Proxy.getHost(this);
+            proxyPort = android.net.Proxy.getPort(this);
+        }
+        return (!TextUtils.isEmpty(proxyAddress)) && (proxyPort != -1);
     }
 
     private void initView() {

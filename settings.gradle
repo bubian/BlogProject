@@ -1,5 +1,6 @@
 // socket
 include ':IM:socket_control'
+include 'utils:lib_res_guard'
 include ':IM:socket_app'
 include ':IM:socket'
 include ':IM:socket_data'
