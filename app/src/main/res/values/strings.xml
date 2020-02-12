@@ -3,6 +3,7 @@
 
     <string name="use_native">Use native conversion</string>
     <string name="refresh">refresh</string>
+    <string name="crc">classes.dex crc 值</string>
 
     <string name="html">
         <![CDATA[

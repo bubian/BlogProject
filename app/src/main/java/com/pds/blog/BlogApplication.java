@@ -1,6 +1,19 @@
 package com.pds.blog;
 
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import android.os.Process;
+import android.util.Log;
 import androidx.multidex.MultiDexApplication;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 /**
  * @author: pengdaosong
@@ -12,5 +25,86 @@ public class BlogApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        if ((getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE) != 0){
+            if (BuildConfig.BUILD_TYPE.contains("debug")){
+                return;
+            }
+            Log.e("","程序被串改");
+            android.os.Process.killProcess(android.os.Process.myPid());
+        }
+
+        if (android.os.Debug.isDebuggerConnected()){
+            if (BuildConfig.BUILD_TYPE.contains("debug")){
+                return;
+            }
+            Log.e("","程序被串改");
+            android.os.Process.killProcess(android.os.Process.myPid());
+        }
+    }
+
+    private boolean isRunningInEmualtor(){
+        java.lang.Process process = null;
+        DataOutputStream os = null;
+        boolean qk = false;
+        try {
+            process = Runtime.getRuntime().exec("getprop ro.kernel.qemu");
+            os = new DataOutputStream(process.getOutputStream());
+            BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream(),"GBK"));
+            os.writeBytes("exit\n");
+            os.flush();
+            process.waitFor();
+            qk = Integer.valueOf(in.readLine()) == 1;
+        } catch (IOException e) {
+            qk = false;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (os != null){
+                    os.close();
+                }
+                process.destroy();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return qk;
+    }
+
+    private boolean isModifySignature(String packageName){
+        PackageManager pm = getPackageManager();
+        PackageInfo pi = null;
+        int sig = 0;
+        try {
+            pi = pm.getPackageInfo(packageName,PackageManager.GET_SIGNATURES);
+            Signature[] s = pi.signatures;
+            sig = s[0].hashCode();
+        } catch (PackageManager.NameNotFoundException e) {
+            sig = 0;
+            e.printStackTrace();
+        }
+
+        if (sig != 1111111111){
+            Log.e("","签名不一致");
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkCRC(){
+        boolean mod = false;
+        long crc = Long.parseLong(getString(R.string.crc));
+        ZipFile zf;
+        try {
+            zf = new ZipFile(getApplicationContext().getPackageCodePath());
+            ZipEntry ze = zf.getEntry("classes.dex");
+            if (ze.getCrc() == crc){
+                mod = true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            mod = false;
+        }
+        return mod;
     }
 }
