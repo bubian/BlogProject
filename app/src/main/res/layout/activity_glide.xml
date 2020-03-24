@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:orientation="vertical"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   android:background="@android:color/white"
+   android:gravity="center">
+
+
+    <ImageView
+        android:id="@+id/image_glide"
+        android:layout_width="330dp"
+        android:layout_height="300dp"
+        android:scaleType="center"
+        android:background="@color/color_9a9aa4"
+        android:src="@mipmap/ttt"/>
+
+</LinearLayout>

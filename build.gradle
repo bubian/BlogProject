@@ -26,6 +26,8 @@ allprojects {
         maven {
             url uri('../repo')
         }
+
+        maven { url "https://oss.jfrog.org/libs-snapshot" }
         // 添加，下载stetho_realm
         maven {
             url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'

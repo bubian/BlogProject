@@ -6,3 +6,8 @@
 
 ### 跨进程通信
 - https://github.com/iqiyi/Andromeda
+
+### 相机库：
+- https://github.com/google/cameraview
+- https://github.com/CameraKit/camerakit-android
+- https://github.com/RedApparat/Fotoapparat

@@ -125,4 +125,13 @@ dependencies {
     implementation project(path: ':mode_ui')
     compile project(path: ':lib_util')
     //    compile project(':lib_aspect_annotations')
+    // RxJava
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+//    implementation 'io.reactivex:rxjava-async-util:0.20.4'
+//    implementation 'rxjava-computation-expressions:0.20.4'
+    // https://github.com/JakeWharton/RxBinding/
+
+
+    implementation 'com.jakewharton.rxbinding3:rxbinding-material:3.1.0'
 }

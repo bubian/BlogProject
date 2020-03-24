@@ -4,7 +4,7 @@
           package="com.pds.blog">
 
     <!-- android:extractNativeLibs="false"  阻止把本地库从 APK 拷贝到文件系统上。唯一的要求是文件已经经过整理并且未压缩地存于 APK 里,这个功能仅在高于 2.2.0 版本的 Android Gradle 插件中使用-->
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
             android:extractNativeLibs="false"
             android:allowBackup="true"
@@ -18,7 +18,7 @@
             tools:replace="android:appComponentFactory"
             android:name=".BlogApplication"
             tools:targetApi="m">
-        <activity android:name=".refresh.RefreshActivity">
+        <activity android:name=".GlideTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>
