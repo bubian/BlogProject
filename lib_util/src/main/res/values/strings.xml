@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">lib_util</string>
+    <string name="price_inner_convert">%1$1.2f</string>
+    <string name="price_rmb_format">￥%s</string>
+    <string name="msg_timeutil_yesterday">昨天</string>
+
+    <!--星期-->
+    <string name="week_one_2">周一</string>
+    <string name="week_two_2">周二</string>
+    <string name="week_three_2">周三</string>
+    <string name="week_four_2">周四</string>
+    <string name="week_five_2">周五</string>
+    <string name="week_six_2">周六</string>
+    <string name="week_seven_2">周日</string>
+
+    <string name="week_one">星期一</string>
+    <string name="week_two">星期二</string>
+    <string name="week_three">星期三</string>
+    <string name="week_four">星期四</string>
+    <string name="week_five">星期五</string>
+    <string name="week_six">星期六</string>
+    <string name="week_seven">星期天</string>
 </resources>

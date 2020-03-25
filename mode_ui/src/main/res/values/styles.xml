@@ -14,4 +14,34 @@
         <item name="android:windowExitAnimation">@anim/toast_exit</item>
     </style>
 
+    <style name="popup_style">
+        <item name="android:windowEnterAnimation">@anim/fade_in2</item>
+        <item name="android:windowExitAnimation">@anim/fade_out2</item>
+    </style>
+
+    <declare-styleable name="MarqueeHorizontalView">
+        <attr name="mvTextColor" format="color" />
+        <attr name="mvTextSize" format="dimension" />
+        <attr name="isRepeat" format="boolean" />
+        <attr name="speed" format="integer" />
+        <attr name="startPoint" format="integer">
+            <enum name="start" value="0" />
+            <enum name="end" value="1" />
+        </attr>
+        <attr name="direction" format="integer">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="RatioImageView">
+        <attr name="ratio" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleRingProgressView">
+        <attr name="crpv_ring_width" format="dimension"/>
+        <attr name="crpv_bg_color" format="color"/>
+        <attr name="crpv_progress_color" format="color"/>
+        <attr name="crpv_ring_angle" format="integer"/>
+    </declare-styleable>
 </resources>

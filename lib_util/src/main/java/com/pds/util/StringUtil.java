@@ -12,7 +12,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -29,8 +28,8 @@ import java.util.regex.Pattern;
  * Email：fangjing@medlinker.com.
  * Description:
  */
-public class StringUtils {
-    private static final String TAG = StringUtils.class.getSimpleName();
+public class StringUtil {
+    private static final String TAG = StringUtil.class.getSimpleName();
 
 
     /**
@@ -370,6 +369,8 @@ public class StringUtils {
     }
 
 
+
+
     /**
      * 对EditText字数的限制
      *
@@ -549,9 +550,5 @@ public class StringUtils {
         } else {
             return url.concat("?extra=").concat(str);
         }
-    }
-
-    public static boolean isStrictEmpty(String s) {
-        return s == null || "".equals(s) || "null".equalsIgnoreCase(s);
     }
 }

@@ -22,9 +22,16 @@ import java.util.zip.ZipFile;
  * Description:
  */
 public class BlogApplication extends MultiDexApplication {
+    private static BlogApplication mApp;
+
+    public static BlogApplication instance(){
+        return mApp;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+        mApp = this;
         if ((getApplicationInfo().flags &= ApplicationInfo.FLAG_DEBUGGABLE) != 0){
             if (BuildConfig.BUILD_TYPE.contains("debug")){
                 return;

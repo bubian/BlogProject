@@ -5,4 +5,8 @@
     <color name="colorAccent">#D81B60</color>
     <color name="color_e2e7f1">#e2e7f1</color>
     <color name="color_9a9aa4">#9a9aa4</color>
+    <color name="translucence">#99000000</color>
+    <color name="color_f684033">#f68403</color>
+    <color name="color_ff4848">#ff4848</color>
+    <color name="color_fff2c1">#fff2c1</color>
 </resources>
