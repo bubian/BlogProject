@@ -18,7 +18,7 @@
             tools:replace="android:appComponentFactory"
             android:name=".BlogApplication"
             tools:targetApi="m">
-        <activity android:name=".GlideTestActivity">
+        <activity android:name=".ui.StickyNavActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>

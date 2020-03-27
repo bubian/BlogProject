@@ -1,6 +1,8 @@
 package com.pds.blog;
 
 import android.os.Bundle;
+import android.widget.FrameLayout;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 

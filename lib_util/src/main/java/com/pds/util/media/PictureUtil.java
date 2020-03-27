@@ -1,7 +1,6 @@
 package com.pds.util.media;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
@@ -10,27 +9,9 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Shader;
-import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
-import android.os.Build;
-import android.provider.MediaStore;
-import android.support.annotation.Nullable;
-import android.support.v4.content.FileProvider;
-import android.text.TextUtils;
-import android.view.View;
 
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
-import com.cn.glidelib.glide.GlideApp;
-import com.medlinker.base.entity.FileEntity;
-import com.medlinker.base.utils.DimenUtil;
-import com.medlinker.base.utils.ToastUtil;
-
-import net.medlinker.medlinker.BuildConfig;
-import net.medlinker.medlinker.R;
-import net.medlinker.medlinker.app.MedlinkerApp;
+import com.pds.util.unit.UnitConversionUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -275,14 +256,14 @@ public class PictureUtil {
      *
      * @param bitmap
      */
-    public static String saveImgToTemp(Bitmap bitmap) {
-        if (null == bitmap) {
-            return null;
-        }
-        String fileName = CommonUtil.getMyUUID().concat(".jpg");
-        String localPath = getTempFilePath() + fileName;
-        return saveImgToLocal(bitmap, localPath);
-    }
+//    public static String saveImgToTemp(Bitmap bitmap) {
+//        if (null == bitmap) {
+//            return null;
+//        }
+//        String fileName = CommonUtil.getMyUUID().concat(".jpg");
+//        String localPath = getTempFilePath() + fileName;
+//        return saveImgToLocal(bitmap, localPath);
+//    }
 
 
     /**
@@ -290,116 +271,88 @@ public class PictureUtil {
      *
      * @param bitmap
      */
-    public static String saveImgToLocal(Context context, Bitmap bitmap) {
-        if (null == bitmap) {
-            return null;
-        }
-        String fileName = CommonUtil.getMyUUID() + ".jpg";
-        String localPath = getPictureFilePath() + fileName;
-        File file = new File(localPath);
-        if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        FileOutputStream os;
-        try {
-            os = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
-            os.close();
-            //把文件插入到系统图库
-            MediaStore.Images.Media.insertImage(context.getContentResolver(),
-                    file.getAbsolutePath(), fileName, null);
-            //通知图库更新
-            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Uri uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID.concat(".provider"), file);
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                intent.setData(uri);
-            } else {
-                intent.setData(Uri.fromFile(file));
-            }
-            context.sendBroadcast(intent);
-            return fileName;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+//    public static String saveImgToLocal(Context context, Bitmap bitmap) {
+//        if (null == bitmap) {
+//            return null;
+//        }
+//        String fileName = CommonUtil.getMyUUID() + ".jpg";
+//        String localPath = getPictureFilePath() + fileName;
+//        File file = new File(localPath);
+//        if (!file.exists()) {
+//            file.getParentFile().mkdirs();
+//            try {
+//                file.createNewFile();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        FileOutputStream os;
+//        try {
+//            os = new FileOutputStream(file);
+//            bitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
+//            os.close();
+//            //把文件插入到系统图库
+//            MediaStore.Images.Media.insertImage(context.getContentResolver(),
+//                    file.getAbsolutePath(), fileName, null);
+//            //通知图库更新
+//            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                Uri uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID.concat(".provider"), file);
+//                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                intent.setData(uri);
+//            } else {
+//                intent.setData(Uri.fromFile(file));
+//            }
+//            context.sendBroadcast(intent);
+//            return fileName;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
 
-    public static void saveImgToLocal(final Context context, final View v, final boolean isShowToast) {
-        if (v == null || v.getWidth() <= 0 || v.getHeight() <= 0) {
-            return;
-        }
-
-        AsyncJobUtil.doInBackground(new AsyncJobUtil.OnBackgroundJob() {
-            @Override
-            public void doOnBackground() {
-                v.setDrawingCacheEnabled(true);
-                Bitmap bitmap = v.getDrawingCache();
-
-                final String fileName = PictureUtil.saveImgToLocal(context, bitmap);
-                v.setDrawingCacheEnabled(false);
-                v.destroyDrawingCache();
-
-                // Send the result to the UI thread and show it on a Toast
-                AsyncJobUtil.doOnMainThread(new AsyncJobUtil.OnMainThreadJob() {
-                    @Override
-                    public void doInUIThread() {
-                        if (isShowToast && !TextUtils.isEmpty(fileName)) {
-                            ToastUtil.showMessage(context, context.getString(R.string.image_save_addr) + FileUtil.Constants.DEFAULT_IMAGES_DIR + "/" + fileName);
-                        }
-                    }
-                });
-            }
-        });
-    }
-
-    public static void downLoadImg(final Context context, final String url, final boolean isShowToast) {
-        if (url.startsWith("http:") || url.startsWith("https:")) {
-            GlideApp.with(context)
-                    .downloadOnly()
-                    .load(url)
-                    .into(new SimpleTarget<File>() {
-                        @Override
-                        public void onResourceReady(File resource, Transition<? super File> transition) {
-                            if (resource != null && resource.exists()) {
-                                String fileName = CommonUtil.getMyUUID() + ".jpg";
-                                String localPath = getPictureFilePath() + fileName;
-                                File dstFile = new File(localPath);
-                                if (!dstFile.exists()) {
-                                    dstFile.getParentFile().mkdirs();
-                                    try {
-                                        dstFile.createNewFile();
-                                        FileUtil.copyFile(resource, dstFile);
-                                        String path = getPictureFilePath() + "/" + fileName;
-                                        sendBraodCastToGallary(context, path);
-                                        if (isShowToast)
-                                            ToastUtil.showMessage(context, context.getString(R.string.image_save_addr) + FileUtil.Constants.DEFAULT_IMAGES_DIR + "/" + fileName);
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }
-
-                        }
-
-                        @Override
-                        public void onLoadFailed(@Nullable Drawable errorDrawable) {
-                            if (isShowToast) {
-                                ToastUtil.showMessage(context, R.string.network_failed_please_retry);
-                            }
-                        }
-                    });
-        } else {
-            if (isShowToast) {
-                ToastUtil.showMessage(context, context.getString(R.string.image_save_already_exist) + url);
-            }
-        }
-    }
+//    public static void downLoadImg(final Context context, final String url, final boolean isShowToast) {
+//        if (url.startsWith("http:") || url.startsWith("https:")) {
+//            GlideApp.with(context)
+//                    .downloadOnly()
+//                    .load(url)
+//                    .into(new SimpleTarget<File>() {
+//                        @Override
+//                        public void onResourceReady(File resource, Transition<? super File> transition) {
+//                            if (resource != null && resource.exists()) {
+//                                String fileName = CommonUtil.getMyUUID() + ".jpg";
+//                                String localPath = getPictureFilePath() + fileName;
+//                                File dstFile = new File(localPath);
+//                                if (!dstFile.exists()) {
+//                                    dstFile.getParentFile().mkdirs();
+//                                    try {
+//                                        dstFile.createNewFile();
+//                                        FileUtil.copyFile(resource, dstFile);
+//                                        String path = getPictureFilePath() + "/" + fileName;
+//                                        sendBraodCastToGallary(context, path);
+//                                        if (isShowToast)
+//                                            ToastUtil.showMessage(context, context.getString(R.string.image_save_addr) + FileUtil.Constants.DEFAULT_IMAGES_DIR + "/" + fileName);
+//                                    } catch (IOException e) {
+//                                        e.printStackTrace();
+//                                    }
+//                                }
+//                            }
+//
+//                        }
+//
+//                        @Override
+//                        public void onLoadFailed(@Nullable Drawable errorDrawable) {
+//                            if (isShowToast) {
+//                                ToastUtil.showMessage(context, R.string.network_failed_please_retry);
+//                            }
+//                        }
+//                    });
+//        } else {
+//            if (isShowToast) {
+//                ToastUtil.showMessage(context, context.getString(R.string.image_save_already_exist) + url);
+//            }
+//        }
+//    }
 
     /**
      * 将广告图片存入本地
@@ -461,7 +414,7 @@ public class PictureUtil {
 //            dir.mkdirs();
 //        }
 //        return dir;
-        return FileUtil.getImagesDir();
+        return new File("");
     }
 
     /**
@@ -479,7 +432,7 @@ public class PictureUtil {
      * @return
      */
     public static File getTempFile() {
-        return FileUtil.getTempDir();
+        return new File("");
     }
 
     /**
@@ -488,9 +441,9 @@ public class PictureUtil {
      * @param bitmap
      * @return
      */
-    public static Bitmap GetRoundedCornerBitmap(Bitmap bitmap) {
+    public static Bitmap GetRoundedCornerBitmap(Context context, Bitmap bitmap) {
         int radius = bitmap.getWidth() / 2;
-        int borderWidth = DimenUtil.dip2px(12);
+        int borderWidth = UnitConversionUtils.dip2px(context, 12);
         BitmapShader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         Bitmap dest = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(dest);
@@ -529,30 +482,6 @@ public class PictureUtil {
     }
 
     /**
-     * 获取文件的大小
-     *
-     * @param fileEntity 本地文件路径或者网络地址
-     * @return
-     */
-    public static String getFileSize(FileEntity fileEntity) {
-        double result = 0;
-        String filePathOrUrl = fileEntity.getFileUrl();
-        File file = new File(filePathOrUrl);
-        if (file.exists()) {
-            result = file.length() / 1024.00;
-        }
-        if (result < 1) {
-            return formatDouble2(result) + "k";
-        }
-
-        if (result < 1000) {
-            return (int) result + "k";
-        }
-        result = result / 1024;
-        return formatDouble2(result) + "M";
-    }
-
-    /**
      * NumberFormat is the abstract base class for all number formats.
      * This class provides the interface for formatting and parsing numbers.
      *
@@ -574,25 +503,25 @@ public class PictureUtil {
      * @param context
      * @param filePath
      */
-    public static void sendBraodCastToGallary(Context context, String filePath) {
-        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File file = new File(filePath);
-        if (file != null && file.exists()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Uri uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID.concat(".provider"), file);
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                intent.setData(uri);
-            } else {
-                intent.setData(Uri.fromFile(file));
-            }
-            context.sendBroadcast(intent);
-        }
-
-        MediaScannerConnection.scanFile(MedlinkerApp.getApplication(), new String[]{filePath}, new String[]{"image/jpeg"}, new MediaScannerConnection.OnScanCompletedListener() {
-            @Override
-            public void onScanCompleted(final String path, final Uri uri) {
-                //your file has been scanned!
-            }
-        });
-    }
+//    public static void sendBraodCastToGallary(Context context, String filePath) {
+//        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//        File file = new File(filePath);
+//        if (file != null && file.exists()) {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                Uri uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID.concat(".provider"), file);
+//                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                intent.setData(uri);
+//            } else {
+//                intent.setData(Uri.fromFile(file));
+//            }
+//            context.sendBroadcast(intent);
+//        }
+//
+//        MediaScannerConnection.scanFile(MedlinkerApp.getApplication(), new String[]{filePath}, new String[]{"image/jpeg"}, new MediaScannerConnection.OnScanCompletedListener() {
+//            @Override
+//            public void onScanCompleted(final String path, final Uri uri) {
+//                //your file has been scanned!
+//            }
+//        });
+//    }
 }

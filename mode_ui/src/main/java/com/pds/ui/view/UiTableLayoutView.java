@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import com.pds.ui.R;
+import com.pds.util.StringUtils;
 import com.pds.util.unit.UnitConversionUtils;
 
 /**
