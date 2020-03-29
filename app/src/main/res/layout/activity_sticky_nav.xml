@@ -21,14 +21,11 @@
         android:id="@id/id_stickynavlayout_indicator"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#ffffffff" >
-    </com.pds.blog.ui.stickynavlayout.SimpleViewPagerIndicator>
+        android:background="#ffffffff" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@id/id_stickynavlayout_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         >
-    </androidx.viewpager.widget.ViewPager>
+        android:layout_height="match_parent"/>
 
 </com.pds.blog.ui.stickynavlayout.StickyNavLayout >
