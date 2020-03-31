@@ -12,8 +12,10 @@ import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Action;
 import io.reactivex.rxjava3.functions.BiFunction;
+import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.functions.Supplier;
+import io.reactivex.rxjava3.observables.ConnectableObservable;
 
 /**
  * @author: pengdaosong
@@ -423,18 +425,85 @@ public class RxJavaTest {
     private void Merge(){
         Observable.merge(null,null);
         Observable.mergeDelayError(null,null);
-        Observable.create(null).mergeWith(new ObservableSource<Object>() {
-            @Override
-            public void subscribe(@NonNull Observer<? super Object> observer) {
+        Observable.create(null).publish().connect();
 
-            }
-        });
+
         Observable.switchOnNext(null);
+
     }
 
     public static void main(String[] arg){
         RxJavaTest rxJavaTest = new RxJavaTest();
-        rxJavaTest.AndOrThenOrWhen();
+//        rxJavaTest.AndOrThenOrWhen();
+
+        Observable observable = Observable.create((ObservableOnSubscribe<Integer>) emitter -> {
+            ObservableEmitter<Integer> observableEmitter = emitter.serialize();
+            try {
+                // 序列化
+                if (!emitter.isDisposed()) {
+                    for (int i = 0; i < 4; i++) {
+                        System.out.println("create operate--->emitter: "+i);
+                        if (1==i){
+                            // ExceptionHelper.TERMINATED
+//                            observableEmitter.onError(new Throwable("error"));
+                        }else {
+                            observableEmitter.onNext(i);
+                        }
+
+                    }
+                    observableEmitter.onComplete();
+                }
+            } catch (Exception e) {
+                observableEmitter.onError(e);
+            }
+        }).publish().refCount(2);
+
+        observable.subscribe(new Observer<Integer>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                System.out.println("publish operate--->onSubscribe: "+d.toString());
+            }
+
+            @Override
+            public void onNext(@NonNull Integer integer) {
+                System.out.println("publish operate--->Next: " + integer);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                System.out.println("publish operate--->Error: " + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+                System.out.println("publish operate--->Sequence complete.");
+            }
+        });
+        observable.subscribe(new Observer<Integer>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                System.out.println("publish operate--->1onSubscribe: "+d.toString());
+            }
+
+            @Override
+            public void onNext(@NonNull Integer integer) {
+                System.out.println("publish operate--->1Next: " + integer);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                System.out.println("publish operate--->1Error: " + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+                System.out.println("publish operate--->1Sequence complete.");
+            }
+        });
+
+
+//        observable.connect();
+
     }
 
 }
