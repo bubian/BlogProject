@@ -11,3 +11,6 @@
 - https://github.com/google/cameraview
 - https://github.com/CameraKit/camerakit-android
 - https://github.com/RedApparat/Fotoapparat
+
+### 应用耗电统计工具
+- https://github.com/google/battery-historian

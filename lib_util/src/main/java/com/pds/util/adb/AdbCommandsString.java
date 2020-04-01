@@ -59,5 +59,10 @@ public class AdbCommandsString {
     public static final String screenecord  = "adb shell screenrecord /sdcard/myscreenrecord.mp4";
 
 
+    /**
+     * 要打印设备上次充电后某个给定应用软件包的电池使用情况统计信息
+     */
+
+    public static final String batterystats  = "adb shell dumpsys batterystats --charged <package-name>";
 
 }
