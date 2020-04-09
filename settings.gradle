@@ -25,8 +25,8 @@ include':lib_preloader'
 // utils
 include':utils:lib_arsc'
 // scene
-include ':lib_scene:scene'
-include ':lib_scene:scene_ui'
-include ':lib_scene:scene_shared_element_animation'
-include ':lib_scene:scene_ktx'
-include ':lib_scene:demo'
+//include ':lib_scene:scene'
+//include ':lib_scene:scene_ui'
+//include ':lib_scene:scene_shared_element_animation'
+//include ':lib_scene:scene_ktx'
+//include ':lib_scene:demo'
