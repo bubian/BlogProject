@@ -26,3 +26,6 @@
   4. 支持对Activity和Window属性的修改和恢复
   5. 支持页面之间拿返回值，支持在Scene中申请权限
   6. 支持页面销毁时保存状态和恢复
+  
+### 日志库
+- https://github.com/elvishew/xLog
