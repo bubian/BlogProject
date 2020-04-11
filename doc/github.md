@@ -28,4 +28,8 @@
   6. 支持页面销毁时保存状态和恢复
   
 ### 日志库
+##### 日志打印
 - https://github.com/elvishew/xLog
+##### 日志收集
+ - https://tech.meituan.com/2018/10/11/logan-open-source.html、
+ - https://github.com/Meituan-Dianping/Logan
