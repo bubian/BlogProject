@@ -1,5 +1,6 @@
 // socket
-include ':IM:socket_control', ':xposed_hook'
+include ':IM:socket_control'
+include':xposed:xposed_hook'
 include 'utils:lib_res_guard'
 include ':IM:socket_app'
 include ':IM:socket'
