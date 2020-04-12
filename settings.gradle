@@ -1,6 +1,5 @@
 // socket
 include ':IM:socket_control'
-include':xposed:xposed_hook'
 include 'utils:lib_res_guard'
 include ':IM:socket_app'
 include ':IM:socket'
@@ -25,6 +24,9 @@ include ':plugin:plugin_webP'
 include':lib_preloader'
 // utils
 include':utils:lib_arsc'
+// XPosed
+include ':xposed:xposed_restart'
+include ':xposed:xposed_hook'
 // scene
 //include ':lib_scene:scene'
 //include ':lib_scene:scene_ui'
