@@ -1,0 +1,9 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'net.lingala.zip4j:zip4j:2.5.1'
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"

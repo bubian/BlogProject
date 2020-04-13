@@ -24,6 +24,7 @@ include ':plugin:plugin_webP'
 include':lib_preloader'
 // utils
 include':utils:lib_arsc'
+include':utils:LibJavaTools'
 // XPosed
 include ':xposed:xposed_restart'
 include ':xposed:xposed_hook'
