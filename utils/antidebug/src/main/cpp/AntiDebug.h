@@ -4,6 +4,7 @@
 
 // 隐藏了关键的函数符号，避免被静态分析
 #define MACRO_HIDE_SYMBOL __attribute__ ((visibility ("hidden")))
+#define MACRO_SECTION __attribute__((section (".cd")))
 
 class AntiDebug{
 public:

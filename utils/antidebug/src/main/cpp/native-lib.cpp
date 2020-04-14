@@ -5,7 +5,7 @@
 jobject g_callbackRef;
 jmethodID  g_MethodCallback;
 
-extern "C" JNIEXPORT void JNICALL
+extern "C" JNIEXPORT void JNICALL MACRO_SECTION
 Java_com_pds_antidebug_AntiDebug_setAntiDebugCallback(
         JNIEnv* env,
         jclass type, jobject jCallback) {

@@ -16,13 +16,15 @@ android {
         // ndk
         externalNativeBuild {
             cmake {
-                cppFlags "-frtti -fexceptions"
+                cppFlags "-frtti -fexceptions -fvisibility=hidden"
             }
         }
         ndk {
 //            moduleName "app"
-//            abiFilters "armeabi-v7a", "x86" //指定平台
-            cFlags "-DANDROID_NDK"
+            abiFilters "armeabi-v7a", "x86" //指定平台
+            ldLibs "log","z","m"
+            // 隐藏符号表 -fvisibility=hidden
+            cFlags "-DANDROID_NDK -fvisibility=hidden"
         }
     }
 
