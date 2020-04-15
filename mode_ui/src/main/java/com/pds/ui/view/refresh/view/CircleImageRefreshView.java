@@ -12,6 +12,7 @@ import android.graphics.drawable.shapes.OvalShape;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Transformation;
 
 import androidx.annotation.VisibleForTesting;
@@ -53,13 +54,7 @@ public class CircleImageRefreshView extends BaseCoverRefreshView {
 
     @VisibleForTesting
     static final int CIRCLE_DIAMETER = 40;
-    private float mTotalDragDistance = -1;
-    private float mCustomSlingshotDistance;
-    private boolean mUsingCustomStart;
-    private float mSpinnerOffsetEnd;
-    private int mOriginalOffsetTop;
-
-    int mCurrentTargetOffsetTop;
+    private boolean mRefreshing;
 
     public CircleImageRefreshView(Context context) {
         this(context,CIRCLE_BG_LIGHT);
@@ -69,8 +64,6 @@ public class CircleImageRefreshView extends BaseCoverRefreshView {
         setVisibility(View.GONE);
     }
 
-    private static final int DEFAULT_CIRCLE_TARGET = 64;
-
     public CircleImageRefreshView(Context context, int color) {
         super(context);
         final float density = getContext().getResources().getDisplayMetrics().density;
@@ -78,13 +71,8 @@ public class CircleImageRefreshView extends BaseCoverRefreshView {
         final int shadowXOffset = (int) (density * X_OFFSET);
 
         mShadowRadius = (int) (density * SHADOW_RADIUS);
-
         final DisplayMetrics metrics = getResources().getDisplayMetrics();
-        mSpinnerOffsetEnd = (int) (DEFAULT_CIRCLE_TARGET * metrics.density);
-        mTotalDragDistance = mSpinnerOffsetEnd;
         mCircleDiameter = (int) (CIRCLE_DIAMETER * metrics.density);
-        mOriginalOffsetTop = mCurrentTargetOffsetTop = -mCircleDiameter;
-
 
         ShapeDrawable circle;
         if (elevationSupported()) {
@@ -110,10 +98,13 @@ public class CircleImageRefreshView extends BaseCoverRefreshView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        final DisplayMetrics metrics = getResources().getDisplayMetrics();
+        mCircleDiameter = (int) (CIRCLE_DIAMETER * metrics.density);
         if (!elevationSupported()) {
-            setMeasuredDimension(getMeasuredWidth() + mShadowRadius * 2, getMeasuredHeight()
+            setMeasuredDimension(mCircleDiameter + mShadowRadius * 2, mCircleDiameter
                     + mShadowRadius * 2);
+        }else {
+            setMeasuredDimension(mCircleDiameter, mCircleDiameter);
         }
     }
 
@@ -197,7 +188,7 @@ public class CircleImageRefreshView extends BaseCoverRefreshView {
         mScaleDownAnimation.setDuration(SCALE_DOWN_DURATION);
         setAnimationListener(listener);
         clearAnimation();
-       startAnimation(mScaleDownAnimation);
+        startAnimation(mScaleDownAnimation);
     }
 
     @Override
@@ -208,55 +199,128 @@ public class CircleImageRefreshView extends BaseCoverRefreshView {
     }
 
     @Override
-    public void finishSpinner(float overScrollTop) {
+    public void finishSpinner(float overScrollTop,float slingshotDist,float totalDragDistance) {
+
+        Animation.AnimationListener listener = null;
+        if (!mScale) {
+            listener = new Animation.AnimationListener() {
+
+                @Override
+                public void onAnimationStart(Animation animation) {
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    if (mRefreshing) {
+                        // Make sure the progress view is fully visible
+                        mProgress.setAlpha(MAX_ALPHA);
+                        mProgress.start();
+                    } else {
+                        reset();
+                    }
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                }
+
+            };
+        }
+
+        if (overScrollTop > totalDragDistance){
+            if (mRefreshing) {
+                animateOffsetToCorrectPosition(listener);
+            } else {
+                startScaleDownAnimation(mRefreshListener);
+            }
+            return;
+        }
+
         mProgress.setStartEndTrim(0f, 0f);
+
+        animateOffsetToCorrectPosition(listener);
         mProgress.setArrowEnabled(false);
     }
+    private static final int ANIMATE_TO_TRIGGER_DURATION = 200;
+    private static final float DECELERATE_INTERPOLATION_FACTOR = 2f;
+    private final DecelerateInterpolator mDecelerateInterpolator = new DecelerateInterpolator(DECELERATE_INTERPOLATION_FACTOR);
+    private void animateOffsetToCorrectPosition(Animation.AnimationListener listener) {
+        mAnimateToCorrectPosition.reset();
+        mAnimateToCorrectPosition.setDuration(ANIMATE_TO_TRIGGER_DURATION);
+        mAnimateToCorrectPosition.setInterpolator(mDecelerateInterpolator);
+        if (listener != null) {
+            setAnimationListener(listener);
+        }
+        clearAnimation();
+        startAnimation(mAnimateToCorrectPosition);
+    }
 
+    private final Animation mAnimateToCorrectPosition = new Animation() {
+        @Override
+        public void applyTransformation(float interpolatedTime, Transformation t) {
+            mProgress.setArrowScale(1 - interpolatedTime);
+        }
+    };
+
+    private Animation.AnimationListener mRefreshListener = new Animation.AnimationListener() {
+        @Override
+        public void onAnimationStart(Animation animation) {
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            if (mRefreshing) {
+                // Make sure the progress view is fully visible
+                mProgress.setAlpha(MAX_ALPHA);
+                mProgress.start();
+//                mCurrentTargetOffsetTop = mCircleView.getTop();
+            } else {
+                reset();
+            }
+        }
+    };
 
     private Animation mAlphaStartAnimation;
     private Animation mAlphaMaxAnimation;
-    private float slingshotDist;
     private float dragPercent;
     private float tensionPercent;
+
     @Override
-    public void moveSpinner(float overScrollTop) {
+    public void moveSpinner(float overScrollTop,float slingshotDist,float totalDragDistance) {
         mProgress.setArrowEnabled(true);
         if (!mScale) {
             setScaleX(1f);
             setScaleY(1f);
         }
+
         if (mScale) {
-            setAnimationProgress(Math.min(1f, overScrollTop / mTotalDragDistance));
+            setAnimationProgress(Math.min(1f, overScrollTop / totalDragDistance));
         }
 
-        if (overScrollTop < mTotalDragDistance) {
+        if (overScrollTop < totalDragDistance) {
             if (mProgress.getAlpha() > STARTING_PROGRESS_ALPHA
                     && !AnUtils.isAnimationRunning(mAlphaStartAnimation)) {
-                // Animate the alpha
                 startProgressAlphaStartAnimation();
             }
         } else {
             if (mProgress.getAlpha() < MAX_ALPHA && !AnUtils.isAnimationRunning(mAlphaMaxAnimation)) {
-                // Animate the alpha
                 startProgressAlphaMaxAnimation();
             }
         }
 
-        slingshotDist = mCustomSlingshotDistance > 0
-                ? mCustomSlingshotDistance
-                : (mUsingCustomStart
-                ? mSpinnerOffsetEnd - mOriginalOffsetTop
-                : mSpinnerOffsetEnd);
-        float originalDragPercent = overScrollTop / mTotalDragDistance;
+        float originalDragPercent = overScrollTop / totalDragDistance;
         dragPercent = Math.min(1f, Math.abs(originalDragPercent));
+
         float adjustedPercent = (float) Math.max(dragPercent - .4, 0) * 5 / 3;
         float strokeStart = adjustedPercent * .8f;
-        float extraOS = Math.abs(overScrollTop) - mTotalDragDistance;
-        float tensionSlingshotPercent = Math.max(0, Math.min(extraOS, slingshotDist * 2)
-                / slingshotDist);
-        tensionPercent = (float) ((tensionSlingshotPercent / 4) - Math.pow(
-                (tensionSlingshotPercent / 4), 2)) * 2f;
+        float extraOS = Math.abs(overScrollTop) - totalDragDistance;
+
+        float tensionSlingshotPercent = Math.max(0, Math.min(extraOS, slingshotDist * 2) / slingshotDist);
+        tensionPercent = (float) ((tensionSlingshotPercent / 4) - Math.pow((tensionSlingshotPercent / 4), 2)) * 2f;
 
         mProgress.setStartEndTrim(0f, Math.min(MAX_PROGRESS_ANGLE, strokeStart));
         mProgress.setArrowScale(Math.min(1f, adjustedPercent));
@@ -266,9 +330,8 @@ public class CircleImageRefreshView extends BaseCoverRefreshView {
     }
 
     @Override
-    public int targetY() {
-        float extraMove = (slingshotDist) * tensionPercent * 2;
-        return mOriginalOffsetTop + (int) ((slingshotDist * dragPercent) + extraMove);
+    public void setRefreshState(boolean isRefreshing) {
+        mRefreshing = isRefreshing;
     }
 
     private void startProgressAlphaMaxAnimation() {
@@ -311,15 +374,5 @@ public class CircleImageRefreshView extends BaseCoverRefreshView {
         final DisplayMetrics metrics = getResources().getDisplayMetrics();
         mCircleDiameter = (int) (CIRCLE_DIAMETER * metrics.density);
         return mCircleDiameter;
-    }
-
-    @Override
-    public int currentTargetOffsetTop() {
-        return mCurrentTargetOffsetTop;
-    }
-
-    @Override
-    public float totalDragDistance() {
-        return mTotalDragDistance;
     }
 }

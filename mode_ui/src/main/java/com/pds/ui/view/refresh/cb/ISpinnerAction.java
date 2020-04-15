@@ -7,7 +7,8 @@ package com.pds.ui.view.refresh.cb;
  * Description:
  */
 public interface ISpinnerAction {
-    void finishSpinner(float overScrollTop);
-    void moveSpinner(float overScrollTop);
+    void finishSpinner(float overScrollTop,float slingshotDist,float totalDragDistance);
+    void moveSpinner(float overScrollTop,float slingshotDist,float totalDragDistance);
+    void setRefreshState(boolean isRefreshing);
     void reset();
 }

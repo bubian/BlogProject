@@ -16,7 +16,7 @@ import com.pds.ui.view.refresh.cb.ISpinnerAction;
  * Description:
  */
 @SuppressLint("AppCompatCustomView")
-public class BaseCoverRefreshView extends ImageView implements ISpinnerAction, ICover {
+public abstract class BaseCoverRefreshView extends ImageView implements ISpinnerAction, ICover {
     public BaseCoverRefreshView(Context context) {
         super(context);
     }
@@ -30,22 +30,7 @@ public class BaseCoverRefreshView extends ImageView implements ISpinnerAction, I
     }
 
     @Override
-    public float totalDragDistance() {
-        return 0;
-    }
-
-    @Override
     public int viewDiameter() {
-        return 0;
-    }
-
-    @Override
-    public int currentTargetOffsetTop() {
-        return 0;
-    }
-
-    @Override
-    public int targetY() {
         return 0;
     }
 
@@ -55,12 +40,12 @@ public class BaseCoverRefreshView extends ImageView implements ISpinnerAction, I
     }
 
     @Override
-    public void finishSpinner(float overScrollTop) {
+    public void finishSpinner(float overScrollTop,float slingshotDist,float totalDragDistance) {
 
     }
 
     @Override
-    public void moveSpinner(float overScrollTop) {
+    public void moveSpinner(float overScrollTop,float slingshotDist,float totalDragDistance) {
 
     }
 

@@ -14,7 +14,7 @@ import com.pds.ui.view.refresh.cb.ICover;
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-public class BaseHolder implements IRefreshTrigger, ISpinnerAction {
+public abstract class  BaseHolder implements IRefreshTrigger, ISpinnerAction {
 
     protected Context mContext;
     protected View mRefreshView;
@@ -60,12 +60,12 @@ public class BaseHolder implements IRefreshTrigger, ISpinnerAction {
     }
 
     @Override
-    public void finishSpinner(float overScrollTop) {
+    public void finishSpinner(float overScrollTop, float slingshotDist, float totalDragDistance) {
 
     }
 
     @Override
-    public void moveSpinner(float overScrollTop) {
+    public void moveSpinner(float overScrollTop, float slingshotDist, float totalDragDistance) {
 
     }
 

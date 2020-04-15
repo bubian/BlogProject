@@ -9,9 +9,6 @@ import android.view.animation.Transformation;
  * Description:
  */
 public interface ICover {
-    float totalDragDistance();
     int viewDiameter();
-    int currentTargetOffsetTop();
-    int targetY();
     void applyTransformation(float interpolatedTime, Transformation t);
 }

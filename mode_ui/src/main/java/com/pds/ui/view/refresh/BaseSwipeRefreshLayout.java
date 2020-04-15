@@ -3,6 +3,7 @@ package com.pds.ui.view.refresh;
 import android.content.Context;
 import android.os.Looper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,6 +26,7 @@ import com.pds.ui.view.refresh.holder.ZoomPullRefreshHolder;
 public abstract class BaseSwipeRefreshLayout extends ViewGroup implements NestedScrollingParent,
         NestedScrollingChild {
 
+    private static final String TAG = "BSRL:";
     protected Context mContext;
     private float mTotalUnconsumed;
     private final NestedScrollingParentHelper mNestedScrollingParentHelper;
@@ -33,9 +35,14 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
     private boolean mNestedScrollInProgress;
     private final int[] mParentScrollConsumed = new int[2];
     private final int[] mParentOffsetInWindow = new int[2];
-    // Whether the client has set a custom starting position;
+    // 是否开启了自定义开始位置
     boolean mUsingCustomStart;
+    protected int mSpinnerOffsetEnd;
+    protected float mTotalDragDistance;
 
+    /**
+     * 下拉刷新时，显示的View
+     */
     protected View mRefreshView;
     // Target is returning to its start offset because it was cancelled or a
     // refresh was triggered.
@@ -78,6 +85,7 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
 
     @Override
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
+        Log.d(TAG,"onNestedPreScroll:mTotalUnconsumed:"+ mTotalUnconsumed + " dy:"+dy);
         if (dy > 0 && mTotalUnconsumed > 0) {
             if (dy > mTotalUnconsumed) {
                 consumed[1] = dy - (int) mTotalUnconsumed;
@@ -86,6 +94,7 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
                 mTotalUnconsumed -= dy;
                 consumed[1] = dy;
             }
+            Log.d(TAG,"onNestedPreScroll:mTotalUnconsumed:"+ mTotalUnconsumed);
             moveSpinner(mTotalUnconsumed);
         }
         if (mUsingCustomStart && dy > 0 && mTotalUnconsumed == 0
@@ -96,6 +105,18 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
         if (dispatchNestedPreScroll(dx - consumed[0], dy - consumed[1], parentConsumed, null)) {
             consumed[0] += parentConsumed[0];
             consumed[1] += parentConsumed[1];
+        }
+    }
+
+    @Override
+    public void onNestedScroll(final View target, final int dxConsumed, final int dyConsumed,
+                               final int dxUnconsumed, final int dyUnconsumed) {
+        dispatchNestedScroll(dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, mParentOffsetInWindow);
+        final int dy = dyUnconsumed + mParentOffsetInWindow[1];
+        if (dy < 0 && !canChildScrollUp()) {
+            mTotalUnconsumed += Math.abs(dy);
+            Log.d(TAG,"onNestedScroll:mTotalUnconsumed:"+ mTotalUnconsumed);
+            moveSpinner(mTotalUnconsumed);
         }
     }
 
@@ -113,18 +134,6 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
             mTotalUnconsumed = 0;
         }
         stopNestedScroll();
-    }
-
-    @Override
-    public void onNestedScroll(final View target, final int dxConsumed, final int dyConsumed,
-                               final int dxUnconsumed, final int dyUnconsumed) {
-        dispatchNestedScroll(dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed,
-                mParentOffsetInWindow);
-        final int dy = dyUnconsumed + mParentOffsetInWindow[1];
-        if (dy < 0 && !canChildScrollUp()) {
-            mTotalUnconsumed += Math.abs(dy);
-            moveSpinner(mTotalUnconsumed);
-        }
     }
 
     @Override
@@ -194,6 +203,8 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
     public boolean isRefreshing() {
         return mRefreshing;
     }
+
+
     public boolean isMainThread() {
         return Looper.getMainLooper() == Looper.myLooper();
     }

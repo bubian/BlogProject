@@ -17,4 +17,9 @@ public class ZoomPullRefreshHolder extends BaseHolder{
     public ZoomPullRefreshHolder(Context context, View refreshView) {
         super(context, refreshView);
     }
+
+    @Override
+    public void setRefreshState(boolean isRefreshing) {
+
+    }
 }

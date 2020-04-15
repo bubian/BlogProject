@@ -19,7 +19,7 @@ import com.pds.ui.view.refresh.cb.ISpinnerAction;
  * Description:
  */
 public class CoverPullRefreshHolder extends BaseHolder{
-
+    private static final String TAG = "MSRL_TAG:CPRH:";
     private static final int ANIMATE_TO_START_DURATION = 200;
     private static final float DECELERATE_INTERPOLATION_FACTOR = 2f;
 
@@ -31,6 +31,7 @@ public class CoverPullRefreshHolder extends BaseHolder{
 
     private int mMediumAnimationDuration;
     int mCurrentTargetOffsetTop;
+    private boolean mIsRefreshing;
 
 
     public CoverPullRefreshHolder(Context context) {
@@ -74,12 +75,15 @@ public class CoverPullRefreshHolder extends BaseHolder{
     }
 
     @Override
-    public void finishSpinner(float overScrollTop) {
+    public void finishSpinner(float overScrollTop,float slingshotDist,float totalDragDistance) {
         Log.e("MU::::","Override:overScrollTop="+overScrollTop);
         if (mRefreshView instanceof ISpinnerAction){
-            ((ISpinnerAction) mRefreshView).finishSpinner(overScrollTop);
+            ((ISpinnerAction) mRefreshView).finishSpinner(overScrollTop, slingshotDist, totalDragDistance);
         }
-        animateOffsetToStartPosition(mCurrentTargetOffsetTop);
+
+        if (!mIsRefreshing){
+            animateOffsetToStartPosition(mCurrentTargetOffsetTop);
+        }
     }
 
     private final Animation mAnimateToStartPosition = new Animation() {
@@ -100,26 +104,25 @@ public class CoverPullRefreshHolder extends BaseHolder{
         mRefreshView.clearAnimation();
         mRefreshView.startAnimation(mAnimateToStartPosition);
     }
+
     @Override
-    public void moveSpinner(float overScrollTop) {
+    public void moveSpinner(float overScrollTop, float slingshotDist, float totalDragDistance) {
         if (null == mRefreshView){
             return;
         }
-        Log.e("MU::::","moveSpinner:overScrollTop="+overScrollTop);
+        Log.e(TAG,"moveSpinner:overScrollTop="+overScrollTop);
         if (mRefreshView.getVisibility() != View.VISIBLE) {
             mRefreshView.setVisibility(View.VISIBLE);
         }
 
         if (mRefreshView instanceof ISpinnerAction){
-            ((ISpinnerAction) mRefreshView).moveSpinner(overScrollTop);
+            ((ISpinnerAction) mRefreshView).moveSpinner(overScrollTop,slingshotDist,totalDragDistance);
         }
+    }
 
-        if (mRefreshView instanceof ICover){
-            int targetY = ((ICover) mRefreshView).targetY();
-            int t = targetY - mCurrentTargetOffsetTop;
-            Log.e("MU::::","moveSpinner:targetY="+t);
-            setTargetOffsetTopAndBottom(t);
-        }
-
+    @Override
+    public void setRefreshState(boolean isRefreshing) {
+        mIsRefreshing = isRefreshing;
+        ((ISpinnerAction) mRefreshView).setRefreshState(mIsRefreshing);
     }
 }

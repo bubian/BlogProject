@@ -18,5 +18,10 @@ public class PullRefreshHolder extends BaseHolder {
     public PullRefreshHolder(Context context, View refreshView) {
         super(context,refreshView);
     }
+
+    @Override
+    public void setRefreshState(boolean isRefreshing) {
+
+    }
 }
 
