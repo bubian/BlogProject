@@ -38,4 +38,7 @@
  - [xCrash](https://github.com/iqiyi/xCrash/blob/master/README.zh-CN.md)
  
    xCrash 能为安卓 app 提供捕获 java 崩溃，native 崩溃和 ANR 的能力。不需要 root 权限或任何系统权限。
-  
+ - [adb用法大全](https://github.com/mzlogin/awesome-adb)
+ 
+   ADB，即 Android Debug Bridge，它是 Android 开发/测试人员不可替代的强大工具，也是 Android 设备玩家的好玩具。
+   
