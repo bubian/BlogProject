@@ -11,6 +11,6 @@ import android.view.animation.Animation;
 public class AnUtils {
 
     public static boolean isAnimationRunning(Animation animation) {
-        return animation != null && animation.hasStarted() && !animation.hasEnded();
+        return animation == null || !animation.hasStarted() || animation.hasEnded();
     }
 }

@@ -179,11 +179,11 @@ public class CircleImageRefreshView extends BaseCoverRefreshView {
 
         if (overScrollTop < totalDragDistance) {
             if (mProgress.getAlpha() > STARTING_PROGRESS_ALPHA
-                    && !AnUtils.isAnimationRunning(mAlphaStartAnimation)) {
+                    && AnUtils.isAnimationRunning(mAlphaStartAnimation)) {
                 startProgressAlphaStartAnimation();
             }
         } else {
-            if (mProgress.getAlpha() < MAX_ALPHA && !AnUtils.isAnimationRunning(mAlphaMaxAnimation)) {
+            if (mProgress.getAlpha() < MAX_ALPHA && AnUtils.isAnimationRunning(mAlphaMaxAnimation)) {
                 startProgressAlphaMaxAnimation();
             }
         }
