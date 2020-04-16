@@ -13,12 +13,14 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
+import android.widget.ImageView;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
+import com.pds.ui.view.refresh.cb.BaseCover;
 import com.pds.ui.view.refresh.utils.AnUtils;
 
 /**
@@ -28,7 +30,7 @@ import com.pds.ui.view.refresh.utils.AnUtils;
  * Description:
  */
 @SuppressLint("AppCompatCustomView")
-public class CircleImageRefreshView extends BaseCoverRefreshView {
+public class CircleImageRefreshView extends ImageView implements BaseCover {
     private static final int KEY_SHADOW_COLOR = 0x1E000000;
     private static final int FILL_SHADOW_COLOR = 0x3D000000;
     private static final int CIRCLE_BG_LIGHT = 0xFFFAFAFA;
@@ -265,4 +267,10 @@ public class CircleImageRefreshView extends BaseCoverRefreshView {
     public void applyTransformation(float interpolatedTime, Transformation t) {
         mProgress.setArrowScale(1 - interpolatedTime);
     }
+    @Override
+    public boolean doComplete(float interpolatedTime, Transformation t) { return false; }
+    @Override
+    public void onAnimationRepeat(Animation animation) { }
+    @Override
+    public void onAnimationStart(Animation animation) { }
 }
