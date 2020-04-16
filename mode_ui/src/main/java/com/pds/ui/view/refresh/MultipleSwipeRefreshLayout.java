@@ -42,63 +42,34 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
 
     private static final String LOG_TAG = "MSRL_TAG:";
 
-    private static final float DECELERATE_INTERPOLATION_FACTOR = 2f;
     private static final int INVALID_POINTER = -1;
     private static final float DRAG_RATE = .5f;
-    private static final int DEFAULT_CIRCLE_TARGET = 64;
 
-    /**
-     * 布局里面添加的用于展示业务逻辑的UI组件
-     */
-    private View mTarget;
-    OnRefreshListener mListener;
     private int mTouchSlop;
     private int mMediumAnimationDuration;
-
     private float mInitialMotionY;
     private float mInitialDownY;
     private boolean mIsBeingDragged;
     private int mActivePointerId = INVALID_POINTER;
 
-    private final DecelerateInterpolator mDecelerateInterpolator;
     private static final int[] LAYOUT_ATTRS = new int[]{
             android.R.attr.enabled
     };
 
-    /**
-     * 下拉刷新展示的View在容器中位置索引
-     */
-    private int mRefreshViewIndex = -1;
-    boolean mNotify;
     private OnChildScrollUpCallback mChildScrollUpCallback;
-    /**
-     * 下拉刷新展示View顶部偏移内容View顶部的距离
-     */
-    private int mCurrentTargetOffsetTop;
-    private boolean mIsFirstMeasureSuccess = false;
-
-    /**
-     * 最开始下拉刷新展示View顶部偏移内容View顶部的距离
-     */
-    protected int mOriginalOffsetTop;
-
-
-    void reset() {
-        // todo
-    }
 
     @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
         if (!enabled) {
-            reset();
+           mRefreshViewHolder.reset();
         }
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        reset();
+        mRefreshViewHolder.reset();
     }
 
     public MultipleSwipeRefreshLayout(Context context) {
@@ -113,12 +84,6 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
                 android.R.integer.config_mediumAnimTime);
 
         setWillNotDraw(false);
-        mDecelerateInterpolator = new DecelerateInterpolator(DECELERATE_INTERPOLATION_FACTOR);
-
-        final DisplayMetrics metrics = getResources().getDisplayMetrics();
-        mSpinnerOffsetEnd = (int) (DEFAULT_CIRCLE_TARGET * metrics.density);
-        mTotalDragDistance = mSpinnerOffsetEnd;
-
         addRefreshView();
         setChildrenDrawingOrderEnabled(true);
         setNestedScrollingEnabled(true);
@@ -136,33 +101,12 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
         return new CircleImageRefreshView(getContext());
     }
 
-    @Override
-    protected int getChildDrawingOrder(int childCount, int i) {
-        if (mRefreshViewIndex < 0) {
-            return i;
-        } else if (i == childCount - 1) {
-            // Draw the selected child last
-            return mRefreshViewIndex;
-        } else if (i >= mRefreshViewIndex) {
-            // Move the children after the selected child earlier one
-            return i + 1;
-        } else {
-            // Keep the children before the selected child the same
-            return i;
-        }
-    }
-
     public void setRefreshing(boolean refreshing) {
         if (refreshing && !mRefreshing) {
             mRefreshing = true;
-            int endTarget = 0;
-            if (!mUsingCustomStart) {
-                endTarget = mSpinnerOffsetEnd + mOriginalOffsetTop;
-            } else {
-                endTarget = mSpinnerOffsetEnd;
-            }
-            setTargetOffsetTopAndBottom(endTarget - mCurrentTargetOffsetTop);
+            mRefreshViewHolder.setRefreshing(true);
             mNotify = false;
+//            startScaleUpAnimation(mRefreshListener);
         } else {
             setRefreshing(refreshing, false /* notify */);
         }
@@ -173,7 +117,7 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
             mNotify = notify;
             ensureTarget();
             mRefreshing = refreshing;
-            // todo
+            mRefreshViewHolder.setRefreshing(refreshing,notify);
         }
     }
 
@@ -199,16 +143,14 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
         if (mTarget == null) {
             return;
         }
-
         // 测量内容View
         mTarget.measure(MeasureSpec.makeMeasureSpec(
                 getMeasuredWidth() - getPaddingLeft() - getPaddingRight(),
                 MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(
                 getMeasuredHeight() - getPaddingTop() - getPaddingBottom(), MeasureSpec.EXACTLY));
-
         // 测量下拉刷新组件
         measureChild(mRefreshView,widthMeasureSpec,heightMeasureSpec);
-
+        setHolderRefreshView();
         mRefreshViewIndex = -1;
         // 找到下拉刷新View在容器中的位置。
         for (int index = 0; index < getChildCount(); index++) {
@@ -217,16 +159,11 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
                 break;
             }
         }
-        if (!mIsFirstMeasureSuccess){
-            mCurrentTargetOffsetTop = -mRefreshView.getMeasuredHeight();
-            mOriginalOffsetTop = mCurrentTargetOffsetTop;
-        }
-        Log.d(LOG_TAG,"test:onMeasure:mCurrentTargetOffsetTop:"+ mCurrentTargetOffsetTop);
+        mRefreshViewHolder.measureChildAfter(this,widthMeasureSpec,heightMeasureSpec);
     }
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        mIsFirstMeasureSuccess = true;
         final int width = getMeasuredWidth();
         final int height = getMeasuredHeight();
 
@@ -241,20 +178,9 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
         final int childHeight = height - getPaddingTop() - getPaddingBottom();
         child.layout(childLeft, childTop, childLeft + childWidth, childTop + childHeight);
 
-        int refreshWidth = mRefreshView.getMeasuredWidth();
-        int refreshHeight = mRefreshView.getMeasuredHeight();
-        Log.d(LOG_TAG,"test:onLayout:mCurrentTargetOffsetTop:"+ mCurrentTargetOffsetTop);
-        mRefreshView.layout((width - refreshWidth) / 2, mCurrentTargetOffsetTop,
-                (width  + refreshWidth ) / 2, mCurrentTargetOffsetTop+ refreshHeight);
+        setHolderRefreshView();
+        mRefreshViewHolder.layoutChild(changed,left,top,right,bottom);
     }
-
-    void setTargetOffsetTopAndBottom(int offset) {
-        mRefreshView.bringToFront();
-        ViewCompat.offsetTopAndBottom(mRefreshView, offset);
-        mCurrentTargetOffsetTop = mRefreshView.getTop();
-        Log.d(LOG_TAG,"test:setTargetOffsetTopAndBottom:mCurrentTargetOffsetTop:"+ mCurrentTargetOffsetTop);
-    }
-
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
@@ -268,13 +194,13 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
 
         boolean canNotPullToRefresh = canNotPullToRefresh();
         Log.d(LOG_TAG,"onInterceptTouchEvent:canNotPullToRefresh:"+ canNotPullToRefresh);
-        if (canNotPullToRefresh()) {
+        if (canNotPullToRefresh) {
             return false;
         }
 
+        mRefreshViewHolder.onInterceptTouchEvent(ev);
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                setTargetOffsetTopAndBottom(mOriginalOffsetTop - mRefreshView.getTop());
                 mActivePointerId = ev.getPointerId(0);
                 mIsBeingDragged = false;
 
@@ -314,48 +240,14 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
     }
 
     @Override
-    public void requestDisallowInterceptTouchEvent(boolean b) {
-        if ((android.os.Build.VERSION.SDK_INT < 21 && mTarget instanceof AbsListView)
-                || (mTarget != null && !ViewCompat.isNestedScrollingEnabled(mTarget))) {
-        } else {
-            super.requestDisallowInterceptTouchEvent(b);
-        }
-    }
-
-    @SuppressLint("NewApi")
-    @Override
-    protected void moveSpinner(float overScrollTop) {
-        setHolderRefreshView();
-        Log.i(LOG_TAG,"moveSpinner:overScrollTop="+overScrollTop);
-        float slingshotDist = mUsingCustomStart ? mSpinnerOffsetEnd - mOriginalOffsetTop : mSpinnerOffsetEnd;
-        mRefreshViewHolder.moveSpinner(overScrollTop,slingshotDist,mTotalDragDistance);
-
-
-        float originalDragPercent = overScrollTop / mTotalDragDistance;
-        float dragPercent = Math.min(1f, Math.abs(originalDragPercent));
-
-        float extraOS = Math.abs(overScrollTop) - mTotalDragDistance;
-        float tensionSlingshotPercent = Math.max(0, Math.min(extraOS, slingshotDist * 2) / slingshotDist);
-        float tensionPercent = (float) ((tensionSlingshotPercent / 4) - Math.pow((tensionSlingshotPercent / 4), 2)) * 2f;
-        float extraMove = (slingshotDist) * tensionPercent * 2;
-
-        int targetY = mOriginalOffsetTop + (int) ((slingshotDist * dragPercent) + extraMove);
-        int t = targetY - mCurrentTargetOffsetTop;
-        setTargetOffsetTopAndBottom(t);
-    }
-
-    @Override
     protected void finishSpinner(float overScrollTop) {
-        Log.e("MU","finishSpinner:overScrollTop="+overScrollTop);
-        if (overScrollTop > mTotalDragDistance) {
+        if (mRefreshViewHolder.isRefreshing(overScrollTop)) {
             setRefreshing(true, true /* notify */);
         } else {
             mRefreshing = false;
         }
         setHolderRefreshView();
-        mRefreshViewHolder.setRefreshState(mRefreshing);
-        float slingshotDist = mUsingCustomStart ? mSpinnerOffsetEnd - mOriginalOffsetTop : mSpinnerOffsetEnd;
-        mRefreshViewHolder.finishSpinner(overScrollTop,slingshotDist,mTotalDragDistance);
+        mRefreshViewHolder.finishSpinner(overScrollTop);
     }
 
     @Override
@@ -435,14 +327,6 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
         return true;
     }
 
-    /**
-     * @return 不能下拉刷新状态
-     */
-    private boolean canNotPullToRefresh() {
-        return !isEnabled() || mReturningToStart || canChildScrollUp()
-                || mRefreshing || isNestedScrollInProgress() || mRefreshView == null;
-    }
-
     @SuppressLint("NewApi")
     private void startDragging(float y) {
         final float yDiff = y - mInitialDownY;
@@ -481,10 +365,6 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
             this.mRefreshView = view;
             addView(view);
         }
-    }
-
-    public void setOnRefreshListener(OnRefreshListener listener) {
-        mListener = listener;
     }
 
     public void setOnChildScrollUpCallback(@Nullable OnChildScrollUpCallback callback) {

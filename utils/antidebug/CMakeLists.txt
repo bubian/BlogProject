@@ -1,16 +1,19 @@
 cmake_minimum_required(VERSION 3.4.1)
 
 add_library(
-        AntiDebug
+        AntiSafe
         SHARED
         src/main/cpp/safe.cpp
-             src/main/cpp/AntiDebug.cpp)
+        src/main/cpp/SafeCheck.cpp
+        src/main/cpp/exception/ExceptionTools.cpp
+        src/main/cpp/tools/DeviceInfo.h
+        src/main/cpp/AntiDebug.cpp)
 
 find_library(
-            AntiDebug
+            AntiSafe
             log )
 
 target_link_libraries(
-        AntiDebug
+        AntiSafe
         android
         log )

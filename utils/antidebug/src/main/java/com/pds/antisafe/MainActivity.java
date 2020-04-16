@@ -1,4 +1,4 @@
-package com.pds.antidebug;
+package com.pds.antisafe;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -11,7 +11,8 @@ public class MainActivity extends AppCompatActivity implements IAntiDebugCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        AntiDebug.setAntiDebugCallback(this);
+        AntiSafe.setAntiDebugCallback(this);
+        AntiSafe.safeCheck();
     }
 
 

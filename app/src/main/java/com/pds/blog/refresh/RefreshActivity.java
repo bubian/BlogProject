@@ -22,6 +22,7 @@ import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.pds.blog.R;
 import com.pds.blog.base.BaseActivity;
+import com.pds.ui.view.refresh.cb.OnRefreshListener;
 import com.pds.ui.view.refresh.view.TwoPointRefreshView;
 import com.pds.ui.view.refresh.CustomSwipeToRefresh;
 import com.pds.ui.view.refresh.view.CircleImageRefreshView;
@@ -62,6 +63,18 @@ public class RefreshActivity extends BaseActivity {
         initData();
         boolean isProxy = isProxy();
         Log.e(TAG,"isProxy="+isProxy);
+        swipeToRefresh.setOnRefreshListener(() -> {
+            Log.d(TAG,"start refresh");
+            new Thread(() -> {
+                try {
+                    Thread.sleep(3*1000);
+                    swipeToRefresh.setRefreshing(false);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }).start();
+        });
     }
 
     public  boolean isProxy() {

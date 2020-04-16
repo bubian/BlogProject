@@ -6,12 +6,16 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 
 import androidx.core.view.NestedScrollingChild;
 import androidx.core.view.NestedScrollingChildHelper;
 import androidx.core.view.NestedScrollingParent;
 import androidx.core.view.NestedScrollingParentHelper;
 import androidx.core.view.ViewCompat;
+
+import com.pds.ui.view.refresh.cb.OnRefreshListener;
+import com.pds.ui.view.refresh.cb.RefreshState;
 import com.pds.ui.view.refresh.holder.BaseHolder;
 import com.pds.ui.view.refresh.holder.CoverPullRefreshHolder;
 import com.pds.ui.view.refresh.holder.PullRefreshHolder;
@@ -35,19 +39,22 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
     private boolean mNestedScrollInProgress;
     private final int[] mParentScrollConsumed = new int[2];
     private final int[] mParentOffsetInWindow = new int[2];
-    // 是否开启了自定义开始位置
-    boolean mUsingCustomStart;
-    protected int mSpinnerOffsetEnd;
-    protected float mTotalDragDistance;
+
+    /**
+     * 下拉刷新展示的View在容器中位置索引
+     */
+    protected int mRefreshViewIndex = -1;
 
     /**
      * 下拉刷新时，显示的View
      */
     protected View mRefreshView;
-    // Target is returning to its start offset because it was cancelled or a
-    // refresh was triggered.
+    protected View mTarget;
     protected boolean mReturningToStart;
     protected boolean mRefreshing = false;
+
+    protected boolean mNotify;
+    protected OnRefreshListener mListener;
 
     protected BaseHolder mRefreshViewHolder;
     private static final int COVER_TYPE = 1;
@@ -67,6 +74,22 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
         mNestedScrollingChildHelper = new NestedScrollingChildHelper(this);
     }
 
+    protected Context context(){
+        if (null == mContext){
+            mContext = getContext();
+        }
+        return mContext;
+    }
+
+    @Override
+    public void requestDisallowInterceptTouchEvent(boolean b) {
+        if ((android.os.Build.VERSION.SDK_INT < 21 && mTarget instanceof AbsListView)
+                || (mTarget != null && !ViewCompat.isNestedScrollingEnabled(mTarget))) {
+        } else {
+            super.requestDisallowInterceptTouchEvent(b);
+        }
+    }
+
     @Override
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
         return isEnabled() && !mReturningToStart && !mRefreshing
@@ -75,9 +98,7 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
 
     @Override
     public void onNestedScrollAccepted(View child, View target, int axes) {
-        // Reset the counter of how much leftover scroll needs to be consumed.
         mNestedScrollingParentHelper.onNestedScrollAccepted(child, target, axes);
-        // Dispatch up to the nested parent
         startNestedScroll(axes & ViewCompat.SCROLL_AXIS_VERTICAL);
         mTotalUnconsumed = 0;
         mNestedScrollInProgress = true;
@@ -85,7 +106,6 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
 
     @Override
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
-        Log.d(TAG,"onNestedPreScroll:mTotalUnconsumed:"+ mTotalUnconsumed + " dy:"+dy);
         if (dy > 0 && mTotalUnconsumed > 0) {
             if (dy > mTotalUnconsumed) {
                 consumed[1] = dy - (int) mTotalUnconsumed;
@@ -94,10 +114,9 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
                 mTotalUnconsumed -= dy;
                 consumed[1] = dy;
             }
-            Log.d(TAG,"onNestedPreScroll:mTotalUnconsumed:"+ mTotalUnconsumed);
             moveSpinner(mTotalUnconsumed);
         }
-        if (mUsingCustomStart && dy > 0 && mTotalUnconsumed == 0
+        if (dy > 0 && mTotalUnconsumed == 0
                 && Math.abs(dy - consumed[1]) > 0) {
             mRefreshView.setVisibility(View.GONE);
         }
@@ -115,7 +134,6 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
         final int dy = dyUnconsumed + mParentOffsetInWindow[1];
         if (dy < 0 && !canChildScrollUp()) {
             mTotalUnconsumed += Math.abs(dy);
-            Log.d(TAG,"onNestedScroll:mTotalUnconsumed:"+ mTotalUnconsumed);
             moveSpinner(mTotalUnconsumed);
         }
     }
@@ -200,11 +218,6 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
         return mNestedScrollInProgress;
     }
 
-    public boolean isRefreshing() {
-        return mRefreshing;
-    }
-
-
     public boolean isMainThread() {
         return Looper.getMainLooper() == Looper.myLooper();
     }
@@ -216,27 +229,61 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
         if (null == mRefreshViewHolder){
             Context context = context();
             if (mRefreshType == PULL_TYPE){
-                mRefreshViewHolder = new PullRefreshHolder(context);
+                mRefreshViewHolder = new PullRefreshHolder(context,mRefreshView);
             }else if (mRefreshType == ZOOM_TYPE){
-                mRefreshViewHolder = new ZoomPullRefreshHolder(context);
+                mRefreshViewHolder = new ZoomPullRefreshHolder(context,mRefreshView);
             }else {
-                mRefreshViewHolder = new CoverPullRefreshHolder(context);
+                mRefreshViewHolder = new CoverPullRefreshHolder(context,mRefreshView);
             }
         }
+        mRefreshViewHolder.setParent(this);
         mRefreshViewHolder.setRefreshView(mRefreshView);
     }
 
-    protected Context context(){
-        if (null == mContext){
-            mContext = getContext();
-        }
-        return mContext;
+    protected abstract void finishSpinner(float overScrollTop);
+
+    protected void moveSpinner(float overScrollTop){
+        setHolderRefreshView();
+        mRefreshViewHolder.moveSpinner(overScrollTop);
     }
-    public void setRefreshType(int mRefreshType) {
-        this.mRefreshType = mRefreshType;
+    protected abstract boolean canChildScrollUp();
+
+    public void doNotify(int state){
+        if (mNotify) {
+            if (mListener == null) { return; }
+            if (state == RefreshState.START){ mListener.onRefresh(); }
+        }
     }
 
-    protected abstract void finishSpinner(float overScrollTop);
-    protected abstract void moveSpinner(float overScrollTop);
-    protected abstract boolean canChildScrollUp();
+    /**
+     * @return 不能下拉刷新状态
+     */
+    protected boolean canNotPullToRefresh() {
+        return !isEnabled() || mReturningToStart || canChildScrollUp()
+                || mRefreshing || isNestedScrollInProgress() || mRefreshView == null;
+    }
+
+    @Override
+    protected int getChildDrawingOrder(int childCount, int i) {
+        if (mRefreshViewIndex < 0) {
+            return i;
+        } else if (i == childCount - 1) {
+            // Draw the selected child last
+            return mRefreshViewIndex;
+        } else if (i >= mRefreshViewIndex) {
+            // Move the children after the selected child earlier one
+            return i + 1;
+        } else {
+            // Keep the children before the selected child the same
+            return i;
+        }
+    }
+
+    public boolean isRefreshing() {
+        return mRefreshing;
+    }
+
+    public void setRefreshType(int mRefreshType) { this.mRefreshType = mRefreshType; }
+
+    public void setOnRefreshListener(OnRefreshListener listener) { mListener = listener; }
 }

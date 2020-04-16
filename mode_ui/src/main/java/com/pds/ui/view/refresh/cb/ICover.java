@@ -9,6 +9,6 @@ import android.view.animation.Transformation;
  * Description:
  */
 public interface ICover {
-    int viewDiameter();
     void applyTransformation(float interpolatedTime, Transformation t);
+    boolean doComplete(float interpolatedTime, Transformation t);
 }

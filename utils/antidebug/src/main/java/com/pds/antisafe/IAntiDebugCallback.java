@@ -1,4 +1,4 @@
-package com.pds.antidebug;
+package com.pds.antisafe;
 
 public interface IAntiDebugCallback {
     void beInjectedDebug();

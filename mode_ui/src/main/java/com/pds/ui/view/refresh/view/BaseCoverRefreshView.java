@@ -3,9 +3,11 @@ package com.pds.ui.view.refresh.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.ImageView;
 
+import com.pds.ui.view.refresh.cb.BaseCover;
 import com.pds.ui.view.refresh.cb.ICover;
 import com.pds.ui.view.refresh.cb.ISpinnerAction;
 
@@ -16,7 +18,8 @@ import com.pds.ui.view.refresh.cb.ISpinnerAction;
  * Description:
  */
 @SuppressLint("AppCompatCustomView")
-public abstract class BaseCoverRefreshView extends ImageView implements ISpinnerAction, ICover {
+public abstract class BaseCoverRefreshView extends ImageView implements BaseCover {
+
     public BaseCoverRefreshView(Context context) {
         super(context);
     }
@@ -27,16 +30,6 @@ public abstract class BaseCoverRefreshView extends ImageView implements ISpinner
 
     public BaseCoverRefreshView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-    }
-
-    @Override
-    public int viewDiameter() {
-        return 0;
-    }
-
-    @Override
-    public void applyTransformation(float interpolatedTime, Transformation t) {
-
     }
 
     @Override
@@ -53,4 +46,30 @@ public abstract class BaseCoverRefreshView extends ImageView implements ISpinner
     public void reset() {
 
     }
+
+    @Override
+    protected void onAnimationStart() {
+        super.onAnimationStart();
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationStart(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+
+    }
+
+    @Override
+    public boolean doComplete(float interpolatedTime, Transformation t) {
+        return false;
+    }
+
 }

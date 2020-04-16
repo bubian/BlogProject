@@ -1,14 +1,14 @@
-package com.pds.antidebug;
+package com.pds.antisafe;
 
-public class AntiDebug {
+public class AntiSafe {
     private static String KEY_SUBSTRATE = "com.saurik.substrate.MS$2";
 
     static {
-        System.loadLibrary("AntiDebug");
+        System.loadLibrary("AntiSafe");
     }
 
-    /* 设置native检查回调接口 */
     public static native void setAntiDebugCallback(IAntiDebugCallback callback);
+    public static native void safeCheck();
 
     /* 通过堆栈判断apk是否被注入，被注入时ZygoteInit对象会被执行两次 */
     public static boolean isInject() {
