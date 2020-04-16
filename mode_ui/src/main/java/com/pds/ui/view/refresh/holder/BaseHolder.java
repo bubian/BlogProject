@@ -39,71 +39,41 @@ public abstract class  BaseHolder implements IRefreshTrigger {
     }
 
     @Override
-    public void onPullDownState(float progress) {
-
-    }
+    public void onPullDownState(float progress) { }
 
     @Override
-    public void onRefreshing() {
-
-    }
+    public void onRefreshing() { }
 
     @Override
-    public void onReleaseToRefresh() {
-
-    }
+    public void onReleaseToRefresh() { }
 
     @Override
-    public void onComplete() {
-
-    }
+    public void onComplete() { }
 
     @Override
-    public void init() {
+    public void init() { }
 
-    }
+    public void finishSpinner(float overScrollTop) { }
 
-    public void finishSpinner(float overScrollTop) {
+    public void moveSpinner(float overScrollTop) { }
 
-    }
+    public void reset() { }
 
-    public void moveSpinner(float overScrollTop) {
-
-    }
-
-    public void reset() {
-
-    }
-
-    public void setParent(BaseSwipeRefreshLayout mParent){
-
-    }
-
-    public void measureChildAfter(ViewGroup parent, int widthMeasureSpec, int heightMeasureSpec){
-
-    }
+    public void setParent(BaseSwipeRefreshLayout mParent){ }
 
     public abstract void measureChildAfter(BaseSwipeRefreshLayout parent, int widthMeasureSpec, int heightMeasureSpec);
 
-    public void layoutChild(boolean changed, int left, int top, int right, int bottom){
-
-    }
+    public void layoutChild(boolean changed, int left, int top, int right, int bottom){ }
 
     public boolean onInterceptTouchEvent(MotionEvent ev){
         return false;
     }
 
-    public void setRefreshState(boolean mRefreshing){
+    public void setRefreshState(boolean mRefreshing){ }
 
-    }
+    public void setRefreshing(boolean refreshing){ }
 
-    public void setRefreshing(boolean refreshing){
-
-    }
-
-    public void setRefreshing(boolean refreshing,boolean notify){
-
-    }
+    public void setRefreshing(boolean refreshing,boolean notify){ }
 
     public boolean isRefreshing(float overScrollTop){
         return false;

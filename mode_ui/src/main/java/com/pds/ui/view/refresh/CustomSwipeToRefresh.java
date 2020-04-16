@@ -9,7 +9,7 @@ public class CustomSwipeToRefresh extends MultipleSwipeRefreshLayout {
     private final int mTouchSlop;
     private float mPrevX;
     private float mPrevY;
-    private boolean isViewPagerDragger;
+    private boolean isViewPagerDragged;
 
     public CustomSwipeToRefresh(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -23,11 +23,11 @@ public class CustomSwipeToRefresh extends MultipleSwipeRefreshLayout {
             case MotionEvent.ACTION_DOWN:
                 mPrevX = MotionEvent.obtain(event).getX();
                 mPrevY = MotionEvent.obtain(event).getY();
-                isViewPagerDragger = false;
+                isViewPagerDragged = false;
                 break;
 
             case MotionEvent.ACTION_MOVE:
-                if(isViewPagerDragger){
+                if(isViewPagerDragged){
                     return false;
                 }
                 final float eventX = event.getX();
@@ -36,13 +36,13 @@ public class CustomSwipeToRefresh extends MultipleSwipeRefreshLayout {
                 float yDiff = Math.abs(eventY - mPrevY);
 
                 if (xDiff > mTouchSlop && xDiff > yDiff) {
-                    isViewPagerDragger = true;
+                    isViewPagerDragged = true;
                     return false;
                 }
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
 
-                isViewPagerDragger = false;
+                isViewPagerDragged = false;
                 break;
         }
 

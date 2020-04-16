@@ -162,29 +162,29 @@ public class CoverPullRefreshHolder extends BaseHolder{
             if (mRefreshView instanceof ISpinnerAction){
                 ((ISpinnerAction) mRefreshView).finishSpinner(overScrollTop, slingshotDist, mTotalDragDistance);
             }
-//            Animation.AnimationListener listener = null;
-//            if (!mScale) {
-//                listener = new Animation.AnimationListener() {
-//
-//                    @Override
-//                    public void onAnimationStart(Animation animation) {
-//                    }
-//
-//                    @Override
-//                    public void onAnimationEnd(Animation animation) {
-//                        if (!mScale) {
-//                            startScaleDownAnimation(null);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onAnimationRepeat(Animation animation) {
-//                    }
-//
-//                };
-//            }
+            Animation.AnimationListener listener = null;
+            if (!mScale) {
+                listener = new Animation.AnimationListener() {
 
-            animateOffsetToStartPosition(mCurrentTargetOffsetTop);
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        if (!mScale) {
+                            startScaleDownAnimation();
+                        }
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                    }
+
+                };
+            }
+
+            animateOffsetToStartPosition(mCurrentTargetOffsetTop,listener);
         }
     }
 
@@ -199,12 +199,12 @@ public class CoverPullRefreshHolder extends BaseHolder{
 
     };
 
-    private void animateOffsetToStartPosition(int from) {
+    private void animateOffsetToStartPosition(int from,Animation.AnimationListener listener) {
         mFrom = from;
         mAnimateToStartPosition.reset();
         mAnimateToStartPosition.setDuration(ANIMATE_TO_START_DURATION);
         mAnimateToStartPosition.setInterpolator(mDecelerateInterpolator);
-        mAnimateToStartPosition.setAnimationListener(mRefreshListener);
+        mAnimateToStartPosition.setAnimationListener(listener);
         mRefreshView.clearAnimation();
         mRefreshView.startAnimation(mAnimateToStartPosition);
     }

@@ -22,6 +22,7 @@ import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.pds.blog.R;
 import com.pds.blog.base.BaseActivity;
+import com.pds.ui.view.refresh.MultipleSwipeRefreshLayout;
 import com.pds.ui.view.refresh.cb.OnRefreshListener;
 import com.pds.ui.view.refresh.view.TwoPointRefreshView;
 import com.pds.ui.view.refresh.CustomSwipeToRefresh;
@@ -43,7 +44,7 @@ public class RefreshActivity extends BaseActivity {
 
     private static final String TAG = "RefreshActivity";
     private VLayoutRecycleView vLayoutRecycleView;
-    private CustomSwipeToRefresh swipeToRefresh;
+    private MultipleSwipeRefreshLayout swipeToRefresh;
     private HeaderAdapter headerAdapter;
     private ContentAdapter contentAdapter;
 
