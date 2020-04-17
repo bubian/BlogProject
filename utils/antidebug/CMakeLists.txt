@@ -6,6 +6,7 @@ add_library(
         src/main/cpp/safe.cpp
         src/main/cpp/SafeCheck.cpp
         src/main/cpp/exception/ExceptionTools.cpp
+        src/main/cpp/exception/antitrace.cpp
         src/main/cpp/tools/DeviceInfo.h
         src/main/cpp/AntiDebug.cpp)
 
