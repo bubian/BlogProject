@@ -70,7 +70,9 @@ public abstract class  BaseHolder implements IRefreshTrigger {
         return false;
     }
 
-    public void setRefreshState(boolean mRefreshing){ }
+    public void setRefreshState(boolean mRefreshing){
+
+    }
 
     public void setRefreshing(boolean refreshing){ }
 

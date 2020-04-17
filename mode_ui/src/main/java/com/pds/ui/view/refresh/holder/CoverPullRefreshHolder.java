@@ -68,6 +68,11 @@ public class CoverPullRefreshHolder extends BaseHolder{
         moveToStart(1.0f);
     }
 
+    private void syncRefreshState(boolean isRefreshing) {
+        mRefreshing = isRefreshing;
+        convert().setRefreshState(mRefreshing);
+    }
+
     private BaseCover convert(){
        return  (BaseCover)mRefreshView;
     }
@@ -328,17 +333,19 @@ public class CoverPullRefreshHolder extends BaseHolder{
     }
 
     public void setProgressViewOffset(boolean scale, int start, int end) {
+        if (mRefreshing){
+            return;
+        }
         mScale = scale;
         mOriginalOffsetTop = start;
         mSpinnerOffsetEnd = end;
         mUsingCustomStart = true;
         reset();
-        mRefreshing = false;
     }
 
-    public void setRefreshState(boolean isRefreshing) {
-        mRefreshing = isRefreshing;
-        convert().setRefreshState(mRefreshing);
+    @Override
+    public void setRefreshState(boolean mRefreshing) {
+        syncRefreshState(mRefreshing);
     }
 
     public void setSlingshotDistance(@Px int slingshotDistance) {
