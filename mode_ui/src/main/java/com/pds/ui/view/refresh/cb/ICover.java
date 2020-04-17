@@ -11,4 +11,6 @@ import android.view.animation.Transformation;
 public interface ICover {
     void applyTransformation(float interpolatedTime, Transformation t);
     boolean doComplete(float interpolatedTime, Transformation t);
+    boolean doCustomExitAnimation();
+    boolean doCustomEnterAnimation();
 }

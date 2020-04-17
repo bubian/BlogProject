@@ -243,9 +243,6 @@ public class CircleImageRefreshView extends ImageView implements BaseCover {
     public void reset() {
         mProgress.stop();
         setColorViewAlpha(MAX_ALPHA);
-        if (mScale) {
-            setAnimationProgress(0 /* animation complete and view is hidden */);
-        }
     }
 
     private void setColorViewAlpha(int targetAlpha) {
@@ -269,6 +266,18 @@ public class CircleImageRefreshView extends ImageView implements BaseCover {
     }
     @Override
     public boolean doComplete(float interpolatedTime, Transformation t) { return false; }
+
+    @Override
+    public boolean doCustomExitAnimation() {
+        return false;
+    }
+
+    @Override
+    public boolean doCustomEnterAnimation() {
+        mProgress.setAlpha(MAX_ALPHA);
+        return false;
+    }
+
     @Override
     public void onAnimationRepeat(Animation animation) { }
     @Override

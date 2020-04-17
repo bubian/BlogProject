@@ -20,9 +20,9 @@ import com.pds.ui.view.refresh.cb.ICover;
  */
 public abstract class  BaseHolder implements IRefreshTrigger {
 
-    protected Context mContext;
-    protected View mRefreshView;
-    protected int mTouchSlop;
+    Context mContext;
+    View mRefreshView;
+    protected BaseSwipeRefreshLayout mParent;
 
     public BaseHolder(Context context){
         this(context,null);
@@ -31,7 +31,6 @@ public abstract class  BaseHolder implements IRefreshTrigger {
     public BaseHolder(Context context,View refreshView){
         mContext = context;
         mRefreshView = refreshView;
-        mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
     }
 
     public void setRefreshView(View refreshView){
@@ -59,7 +58,9 @@ public abstract class  BaseHolder implements IRefreshTrigger {
 
     public void reset() { }
 
-    public void setParent(BaseSwipeRefreshLayout mParent){ }
+    public void setParent(BaseSwipeRefreshLayout mParent) {
+        this.mParent = mParent;
+    }
 
     public abstract void measureChildAfter(BaseSwipeRefreshLayout parent, int widthMeasureSpec, int heightMeasureSpec);
 

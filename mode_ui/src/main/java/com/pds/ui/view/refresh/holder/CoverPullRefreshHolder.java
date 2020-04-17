@@ -38,7 +38,6 @@ public class CoverPullRefreshHolder extends BaseHolder{
     private final DecelerateInterpolator mDecelerateInterpolator = new DecelerateInterpolator(DECELERATE_INTERPOLATION_FACTOR);
 
     protected int mFrom;
-    private int mMediumAnimationDuration;
     private boolean mRefreshing;
 
     // 是否开启了自定义开始位置
@@ -46,23 +45,15 @@ public class CoverPullRefreshHolder extends BaseHolder{
     protected int mSpinnerOffsetEnd;
     protected float mTotalDragDistance;
     private boolean mIsFirstMeasureSuccess;
-
-    private Animation mScaleDownAnimation;
-
-    // Whether this item is scaled up rather than clipped
     boolean mScale;
-
-    /**
-     * 下拉刷新展示View顶部偏移内容View顶部的距离
-     */
+    // 下拉刷新展示View顶部偏移内容View顶部的距离
     private int mCurrentTargetOffsetTop;
-
-    /**
-     * 最开始下拉刷新展示View顶部偏移内容View顶部的距离
-     */
+    //最开始下拉刷新展示View顶部偏移内容View顶部的距离
     protected int mOriginalOffsetTop;
 
-    private BaseSwipeRefreshLayout mParent;
+    private Animation mScaleDownAnimation;
+    private Animation mScaleAnimation;
+    private int mMediumAnimationDuration;
     private int mCustomSlingshotDistance;
 
     public CoverPullRefreshHolder(@NonNull Context context, View refreshView) {
@@ -80,28 +71,41 @@ public class CoverPullRefreshHolder extends BaseHolder{
     private BaseCover convert(){
        return  (BaseCover)mRefreshView;
     }
+
     private void moveToStart(float interpolatedTime) {
         int targetTop = (mFrom + (int) ((mOriginalOffsetTop - mFrom) * interpolatedTime));
         int offset = targetTop - mRefreshView.getTop();
         setTargetOffsetTopAndBottom(offset);
     }
 
+    private void setAnimationProgress(float progress) {
+        mRefreshView.setScaleX(progress);
+        mRefreshView.setScaleY(progress);
+    }
+
+    private void setTargetOffsetTopAndBottom(int offset) {
+        mRefreshView.bringToFront();
+        ViewCompat.offsetTopAndBottom(mRefreshView, offset);
+        mCurrentTargetOffsetTop = mRefreshView.getTop();
+    }
+
     @Override
     public void reset() {
         mRefreshView.clearAnimation();
         mRefreshView.setVisibility(View.GONE);
+        convert().reset();
+        if (convert().doCustomExitAnimation()){
+            mCurrentTargetOffsetTop =mRefreshView.getTop();
+            return;
+        }
         if (mScale) {
-
+            // 缩放消失
+            setAnimationProgress(0);
         }else {
+            // 平移到开始位置
             setTargetOffsetTopAndBottom(mOriginalOffsetTop - mCurrentTargetOffsetTop);
         }
         mCurrentTargetOffsetTop =mRefreshView.getTop();
-    }
-
-    void setTargetOffsetTopAndBottom(int offset) {
-        mRefreshView.bringToFront();
-        ViewCompat.offsetTopAndBottom(mRefreshView, offset);
-        mCurrentTargetOffsetTop = mRefreshView.getTop();
     }
 
     private final Animation mAnimateToCorrectPosition = new Animation() {
@@ -116,7 +120,6 @@ public class CoverPullRefreshHolder extends BaseHolder{
             }
             targetTop = (mFrom + (int) ((endTarget - mFrom) * interpolatedTime));
             int offset = targetTop - mRefreshView.getTop();
-            Log.d(TAG,"test:offset="+ offset + " mFrom = "+ mFrom + " endTarget = " + endTarget + " targetTop="+ targetTop);
             setTargetOffsetTopAndBottom(offset);
             ((ICover)mRefreshView).applyTransformation(interpolatedTime,t);
         }
@@ -144,6 +147,47 @@ public class CoverPullRefreshHolder extends BaseHolder{
         }
     };
 
+    private final Animation mAnimateToStartPosition = new Animation() {
+        @Override
+        public void applyTransformation(float interpolatedTime, Transformation t) {
+            if (mRefreshView instanceof ICover){
+                ((ICover) mRefreshView).applyTransformation(interpolatedTime,t);
+            }
+            moveToStart(interpolatedTime);
+        }
+
+    };
+
+    private void startScaleDownAnimation() {
+        mScaleDownAnimation = new Animation() {
+            @Override
+            public void applyTransformation(float interpolatedTime, Transformation t) {
+                if (!convert().doComplete(interpolatedTime, t)){
+                    mRefreshView.setScaleX(1 - interpolatedTime);
+                    mRefreshView.setScaleY(1 - interpolatedTime);
+                }
+            }
+        };
+        mScaleDownAnimation.setDuration(SCALE_DOWN_DURATION);
+        mScaleDownAnimation.setAnimationListener(mRefreshListener);
+        mRefreshView.clearAnimation();
+        mRefreshView.startAnimation(mScaleDownAnimation);
+    }
+
+
+    private void startScaleUpAnimation(Animation.AnimationListener listener) {
+        mRefreshView.setVisibility(View.VISIBLE);
+        mScaleAnimation = new Animation() {
+            @Override
+            public void applyTransformation(float interpolatedTime, Transformation t) {
+                setAnimationProgress(interpolatedTime);
+            }
+        };
+        mScaleAnimation.setDuration(mMediumAnimationDuration);
+        mRefreshView.clearAnimation();
+        mRefreshView.startAnimation(mScaleAnimation);
+    }
+
     private void animateOffsetToCorrectPosition(int from) {
         mFrom = from;
         mAnimateToCorrectPosition.reset();
@@ -152,6 +196,16 @@ public class CoverPullRefreshHolder extends BaseHolder{
         mAnimateToCorrectPosition.setAnimationListener(mRefreshListener);
         mRefreshView.clearAnimation();
         mRefreshView.startAnimation(mAnimateToCorrectPosition);
+    }
+
+    private void animateOffsetToStartPosition(int from,Animation.AnimationListener listener) {
+        mFrom = from;
+        mAnimateToStartPosition.reset();
+        mAnimateToStartPosition.setDuration(ANIMATE_TO_START_DURATION);
+        mAnimateToStartPosition.setInterpolator(mDecelerateInterpolator);
+        mAnimateToStartPosition.setAnimationListener(listener);
+        mRefreshView.clearAnimation();
+        mRefreshView.startAnimation(mAnimateToStartPosition);
     }
 
     @Override
@@ -182,27 +236,6 @@ public class CoverPullRefreshHolder extends BaseHolder{
             };
         }
         animateOffsetToStartPosition(mCurrentTargetOffsetTop,listener);
-    }
-
-    private final Animation mAnimateToStartPosition = new Animation() {
-        @Override
-        public void applyTransformation(float interpolatedTime, Transformation t) {
-            if (mRefreshView instanceof ICover){
-               ((ICover) mRefreshView).applyTransformation(interpolatedTime,t);
-            }
-            moveToStart(interpolatedTime);
-        }
-
-    };
-
-    private void animateOffsetToStartPosition(int from,Animation.AnimationListener listener) {
-        mFrom = from;
-        mAnimateToStartPosition.reset();
-        mAnimateToStartPosition.setDuration(ANIMATE_TO_START_DURATION);
-        mAnimateToStartPosition.setInterpolator(mDecelerateInterpolator);
-        mAnimateToStartPosition.setAnimationListener(listener);
-        mRefreshView.clearAnimation();
-        mRefreshView.startAnimation(mAnimateToStartPosition);
     }
 
     @Override
@@ -262,15 +295,6 @@ public class CoverPullRefreshHolder extends BaseHolder{
                 (width  + refreshWidth ) / 2, mCurrentTargetOffsetTop+ refreshHeight);
     }
 
-    public void setRefreshState(boolean isRefreshing) {
-        mRefreshing = isRefreshing;
-        convert().setRefreshState(mRefreshing);
-    }
-
-    public void setParent(BaseSwipeRefreshLayout mParent) {
-        this.mParent = mParent;
-    }
-
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         final int action = ev.getActionMasked();
@@ -288,22 +312,10 @@ public class CoverPullRefreshHolder extends BaseHolder{
             } else {
                 endTarget = mSpinnerOffsetEnd;
             }
-            setTargetOffsetTopAndBottom(endTarget - mCurrentTargetOffsetTop);
-            startScaleUpAnimation(mRefreshListener);
-    }
-
-    private void startScaleUpAnimation(Animation.AnimationListener listener) {
-//        mRefreshView.setVisibility(View.VISIBLE);
-//        mProgress.setAlpha(MAX_ALPHA);
-//        mScaleAnimation = new Animation() {
-//            @Override
-//            public void applyTransformation(float interpolatedTime, Transformation t) {
-//                setAnimationProgress(interpolatedTime);
-//            }
-//        };
-//        mScaleAnimation.setDuration(mMediumAnimationDuration);
-//        mRefreshView.clearAnimation();
-//        mRefreshView.startAnimation(mScaleAnimation);
+            if (!convert().doCustomEnterAnimation()){
+                setTargetOffsetTopAndBottom(endTarget - mCurrentTargetOffsetTop);
+                startScaleUpAnimation(mRefreshListener);
+            }
     }
 
     @Override
@@ -315,23 +327,6 @@ public class CoverPullRefreshHolder extends BaseHolder{
             }
     }
 
-    void startScaleDownAnimation() {
-        mScaleDownAnimation = new Animation() {
-            @Override
-            public void applyTransformation(float interpolatedTime, Transformation t) {
-                if (!convert().doComplete(interpolatedTime, t)){
-                    mRefreshView.setScaleX(1 - interpolatedTime);
-                    mRefreshView.setScaleY(1 - interpolatedTime);
-                }
-            }
-        };
-        mScaleDownAnimation.setDuration(SCALE_DOWN_DURATION);
-        mScaleDownAnimation.setAnimationListener(mRefreshListener);
-        mRefreshView.clearAnimation();
-        mRefreshView.startAnimation(mScaleDownAnimation);
-    }
-
-
     public void setProgressViewOffset(boolean scale, int start, int end) {
         mScale = scale;
         mOriginalOffsetTop = start;
@@ -339,6 +334,11 @@ public class CoverPullRefreshHolder extends BaseHolder{
         mUsingCustomStart = true;
         reset();
         mRefreshing = false;
+    }
+
+    public void setRefreshState(boolean isRefreshing) {
+        mRefreshing = isRefreshing;
+        convert().setRefreshState(mRefreshing);
     }
 
     public void setSlingshotDistance(@Px int slingshotDistance) {
