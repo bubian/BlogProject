@@ -8,12 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 
+import androidx.annotation.Nullable;
 import androidx.core.view.NestedScrollingChild;
 import androidx.core.view.NestedScrollingChildHelper;
 import androidx.core.view.NestedScrollingParent;
 import androidx.core.view.NestedScrollingParentHelper;
 import androidx.core.view.ViewCompat;
 
+import com.pds.ui.view.refresh.cb.OnChildScrollUpCallback;
 import com.pds.ui.view.refresh.cb.OnRefreshListener;
 import com.pds.ui.view.refresh.cb.RefreshState;
 import com.pds.ui.view.refresh.holder.BaseHolder;
@@ -40,6 +42,7 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
     private final int[] mParentScrollConsumed = new int[2];
     private final int[] mParentOffsetInWindow = new int[2];
 
+    private OnChildScrollUpCallback mChildScrollUpCallback;
     /**
      * 下拉刷新展示的View在容器中位置索引
      */
@@ -222,31 +225,31 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
         return Looper.getMainLooper() == Looper.myLooper();
     }
 
-    protected void setHolderRefreshView(){
+    protected void checkRefreshHolder(){
         if (!isMainThread()){
             return;
         }
         if (null == mRefreshViewHolder){
-            Context context = context();
-            if (mRefreshType == PULL_TYPE){
-                mRefreshViewHolder = new PullRefreshHolder(context,mRefreshView);
-            }else if (mRefreshType == ZOOM_TYPE){
-                mRefreshViewHolder = new ZoomPullRefreshHolder(context,mRefreshView);
-            }else {
-                mRefreshViewHolder = new CoverPullRefreshHolder(context,mRefreshView);
-            }
+            createRefreshHolder();
+            mRefreshViewHolder.setParent(this);
+            mRefreshViewHolder.setRefreshView(mRefreshView);
         }
-        mRefreshViewHolder.setParent(this);
-        mRefreshViewHolder.setRefreshView(mRefreshView);
     }
 
-    protected abstract void finishSpinner(float overScrollTop);
-
-    protected void moveSpinner(float overScrollTop){
-        setHolderRefreshView();
-        mRefreshViewHolder.moveSpinner(overScrollTop);
+    public void createRefreshHolder(){
+        Context context = context();
+        if (mRefreshType == PULL_TYPE){
+            mRefreshViewHolder = new PullRefreshHolder(context,mRefreshView);
+        }else if (mRefreshType == ZOOM_TYPE){
+            mRefreshViewHolder = new ZoomPullRefreshHolder(context,mRefreshView);
+        }else {
+            mRefreshViewHolder = new CoverPullRefreshHolder(context,mRefreshView);
+        }
     }
-    protected abstract boolean canChildScrollUp();
+
+    protected void finishSpinner(float overScrollTop){}
+
+    protected void moveSpinner(float overScrollTop){ }
 
     public void doNotify(int state){
         if (mNotify) {
@@ -268,15 +271,46 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
         if (mRefreshViewIndex < 0) {
             return i;
         } else if (i == childCount - 1) {
-            // Draw the selected child last
             return mRefreshViewIndex;
         } else if (i >= mRefreshViewIndex) {
-            // Move the children after the selected child earlier one
             return i + 1;
         } else {
-            // Keep the children before the selected child the same
             return i;
         }
+    }
+
+    protected void ensureTarget() {
+        if (mTarget == null) {
+            for (int i = 0; i < getChildCount(); i++) {
+                View child = getChildAt(i);
+                // 刷新组件应该只包含内容View和下拉刷新显示的View
+                if (!child.equals(mRefreshView)) {
+                    mTarget = child;
+                    break;
+                }
+            }
+        }
+    }
+
+    public boolean canChildScrollUp() {
+        if (mChildScrollUpCallback != null) {
+            return mChildScrollUpCallback.canChildScrollUp(this, mTarget);
+        }
+        return ViewCompat.canScrollVertically(mTarget, -1);
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        if (!enabled) {
+            mRefreshViewHolder.reset();
+        }
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        mRefreshViewHolder.reset();
     }
 
     public boolean isRefreshing() {
@@ -286,4 +320,20 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
     public void setRefreshType(int mRefreshType) { this.mRefreshType = mRefreshType; }
 
     public void setOnRefreshListener(OnRefreshListener listener) { mListener = listener; }
+
+    public void setOnChildScrollUpCallback(@Nullable OnChildScrollUpCallback callback) {
+        mChildScrollUpCallback = callback;
+    }
+
+    /**
+     *  设置刷新显示view
+     * @param view
+     */
+    public void setRefreshView(View view) {
+        if(view != null) {
+            removeView(mRefreshView);
+            this.mRefreshView = view;
+            addView(view);
+        }
+    }
 }

@@ -11,6 +11,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Transformation;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Px;
 import androidx.core.view.ViewCompat;
 
 import com.pds.ui.view.refresh.BaseSwipeRefreshLayout;
@@ -62,6 +63,7 @@ public class CoverPullRefreshHolder extends BaseHolder{
     protected int mOriginalOffsetTop;
 
     private BaseSwipeRefreshLayout mParent;
+    private int mCustomSlingshotDistance;
 
     public CoverPullRefreshHolder(@NonNull Context context, View refreshView) {
         super(context, refreshView);
@@ -154,38 +156,32 @@ public class CoverPullRefreshHolder extends BaseHolder{
 
     @Override
     public void finishSpinner(float overScrollTop) {
-        if (overScrollTop > mTotalDragDistance){
-            setRefreshing(true,true);
-        }else {
-            setRefreshState(false);
-            float slingshotDist = mUsingCustomStart ? mSpinnerOffsetEnd - mOriginalOffsetTop : mSpinnerOffsetEnd;
-            if (mRefreshView instanceof ISpinnerAction){
-                ((ISpinnerAction) mRefreshView).finishSpinner(overScrollTop, slingshotDist, mTotalDragDistance);
-            }
-            Animation.AnimationListener listener = null;
-            if (!mScale) {
-                listener = new Animation.AnimationListener() {
-
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        if (!mScale) {
-                            startScaleDownAnimation();
-                        }
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-                    }
-
-                };
-            }
-
-            animateOffsetToStartPosition(mCurrentTargetOffsetTop,listener);
+        float slingshotDist = mUsingCustomStart ? mSpinnerOffsetEnd - mOriginalOffsetTop : mSpinnerOffsetEnd;
+        if (mRefreshView instanceof ISpinnerAction){
+            ((ISpinnerAction) mRefreshView).finishSpinner(overScrollTop, slingshotDist, mTotalDragDistance);
         }
+        Animation.AnimationListener listener = null;
+        if (!mScale) {
+            listener = new Animation.AnimationListener() {
+
+                @Override
+                public void onAnimationStart(Animation animation) {
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    if (!mScale) {
+                        startScaleDownAnimation();
+                    }
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                }
+
+            };
+        }
+        animateOffsetToStartPosition(mCurrentTargetOffsetTop,listener);
     }
 
     private final Animation mAnimateToStartPosition = new Animation() {
@@ -219,7 +215,11 @@ public class CoverPullRefreshHolder extends BaseHolder{
             mRefreshView.setVisibility(View.VISIBLE);
         }
 
-        float slingshotDist = mUsingCustomStart ? mSpinnerOffsetEnd - mOriginalOffsetTop : mSpinnerOffsetEnd;
+        float slingshotDist = mCustomSlingshotDistance > 0
+                ? mCustomSlingshotDistance
+                : (mUsingCustomStart
+                ? mSpinnerOffsetEnd - mOriginalOffsetTop
+                : mSpinnerOffsetEnd);
 
         if (mRefreshView instanceof ISpinnerAction){
             ((ISpinnerAction) mRefreshView).moveSpinner(overScrollTop,slingshotDist,mTotalDragDistance);
@@ -282,7 +282,6 @@ public class CoverPullRefreshHolder extends BaseHolder{
 
     @Override
     public void setRefreshing(boolean refreshing) {
-        if (refreshing && !mRefreshing) {
             int endTarget;
             if (!mUsingCustomStart) {
                 endTarget = mSpinnerOffsetEnd + mOriginalOffsetTop;
@@ -290,19 +289,30 @@ public class CoverPullRefreshHolder extends BaseHolder{
                 endTarget = mSpinnerOffsetEnd;
             }
             setTargetOffsetTopAndBottom(endTarget - mCurrentTargetOffsetTop);
-        }
+            startScaleUpAnimation(mRefreshListener);
+    }
+
+    private void startScaleUpAnimation(Animation.AnimationListener listener) {
+//        mRefreshView.setVisibility(View.VISIBLE);
+//        mProgress.setAlpha(MAX_ALPHA);
+//        mScaleAnimation = new Animation() {
+//            @Override
+//            public void applyTransformation(float interpolatedTime, Transformation t) {
+//                setAnimationProgress(interpolatedTime);
+//            }
+//        };
+//        mScaleAnimation.setDuration(mMediumAnimationDuration);
+//        mRefreshView.clearAnimation();
+//        mRefreshView.startAnimation(mScaleAnimation);
     }
 
     @Override
     public void setRefreshing(boolean refreshing, boolean notify) {
-        if (mRefreshing != refreshing){
-            setRefreshState(refreshing);
             if (mRefreshing) {
                 animateOffsetToCorrectPosition(mCurrentTargetOffsetTop);
             } else {
                 startScaleDownAnimation();
             }
-        }
     }
 
     void startScaleDownAnimation() {
@@ -329,6 +339,10 @@ public class CoverPullRefreshHolder extends BaseHolder{
         mUsingCustomStart = true;
         reset();
         mRefreshing = false;
+    }
+
+    public void setSlingshotDistance(@Px int slingshotDistance) {
+        mCustomSlingshotDistance = slingshotDistance;
     }
 
     @Override

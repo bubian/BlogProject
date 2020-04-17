@@ -4,6 +4,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.pds.ui.view.refresh.BaseSwipeRefreshLayout;
 import com.pds.ui.view.refresh.MultipleSwipeRefreshLayout;
 
 /**
@@ -13,5 +14,5 @@ import com.pds.ui.view.refresh.MultipleSwipeRefreshLayout;
  * Description:
  */
 public interface OnChildScrollUpCallback {
-    boolean canChildScrollUp(MultipleSwipeRefreshLayout parent, @Nullable View child);
+    boolean canChildScrollUp(BaseSwipeRefreshLayout parent, @Nullable View child);
 }

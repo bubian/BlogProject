@@ -56,22 +56,6 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
             android.R.attr.enabled
     };
 
-    private OnChildScrollUpCallback mChildScrollUpCallback;
-
-    @Override
-    public void setEnabled(boolean enabled) {
-        super.setEnabled(enabled);
-        if (!enabled) {
-           mRefreshViewHolder.reset();
-        }
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        mRefreshViewHolder.reset();
-    }
-
     public MultipleSwipeRefreshLayout(Context context) {
         this(context, null);
     }
@@ -97,16 +81,21 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
         mRefreshView = createRefreshView();
         addView(mRefreshView);
     }
+
     protected View createRefreshView() {
         return new CircleImageRefreshView(getContext());
     }
 
+    private void syncRefreshState(boolean refreshing){
+        mRefreshing = refreshing;
+        mRefreshViewHolder.setRefreshState(mRefreshing);
+    }
+
     public void setRefreshing(boolean refreshing) {
         if (refreshing && !mRefreshing) {
-            mRefreshing = true;
+            syncRefreshState(true);
             mRefreshViewHolder.setRefreshing(true);
             mNotify = false;
-//            startScaleUpAnimation(mRefreshListener);
         } else {
             setRefreshing(refreshing, false /* notify */);
         }
@@ -116,21 +105,8 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
         if (mRefreshing != refreshing) {
             mNotify = notify;
             ensureTarget();
-            mRefreshing = refreshing;
+            syncRefreshState(refreshing);
             mRefreshViewHolder.setRefreshing(refreshing,notify);
-        }
-    }
-
-    private void ensureTarget() {
-        if (mTarget == null) {
-            for (int i = 0; i < getChildCount(); i++) {
-                View child = getChildAt(i);
-                // 刷新组件应该只包含内容View和下拉刷新显示的View
-                if (!child.equals(mRefreshView)) {
-                    mTarget = child;
-                    break;
-                }
-            }
         }
     }
 
@@ -150,7 +126,7 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
                 getMeasuredHeight() - getPaddingTop() - getPaddingBottom(), MeasureSpec.EXACTLY));
         // 测量下拉刷新组件
         measureChild(mRefreshView,widthMeasureSpec,heightMeasureSpec);
-        setHolderRefreshView();
+        checkRefreshHolder();
         mRefreshViewIndex = -1;
         // 找到下拉刷新View在容器中的位置。
         for (int index = 0; index < getChildCount(); index++) {
@@ -178,8 +154,26 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
         final int childHeight = height - getPaddingTop() - getPaddingBottom();
         child.layout(childLeft, childTop, childLeft + childWidth, childTop + childHeight);
 
-        setHolderRefreshView();
+        checkRefreshHolder();
         mRefreshViewHolder.layoutChild(changed,left,top,right,bottom);
+    }
+
+    private void onSecondaryPointerUp(MotionEvent ev) {
+        final int pointerIndex = ev.getActionIndex();
+        final int pointerId = ev.getPointerId(pointerIndex);
+        if (pointerId == mActivePointerId) {
+            final int newPointerIndex = pointerIndex == 0 ? 1 : 0;
+            mActivePointerId = ev.getPointerId(newPointerIndex);
+        }
+    }
+
+    @SuppressLint("NewApi")
+    private void startDragging(float y) {
+        final float yDiff = y - mInitialDownY;
+        if (yDiff > mTouchSlop && !mIsBeingDragged) {
+            mInitialMotionY = mInitialDownY + mTouchSlop;
+            mIsBeingDragged = true;
+        }
     }
 
     @Override
@@ -237,17 +231,6 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
                 break;
         }
         return mIsBeingDragged;
-    }
-
-    @Override
-    protected void finishSpinner(float overScrollTop) {
-        if (mRefreshViewHolder.isRefreshing(overScrollTop)) {
-            setRefreshing(true, true /* notify */);
-        } else {
-            mRefreshing = false;
-        }
-        setHolderRefreshView();
-        mRefreshViewHolder.finishSpinner(overScrollTop);
     }
 
     @Override
@@ -327,48 +310,21 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
         return true;
     }
 
-    @SuppressLint("NewApi")
-    private void startDragging(float y) {
-        final float yDiff = y - mInitialDownY;
-        if (yDiff > mTouchSlop && !mIsBeingDragged) {
-            mInitialMotionY = mInitialDownY + mTouchSlop;
-            mIsBeingDragged = true;
-        }
-    }
-
-    private void onSecondaryPointerUp(MotionEvent ev) {
-        final int pointerIndex = ev.getActionIndex();
-        final int pointerId = ev.getPointerId(pointerIndex);
-        if (pointerId == mActivePointerId) {
-            // This was our active pointer going up. Choose a new
-            // active pointer and adjust accordingly.
-            final int newPointerIndex = pointerIndex == 0 ? 1 : 0;
-            mActivePointerId = ev.getPointerId(newPointerIndex);
-        }
+    @Override
+    protected void moveSpinner(float overScrollTop) {
+        checkRefreshHolder();
+        mRefreshViewHolder.moveSpinner(overScrollTop);
     }
 
     @Override
-    public boolean canChildScrollUp() {
-        if (mChildScrollUpCallback != null) {
-            return mChildScrollUpCallback.canChildScrollUp(this, mTarget);
+    protected void finishSpinner(float overScrollTop) {
+        checkRefreshHolder();
+        if (mRefreshViewHolder.isRefreshing(overScrollTop)) {
+            setRefreshing(true, true /* notify */);
+        } else {
+            syncRefreshState(false);
+            mRefreshViewHolder.finishSpinner(overScrollTop);
         }
-        return ViewCompat.canScrollVertically(mTarget, -1);
-    }
-
-    /**
-     *  设置刷新显示view
-     * @param view
-     */
-    public void setRefreshView(View view) {
-        if(view != null) {
-            removeView(mRefreshView);
-            this.mRefreshView = view;
-            addView(view);
-        }
-    }
-
-    public void setOnChildScrollUpCallback(@Nullable OnChildScrollUpCallback callback) {
-        mChildScrollUpCallback = callback;
     }
 }
 
