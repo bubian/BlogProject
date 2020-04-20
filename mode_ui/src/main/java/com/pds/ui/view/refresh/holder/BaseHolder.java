@@ -62,4 +62,6 @@ public abstract class  BaseHolder{
     public boolean isRefreshing(float overScrollTop){
         return false;
     }
+
+    public int getInitShowHeight(){ return 0; }
 }

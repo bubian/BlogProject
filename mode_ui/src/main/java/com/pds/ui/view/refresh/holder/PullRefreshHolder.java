@@ -1,7 +1,17 @@
 package com.pds.ui.view.refresh.holder;
 
+import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Transformation;
+
+import androidx.core.view.ViewCompat;
 
 import com.pds.ui.view.refresh.BaseSwipeRefreshLayout;
 import com.pds.ui.view.refresh.cb.BaseTied;
@@ -15,6 +25,19 @@ import com.pds.ui.view.refresh.cb.RefreshState;
  * Description:
  */
 public class PullRefreshHolder extends BaseHolder {
+
+    private static final String TAG = "PullRefreshHolder";
+    private static final int DEFAULT_CIRCLE_TARGET = 64;
+
+    private boolean mRefreshing;
+    private int mHeaderViewHeight;
+    private boolean mScale;
+    private float mTotalDragDistance;
+    private View mTarget;
+    private int mMediumAnimationDuration;
+
+    private static final int ANIMATE_TO_TRIGGER_DURATION = 200;
+    private int mOriginalOffsetTop;
 
     public PullRefreshHolder(Context context, View refreshView) {
         super(context,refreshView);
@@ -144,11 +167,32 @@ public class PullRefreshHolder extends BaseHolder {
 
     @Override
     public void measureChildAfter(BaseSwipeRefreshLayout parent, int widthMeasureSpec, int heightMeasureSpec) {
+        mParent = parent;
+        updateBaseValues(mRefreshView.getMeasuredHeight());
+    }
 
+
+    @Override
+    public void layoutChild(boolean changed, int left, int top, int right, int bottom) {
+        if (null == mParent){
+            return;
+        }
+        final int width = mParent.getMeasuredWidth();
+        if(mRefreshView != null){
+            int refreshWidth = mRefreshView.getMeasuredWidth();
+            mRefreshView.layout((width/2 - refreshWidth/2), top - mHeaderViewHeight, (width/2 + refreshWidth/2), top);
+        }
     }
 
     @Override
     public void setRefreshState(boolean isRefreshing) {
+        syncRefreshState(isRefreshing);
+    }
+
+    void setAnimationProgress(float progress) {
+        mRefreshView.setScaleX(progress);
+        mRefreshView.setScaleY(progress);
+    }
 
     @Override
     public void moveSpinner(float overScrollTop) {

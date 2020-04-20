@@ -3,6 +3,7 @@ package com.pds.ui.view.refresh.view;
 import android.content.Context;
 import androidx.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -16,6 +17,9 @@ import com.pds.ui.view.refresh.cb.BaseTied;
 import java.util.Random;
 
 public class TwoPointRefreshView extends FrameLayout implements BaseTied {
+
+    private static final int DEFAULT_HEADER_HEIGHT = 40;
+    private final int mHeight;
 
     private ImageView loadingView;
     private TextView refreshState;
@@ -39,6 +43,9 @@ public class TwoPointRefreshView extends FrameLayout implements BaseTied {
 
     public TwoPointRefreshView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        final DisplayMetrics metrics = getResources().getDisplayMetrics();
+        mHeight = (int) (DEFAULT_HEADER_HEIGHT * metrics.density);
+        setMinimumHeight(mHeight);
         setupViews();
         mRandom = new Random();
     }

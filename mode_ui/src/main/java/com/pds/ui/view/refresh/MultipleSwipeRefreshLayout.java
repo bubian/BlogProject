@@ -36,7 +36,12 @@ import android.widget.AbsListView;
 import com.pds.ui.view.refresh.cb.ICover;
 import com.pds.ui.view.refresh.cb.OnChildScrollUpCallback;
 import com.pds.ui.view.refresh.cb.OnRefreshListener;
+import com.pds.ui.view.refresh.holder.CoverPullRefreshHolder;
+import com.pds.ui.view.refresh.holder.PullRefreshHolder;
+import com.pds.ui.view.refresh.holder.ZoomPullRefreshHolder;
 import com.pds.ui.view.refresh.view.CircleImageRefreshView;
+import com.pds.ui.view.refresh.view.TwoPointRefreshView;
+import com.pds.ui.view.refresh.view.ZoomRefreshHeaderView;
 
 public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
 
@@ -85,7 +90,13 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
     }
 
     protected View createRefreshView() {
-        return new CircleImageRefreshView(getContext());
+        if (mRefreshType == PULL_TYPE){
+            return new TwoPointRefreshView(getContext());
+        }else if (mRefreshType == ZOOM_TYPE){
+            return new ZoomRefreshHeaderView(getContext());
+        }else {
+            return new CircleImageRefreshView(getContext());
+        }
     }
 
     private void syncRefreshState(boolean refreshing){

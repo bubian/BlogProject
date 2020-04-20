@@ -22,6 +22,7 @@ import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.pds.blog.R;
 import com.pds.blog.base.BaseActivity;
+import com.pds.ui.view.refresh.BaseSwipeRefreshLayout;
 import com.pds.ui.view.refresh.MultipleSwipeRefreshLayout;
 import com.pds.ui.view.refresh.cb.OnRefreshListener;
 import com.pds.ui.view.refresh.view.TwoPointRefreshView;
@@ -77,6 +78,7 @@ public class RefreshActivity extends BaseActivity {
 
             }).start();
         });
+        swipeToRefresh.setRefreshType(BaseSwipeRefreshLayout.PULL_TYPE);
     }
 
     public  boolean isProxy() {
