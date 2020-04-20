@@ -80,6 +80,8 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
     private void addRefreshView(){
         mRefreshView = createRefreshView();
         addView(mRefreshView);
+        checkRefreshHolder();
+        mRefreshViewHolder.init();
     }
 
     protected View createRefreshView() {
@@ -152,10 +154,13 @@ public class MultipleSwipeRefreshLayout extends BaseSwipeRefreshLayout {
         final int childTop = getPaddingTop();
         final int childWidth = width - getPaddingLeft() - getPaddingRight();
         final int childHeight = height - getPaddingTop() - getPaddingBottom();
-        child.layout(childLeft, childTop, childLeft + childWidth, childTop + childHeight);
-
+        child.layout(childLeft, childTop + mRefreshViewHolder.getInitShowHeight(), childLeft + childWidth, childTop + childHeight);
         checkRefreshHolder();
-        mRefreshViewHolder.layoutChild(changed,left,top,right,bottom);
+        if (mRefreshType == PULL_TYPE){
+            mRefreshViewHolder.layoutChild(changed,left,childTop,right,bottom);
+        }else {
+            mRefreshViewHolder.layoutChild(changed,left,top,right,bottom);
+        }
     }
 
     private void onSecondaryPointerUp(MotionEvent ev) {

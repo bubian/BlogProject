@@ -69,7 +69,8 @@ public class RefreshActivity extends BaseActivity {
             new Thread(() -> {
                 try {
                     Thread.sleep(3*1000);
-                    swipeToRefresh.setRefreshing(false);
+                    runOnUiThread(() -> swipeToRefresh.setRefreshing(false));
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

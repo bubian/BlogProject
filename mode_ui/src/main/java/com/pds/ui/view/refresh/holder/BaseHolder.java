@@ -18,7 +18,7 @@ import com.pds.ui.view.refresh.cb.ICover;
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-public abstract class  BaseHolder implements IRefreshTrigger {
+public abstract class  BaseHolder{
 
     Context mContext;
     View mRefreshView;
@@ -37,19 +37,6 @@ public abstract class  BaseHolder implements IRefreshTrigger {
         mRefreshView = refreshView;
     }
 
-    @Override
-    public void onPullDownState(float progress) { }
-
-    @Override
-    public void onRefreshing() { }
-
-    @Override
-    public void onReleaseToRefresh() { }
-
-    @Override
-    public void onComplete() { }
-
-    @Override
     public void init() { }
 
     public void finishSpinner(float overScrollTop) { }
@@ -58,21 +45,15 @@ public abstract class  BaseHolder implements IRefreshTrigger {
 
     public void reset() { }
 
-    public void setParent(BaseSwipeRefreshLayout mParent) {
-        this.mParent = mParent;
-    }
+    public void setParent(BaseSwipeRefreshLayout mParent) { this.mParent = mParent; }
 
     public abstract void measureChildAfter(BaseSwipeRefreshLayout parent, int widthMeasureSpec, int heightMeasureSpec);
 
     public void layoutChild(boolean changed, int left, int top, int right, int bottom){ }
 
-    public boolean onInterceptTouchEvent(MotionEvent ev){
-        return false;
-    }
+    public boolean onInterceptTouchEvent(MotionEvent ev){ return false; }
 
-    public void setRefreshState(boolean mRefreshing){
-
-    }
+    public void setRefreshState(boolean mRefreshing){ }
 
     public void setRefreshing(boolean refreshing){ }
 

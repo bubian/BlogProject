@@ -10,12 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.pds.ui.R;
 import com.pds.ui.view.refresh.FrameAnimDrawable;
-import com.pds.ui.view.refresh.cb.IRefreshTrigger;
+import com.pds.ui.view.refresh.cb.BaseTied;
 
 
 import java.util.Random;
 
-public class TwoPointRefreshView extends FrameLayout implements IRefreshTrigger {
+public class TwoPointRefreshView extends FrameLayout implements BaseTied {
 
     private ImageView loadingView;
     private TextView refreshState;
@@ -42,6 +42,7 @@ public class TwoPointRefreshView extends FrameLayout implements IRefreshTrigger 
         setupViews();
         mRandom = new Random();
     }
+
     private void setupViews() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_medlinker_refresh_header, this);
         loadingView = view.findViewById(R.id.iv_loadingview);
@@ -97,5 +98,25 @@ public class TwoPointRefreshView extends FrameLayout implements IRefreshTrigger 
         if(refreshState.getVisibility() == VISIBLE){
             refreshState.setText(sTIPS[tipsIndex]);
         }
+    }
+
+    @Override
+    public void finishSpinner(float overScrollTop, float slingshotDist, float totalDragDistance) {
+
+    }
+
+    @Override
+    public void moveSpinner(float overScrollTop, float slingshotDist, float totalDragDistance) {
+
+    }
+
+    @Override
+    public void setRefreshState(boolean isRefreshing) {
+
+    }
+
+    @Override
+    public void reset() {
+
     }
 }
