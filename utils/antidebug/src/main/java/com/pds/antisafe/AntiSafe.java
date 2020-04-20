@@ -9,6 +9,7 @@ public class AntiSafe {
 
     public static native void setAntiDebugCallback(IAntiDebugCallback callback);
     public static native void safeCheck();
+    public static native void getString();
 
     /* 通过堆栈判断apk是否被注入，被注入时ZygoteInit对象会被执行两次 */
     public static boolean isInject() {

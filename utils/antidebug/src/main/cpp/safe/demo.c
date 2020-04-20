@@ -50,6 +50,7 @@ void init_getString(){
   puts("Decrypt success");
 }
 
+//获取so加载到内存中的起始地址,这里的代码其实就是读取设备的proc/<uid>/maps中的内容，因为这个maps中是程序运行的内存映像：
 unsigned long getLibAddr(){
   unsigned long ret = 0;
   char name[] = "libdemo.so";
