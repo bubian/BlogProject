@@ -3,6 +3,14 @@ apply plugin: 'aspect'
 //apply plugin: 'webp'
 apply from: '../config.gradle'
 
+apply plugin: 'cn.hikyson.methodcanary.plugin'
+AndroidGodEye {
+    enableMethodTracer true // 方法耗时检测，注意，生产包中关闭它，举例，这里可以这么写：!gradle.startParameter.taskNames.contains("assembleRelease")
+    enableLifecycleTracer true // 页面生命周期检测
+    instrumentationRuleFilePath 'AndroidGodEye-MethodCanary.js'
+    instrumentationRuleIncludeClassNamePrefix(['com.pds.blog'])
+}
+
 //def TEST = 1
 //def ONLINE = 2
 android {
@@ -92,6 +100,11 @@ android {
 //    }
     buildTypes {
         debug {
+            resValue("bool", "android_god_eye_manual_install", "false")
+            resValue("bool", "android_god_eye_need_notification", "true")
+            resValue("integer", "android_god_eye_monitor_port", "5390")
+            resValue("string", "android_god_eye_install_assets_path", "android-godeye-config/install.config")
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -101,6 +114,11 @@ android {
 //        }
 //        release.initWith(releaseWithLog)
         release {
+            resValue("bool", "android_god_eye_manual_install", "false") // 是否手动安装，默认false
+            resValue("bool", "android_god_eye_need_notification", "false") // 是否展示通知栏，默认false，生产环境请关闭
+            resValue("integer", "android_god_eye_monitor_port", "5390") // Monitor端口，默认5390
+            resValue("string", "android_god_eye_install_assets_path", "android-godeye-config/install.config") // 安装配置文件在assets中的路径
+
             minifyEnabled true
             zipAlignEnabled true
             // 移除无用的resource文件
@@ -147,4 +165,20 @@ dependencies {
     implementation("com.google.guava:guava:28.2-android")
 
     implementation 'com.zhy:base-adapter:2.0.0'
+
+
+    // AndroidGodEye(https://github.com/Kyson/AndroidGodEye)
+
+    // 核心模块，必须依赖
+    implementation 'cn.hikyson.godeye:godeye-core:3.4.2'
+    // Debug包配置Debug看板
+    debugImplementation 'cn.hikyson.godeye:godeye-monitor:3.4.2'
+    // From Version 3.4.0, godeye-monitor-no-op has been removed.
+    // releaseImplementation 'cn.hikyson.godeye:godeye-monitor-no-op:3.4.2'
+    // 额外依赖，如果项目使用OkHttp作为网络请求可以用这个库完成网络监控
+    implementation 'cn.hikyson.godeye:godeye-okhttp:3.4.2'
+    // 额外依赖，添加此依赖可以完成Crash监控，如果不依赖则无法监控Crash（安装了也不会生效）
+    implementation 'cn.hikyson.godeye:godeye-xcrash:3.4.2'
+    // 额外依赖，添加此依赖可以监控内存泄漏，如果不依赖则无法监控（安装了也不会生效），如果你也依赖了LeakCanary则无法依赖这个库，否则你项目中的LeakCanary会失效
+    debugImplementation 'cn.hikyson.godeye:godeye-leakcanary:3.4.2'
 }
