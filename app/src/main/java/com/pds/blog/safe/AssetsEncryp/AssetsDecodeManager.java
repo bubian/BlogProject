@@ -4,7 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.pds.blog.BlogApplication;
+import com.pds.blog.app.BlogApplication;
 import com.pds.util.file.FileUtil;
 import com.pds.util.file.ZipUtils;
 import com.pds.util.safe.DesEncryptUtil;

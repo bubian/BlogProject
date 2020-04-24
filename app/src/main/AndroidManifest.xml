@@ -16,7 +16,7 @@
             android:fullBackupContent="true"
             android:appComponentFactory=""
             tools:replace="android:appComponentFactory"
-            android:name=".BlogApplication"
+            android:name=".app.BlogApplication"
             tools:targetApi="m">
         <activity android:name=".refresh.RefreshActivity">
             <intent-filter>

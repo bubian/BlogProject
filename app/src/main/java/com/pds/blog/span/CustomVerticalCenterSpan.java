@@ -9,7 +9,7 @@ import android.text.style.ReplacementSpan;
 
 import androidx.annotation.NonNull;
 
-import com.pds.blog.BlogApplication;
+import com.pds.blog.app.BlogApplication;
 import com.pds.util.unit.UnitConversionUtils;
 
 /**

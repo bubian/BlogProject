@@ -1,12 +1,14 @@
-package com.pds.blog;
+package com.pds.blog.app;
 
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.os.Process;
 import android.util.Log;
 import androidx.multidex.MultiDexApplication;
+
+import com.pds.blog.BuildConfig;
+import com.pds.blog.R;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
