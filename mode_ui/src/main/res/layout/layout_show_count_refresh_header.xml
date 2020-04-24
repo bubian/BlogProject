@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+
+    <com.pds.ui.view.refresh.view.CircleLoadingView
+        android:id="@+id/v_refresh_loading"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:background="#00000000" />
+
+    <TextView
+        android:id="@+id/tv_refresh_loading_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        tools:text="正在刷新"
+        android:textColor="#DADBDB"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_refresh_load_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="已更新0条内容"
+        android:textColor="#0064FF"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+</merge>

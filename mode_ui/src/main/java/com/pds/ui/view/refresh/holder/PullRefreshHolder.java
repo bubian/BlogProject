@@ -29,11 +29,11 @@ public class PullRefreshHolder extends BaseHolder {
     private static final String TAG = "PullRefreshHolder";
     private static final int DEFAULT_CIRCLE_TARGET = 64;
 
-    private boolean mRefreshing;
-    private int mHeaderViewHeight;
-    private boolean mScale;
+    protected boolean mRefreshing;
+    protected int mHeaderViewHeight;
+    protected boolean mScale;
     private float mTotalDragDistance;
-    private View mTarget;
+    protected View mTarget;
     private int mMediumAnimationDuration;
 
     private static final int ANIMATE_TO_TRIGGER_DURATION = 200;
@@ -261,7 +261,7 @@ public class PullRefreshHolder extends BaseHolder {
         }
     }
 
-    private void ensureTarget() {
+    protected void ensureTarget() {
         if (null == mParent){
             return;
         }
@@ -314,7 +314,7 @@ public class PullRefreshHolder extends BaseHolder {
         mRefreshView.startAnimation(mScaleDownToStartAnimation);
     }
 
-    private void animateOffsetToStartPosition( Animation.AnimationListener listener) {
+    protected void animateOffsetToStartPosition( Animation.AnimationListener listener) {
         if (mScale) {
             // Scale the item back down
             startScaleDownReturnToStartAnimation(listener);

@@ -7,24 +7,35 @@ package com.pds.ui.view.refresh.view;
  * Description:
  */
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 import com.pds.ui.R;
+import com.pds.ui.view.refresh.IOSLoadingView;
+import com.pds.ui.view.refresh.cb.BaseTied;
 import com.pds.ui.view.refresh.cb.IRefreshTrigger;
+import com.pds.util.device.DeviceUtil;
+import com.pds.util.unit.UnitConversionUtils;
 
 import java.util.Random;
 
-public class ZoomRefreshHeaderView extends FrameLayout implements IRefreshTrigger {
+public class ZoomRefreshHeaderView extends FrameLayout implements BaseTied {
 
-    private ImageView loadingView;
-    private TextView refreshState;
+    private ImageView mZoomBg;
+    private ImageView mZoomMongolian;
+    private IOSLoadingView mZoomIosView;
+    private TextView mZoomRefreshState;
 
     static final String[] sTIPS = {
             "看前沿医疗资讯，上医联头条", "喜欢我们记得分享哟", "越用越懂你", "别忘了，右上方还有知识库等你发现"
@@ -32,15 +43,9 @@ public class ZoomRefreshHeaderView extends FrameLayout implements IRefreshTrigge
 
     private int tipsIndex;
     private Random mRandom;
-    private IRefreshTrigger mRefreshTrigger;
 
     public ZoomRefreshHeaderView(Context context) {
         this(context, null);
-    }
-
-    public ZoomRefreshHeaderView callback(IRefreshTrigger refreshTrigger){
-        this.mRefreshTrigger = refreshTrigger;
-        return this;
     }
 
     public ZoomRefreshHeaderView(Context context, @Nullable AttributeSet attrs) {
@@ -51,60 +56,74 @@ public class ZoomRefreshHeaderView extends FrameLayout implements IRefreshTrigge
         super(context, attrs, defStyleAttr);
         setupViews();
         mRandom = new Random();
+        ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,UnitConversionUtils.dip2px(getContext(),200));
+        setLayoutParams(params);
     }
     private void setupViews() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.header_zoom, this);
-        view.setMinimumHeight(0);
-        view.setVisibility(GONE);
-        loadingView = view.findViewById(R.id.iv_loadingview);
-        refreshState = view.findViewById(R.id.tv_refresh_state);
-    }
-
-    public void setTipsViewVisible(int visible){
-        refreshState.setVisibility(visible);
-    }
-
-    @Override
-    public void onPullDownState(float progress) {
-        if (null != mRefreshTrigger){
-            mRefreshTrigger.onPullDownState(progress);
-        }
-    }
-
-    @Override
-    public void onRefreshing() {
-        if (null != mRefreshTrigger){
-            mRefreshTrigger.onRefreshing();
-        }
-    }
-
-    @Override
-    public void onReleaseToRefresh() {
-        if (null != mRefreshTrigger){
-            mRefreshTrigger.onReleaseToRefresh();
-        }
-    }
-
-    @Override
-    public void onComplete() {
-        if(refreshState.getVisibility() == VISIBLE){
-            tipsIndex = mRandom.nextInt(sTIPS.length);
-            refreshState.setText(sTIPS[tipsIndex]);
-        }
-
-        if (null != mRefreshTrigger){
-            mRefreshTrigger.onComplete();
-        }
+        mZoomBg = view.findViewById(R.id.zoom_bg);
+        mZoomMongolian = view.findViewById(R.id.zoom_mongolian);
+        mZoomIosView = view.findViewById(R.id.zoom_ios_loading);
+        mZoomRefreshState = view.findViewById(R.id.zoom_state);
     }
 
     @Override
     public void init() {
-        if(refreshState.getVisibility() == VISIBLE){
-            refreshState.setText(sTIPS[tipsIndex]);
+        if(mZoomRefreshState.getVisibility() == VISIBLE){
+            mZoomRefreshState.setText(sTIPS[tipsIndex]);
         }
+    }
 
-        if (null != mRefreshTrigger){
-            mRefreshTrigger.init();
+    private int h(){
+        Resources resources = this.getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        return dm.widthPixels;
+    }
+
+    public void setTipsViewVisible(int visible){
+        mZoomRefreshState.setVisibility(visible);
+    }
+
+    @Override
+    public void onPullDownState(float progress) {
+
+    }
+
+    @Override
+    public void onRefreshing() {
+
+    }
+
+    @Override
+    public void onReleaseToRefresh() {
+
+    }
+
+    @Override
+    public void onComplete() {
+        if(mZoomRefreshState.getVisibility() == VISIBLE){
+            tipsIndex = mRandom.nextInt(sTIPS.length);
+            mZoomRefreshState.setText(sTIPS[tipsIndex]);
         }
+    }
+
+    @Override
+    public void finishSpinner(float overScrollTop, float slingshotDist, float totalDragDistance) {
+
+    }
+
+    @Override
+    public void moveSpinner(float overScrollTop, float slingshotDist, float totalDragDistance) {
+
+    }
+
+    @Override
+    public void setRefreshState(boolean isRefreshing) {
+
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

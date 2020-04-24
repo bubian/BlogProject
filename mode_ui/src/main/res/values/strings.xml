@@ -3,4 +3,10 @@
     <string name="uploading">%s正在发布中，请稍候...</string>
     <string name="upload_success">%s发布成功</string>
     <string name="upload_failed">%s发布失败，已存草稿箱</string>
+
+    <string name="text_pull_down_refresh">下拉刷新</string>
+    <string name="text_refreshing">正在刷新</string>
+    <string name="text_freed_refresh">释放刷新</string>
+    <string name="text_refresh_count">已更新%d条数据</string>
+    <string name="text_refresh_fail">刷新失败</string>
 </resources>

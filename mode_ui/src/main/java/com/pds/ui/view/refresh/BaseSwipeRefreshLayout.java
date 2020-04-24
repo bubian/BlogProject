@@ -64,7 +64,7 @@ public abstract class BaseSwipeRefreshLayout extends ViewGroup implements Nested
     public static final int PULL_TYPE = 2;
     public static final int ZOOM_TYPE = 3;
 
-    protected int mRefreshType = PULL_TYPE;// 1 - 覆盖样式 2 - 下拉样式 3 - 缩放样式
+    protected int mRefreshType = ZOOM_TYPE;// 1 - 覆盖样式 2 - 下拉样式 3 - 缩放样式
 
     public BaseSwipeRefreshLayout(Context context) {
         this(context, null);
