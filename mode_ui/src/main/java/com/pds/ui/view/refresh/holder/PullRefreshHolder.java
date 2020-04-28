@@ -101,7 +101,7 @@ public class PullRefreshHolder extends BaseHolder {
     @Override
     public void setRefreshing(boolean refreshing, boolean notify) {
         if (mRefreshing) {
-            animateOffsetToCorrectPosition( mRefreshListener);
+            animateOffsetToCorrectPosition(mRefreshListener);
         } else {
             startScaleDownAnimation(mRefreshListener);
         }
