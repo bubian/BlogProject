@@ -67,3 +67,5 @@
 
 # for DexGuard only
 # -keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+# X5
+-keep class com.tencent.smtt.**{*;}

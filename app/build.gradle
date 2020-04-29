@@ -154,21 +154,16 @@ dependencies {
     implementation 'com.trello.rxlifecycle3:rxlifecycle-components-preference:3.1.0'
     // If you want to use Android Lifecycle for providers
     implementation 'com.trello.rxlifecycle3:rxlifecycle-android-lifecycle:3.1.0'
-//    implementation 'io.reactivex:rxjava-async-util:0.20.4'
-//    implementation 'rxjava-computation-expressions:0.20.4'
+    //    implementation 'io.reactivex:rxjava-async-util:0.20.4'
+    //    implementation 'rxjava-computation-expressions:0.20.4'
     // https://github.com/JakeWharton/RxBinding/
     implementation 'com.jakewharton.rxbinding3:rxbinding-material:3.1.0'
-
     // Guava是Google的一组核心Java库，其中包括新的集合类型（例如多图和多集），不可变的集合，图形库以及用于并发，I / O，哈希，缓存，基元，字符串等的实用程序！
     // 它广泛用于Google的大多数Java项目中，也被许多其他公司广泛使用。
     // https://github.com/google/guava/
-    implementation("com.google.guava:guava:28.2-android")
-
+    implementation 'com.google.guava:guava:28.2-android'
     implementation 'com.zhy:base-adapter:2.0.0'
-
-
     // AndroidGodEye(https://github.com/Kyson/AndroidGodEye)
-
     // 核心模块，必须依赖
     implementation 'cn.hikyson.godeye:godeye-core:3.4.2'
     // Debug包配置Debug看板
@@ -181,4 +176,5 @@ dependencies {
     implementation 'cn.hikyson.godeye:godeye-xcrash:3.4.2'
     // 额外依赖，添加此依赖可以监控内存泄漏，如果不依赖则无法监控（安装了也不会生效），如果你也依赖了LeakCanary则无法依赖这个库，否则你项目中的LeakCanary会失效
     debugImplementation 'cn.hikyson.godeye:godeye-leakcanary:3.4.2'
+    implementation files('libs/tbs_sdk_thirdapp_v4.3.0.3.jar')
 }
