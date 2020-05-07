@@ -29,6 +29,7 @@ include':utils:antidebug'
 // XPosed
 include ':xposed:xposed_restart'
 include ':xposed:xposed_hook'
+include ':xposed:dumpdex'
 // scene
 //include ':lib_scene:scene'
 //include ':lib_scene:scene_ui'
