@@ -109,8 +109,8 @@ public class NavigationView extends FrameLayout {
             mRightView.setVisibility(VISIBLE);
         }
         ViewGroup viewGroup = (ViewGroup) mInflater.inflate(R.layout.hb_navgation_item, direct.equals(Direct.LEFT) ? mLeftView : mRightView, false);
-        ImageView iconView = viewGroup.findViewById(R.id.hybrid_icon);
-        TextView textView = viewGroup.findViewById(R.id.tx);
+        ImageView iconView = viewGroup.findViewById(R.id.hb_icon);
+        TextView textView = viewGroup.findViewById(R.id.hb_tx);
         textView.setTextColor(textColor);
         if (icon instanceof String) {
             GlideUtil.load(getContext(), ((String) icon)).apply(new RequestOptions().transform(new CircleCrop())).into(iconView);

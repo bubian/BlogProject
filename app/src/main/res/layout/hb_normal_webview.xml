@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/hybrid_navgation_height"
-    android:background="@color/hwpush_white"
+    android:layout_height="@dimen/hb_navigation_height"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingLeft="2dp"
@@ -25,7 +24,6 @@
         android:paddingRight="10dp"
         android:gravity="center"
         android:text="关闭"
-        android:textColor="@color/gray_primary_dark"
         android:textSize="13sp" />
 
     <TextView
@@ -49,6 +47,5 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:padding="10dp"
-        android:src="@drawable/icon_more_pressed"
         android:visibility="gone" />
 </LinearLayout>

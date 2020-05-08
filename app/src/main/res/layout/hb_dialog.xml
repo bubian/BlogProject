@@ -16,5 +16,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|top"
         android:padding="10dp"
-        android:src="@drawable/hb_ic_close_selector" />
+        android:src="@drawable/hb_close_selector" />
 </FrameLayout>

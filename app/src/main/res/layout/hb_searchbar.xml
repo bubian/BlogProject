@@ -32,7 +32,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="4dp"
             android:scaleType="centerInside"
-            android:src="@drawable/hb_icon_search_blue" />
+            android:src="@drawable/hb_search_blue" />
 
         <EditText
             android:id="@+id/hb_search_bar_center"

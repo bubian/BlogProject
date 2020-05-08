@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
-    android:background="@color/white"
+    android:background="@android:color/white"
     android:minHeight="195dp"
     android:orientation="vertical"
     android:paddingBottom="20dp"
@@ -12,17 +12,14 @@
     android:paddingStart="16dp"
     android:paddingTop="16dp">
 
-    <com.medlinker.base.widget.SafeEditText
+    <EditText
         android:id="@+id/et_comment"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@null"
         android:gravity="top"
-        android:hint="@string/hint_say_something"
         android:imeOptions="actionSend"
-        android:textColor="@color/c_454554"
         android:textColorHint="#999999"
-        android:textCursorDrawable="@drawable/msg_chat_input_cursor"
         android:textSize="17sp"
         android:layout_marginEnd="8dp"/>
 
@@ -43,7 +40,7 @@
       android:paddingBottom="8dp"
       android:layout_gravity="end"
       android:text="发送"
-      android:textColor="@color/c_007eff"
+      android:textColor="#007eff"
       android:textSize="16sp" />
 
 </LinearLayout>
