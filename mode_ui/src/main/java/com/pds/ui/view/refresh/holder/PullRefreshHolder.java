@@ -31,6 +31,7 @@ public class PullRefreshHolder extends BaseHolder {
 
     protected boolean mRefreshing;
     protected int mHeaderViewHeight;
+    protected int mOriginalViewHeight;
     protected boolean mScale;
     private float mTotalDragDistance;
     protected View mTarget;
@@ -168,6 +169,9 @@ public class PullRefreshHolder extends BaseHolder {
     @Override
     public void measureChildAfter(BaseSwipeRefreshLayout parent, int widthMeasureSpec, int heightMeasureSpec) {
         mParent = parent;
+        if (mOriginalViewHeight <= 0){
+            mOriginalViewHeight = mRefreshView.getMeasuredHeight();
+        }
         updateBaseValues(mRefreshView.getMeasuredHeight());
     }
 
@@ -180,7 +184,7 @@ public class PullRefreshHolder extends BaseHolder {
         final int width = mParent.getMeasuredWidth();
         if(mRefreshView != null){
             int refreshWidth = mRefreshView.getMeasuredWidth();
-            mRefreshView.layout((width/2 - refreshWidth/2), top - mHeaderViewHeight, (width/2 + refreshWidth/2), top);
+            mRefreshView.layout((width/2 - refreshWidth/2), top - mOriginalViewHeight, (width/2 + refreshWidth/2), top);
         }
     }
 

@@ -52,10 +52,6 @@ public class ZoomPullRefreshHolder extends PullRefreshHolder{
     @Override
     public void measureChildAfter(BaseSwipeRefreshLayout parent, int widthMeasureSpec, int heightMeasureSpec) {
         super.measureChildAfter(parent, widthMeasureSpec, heightMeasureSpec);
-        if (mOriginalViewHeight <= 0){
-            mOriginalViewHeight = mRefreshView.getMeasuredHeight();
-        }
-
     }
 
     @Override
