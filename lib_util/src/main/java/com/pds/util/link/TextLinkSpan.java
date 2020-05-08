@@ -4,7 +4,7 @@ import android.text.TextPaint;
 import android.text.style.URLSpan;
 import android.view.View;
 
-import com.pds.util.ui.ViewUtil;
+import com.pds.util.ui.ViewUtils;
 
 /**
  * @author <a href="mailto:ganyu@medlinker.com">ganyu</a>
@@ -24,7 +24,7 @@ public class TextLinkSpan extends URLSpan {
 
     @Override
     public void onClick(View widget) {
-        if (ViewUtil.isFastDoubleClick()) {
+        if (ViewUtils.isFastDoubleClick()) {
             return;
         }
 //        ModuleBaseManager.getInstance().getModuleService().toWebDefaultActivity(widget.getContext(), mTitle, getURL());

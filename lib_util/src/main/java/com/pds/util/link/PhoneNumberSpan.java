@@ -3,7 +3,7 @@ package com.pds.util.link;
 import android.text.TextPaint;
 import android.view.View;
 
-import com.pds.util.ui.ViewUtil;
+import com.pds.util.ui.ViewUtils;
 
 import java.util.regex.Pattern;
 
@@ -28,7 +28,7 @@ public class PhoneNumberSpan extends android.text.style.ClickableSpan {
 
     @Override
     public void onClick(View widget) {
-        if (ViewUtil.isFastDoubleClick()) {
+        if (ViewUtils.isFastDoubleClick()) {
             return;
         }
     }

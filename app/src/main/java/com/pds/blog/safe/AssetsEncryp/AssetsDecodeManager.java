@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.pds.blog.app.BlogApplication;
-import com.pds.util.file.FileUtil;
+import com.pds.util.file.FileUtils;
 import com.pds.util.file.ZipUtils;
 import com.pds.util.safe.DesEncryptUtil;
 import com.pds.util.safe.MD5Util;
@@ -122,7 +122,7 @@ public class AssetsDecodeManager {
             Log.d(TAG, "start decode write md5 file");
             writeMD5File(md5Src);
             Log.d(TAG, "start decode delete file");
-            FileUtil.deleteFile(decodeZip);
+            FileUtils.deleteFile(decodeZip);
         } finally {
             try {
                 if (null != inputStream) {

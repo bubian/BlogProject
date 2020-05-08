@@ -7,7 +7,7 @@ import android.os.CountDownTimer;
 import android.widget.TextView;
 
 import com.pds.util.R;
-import com.pds.util.RegexUtil;
+import com.pds.util.regex.RegexUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,7 +19,7 @@ import java.util.TimeZone;
 /**
  * Created by Terry on 15/10/28.
  */
-public class TimeUtil {
+public class TimeUtils {
 
 
     /*

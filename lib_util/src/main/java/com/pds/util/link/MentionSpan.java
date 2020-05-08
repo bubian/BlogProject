@@ -5,7 +5,7 @@ import android.graphics.Paint;
 import android.text.TextPaint;
 import android.view.View;
 
-import com.pds.util.ui.ViewUtil;
+import com.pds.util.ui.ViewUtils;
 
 /**
  * @author <a href="mailto:yangjiantao@medlinker.net">Jiantao.Yang</a>
@@ -36,7 +36,7 @@ public class MentionSpan extends android.text.style.ClickableSpan {
     }
 
     public void onClick(View widget) {
-        if (ViewUtil.isFastDoubleClick()) {
+        if (ViewUtils.isFastDoubleClick()) {
             return;
         }
         // FIXME: 2016/3/1 这里可处理点击事件

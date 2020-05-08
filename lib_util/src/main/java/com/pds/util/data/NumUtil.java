@@ -2,8 +2,6 @@ package com.pds.util.data;/**
  * Created by kuiwen on 2015/10/21.
  */
 
-import com.pds.util.StringUtils;
-
 import java.text.DecimalFormat;
 
 /**
