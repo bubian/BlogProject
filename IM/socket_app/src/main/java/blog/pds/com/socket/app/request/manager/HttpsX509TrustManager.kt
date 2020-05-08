@@ -1,8 +1,7 @@
 package blog.pds.com.socket.app.request.manager
 
-import blog.pds.com.socket.app.common.base.BaseApplication
+import blog.pds.com.socket.app.SocketManager
 import java.io.IOException
-import java.lang.Exception
 import java.math.BigInteger
 import java.security.KeyStore
 import java.security.KeyStoreException
@@ -59,7 +58,7 @@ class HttpsX509TrustManager : X509TrustManager {
 
         try {
             val certificateFactory = CertificateFactory.getInstance("X.509")
-            val inputStream = BaseApplication.app().assets.open("baidu.cer")
+            val inputStream = SocketManager.application?.assets?.open("baidu.cer")
             val clientCertificate = certificateFactory.generateCertificate(inputStream) as X509Certificate
             clientEncoded = BigInteger(1, clientCertificate.publicKey.encoded).toString(16)
             clientSubject = clientCertificate.subjectDN.name

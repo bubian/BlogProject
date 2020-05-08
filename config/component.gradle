@@ -2,4 +2,8 @@ ext {
     debug = [
         socket_app: true,
     ]
+
+    id = [
+            socket_app: "blog.pds.com.socket.app"
+    ]
 }

@@ -1,7 +1,6 @@
-package blog.pds.com.socket.app.common.base
+package blog.pds.com.socket.app
 
 import androidx.multidex.MultiDexApplication
-import blog.pds.com.socket.control.config.ApiManager
 
 /**
  * @author: pengdaosong
@@ -9,15 +8,15 @@ import blog.pds.com.socket.control.config.ApiManager
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-class BaseApplication : MultiDexApplication(){
+class ModuleApplication : MultiDexApplication(){
 
     companion object{
-        private lateinit var application: BaseApplication
+        private lateinit var application: ModuleApplication
 
         const val ip = "192.168.2.2"
         const val port = 6666
 
-        fun app(): BaseApplication {
+        fun app(): ModuleApplication {
             return application
         }
     }
@@ -25,10 +24,7 @@ class BaseApplication : MultiDexApplication(){
     override fun onCreate() {
         super.onCreate()
         application = this
-        ApiManager.ipAndPort(
-            ip,
-            port
-        )
+        SocketManager.init(this)
     }
 
 }

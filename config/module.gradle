@@ -1,14 +1,16 @@
 def ext = rootProject.ext
-def debug = ext.debug["socket_app"]
+def module_name = project.name
+def debug = ext.debug[module_name]
 if (debug){
     apply plugin: 'com.android.application'
 }else {
     apply plugin: 'com.android.library'
 }
-
+def id = ext.id[module_name]
 android {
     compileSdkVersion ext.android.compileSdkVersion
     defaultConfig {
+        applicationId id
         minSdkVersion ext.android.minSdkVersion
         targetSdkVersion ext.android.targetSdkVersion
         versionCode ext.android.versionCode
@@ -30,6 +32,9 @@ android {
     sourceSets {
         main {
             if (debug){
+                java {
+                    srcDir "src/debug/$id"
+                }
                 manifest.srcFile 'src/debug/AndroidManifest.xml'
             }else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
