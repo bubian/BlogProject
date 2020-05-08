@@ -1,0 +1,2 @@
+apply from: "config/component.gradle"
+apply from: "config/base.gradle"

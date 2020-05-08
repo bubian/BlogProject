@@ -1,0 +1,5 @@
+ext {
+    debug = [
+        socket_app: true,
+    ]
+}
