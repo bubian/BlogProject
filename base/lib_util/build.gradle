@@ -1,9 +1,9 @@
 apply plugin: 'com.android.library'
-apply from: '../config/android.gradle'
+apply from: '../../config/android.gradle'
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation project(path: ':sdk_third')
+    implementation project(path: ':base:sdk_third')
     //    api 'com.belerweb:pinyin4j:2.5.0'
     //    implementation files('libs/pinyinsearch.jar')
     implementation files('libs/jpinyin-1.0.jar')

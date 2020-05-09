@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply from: '../config/android.gradle'
+apply from: '../../config/android.gradle'
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -9,7 +9,7 @@ dependencies {
         transitive = true
     }
     //工程lib
-    implementation project(':lib_util')
+    implementation project(':base:lib_util')
 
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha02'
     // For control over item selection of both touch and mouse driven selection

@@ -7,16 +7,16 @@ include ':IM:socket_data'
 // app
 include ':app'
 // common
-include ':lib_package'
-include ':sdk_third'
-include ':mode_ui'
-include ':lib_util'
-include ':lib_net'
+include ':base:lib_package'
+include ':base:sdk_third'
+include ':base:mode_ui'
+include ':base:lib_util'
+include ':base:lib_net'
 // netty
 include ':nettyim'
 // aspect
-include ':lib_aspect_annotations'
-include ':lib_aspect_runtime'
+include ':plugin:lib_aspect_annotations'
+include ':plugin:lib_aspect_runtime'
 include ':plugin:plugin_aspect'
 // webP
 include ':plugin:plugin_webP'
@@ -32,9 +32,3 @@ include ':xposed:xposed_hook'
 include ':xposed:dumpdex'
 
 include ':study:lib_java_study'
-// scene
-//include ':lib_scene:scene'
-//include ':lib_scene:scene_ui'
-//include ':lib_scene:scene_shared_element_animation'
-//include ':lib_scene:scene_ktx'
-//include ':lib_scene:demo'

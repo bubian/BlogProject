@@ -1,4 +1,4 @@
-apply from: "../config/module.gradle"
+apply from: "../../config/module.gradle"
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.anko:anko-commons:0.10.4"
