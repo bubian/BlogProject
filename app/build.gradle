@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply from: "../config/module.gradle"
 apply plugin: 'aspect'
 //apply plugin: 'webp'
 apply from: '../config.gradle'
@@ -11,16 +11,8 @@ AndroidGodEye {
     instrumentationRuleIncludeClassNamePrefix(['com.pds.blog'])
 }
 
-//def TEST = 1
-//def ONLINE = 2
 android {
-    compileSdkVersion 28
     defaultConfig {
-        applicationId "com.pds.blog"
-        minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
@@ -55,11 +47,6 @@ android {
 //        incremental true
 //    }
 
-    //指定jdk版本
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 
     defaultConfig {
         //只支持中文

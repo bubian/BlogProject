@@ -1,37 +1,32 @@
+def PROJECT_NAME = "BlogProject"
+def APP = 'com.android.application'
+def LIB =  'com.android.library'
+
+String ROOT_DIR = System.getProperty("user.dir")
+def project_dir = ROOT_DIR
+
+if (!ROOT_DIR.endsWith(PROJECT_NAME)){
+   int index = ROOT_DIR.lastIndexOf (PROJECT_NAME)
+    project_dir = ROOT_DIR.substring(0,index + PROJECT_NAME.length())
+}
+
 def ext = rootProject.ext
 def module_name = project.name
 def debug = ext.debug[module_name]
-if (debug){
-    apply plugin: 'com.android.application'
+def app = "app" == project.name
+
+if (debug || app){
+    apply plugin: APP
 }else {
-    apply plugin: 'com.android.library'
+    apply plugin: LIB
 }
+
+apply from: "$project_dir/config/android.gradle"
 def id = ext.id[module_name]
 android {
-    compileSdkVersion ext.android.compileSdkVersion
-    defaultConfig {
-        applicationId id
-        minSdkVersion ext.android.minSdkVersion
-        targetSdkVersion ext.android.targetSdkVersion
-        versionCode ext.android.versionCode
-        versionName ext.android.versionName
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
     sourceSets {
         main {
-            if (debug){
+            if (debug && !app){
                 java {
                     srcDir "src/debug/$id"
                 }
@@ -39,6 +34,28 @@ android {
             }else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             }
+        }
+    }
+}
+
+/**
+ * autoBuildJar:true,module构建过程自动生成jar并上传到maven仓库(目前暂时上传到本地maven)；false，手动生成jar和上传
+ */
+apply from: "$project_dir/config/jar.gradle"
+def autoBuildJar = false
+if(autoBuildJar && !debug){
+    println('module auto build jar')
+    def hasApp = project.plugins.hasPlugin(APP)
+    def hasLib = project.plugins.hasPlugin(LIB)
+    if (!hasApp && !hasLib) {
+        throw new IllegalStateException("'android' or 'android-library' plugin required.")
+    }
+    def vs = project.android.libraryVariants
+    vs.all {v ->
+        JavaCompile javaCompile = v.javaCompile
+        javaCompile.doLast {
+//            autoMakeJar.exclude()
+//            ((Upload)uploadArchives).execute()
         }
     }
 }

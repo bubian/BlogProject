@@ -1,5 +1,5 @@
-//使用gradle打包指定包名和类的jar
 
+//使用gradle打包指定包名和类的jar
 task clearJar(type: Delete) {
     delete 'libs/sdk.jar'
 }

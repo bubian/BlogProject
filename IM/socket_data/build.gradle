@@ -1,25 +1,6 @@
-apply plugin: 'com.android.library'
+apply from: "../../config/module.gradle"
 apply from: "../../config/kotlin.gradle"
 apply plugin: 'realm-android'
-
-android {
-    compileSdkVersion 28
-
-
-    defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-        }
-    }
-
-}
 
 dependencies {
     // realm数据库查看--chrome://inspect/#devices
@@ -29,7 +10,4 @@ dependencies {
     api files('libs/protobuf-java-3.9.1.jar')
     implementation files('libs/protobuf-java-format-1.4.jar')
     implementation files('libs/protobuf-java-util-3.9.1.jar')
-}
-repositories {
-    mavenCentral()
 }
