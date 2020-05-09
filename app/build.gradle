@@ -1,13 +1,12 @@
 apply from: "../config/module.gradle"
 apply plugin: 'aspect'
 //apply plugin: 'webp'
-apply from: '../config.gradle'
 
 apply plugin: 'cn.hikyson.methodcanary.plugin'
 AndroidGodEye {
     enableMethodTracer true // 方法耗时检测，注意，生产包中关闭它，举例，这里可以这么写：!gradle.startParameter.taskNames.contains("assembleRelease")
     enableLifecycleTracer true // 页面生命周期检测
-    instrumentationRuleFilePath 'AndroidGodEye-MethodCanary.js'
+    instrumentationRuleFilePath 'config/other/AndroidGodEye-MethodCanary.js'
     instrumentationRuleIncludeClassNamePrefix(['com.pds.blog'])
 }
 

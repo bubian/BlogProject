@@ -12,10 +12,10 @@ if (!ROOT_DIR.endsWith(PROJECT_NAME)){
 
 def ext = rootProject.ext
 def module_name = project.name
-def debug = ext.debug[module_name]
+def isDebug = ext.debug[module_name]
 def app = "app" == project.name
 
-if (debug || app){
+if (isDebug || app){
     apply plugin: APP
 }else {
     apply plugin: LIB
@@ -26,7 +26,7 @@ def id = ext.id[module_name]
 android {
     sourceSets {
         main {
-            if (debug && !app){
+            if (isDebug && !app){
                 java {
                     srcDir "src/debug/$id"
                 }
@@ -34,6 +34,41 @@ android {
             }else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             }
+        }
+    }
+
+    signingConfigs {
+        release {
+            if (!isDebug && !app){
+                return
+            }
+            // storeFile 出于安全考虑，将签名信息放到文件中。
+            File propFile = file('$project_dir/config/other/signing.properties')
+            if (propFile.exists()) {
+                Properties props = new Properties()
+                props.load(new FileInputStream(propFile))
+                if (props.containsKey('STORE_FILE') && props.containsKey('STORE_PASSWORD') &&
+                        props.containsKey('KEY_ALIAS') && props.containsKey('KEY_PASSWORD')) {
+                    android.signingConfigs.release.storeFile = file(props['STORE_FILE'])
+                    android.signingConfigs.release.storePassword = props['STORE_PASSWORD']
+                    android.signingConfigs.release.keyAlias = props['KEY_ALIAS']
+                    android.signingConfigs.release.keyPassword = props['KEY_PASSWORD']
+                } else {
+                    android.buildTypes.release.signingConfig = null
+                }
+            } else {
+                android.buildTypes.release.signingConfig = null
+            }
+        }
+
+        debug {
+            if (!isDebug && !app){
+                return
+            }
+            storeFile file("$project_dir/config/other/pds.keystore")
+            keyAlias 'pds'
+            keyPassword 'pds123'
+            storePassword 'pds123'
         }
     }
 }

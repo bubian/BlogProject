@@ -1,2 +1,11 @@
 apply from: "config/component.gradle"
 apply from: "config/base.gradle"
+
+//aspectjx白名单配置
+//aspectjx {
+//    //includes the libs that you want to weave
+//    includeJarFilter 'universal-image-loader', 'AspectJX-Demo/library'
+//
+//    //excludes the libs that you don't want to weave
+//    excludeJarFilter 'universal-image-loader'
+//}
