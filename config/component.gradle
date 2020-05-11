@@ -5,6 +5,7 @@ ext {
         fmod: true,
         bzip2: true,
         ndkStudy: true,
+        facerecognition: true,
     ]
 
     id = [
@@ -13,6 +14,7 @@ ext {
             nettyim: "com.pds.netty",
             fmod: "com.pds.fmod",
             bzip2: "com.pds.bzip2",
-            ndkStudy: "com.pds.ndk"
+            ndkStudy: "com.pds.ndk",
+            facerecognition: "com.pds.facerecognition",
     ]
 }
