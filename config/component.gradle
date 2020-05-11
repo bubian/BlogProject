@@ -4,6 +4,7 @@ ext {
         nettyim: true,
         fmod: true,
         bzip2: true,
+        ndkStudy: true,
     ]
 
     id = [
@@ -11,6 +12,7 @@ ext {
             app: "com.pds.blog",
             nettyim: "com.pds.netty",
             fmod: "com.pds.fmod",
-            bzip2: "com.pds.bzip2"
+            bzip2: "com.pds.bzip2",
+            ndkStudy: "com.pds.ndk"
     ]
 }

@@ -35,3 +35,4 @@ include ':study:lib_java_study'
 // ndk
 include ':ndk:fmod'
 include ':ndk:bzip2'
+include ':ndk:ndkStudy'
