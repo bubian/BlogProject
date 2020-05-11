@@ -10,6 +10,8 @@ ext {
         ffmpeg: true,
         gifmerger: true,
         h264rtmp2: true,
+        idcardrecognitioon: true,
+        webrtc: true,
     ]
 
     id = [
@@ -24,5 +26,7 @@ ext {
             ffmpeg: "com.pds.ffmpeg",
             gifmerger: "com.pds.gifmerger",
             h264rtmp2: "com.pds.h264rtmp2",
+            idcardrecognitioon: "com.pds.idcardrecognitioon",
+            webrtc: "com.pds.webrtc",
     ]
 }
