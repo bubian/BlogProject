@@ -29,7 +29,7 @@ include':utils:antidebug'
 // XPosed
 include ':xposed:xposed_restart'
 include ':xposed:xposed_hook'
-include ':xposed:dumpdex'
+//include ':xposed:dumpdex'
 // study
 include ':study:lib_java_study'
 // ndk
