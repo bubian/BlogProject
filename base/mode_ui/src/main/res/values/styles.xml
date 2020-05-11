@@ -44,4 +44,9 @@
         <attr name="crpv_progress_color" format="color"/>
         <attr name="crpv_ring_angle" format="integer"/>
     </declare-styleable>
+
+    <style name="dialog_animation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/anim_push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_push_bottom_out</item>
+    </style>
 </resources>
