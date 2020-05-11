@@ -1,7 +1,14 @@
 # For more information about using CMake with Android Studio, read the
 # documentation: https://d.android.com/studio/projects/add-native-code.html
 cmake_minimum_required(VERSION 3.4.1)
-
+# 解决fatal error: 'asm/hwcap.h' file not found
+if(${ANDROID_ABI} STREQUAL "armeabi-v7a")
+    include_directories(${ANDROID_SYSROOT}/usr/include/arm-linux-androidabi)
+elseif(${ANDROID_ABI} STREQUAL "arm64-v8a")
+    include_directories(${ANDROID_SYSROOT}/usr/include/aarch64-linux-android)
+else()
+    include_directories(${ANDROID_SYSROOT}/usr/include/arm-linux-androidabi)
+endif()
 add_library( # Sets the name of the library.
              nativeDump
 
@@ -31,11 +38,3 @@ target_link_libraries( # Specifies the target library.
                        # included in the NDK.
                        ${log-lib} )
 
-
-if(${ANDROID_ABI} STREQUAL "armeabi-v7a")
-    include_directories(${ANDROID_SYSROOT}/usr/include/arm-linux-androidabi)
-elseif(${ANDROID_ABI} STREQUAL "arm64-v8a")
-    include_directories(${ANDROID_SYSROOT}/usr/include/aarch64-linux-android)
-else()
-    include_directories(${ANDROID_SYSROOT}/usr/include/arm-linux-androidabi)
-endif()

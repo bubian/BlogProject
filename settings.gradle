@@ -30,5 +30,7 @@ include':utils:antidebug'
 include ':xposed:xposed_restart'
 include ':xposed:xposed_hook'
 include ':xposed:dumpdex'
-
+// study
 include ':study:lib_java_study'
+// ndk
+include ':ndk:fmod'

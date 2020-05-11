@@ -1,6 +1,9 @@
 def ext = rootProject.ext
 def module_name = project.name
 def id = ext.id[module_name]
+String ROOT_DIR = System.getProperty("user.dir")
+def cMakeListPath = ROOT_DIR + project.path.replaceAll(':','/') + '/CMakeLists.txt'
+def hasCMakeListFile = new File(cMakeListPath).exists()
 android {
     compileSdkVersion ext.android.compileSdkVersion
     defaultConfig {
@@ -9,6 +12,32 @@ android {
         targetSdkVersion ext.android.targetSdkVersion
         versionCode ext.android.versionCode
         versionName ext.android.versionName
+        if (hasCMakeListFile){
+            externalNativeBuild {
+                cmake {
+                    cppFlags "-frtti -fexceptions"
+                }
+            }
+
+            ndk{
+                moduleName "app"
+                abiFilters "armeabi-v7a","x86" //指定平台
+                cFlags "-DANDROID_NDK"
+            }
+        }
+    }
+
+    if (hasCMakeListFile){
+        sourceSets {
+            main {
+                jniLibs.srcDirs = ['libs']
+            }
+        }
+        externalNativeBuild {
+            cmake {
+                path "CMakeLists.txt"
+            }
+        }
     }
 
     buildTypes {

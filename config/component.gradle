@@ -2,11 +2,13 @@ ext {
     debug = [
         socket_app: true,
         nettyim: true,
+        fmod: true,
     ]
 
     id = [
             socket_app: "blog.pds.com.socket.app",
             app: "com.pds.blog",
-            nettyim: "com.pds.netty"
+            nettyim: "com.pds.netty",
+            fmod: "com.pds.fmod"
     ]
 }
