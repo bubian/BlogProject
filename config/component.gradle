@@ -9,6 +9,7 @@ ext {
         gif: true,
         ffmpeg: true,
         gifmerger: true,
+        h264rtmp2: true,
     ]
 
     id = [
@@ -22,5 +23,6 @@ ext {
             gif: "com.pds.gif",
             ffmpeg: "com.pds.ffmpeg",
             gifmerger: "com.pds.gifmerger",
+            h264rtmp2: "com.pds.h264rtmp2",
     ]
 }
