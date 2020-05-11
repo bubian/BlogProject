@@ -3,12 +3,14 @@ ext {
         socket_app: true,
         nettyim: true,
         fmod: true,
+        bzip2: true,
     ]
 
     id = [
             socket_app: "blog.pds.com.socket.app",
             app: "com.pds.blog",
             nettyim: "com.pds.netty",
-            fmod: "com.pds.fmod"
+            fmod: "com.pds.fmod",
+            bzip2: "com.pds.bzip2"
     ]
 }

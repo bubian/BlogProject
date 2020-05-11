@@ -34,3 +34,4 @@ include ':xposed:dumpdex'
 include ':study:lib_java_study'
 // ndk
 include ':ndk:fmod'
+include ':ndk:bzip2'
