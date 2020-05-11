@@ -9,7 +9,7 @@
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, TAG, __VA_ARGS__)
 
 using  namespace FMOD;
-JNIEXPORT void JNICALL Java_com_pds_fmod_MainActivity_fix(JNIEnv *env, jobject job, jstring path, jint mode){
+extern "C" JNIEXPORT void JNICALL Java_com_pds_fmod_MainActivity_fix(JNIEnv *env, jobject job, jstring path, jint mode){
 
   LOGI("start fmod");
   const char *cPath = env->GetStringUTFChars(path,NULL);
