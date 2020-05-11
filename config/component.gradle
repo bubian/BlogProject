@@ -6,6 +6,7 @@ ext {
         bzip2: true,
         ndkStudy: true,
         facerecognition: true,
+        gif: true,
     ]
 
     id = [
@@ -16,5 +17,6 @@ ext {
             bzip2: "com.pds.bzip2",
             ndkStudy: "com.pds.ndk",
             facerecognition: "com.pds.facerecognition",
+            gif: "com.pds.gif",
     ]
 }
