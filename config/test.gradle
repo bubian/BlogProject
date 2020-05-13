@@ -1,13 +1,9 @@
-android {
-    testOptions {
-        unitTests {
-            // 如果您的测试依赖于资源 默认情况下，Android Studio 3.4 及更高版本提供编译版本的资源。
-            includeAndroidResources = false
-        }
-    }
-}
+//参考：https://developer.android.google.cn/studio/test
+//参考：https://developer.android.google.cn/training/testing/#UIAutomator
 
+// apply from: "$project_dir/config/test_android.gradle"
 // 不同工程需要的测试依赖包不同，为了减少构建时间，可以在自己的module依赖自己需要的包，不必在这里全面引入
+
 dependencies {
     // test
     testImplementation 'junit:junit:4.12'

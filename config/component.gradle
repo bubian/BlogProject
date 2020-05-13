@@ -1,6 +1,5 @@
 ext {
-    project_name = "BlogProject"
-    // 默认 - lib  1 - debug  2 - java lib
+    // 默认 - lib  1 - debug  2 - java lib 3 - test
     module_type = [
             app               : 1,
             socket_app        : 1,

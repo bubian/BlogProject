@@ -1,17 +1,17 @@
-def ext = rootProject.ext
+//def ext = rootProject.ext
+//String ROOT_DIR = System.getProperty("user.dir")
 def module_name = project.name
-def id = ext.id[module_name]
-String ROOT_DIR = System.getProperty("user.dir")
-def cMakeListPath = ROOT_DIR + project.path.replaceAll(':','/') + '/CMakeLists.txt'
+def id = id[module_name]
+def cMakeListPath = "$rootDir + ${project.path.replaceAll(':','/')} + /CMakeLists.txt"
 def hasCMakeListFile = new File(cMakeListPath).exists()
 android {
-    compileSdkVersion ext.android.compileSdkVersion
+    compileSdkVersion app.compileSdkVersion
     defaultConfig {
         if (id) applicationId id
-        minSdkVersion ext.android.minSdkVersion
-        targetSdkVersion ext.android.targetSdkVersion
-        versionCode ext.android.versionCode
-        versionName ext.android.versionName
+        minSdkVersion app.minSdkVersion
+        targetSdkVersion app.targetSdkVersion
+        versionCode app.versionCode
+        versionName app.versionName
         if (hasCMakeListFile){
             externalNativeBuild {
                 cmake {

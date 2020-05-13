@@ -1,26 +1,12 @@
-def PROJECT_NAME = rootProject.ext.project_name
-String ROOT_DIR = System.getProperty("user.dir")
-def project_dir = ROOT_DIR
-if (!ROOT_DIR.endsWith(PROJECT_NAME)){
-   int index = ROOT_DIR.lastIndexOf (PROJECT_NAME)
-    project_dir = ROOT_DIR.substring(0,index + PROJECT_NAME.length())
-}
-
-def ext = rootProject.ext
-def module_name = project.name
-def module_type = ext.module_type[module_name]
-
-def APP = 'com.android.application'
-def LIB =  'com.android.library'
-
+def module_type = module_type[project.name]
 if(1 == module_type){
-    apply plugin: APP
-    apply from: "$project_dir/config/app.gradle"
+    apply from: "$rootDir/config/app.gradle"
 }else if(2 == module_type){
-    apply from: "$project_dir/config/java.gradle"
+    apply from: "$rootDir/config/java.gradle"
+}else if (3 == module_type){
+    apply plugin: 'com.android.test'
 }else{
-    apply plugin: LIB
-    apply from: "$project_dir/config/lib.gradle"
+    apply from: "$rootDir/config/lib.gradle"
 }
 
 
