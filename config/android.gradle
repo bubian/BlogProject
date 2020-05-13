@@ -25,6 +25,7 @@ android {
                 cFlags "-DANDROID_NDK"
             }
         }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     if (hasCMakeListFile){
@@ -37,13 +38,6 @@ android {
             cmake {
                 path "CMakeLists.txt"
             }
-        }
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 

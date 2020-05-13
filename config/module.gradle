@@ -22,15 +22,13 @@ if (isDebug || app){
 }
 
 apply from: "$project_dir/config/android.gradle"
-def id = ext.id[module_name]
 android {
     sourceSets {
         main {
             if (isDebug && !app){
-                java {
-                    srcDir "src/debug/$id"
-                }
+                java.srcDirs =  ['src/debug/java','src/main/java']
                 manifest.srcFile 'src/debug/AndroidManifest.xml'
+                res.srcDirs = ['src/main/res','src/debug/res']
             }else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             }
@@ -69,6 +67,29 @@ android {
             keyAlias 'pds'
             keyPassword 'pds123'
             storePassword 'pds123'
+        }
+    }
+
+    buildTypes {
+        if(!isDebug){
+            return
+        }
+        debug {
+            minifyEnabled false
+            zipAlignEnabled true
+            debuggable true
+            shrinkResources false // 移除无用的resource文件
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            debuggable false
+            minifyEnabled true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }

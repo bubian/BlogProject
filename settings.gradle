@@ -1,24 +1,23 @@
-// socket
+// IM
 include ':IM:socket_control'
-include 'utils:lib_res_guard'
 include ':IM:socket_app'
 include ':IM:socket'
 include ':IM:socket_data'
 // app
 include ':app'
-// common
+// base
 include ':base:lib_package'
 include ':base:sdk_third'
 include ':base:mode_ui'
 include ':base:lib_util'
 include ':base:lib_net'
+include ':base:download'
 // netty
 include ':nettyim'
-// aspect
+// plugin
 include ':plugin:lib_aspect_annotations'
 include ':plugin:lib_aspect_runtime'
 include ':plugin:plugin_aspect'
-// webP
 include ':plugin:plugin_webP'
 // optimization
 include':lib_preloader'
@@ -26,6 +25,7 @@ include':lib_preloader'
 include':utils:lib_arsc'
 include':utils:LibJavaTools'
 include':utils:antidebug'
+include 'utils:lib_res_guard'
 // XPosed
 include ':xposed:xposed_restart'
 include ':xposed:xposed_hook'
