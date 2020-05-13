@@ -1,5 +1,4 @@
 apply from: "../../config/module.gradle"
-//applicationId "com.pds.download"
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

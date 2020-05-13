@@ -4,7 +4,7 @@ apply from: "../../config/kotlin.gradle"
 apply plugin: 'realm-android'
 apply plugin: 'com.jakewharton.butterknife'
 
-def debug = rootProject.ext.debug[project.name]
+def debug = (1 == rootProject.ext.module_type[project.name])
 android {
     defaultConfig {
         if(debug){

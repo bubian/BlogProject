@@ -1,19 +1,23 @@
 ext {
-    debug = [
-            socket_app        : true,
-            nettyim           : true,
-            fmod              : true,
-            bzip2             : true,
-            ndkStudy          : true,
-            facerecognition   : true,
-            gif               : true,
-            ffmpeg            : true,
-            gifmerger         : true,
-            h264rtmp2         : true,
-            idcardrecognitioon: true,
-            webrtc            : true,
-            download          : true,
-            mode_ui           : true,
+    project_name = "BlogProject"
+    // 默认 - lib  1 - debug  2 - java lib
+    module_type = [
+            app               : 1,
+            socket_app        : 1,
+            nettyim           : 1,
+            fmod              : 1,
+            bzip2             : 1,
+            ndkStudy          : 1,
+            facerecognition   : 1,
+            gif               : 1,
+            ffmpeg            : 1,
+            gifmerger         : 1,
+            h264rtmp2         : 1,
+            idcardrecognitioon: 1,
+            webrtc            : 1,
+            download          : 1,
+            mode_ui           : 1,
+            lib_java_study    : 2,
     ]
 
     id = [

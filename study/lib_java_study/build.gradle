@@ -1,1 +1,1 @@
-apply from: '../../config/java.gradle'
+apply from: '../../config/module.gradle'

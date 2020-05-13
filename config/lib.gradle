@@ -1,0 +1,31 @@
+def PROJECT_NAME = rootProject.ext.project_name
+String ROOT_DIR = System.getProperty("user.dir")
+def project_dir = ROOT_DIR
+
+if (!ROOT_DIR.endsWith(PROJECT_NAME)){
+    int index = ROOT_DIR.lastIndexOf (PROJECT_NAME)
+    project_dir = ROOT_DIR.substring(0,index + PROJECT_NAME.length())
+}
+
+apply from: "$project_dir/config/android.gradle"
+/**
+ * autoBuildJar:true,module构建过程自动生成jar并上传到maven仓库(目前暂时上传到本地maven)；false，手动生成jar和上传
+ */
+apply from: "$project_dir/config/jar.gradle"
+def autoBuildJar = false
+if(autoBuildJar){
+    println('module auto build jar')
+    def hasApp = project.plugins.hasPlugin(APP)
+    def hasLib = project.plugins.hasPlugin(LIB)
+    if (!hasApp && !hasLib) {
+        throw new IllegalStateException("'android' or 'android-library' plugin required.")
+    }
+    def vs = project.android.libraryVariants
+    vs.all {v ->
+        JavaCompile javaCompile = v.javaCompile
+        javaCompile.doLast {
+//            autoMakeJar.exclude()
+//            ((Upload)uploadArchives).execute()
+        }
+    }
+}

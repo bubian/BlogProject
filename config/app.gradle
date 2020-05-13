@@ -1,0 +1,72 @@
+def PROJECT_NAME = rootProject.ext.project_name
+String ROOT_DIR = System.getProperty("user.dir")
+def project_dir = ROOT_DIR
+
+if (!ROOT_DIR.endsWith(PROJECT_NAME)){
+    int index = ROOT_DIR.lastIndexOf (PROJECT_NAME)
+    project_dir = ROOT_DIR.substring(0,index + PROJECT_NAME.length())
+}
+
+def app = "app" != project.name
+apply from: "$project_dir/config/android.gradle"
+
+android {
+    sourceSets {
+        main {
+            if (app){
+                java.srcDirs =  ['src/debug/java','src/main/java']
+                manifest.srcFile 'src/debug/AndroidManifest.xml'
+                res.srcDirs = ['src/main/res','src/debug/res']
+            }
+        }
+    }
+
+    signingConfigs {
+        release {
+            // storeFile 出于安全考虑，将签名信息放到文件中。
+            File propFile = file("$project_dir/config/other/signing.properties")
+            if (propFile.exists()) {
+                Properties props = new Properties()
+                props.load(new FileInputStream(propFile))
+                if (props.containsKey('STORE_FILE') && props.containsKey('STORE_PASSWORD') &&
+                        props.containsKey('KEY_ALIAS') && props.containsKey('KEY_PASSWORD')) {
+                    android.signingConfigs.release.storeFile = file(props['STORE_FILE'])
+                    android.signingConfigs.release.storePassword = props['STORE_PASSWORD']
+                    android.signingConfigs.release.keyAlias = props['KEY_ALIAS']
+                    android.signingConfigs.release.keyPassword = props['KEY_PASSWORD']
+                } else {
+                    android.buildTypes.release.signingConfig = null
+                }
+            } else {
+                android.buildTypes.release.signingConfig = null
+            }
+        }
+
+        debug {
+            storeFile file("$project_dir/config/other/pds.keystore")
+            keyAlias 'pds'
+            keyPassword 'pds123'
+            storePassword 'pds123'
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            zipAlignEnabled true
+            debuggable true
+            shrinkResources false // 移除无用的resource文件
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            debuggable false
+            minifyEnabled true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
