@@ -1,0 +1,9 @@
+apply plugin: 'java-library'
+
+dependencies {
+    compile 'com.alibaba:fastjson:1.2.68'
+    compile 'org.projectlombok:lombok:1.16.14'
+}
+
+sourceCompatibility = "8"
+targetCompatibility = "8"
