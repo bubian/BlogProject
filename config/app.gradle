@@ -45,6 +45,9 @@ android {
 
     buildTypes {
         debug {
+            // Run code coverage reports by default on debug builds.
+            testCoverageEnabled = true
+
             minifyEnabled false
             zipAlignEnabled true
             debuggable true
@@ -60,6 +63,13 @@ android {
             minifyEnabled true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // 测试相关配置
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
         }
     }
 }

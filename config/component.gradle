@@ -15,10 +15,10 @@ ext {
             idcardrecognitioon: 1,
             webrtc            : 1,
             download          : 1,
-            mode_ui           : 1,
+//            mode_ui           : 1,
             lib_java_study    : 2,
+            test_app          : 3,
     ]
-
     id = [
             socket_app        : "blog.pds.com.socket.app",
             app               : "com.pds.blog",
@@ -34,6 +34,7 @@ ext {
             idcardrecognitioon: "com.pds.idcardrecognitioon",
             webrtc            : "com.pds.webrtc",
             download          : "com.pds.download",
-            mode_ui           : "com.pds.ui",
+//            mode_ui           : "com.pds.ui",
     ]
+
 }

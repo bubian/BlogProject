@@ -43,3 +43,5 @@ include ':ndk:gifmerger'
 include ':ndk:h264rtmp2'
 include ':ndk:idcardrecognitioon'
 include ':ndk:webrtc'
+// test
+include ':test_app'

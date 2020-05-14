@@ -1,30 +1,85 @@
-//参考：https://developer.android.google.cn/studio/test
-//参考：https://developer.android.google.cn/training/testing/#UIAutomator
+//参考例子：https://github.com/googlesamples/android-testing-templates/blob/master/AndroidTestingBlueprint/module-flavor1-androidTest-only/build.gradle
+apply plugin: 'com.android.test'
+android {
+    compileSdkVersion app.compileSdkVersion
+    defaultConfig {
+        minSdkVersion app.minSdkVersion
+        targetSdkVersion app.targetSdkVersion
 
-// apply from: "$project_dir/config/test_android.gradle"
-// 不同工程需要的测试依赖包不同，为了减少构建时间，可以在自己的module依赖自己需要的包，不必在这里全面引入
+        // Only include the 'flavor1' product flavor from the 'defaultDimension' flavor dimension
+//        missingDimensionStrategy 'defaultDimension', 'flavor1'
+
+        // Specifies the application ID for the test APK.
+        testApplicationId "com.pds.test.${project.name}"
+
+        // If set to 'true', enables the instrumentation class to start and stop profiling.
+        // If set to false (default), profiling occurs the entire time the instrumentation
+        // class is running.
+        testHandleProfiling true
+        // If set to 'true', indicates that the Android system should run the instrumentation
+        // class as a functional test. The default value is 'false'
+        testFunctionalTest true
+
+        // The Instrumentation test runner used to run tests.
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+        // Specifies the fully-qualified class name of the test instrumentation runner.
+        // testInstrumentationRunner "android.test.InstrumentationTestRunner"
+
+        // Set the target app project. The module specified here should contain the production code
+        // test should run against.
+        targetProjectPath ':app'
+    }
+
+    testOptions {
+        // Changes the directory where Gradle saves test reports. By default, Gradle saves test reports
+        // in the path_to_your_project/module_name/build/outputs/reports/ directory.
+        // '$rootDir' sets the path relative to the root directory of the current project.
+        reportDir "$rootDir/test_app/test-reports"
+
+        // Changes the directory where Gradle saves test results. By default, Gradle saves test results
+        // in the path_to_your_project/module_name/build/outputs/test-results/ directory.
+        // '$rootDir' sets the path relative to the root directory of the current project.
+        resultsDir "$rootDir/test_app/test-results"
+        // 要仅为本地单元测试指定选项，请配置 testOptions {} 中的 unitTests {} 代码块。
+        unitTests {
+            // 如果您的测试依赖于资源 默认情况下，Android Studio 3.4 及更高版本提供编译版本的资源。
+            includeAndroidResources = false
+
+            all {
+                // Sets JVM argument(s) for the test JVM(s).
+                jvmArgs '-XX:MaxPermSize=256m'
+
+                // You can also check the task name to apply options to only the tests you specify.
+                if (it.name == 'test_app') {
+                    systemProperty 'debug', 'true'
+                }
+            }
+        }
+    }
+
+    // 默认情况下，所有测试均针对调试构建类型运行。您可以利用模块级 build.gradle 文件中的 testBuildType 属性将其更改为针对其他构建类型运行。
+    // 例如，如果您要针对“staging”构建类型运行测试，请按以下代码段所示对该文件进行修改。
+    // testBuildType "staging"
+
+    // 默认情况下，测试模块会包含并仅测试 debug 变体。不过，您可以创建新的构建类型，使其与测试的应用项目匹配。
+    // 要使测试模块测试其他构建类型（而不测试调试构建类型），请使用 VariantFilter 停用测试项目中的 debug 变体，如下所示：
+
+//    variantFilter { variant ->
+//        if (variant.buildType.name == 'debug') {
+//            variant.setIgnore(true)
+//        }
+//    }
+
+}
 
 dependencies {
-    // test
-    testImplementation 'junit:junit:4.12'
+    // Android Testing Support Library's runner and rules and hamcrest matchers
+    implementation 'androidx.test:rules:1.2.0'
+    implementation 'androidx.test:runner:1.2.0'
+    implementation 'org.hamcrest:hamcrest-core:1.3'
 
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-
-    // Core library
-    androidTestImplementation 'androidx.test:core:1.2.0'
-
-    // AndroidJUnitRunner and JUnit Rules
-    androidTestImplementation 'androidx.test:rules:1.2.0'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-
-    // Assertions
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.ext:truth:1.2.0'
-    androidTestImplementation 'com.google.truth:truth:0.42'
-
-    // Espresso dependencies
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-//    androidTestCompile ('androidx.test.espresso:espresso-intents:2.2.2') {
-//        exclude group: 'com.google.code.findbugs'
-//    }
+    implementation 'androidx.test.ext:junit:1.1.1'
+    implementation 'androidx.test.ext:truth:1.2.0'
+    implementation 'com.google.truth:truth:0.42'
 }

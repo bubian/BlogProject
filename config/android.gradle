@@ -2,7 +2,7 @@
 //String ROOT_DIR = System.getProperty("user.dir")
 def module_name = project.name
 def id = id[module_name]
-def cMakeListPath = "$rootDir + ${project.path.replaceAll(':','/')} + /CMakeLists.txt"
+def cMakeListPath = "$rootDir + ${project.path.replaceAll(':', '/')} + /CMakeLists.txt"
 def hasCMakeListFile = new File(cMakeListPath).exists()
 android {
     compileSdkVersion app.compileSdkVersion
@@ -12,23 +12,38 @@ android {
         targetSdkVersion app.targetSdkVersion
         versionCode app.versionCode
         versionName app.versionName
-        if (hasCMakeListFile){
+        if (hasCMakeListFile) {
             externalNativeBuild {
                 cmake {
                     cppFlags "-frtti -fexceptions"
                 }
             }
 
-            ndk{
+            ndk {
                 moduleName "app"
-                abiFilters "armeabi-v7a","x86" //指定平台
+                abiFilters "armeabi-v7a", "x86" //指定平台
                 cFlags "-DANDROID_NDK"
             }
         }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        /*
+        The Android Testing Support Library collects analytics to continuously improve the testing
+        experience. More specifically, it uploads a hash of the package name of the application
+        under test for each invocation. If you do not wish to upload this data, you can opt-out by
+        passing the following argument to the test runner: disableAnalytics "true".
+        */
+        //testInstrumentationRunnerArguments disableAnalytics: 'true'
+
+        /*
+        Uncomment this to pass custom arguments to AndroidJUnitRunner. If uncommented the
+        custom argument "argument1" will be passed to AndroidJUnitRunner and make
+        AndroidLibraryModuleIntegrationTest fail.
+         */
+        // testInstrumentationRunnerArgument "argument1", "make_test_fail
     }
 
-    if (hasCMakeListFile){
+    if (hasCMakeListFile) {
         sourceSets {
             main {
                 jniLibs.srcDirs = ['libs']

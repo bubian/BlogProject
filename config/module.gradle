@@ -4,7 +4,7 @@ if(1 == module_type){
 }else if(2 == module_type){
     apply from: "$rootDir/config/java.gradle"
 }else if (3 == module_type){
-    apply plugin: 'com.android.test'
+    apply from: "$rootDir/config/test.gradle"
 }else{
     apply from: "$rootDir/config/lib.gradle"
 }
