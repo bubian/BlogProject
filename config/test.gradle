@@ -44,7 +44,7 @@ android {
         // 要仅为本地单元测试指定选项，请配置 testOptions {} 中的 unitTests {} 代码块。
         unitTests {
             // 如果您的测试依赖于资源 默认情况下，Android Studio 3.4 及更高版本提供编译版本的资源。
-            includeAndroidResources = false
+            includeAndroidResources = true
 
             all {
                 // Sets JVM argument(s) for the test JVM(s).
@@ -82,4 +82,6 @@ dependencies {
     implementation 'androidx.test.ext:junit:1.1.1'
     implementation 'androidx.test.ext:truth:1.2.0'
     implementation 'com.google.truth:truth:0.42'
+
+//    implementation 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
 }

@@ -24,7 +24,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:replace="android:appComponentFactory"
             tools:targetApi="m">
-        <activity android:name=".refresh.RefreshActivity">
+        <activity android:name=".GlideTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

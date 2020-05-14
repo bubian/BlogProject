@@ -1,6 +1,33 @@
-apply plugin: 'com.android.library'
-apply from: '../../config/android.gradle'
+apply from: '../../config/module.gradle'
 
+def HOST_TYPE_DEV = rootProject.ext.project.hostTypeDev
+def HOST_TYPE_ONLINE = rootProject.ext.project.hostTypeOnline
+def urlType = project.hasProperty('hostType') ? Integer.parseInt(hostType) : HOST_TYPE_DEV
+
+android{
+    defaultConfig {
+        buildConfigField "int", "API_URL_TYPE", "${urlType}"
+    }
+}
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
+
+    api 'com.squareup.retrofit2:retrofit:2.8.1'
+    api 'com.squareup.retrofit2:converter-gson:2.8.1'
+    api 'com.squareup.retrofit2:converter-scalars:2.8.1'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.8.1'
+    // 额外依赖，如果项目使用OkHttp作为网络请求可以用这个库完成网络监控
+    api 'com.squareup.okhttp3:okhttp:4.6.0'
+
+    // RxJava
+    api 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    api 'io.reactivex.rxjava3:rxjava:3.0.0'
+    //    api 'io.reactivex:rxjava-async-util:0.20.4'
+    //    api 'rxjava-computation-expressions:0.20.4'
+
+    api project(path: ':base:data_entity')
+    //logger
+    compile 'com.qpdstudio.logger:logger:1.0.8'
+
+    testImplementation 'junit:junit:4.12'
 }

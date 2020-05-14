@@ -1,4 +1,4 @@
-package com.blog.pds.net.threadpool;
+package com.blog.pds.threadpool;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;

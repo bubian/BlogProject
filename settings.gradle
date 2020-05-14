@@ -12,6 +12,7 @@ include ':base:mode_ui'
 include ':base:lib_util'
 include ':base:lib_net'
 include ':base:download'
+include ':base:data_entity'
 // netty
 include ':nettyim'
 // plugin

@@ -1,5 +1,6 @@
 //参考：https://developer.android.google.cn/studio/test
 //参考：https://developer.android.google.cn/training/testing/#UIAutomator
+//参考：https://developer.android.google.cn/training/testing/espresso/idling-resource
 
 // apply from: "$project_dir/config/test.gradlee"
 // 不同工程需要的测试依赖包不同，为了减少构建时间，可以在自己的module依赖自己需要的包，不必在这里全面引入
@@ -27,4 +28,9 @@ dependencies {
 //    androidTestCompile ('androidx.test.espresso:espresso-intents:2.2.2') {
 //        exclude group: 'com.google.code.findbugs'
 //    }
+
+//    androidTestImplementation "androidx.test.espresso:espresso-contrib:3.2.0"
+//    androidTestImplementation "androidx.test.espresso:espresso-intents:3.2.0"
+//    androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:3.2.0"
+//    androidTestImplementation "androidx.test.espresso:espresso-idling-resource:3.2.0"
 }
