@@ -8,3 +8,7 @@
 
 - 启动Activity不能弹出界面
   需要在应用管理里面，打开 "允许从后台打开窗口"，因为测试里面启动activity是在后台服务里面。
+  
+- android.content.res.Resources$NotFoundException: Drawable com.pds.blog:dimen/compat_button_inset_vertical_material with resource ID #0x7f060055
+
+  将AppCompatActivity换成Activity
