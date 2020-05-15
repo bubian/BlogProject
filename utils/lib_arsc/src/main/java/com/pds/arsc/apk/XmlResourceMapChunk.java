@@ -73,7 +73,7 @@ public class XmlResourceMapChunk extends Chunk {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.XML_RESOURCE_MAP;
+    return Type.XML_RESOURCE_MAP;
   }
 
   @Override

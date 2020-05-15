@@ -109,7 +109,7 @@ public final class XmlStartElementChunk extends XmlNodeChunk {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.XML_START_ELEMENT;
+    return Type.XML_START_ELEMENT;
   }
 
   @Override

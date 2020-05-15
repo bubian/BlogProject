@@ -16,6 +16,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
+
         //获取命令行输入参数,获取后控制使用测试环境，还是线上环境
 //        def urlType = project.hasProperty('platformService') ? Integer.parseInt(platformService) : TEST
 
@@ -123,11 +124,6 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation 'androidx.multidex:multidex:2.0.0'
-    implementation project(':base:lib_package')
-    compile project(path: ':lib_preloader')
-    implementation project(path: ':base:mode_ui')
-    compile project(path: ':base:lib_util')
-    compile project(path: ':base:lib_net')
     //    compile project(':lib_aspect_annotations')
     // rxlifecycle
     implementation 'com.trello.rxlifecycle3:rxlifecycle:3.1.0'
@@ -158,4 +154,11 @@ dependencies {
     // 额外依赖，添加此依赖可以监控内存泄漏，如果不依赖则无法监控（安装了也不会生效），如果你也依赖了LeakCanary则无法依赖这个库，否则你项目中的LeakCanary会失效
     debugImplementation 'cn.hikyson.godeye:godeye-leakcanary:3.4.2'
     implementation files('libs/tbs_sdk_thirdapp_v4.3.0.3.jar')
+
+    // lib-module
+    api project(':base:lib_package')
+    api project(path: ':lib_preloader')
+    api project(path: ':base:mode_ui')
+    api project(path: ':base:lib_util')
+    api project(path: ':base:lib_net')
 }

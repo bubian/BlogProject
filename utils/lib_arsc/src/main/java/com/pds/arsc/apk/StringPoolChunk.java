@@ -148,7 +148,7 @@ public final class StringPoolChunk extends Chunk {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.STRING_POOL;
+    return Type.STRING_POOL;
   }
 
   /** Returns the number of bytes needed for offsets based on {@code strings} and {@code styles}. */

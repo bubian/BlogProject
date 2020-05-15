@@ -60,7 +60,7 @@ public final class TypeSpecChunk extends Chunk {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.TABLE_TYPE_SPEC;
+    return Type.TABLE_TYPE_SPEC;
   }
 
   @Override

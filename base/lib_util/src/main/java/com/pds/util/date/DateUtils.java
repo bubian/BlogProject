@@ -486,4 +486,16 @@ public class DateUtils {
         return (int) (t / 1000 - t1 / 1000) / 3600 / 24;
 
     }
+
+    public static long dateToStamp(String dateStr){
+        SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = null;
+        try {
+            date = format.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        //日期转时间戳（毫秒）
+        return null == date ? 0 : date.getTime();
+    }
 }

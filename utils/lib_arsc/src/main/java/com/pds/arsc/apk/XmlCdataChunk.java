@@ -49,7 +49,7 @@ public final class XmlCdataChunk extends XmlNodeChunk {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.XML_CDATA;
+    return Type.XML_CDATA;
   }
 
   @Override

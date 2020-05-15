@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * Calculates extra information about an {@link ArscBlamer.ResourceEntry}, such as the total
+ * Calculates extra information about an {@link ResourceEntry}, such as the total
  * APK size the entry is responsible for.
  *
  * This class is not thread-safe.
@@ -244,7 +244,7 @@ public class ResourceEntryStatsCollector {
     }
   }
 
-  /** Stats for an individual {@link ArscBlamer.ResourceEntry}. */
+  /** Stats for an individual {@link ResourceEntry}. */
   public static class ResourceStatistics {
 
     /** The empty, immutable instance of ResourceStatistics which contains 0 for all values. */

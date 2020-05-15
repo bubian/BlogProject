@@ -12,3 +12,6 @@
 - android.content.res.Resources$NotFoundException: Drawable com.pds.blog:dimen/compat_button_inset_vertical_material with resource ID #0x7f060055
 
   将AppCompatActivity换成Activity
+  
+  ### 测试学习参考资源
+  [Android单元测试](https://blog.csdn.net/qq_17766199/category_9270906.html)

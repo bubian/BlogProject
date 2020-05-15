@@ -10,6 +10,14 @@ import android.os.Parcelable;
  * Description:
  */
 public class HbParam implements Parcelable {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int id;
 
     @Override

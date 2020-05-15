@@ -1840,4 +1840,6 @@ public class FileUtils {
         if (!isFileExists(file)) return -1;
         return byte2Size(file.length(), unit);
     }
+
+
 }

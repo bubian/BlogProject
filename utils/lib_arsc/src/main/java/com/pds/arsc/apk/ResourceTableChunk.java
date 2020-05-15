@@ -82,7 +82,7 @@ public final class ResourceTableChunk extends ChunkWithChunks {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.TABLE;
+    return Type.TABLE;
   }
 
   @Override

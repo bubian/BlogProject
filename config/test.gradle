@@ -3,7 +3,8 @@ apply plugin: 'com.android.test'
 android {
     compileSdkVersion app.compileSdkVersion
     defaultConfig {
-        minSdkVersion app.minSdkVersion
+//        minSdkVersion app.minSdkVersion
+        minSdkVersion 26
         targetSdkVersion app.targetSdkVersion
 
         // Only include the 'flavor1' product flavor from the 'defaultDimension' flavor dimension
@@ -29,6 +30,12 @@ android {
         // Set the target app project. The module specified here should contain the production code
         // test should run against.
         targetProjectPath ':app'
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
     }
 
     testOptions {
@@ -71,6 +78,10 @@ android {
 //        }
 //    }
 
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 dependencies {

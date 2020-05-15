@@ -194,7 +194,7 @@ public final class TypeChunk extends Chunk {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.TABLE_TYPE;
+    return Type.TABLE_TYPE;
   }
 
   /** Returns the number of bytes needed for offsets based on {@code entries}. */

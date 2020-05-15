@@ -65,7 +65,7 @@ public final class LibraryChunk extends Chunk {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.TABLE_LIBRARY;
+    return Type.TABLE_LIBRARY;
   }
 
   @Override

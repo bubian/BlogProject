@@ -29,6 +29,6 @@ public final class XmlNamespaceStartChunk extends XmlNamespaceChunk {
 
   @Override
   protected Type getType() {
-    return Chunk.Type.XML_START_NAMESPACE;
+    return Type.XML_START_NAMESPACE;
   }
 }
