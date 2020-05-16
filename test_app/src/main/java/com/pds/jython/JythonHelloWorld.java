@@ -13,6 +13,7 @@ public class JythonHelloWorld {
     public static void main(String[] args){
         try (PythonInterpreter pythonInterpreter = new PythonInterpreter()){
             pythonInterpreter.exec("print('Hello Python World!')");
+            pythonInterpreter.execfile("/Users/pengdaosong/pds/BlogProject/test_app/src/main/python/java.py");
 
         }
     }
