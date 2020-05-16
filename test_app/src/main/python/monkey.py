@@ -1,33 +1,31 @@
-# hello.py
 # coding: utf-8
 
-# Imports the monkeyrunner modules used by this program
+# 导入 monkeyrunner依赖
 from com.android.monkeyrunner import MonkeyRunner, MonkeyDevice
 
-# Connects to the current device, returning a MonkeyDevice object
+# 连接当前设备, 返回一个MonkeyDevice对象
 device = MonkeyRunner.waitForConnection()
 
-# Installs the Android package. Notice that this method returns a boolean, so you can test
-# to see if the installation worked.
-device.installPackage('/Users/pengdaosong/pds/BlogProject/app/build/outputs/apk/app-debug.apk')
+# 安装apk，返回一个boolean值表示是否安装成功
+device.installPackage('/Users/pengdaosong/pds/BlogProject/test_app/monkey_runner/app-debug.apk')
 
-# sets a variable with the package's internal name
+# 安装应用包名
 package = 'com.pds.blog'
 
-# sets a variable with the name of an Activity in the package
+# 需要启动的Activity全路径名
 activity = 'com.pds.blog.GlideTestActivity'
 
-# sets the name of the component to start
+# 需要的启动的组件
 runComponent = package + '/' + activity
 
-# Runs the component
+# 启动组件
 device.startActivity(component=runComponent)
 
-# Presses the Menu button
+# 按手机菜单按钮
 device.press('KEYCODE_MENU', MonkeyDevice.DOWN_AND_UP)
 
-# Takes a screenshot
+# 截图
 result = device.takeSnapshot()
 
-# Writes the screenshot to a file
-result.writeToFile('/Users/pengdaosong/pds/BlogProject/app/build/outputs/shot1.png','png')
+# 截图保存路径
+result.writeToFile('/Users/pengdaosong/pds/BlogProject/test_app/monkey_runner/Snapshot/shot1.png','png')

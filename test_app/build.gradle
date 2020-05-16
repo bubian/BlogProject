@@ -1,20 +1,18 @@
 apply from: "../config/module.gradle"
 dependencies {
-    implementation "androidx.appcompat:appcompat:1.1.0"
-    implementation "androidx.test.espresso:espresso-idling-resource:3.2.0"
-
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.2.0'
     // implementation "org.mockito:mockito-core:3.3.3"
     // 更新到最新版本，提示sdk最小版本兼容问题
-    implementation "org.mockito:mockito-android:2.11.0"
-
+    implementation 'org.mockito:mockito-android:2.11.0'
     // PowerMock
     // PowerMock 主要围绕着 Junit 测试框架和 TestNg 测试框架，在安卓中我们常用Junit + Mockito + PowerMock 组合。
     // 既然PowerMock是拓展Mockito，所以使用时，我们要找到与Mockito对应的PowerMock 支持版本去使用。
-//    implementation "org.powermock:powermock-module-junit4:1.7.3"
-//    implementation "org.powermock:powermock-module-junit4-rule:1.7.3"
-//    implementation "org.powermock:powermock-api-mockito2:1.7.3" //注意这里是mockito2
-//    implementation "org.powermock:powermock-classloading-xstream:1.7.3"
-
+    //    implementation "org.powermock:powermock-module-junit4:1.7.3"
+    //    implementation "org.powermock:powermock-module-junit4-rule:1.7.3"
+    //    implementation "org.powermock:powermock-api-mockito2:1.7.3" //注意这里是mockito2
+    //    implementation "org.powermock:powermock-classloading-xstream:1.7.3"
     // robolectric
-//    implementation "org.robolectric:robolectric:4.3.1"
+    //    implementation "org.robolectric:robolectric:4.3.1"
+    implementation files('libs/monkeyrunner-26.0.0-dev.jar')
 }
