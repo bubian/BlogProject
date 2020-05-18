@@ -5,3 +5,5 @@ apply plugin: 'kotlin-kapt'
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+
+//kotlin开源项目地址：https://github.com/JetBrains/kotlin，里面包含了相关插件的源码

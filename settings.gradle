@@ -15,6 +15,7 @@ include ':base:download'
 include ':base:data_entity'
 include ':base:frame'
 include ':base:m2app'
+include ':base:web'
 // netty
 include ':nettyim'
 // plugin
