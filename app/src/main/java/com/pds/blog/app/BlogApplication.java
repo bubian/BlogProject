@@ -17,6 +17,8 @@ import java.io.InputStreamReader;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import io.github.prototypez.appjoint.core.AppSpec;
+
 /**
  * @author: pengdaosong
  * CreateTime:  2019/3/16 4:54 PM

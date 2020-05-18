@@ -1,6 +1,7 @@
 apply from: "../config/module.gradle"
 apply from: "../config/kotlin.gradle"
 apply plugin: 'aspect'
+apply plugin: 'app-joint'
 //apply plugin: 'webp'
 
 apply plugin: 'cn.hikyson.methodcanary.plugin'
@@ -161,4 +162,5 @@ dependencies {
     api project(path: ':base:mode_ui')
     api project(path: ':base:lib_util')
     api project(path: ':base:lib_net')
+    api project(path: ':base:m2app')
 }

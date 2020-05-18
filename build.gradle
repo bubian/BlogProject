@@ -18,6 +18,9 @@ buildscript {
         classpath 'com.plugin:webp:1.0.0'
         classpath 'com.jakewharton:butterknife-gradle-plugin:10.1.0'
         classpath "cn.hikyson.methodcanary:plugin:0.15.4"
+
+        // app-joint
+        classpath 'io.github.prototypez:app-joint:1.7'
     }
 }
 
