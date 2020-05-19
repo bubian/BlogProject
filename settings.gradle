@@ -36,6 +36,7 @@ include ':xposed:xposed_hook'
 //include ':xposed:dumpdex'
 // study
 include ':study:lib_java_study'
+include ':study:kotlin_study'
 // ndk
 include ':ndk:fmod'
 include ':ndk:bzip2'
