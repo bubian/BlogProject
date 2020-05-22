@@ -241,19 +241,19 @@ private fun test9() = runBlocking{
  * 在不同线程间跳转
  */
 
-private fun  test10(){
-    newSingleThreadContext("Ctx1").use { ctx1 ->
-        newSingleThreadContext("Ctx2").use { ctx2 ->
-            runBlocking(ctx1) {
-                println("Started in ctx1")
-                withContext(ctx2) {
-                    println("Working in ctx2")
-                }
-                println("Back to ctx1")
-            }
-        }
-    }
-}
+//private fun  test10(){
+//    newSingleThreadContext("Ctx1").use { ctx1 ->
+//        newSingleThreadContext("Ctx2").use { ctx2 ->
+//            runBlocking(ctx1) {
+//                println("Started in ctx1")
+//                withContext(ctx2) {
+//                    println("Working in ctx2")
+//                }
+//                println("Back to ctx1")
+//            }
+//        }
+//    }
+//}
 
 /**
  * 上下文中的作业,协程的 Job 是上下文的一部分，并且可以使用 coroutineContext [Job] 表达式在上下文中检索它：
