@@ -163,4 +163,5 @@ dependencies {
     api project(path: ':base:lib_util')
     api project(path: ':base:lib_net')
     api project(path: ':base:m2app')
+    api project(path: ':base:skin')
 }

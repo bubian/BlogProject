@@ -9,6 +9,7 @@ import androidx.multidex.MultiDexApplication;
 
 import com.pds.blog.BuildConfig;
 import com.pds.blog.R;
+import com.pds.skin.SkinManager;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -51,6 +52,8 @@ public class BlogApplication extends MultiDexApplication {
             Log.e("","程序被串改");
             android.os.Process.killProcess(android.os.Process.myPid());
         }
+
+        SkinManager.init(this);
     }
 
     private boolean isRunningInEmualtor(){
