@@ -22,8 +22,6 @@ import java.util.List;
 
 
 public class SkinActivity extends Activity {
-
-
     /**
      * 从服务器拉取的皮肤表
      */

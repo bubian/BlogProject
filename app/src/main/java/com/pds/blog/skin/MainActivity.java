@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 进入换肤
      *
+     * 皮肤包是apk压缩文件，通过系统Api获取APK的资源文件并加入到宿主资源管理器中，这样就可以正常获取
      * @param view
      */
     public void skinSelect(View view) {
