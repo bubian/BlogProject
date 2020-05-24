@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.core.view.ViewCompat;
 
-import com.pds.skin.logger.L;
 import com.pds.skin.utils.SkinResources;
 import com.pds.skin.utils.SkinThemeUtils;
 
@@ -21,11 +20,9 @@ public class SkinAttribute {
 
     private static final List<String> mAttributes = new ArrayList<>();
 
-
     static {
         mAttributes.add("background");
         mAttributes.add("src");
-
 
         mAttributes.add("textColor");
         mAttributes.add("drawableLeft");
@@ -34,13 +31,11 @@ public class SkinAttribute {
         mAttributes.add("drawableBottom");
 
         mAttributes.add("skinTypeface");
-
     }
 
     private Typeface typeface;
 
-    //记录换肤需要操作的View与属性信息
-    private List<SkinView> mSkinViews = new ArrayList<>();
+    List<SkinView> mSkinViews = new ArrayList<>();
 
     public SkinAttribute(Typeface typeface) {
         this.typeface = typeface;
@@ -50,39 +45,41 @@ public class SkinAttribute {
         this.typeface = typeface;
     }
 
+
     public void load(View view, AttributeSet attrs) {
-        List<SkinPair> mSkinPars = new ArrayList<>();
+        List<SkinPair> skinPairs = new ArrayList<>();
         for (int i = 0; i < attrs.getAttributeCount(); i++) {
-            //获得属性名  mAttributes
+            //获得属性名
             String attributeName = attrs.getAttributeName(i);
-            L.e("   " + attributeName);
+            //是否符合 需要筛选的属性名
             if (mAttributes.contains(attributeName)) {
                 String attributeValue = attrs.getAttributeValue(i);
-                // 如果是color的 以#开头表示写死的颜色 不可用于换肤
+                //写死了 不管了
                 if (attributeValue.startsWith("#")) {
                     continue;
                 }
+                //资源id
                 int resId;
                 if (attributeValue.startsWith("?")) {
+                    //attr Id
                     int attrId = Integer.parseInt(attributeValue.substring(1));
+                    //获得 主题 style 中的 对应 attr 的资源id值
                     resId = SkinThemeUtils.getResId(view.getContext(), new int[]{attrId})[0];
                 } else {
-                    // 正常以 @ 开头
+                    // @12343455332
                     resId = Integer.parseInt(attributeValue.substring(1));
                 }
-                L.e("   " + attributeName + " = " + attributeValue);
-                SkinPair skinPair = new SkinPair(attributeName, resId);
-                mSkinPars.add(skinPair);
+                if (resId != 0) {
+                    //可以被替换的属性
+                    SkinPair skinPair = new SkinPair(attributeName, resId);
+                    skinPairs.add(skinPair);
+                }
             }
         }
 
-        if (!mSkinPars.isEmpty()) {
-            SkinView skinView = new SkinView(view, mSkinPars);
-            skinView.applySkin(typeface);
-            mSkinViews.add(skinView);
-        } else if (view instanceof TextView || view instanceof SkinViewSupport) {
-            //没有属性满足 但是需要修改字体
-            SkinView skinView = new SkinView(view, mSkinPars);
+        //将View与之对应的可以动态替换的属性集合 放入 集合中
+        if (!skinPairs.isEmpty() || view instanceof TextView || view instanceof SkinViewSupport) {
+            SkinView skinView = new SkinView(view, skinPairs);
             skinView.applySkin(typeface);
             mSkinViews.add(skinView);
         }
@@ -94,26 +91,39 @@ public class SkinAttribute {
         }
     }
 
+    /**
+     * 换皮肤
+     */
+    public void applySkin(Typeface typeface) {
+        for (SkinView mSkinView : mSkinViews) {
+            mSkinView.applySkin(typeface);
+        }
+    }
+
     static class SkinView {
         View view;
-        List<SkinPair> skinPairs = new ArrayList<>();
+        List<SkinPair> skinPairs;
 
         public SkinView(View view, List<SkinPair> skinPairs) {
             this.view = view;
             this.skinPairs = skinPairs;
         }
 
+        /**
+         * @param typeface 字体
+         */
         public void applySkin(Typeface typeface) {
-            applyTypeFace(typeface);
-            applySkinSupport();
+            applySkinTypeface(typeface);
+            applySkinViewSupport();
             for (SkinPair skinPair : skinPairs) {
                 Drawable left = null, top = null, right = null, bottom = null;
                 switch (skinPair.attributeName) {
                     case "background":
                         Object background = SkinResources.getInstance().getBackground(skinPair
                                 .resId);
+                        //Color
                         if (background instanceof Integer) {
-                            view.setBackgroundColor((int) background);
+                            view.setBackgroundColor((Integer) background);
                         } else {
                             ViewCompat.setBackground(view, (Drawable) background);
                         }
@@ -145,8 +155,8 @@ public class SkinAttribute {
                         bottom = SkinResources.getInstance().getDrawable(skinPair.resId);
                         break;
                     case "skinTypeface":
-                        applyTypeFace(SkinResources.getInstance().getTypeface
-                                (skinPair.resId));
+                        Typeface typeface1 = SkinResources.getInstance().getTypeface(skinPair.resId);
+                        applySkinTypeface(typeface1);
                         break;
                     default:
                         break;
@@ -158,13 +168,13 @@ public class SkinAttribute {
             }
         }
 
-        private void applySkinSupport() {
+        private void applySkinViewSupport() {
             if (view instanceof SkinViewSupport) {
                 ((SkinViewSupport) view).applySkin();
             }
         }
 
-        private void applyTypeFace(Typeface typeface) {
+        public void applySkinTypeface(Typeface typeface) {
             if (view instanceof TextView) {
                 ((TextView) view).setTypeface(typeface);
             }

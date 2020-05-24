@@ -84,6 +84,7 @@ public class SkinResources {
     }
 
     public Drawable getDrawable(int resId) {
+        //如果有皮肤  isDefaultSkin false 没有就是true
         if (isDefaultSkin) {
             return mAppResources.getDrawable(resId);
         }
@@ -118,7 +119,7 @@ public class SkinResources {
             }
             int skinId = getIdentifier(resId);
             if (skinId == 0) {
-                return mAppResources.getString(resId);
+                return mAppResources.getString(skinId);
             }
             return mSkinResources.getString(skinId);
         } catch (Resources.NotFoundException e) {
@@ -127,17 +128,25 @@ public class SkinResources {
         return null;
     }
 
+    /**
+     * 获得字体
+     * @param resId
+     * @return
+     */
     public Typeface getTypeface(int resId) {
         String skinTypefacePath = getString(resId);
         if (TextUtils.isEmpty(skinTypefacePath)) {
             return Typeface.DEFAULT;
         }
         try {
-            //使用皮肤包
+            Typeface typeface;
             if (isDefaultSkin) {
-                return Typeface.createFromAsset(mAppResources.getAssets(), skinTypefacePath);
+                typeface = Typeface.createFromAsset(mAppResources.getAssets(), skinTypefacePath);
+                return typeface;
+
             }
-            return Typeface.createFromAsset(mSkinResources.getAssets(), skinTypefacePath);
+            typeface = Typeface.createFromAsset(mSkinResources.getAssets(), skinTypefacePath);
+            return typeface;
         } catch (RuntimeException e) {
         }
         return Typeface.DEFAULT;

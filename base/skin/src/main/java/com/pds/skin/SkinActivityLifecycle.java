@@ -12,28 +12,30 @@ import androidx.core.view.LayoutInflaterCompat;
 import com.pds.skin.utils.SkinThemeUtils;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
+
+/**
+ * Created by Administrator on 2018/3/16 0016.
+ */
 
 public class SkinActivityLifecycle implements Application.ActivityLifecycleCallbacks {
 
-    private ArrayMap<Activity, SkinLayoutInflaterFactory> mLayoutInflaterFactories = new
-            ArrayMap<>();
-
+    HashMap<Activity, SkinLayoutFactory> mLayoutFactoryMap = new HashMap<>();
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         /**
-         *  更新状态栏
+         * 更新状态栏
          */
-        SkinThemeUtils.updateStatusBarColor(activity);
+        SkinThemeUtils.updateStatusBar(activity);
+
         /**
-         * 更新字体
+         *  字体
          */
         Typeface typeface = SkinThemeUtils.getSkinTypeface(activity);
-        /**
-         *  更新布局视图
-         */
-        //获得Activity的布局加载器
+
         LayoutInflater layoutInflater = LayoutInflater.from(activity);
+        //获得Activity的布局加载器
         try {
             //Android 布局加载器 使用 mFactorySet 标记是否设置过Factory
             //如设置过抛出一次
@@ -44,12 +46,11 @@ public class SkinActivityLifecycle implements Application.ActivityLifecycleCallb
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //使用factory2 设置布局加载工程
-        SkinLayoutInflaterFactory skinLayoutInflaterFactory = new SkinLayoutInflaterFactory
-                (activity, typeface);
-        LayoutInflaterCompat.setFactory2(layoutInflater, skinLayoutInflaterFactory);
-        mLayoutInflaterFactories.put(activity, skinLayoutInflaterFactory);
-        SkinManager.getInstance().addObserver(skinLayoutInflaterFactory);
+        SkinLayoutFactory skinLayoutFactory = new SkinLayoutFactory(activity, typeface);
+        LayoutInflaterCompat.setFactory2(layoutInflater, skinLayoutFactory);
+        //注册观察者
+        SkinManager.getInstance().addObserver(skinLayoutFactory);
+        mLayoutFactoryMap.put(activity, skinLayoutFactory);
     }
 
     @Override
@@ -79,13 +80,13 @@ public class SkinActivityLifecycle implements Application.ActivityLifecycleCallb
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-        SkinLayoutInflaterFactory observer = mLayoutInflaterFactories.remove(activity);
-        SkinManager.getInstance().deleteObserver(observer);
+        //删除观察者
+        SkinLayoutFactory skinLayoutFactory = mLayoutFactoryMap.remove(activity);
+        SkinManager.getInstance().deleteObserver(skinLayoutFactory);
     }
 
-
     public void updateSkin(Activity activity) {
-        SkinLayoutInflaterFactory skinLayoutInflaterFactory = mLayoutInflaterFactories.get(activity);
-        skinLayoutInflaterFactory.update(null, null);
+        SkinLayoutFactory skinLayoutFactory = mLayoutFactoryMap.get(activity);
+        skinLayoutFactory.update(null, null);
     }
 }
