@@ -35,6 +35,8 @@ class CustomView1 @JvmOverloads constructor( context: Context, attrs: AttributeS
         super.draw(canvas)
     }
 
+    // Path.setFillType(Path.FillType ft) 设置填充方式，参考：https://hencoder.com/ui-1-1/
+
     // 在 Android 的绘制里使用 Shader ，并不直接用 Shader 这个类，而是用它的几个子类。具体来讲有 LinearGradient RadialGradient SweepGradient BitmapShader ComposeShader
     // 在设置了 Shader 的情况下， Paint.setColor/ARGB() 所设置的颜色就不再起作用。
     // 参数：
