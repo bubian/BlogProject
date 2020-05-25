@@ -80,7 +80,8 @@ public class SkinAttribute {
         //将View与之对应的可以动态替换的属性集合 放入 集合中
         if (!skinPairs.isEmpty() || view instanceof TextView || view instanceof SkinViewSupport) {
             SkinView skinView = new SkinView(view, skinPairs);
-            skinView.applySkin(typeface);
+            skinView.
+                    applySkin(typeface);
             mSkinViews.add(skinView);
         }
     }
