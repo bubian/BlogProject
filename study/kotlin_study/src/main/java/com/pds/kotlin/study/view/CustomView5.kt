@@ -29,7 +29,17 @@ class CustomView5 @JvmOverloads constructor(context: Context, attrs: AttributeSe
         setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec),300)
     }
 
+    // draw() 是绘制过程的总调度方法。一个 View 的整个绘制过程都发生在 draw() 方法里。前面讲到的背景、主体、子 View 、滑动相关以及前景的绘制，它们其实都是在 draw() 方法里的。
+    // onDraw() dispatchDraw() onDrawForeground() 这三个方法在 draw() 中被依次调用
+    override fun draw(canvas: Canvas?) {
+        super.draw(canvas)
+    }
+
     private val pathEffect =  DashPathEffect(floatArrayOf(10f,5f), 10f)
+    // 第1步：背景  它的绘制发生在一个叫 drawBackground() 的方法里，但这个方法是 private 的
+    // 第2步：onDraw
+    // 第2步：onDrawForeground
+    // 第4～5步滑动边缘渐变和滑动条以及前景，放在onDrawForeground
     override fun onDraw(canvas: Canvas) {
         // 设置图像的抖动
         paint.isDither = true
@@ -41,5 +51,9 @@ class CustomView5 @JvmOverloads constructor(context: Context, attrs: AttributeSe
         // PathEffect 分为两类，单一效果的 CornerPathEffect DiscretePathEffect DashPathEffect PathDashPathEffect ，和组合效果的 SumPathEffect ComposePathEffect。
         paint.pathEffect = pathEffect
         canvas.drawCircle(150f, 150f, 50f, paint)
+    }
+    // API 23 才引入
+    override fun onDrawForeground(canvas: Canvas?) {
+        super.onDrawForeground(canvas)
     }
 }

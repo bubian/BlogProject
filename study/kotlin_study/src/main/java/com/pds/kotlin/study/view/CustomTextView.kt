@@ -102,10 +102,10 @@ class CustomTextView @JvmOverloads constructor(context: Context?, attrs: Attribu
         canvas.drawText("real top",920f,top,paintTag)
 
         canvas.drawLine(50f,bottom,1000f,bottom,paintLine)
-        canvas.drawText("real bottom",920f,bottom + 30,paintTag)
+        canvas.drawText("real bottom",820f,bottom + 30,paintTag)
 
         canvas.drawLine(50f,ascent,1000f,ascent,paintLine)
-        canvas.drawText("real ascent",920f,ascent + 30,paintTag)
+        canvas.drawText("real ascent",820f,ascent + 30,paintTag)
 
         canvas.drawLine(50f,descent,1000f,descent,paintLine)
         canvas.drawText("real descent",520f,descent,paintTag)
