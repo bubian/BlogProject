@@ -3,10 +3,14 @@ package com.pds.kotlin.study
 import android.animation.*
 import android.annotation.SuppressLint
 import android.graphics.PointF
+import android.os.Build
 import android.os.Bundle
+import android.transition.Slide
+import android.transition.TransitionInflater
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.pds.kotlin.study.view.SportsView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -106,5 +110,14 @@ class ViewActivity : AppCompatActivity() {
         animator.start()
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    private fun setupWindowAnimations() {
+        // inflate from xml
+        val slide = TransitionInflater.from(this).inflateTransition(R.transition.activity_slide)
+        // or create directly
+        // val slide = Slide()
+        // slide.duration = 1000
+        window.exitTransition = slide
+    }
 
 }
