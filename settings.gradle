@@ -17,6 +17,7 @@ include ':base:frame'
 include ':base:m2app'
 include ':base:web'
 include ':base:skin'
+include ':base:lib_base'
 // netty
 include ':nettyim'
 // plugin
