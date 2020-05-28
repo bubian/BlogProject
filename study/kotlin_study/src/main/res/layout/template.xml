@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 注意我们在这里使用了 tools:androidx.constraintlayout.widget.constraint.ConstraintLayout"，这样在编辑的时候就会让它按照ConstraintLayout来处理。-->
+<!-- 每个PlaceHolder都设置了自己的app:content属性，比如app:content="@+id/edit"，表示用id为edit的控件来填充这个位置 -->
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:layout_editor_absoluteX="0dp"
+tools:layout_editor_absoluteY="81dp"
+tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+<androidx.constraintlayout.widget.Placeholder
+    android:id="@+id/template_main_image"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginTop="16dp"
+    app:content="@+id/top_image"
+    app:layout_constraintDimensionRatio="16:9"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent" />
+<androidx.constraintlayout.widget.Placeholder
+    android:id="@+id/template_save"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    app:content="@+id/save"
+    app:layout_constraintEnd_toStartOf="@+id/template_delete"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    tools:layout_editor_absoluteY="460dp" />
+<androidx.constraintlayout.widget.Placeholder
+    android:id="@+id/template_delete"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    app:content="@+id/delete"
+    app:layout_constraintEnd_toStartOf="@+id/template_cancel"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toEndOf="@+id/template_save"
+    tools:layout_editor_absoluteY="460dp" />
+<androidx.constraintlayout.widget.Placeholder
+    android:id="@+id/template_cancel"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    app:content="@+id/cancel"
+    app:layout_constraintEnd_toStartOf="@+id/template_edit"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toEndOf="@+id/template_delete"
+    tools:layout_editor_absoluteY="460dp" />
+<androidx.constraintlayout.widget.Placeholder
+    android:id="@+id/template_edit"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    app:content="@+id/edit"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toEndOf="@+id/template_cancel"
+    tools:layout_editor_absoluteY="460dp" />
+</merge>

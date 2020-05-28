@@ -34,5 +34,16 @@ dependencies {
     // kotlin携程库
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7'
+
+    implementation 'com.google.android.material:material:1.1.0'
+
+//    compile 'com.androidadvance:topsnackbar:1.1.1'
+
+    implementation 'com.google.android:flexbox:2.0.1'
+
     implementation project(path: ':base:lib_base')
+    implementation project(path: ':base:sdk_third')
+
+    implementation 'com.cocosw:bottomsheet:1.5.0@aar'
+    implementation 'com.cocosw:query:0.2.2'
 }
