@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
-        tools:context=".constraint.ConstraintActivity">
+        tools:context=".ui.constraint.ConstraintActivity">
 
         <!-- 不设置layout_constraintStart_toStartOf，layout_marginStart不起作用，ConstraintLayout需要指定开始位置的约束-->
         <TextView

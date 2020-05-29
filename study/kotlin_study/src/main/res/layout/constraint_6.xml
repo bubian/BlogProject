@@ -9,7 +9,7 @@
     android:background="@android:color/white"
     tools:ignore="MissingConstraints"
     android:fitsSystemWindows="true"
-    tools:context="com.pds.kotlin.study.constraint.ConstraintLayoutActivity">
+    tools:context=".ui.constraint.ConstraintLayoutActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"

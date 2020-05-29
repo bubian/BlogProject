@@ -12,7 +12,7 @@
             android:theme="@style/Theme.MaterialComponents"
             tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".constraint.ConstraintMainActivity">
+            android:name="com.pds.kotlin.study.ui.constraint.ConstraintMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -20,20 +20,20 @@
         </activity>
         <activity
             android:theme="@style/AppTheme.NoActionBar"
-            android:name=".constraint.ConstraintLayoutActivity"/>
+            android:name="com.pds.kotlin.study.ui.constraint.ConstraintLayoutActivity"/>
         <activity
-            android:name=".constraint.BehaviorActivity"
+            android:name="com.pds.kotlin.study.ui.constraint.BehaviorActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".constraint.CustomBehaviorActivity"
+            android:name="com.pds.kotlin.study.ui.constraint.CustomBehaviorActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".constraint.BottomSheetActivity"
+            android:name="com.pds.kotlin.study.ui.constraint.BottomSheetActivity"
             android:theme="@style/AppTheme"/>
         <activity
-            android:name=".constraint.ListActivity"
+            android:name="com.pds.kotlin.study.ui.constraint.ListActivity"
             android:theme="@style/AppTheme"/>
-        <activity android:name=".constraint.ConstraintActivity" />
+        <activity android:name="com.pds.kotlin.study.ui.constraint.ConstraintActivity" />
     </application>
 
 </manifest>
