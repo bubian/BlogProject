@@ -1,18 +1,12 @@
 package com.pds.kotlin.study.ui.constraint
 
 import android.app.Activity
-import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
 import com.google.android.flexbox.*
-import com.pds.base.adapter.ListAdapter
 import com.pds.base.adapter.SimpleItemOnClickListener
-import com.pds.base.holder.BaseViewHolder
 import com.pds.kotlin.study.R
+import com.pds.kotlin.study.ui.adapter.ContentAdapter1
 import com.pds.kotlin.study.ui.entity.Entity
 import kotlinx.android.synthetic.main.constraint_common.*
 import org.jetbrains.anko.internals.AnkoInternals
@@ -20,7 +14,7 @@ import java.util.ArrayList
 
 class ConstraintMainActivity : Activity(){
 
-    private val contentAdapter = ContentAdapter(this)
+    private val contentAdapter = ContentAdapter1(this)
     private val textArray = arrayOf(
         // 下面都是在recyclerView进行滑动操作
         // 向上滑动（不管recyclerView是否已经滚动顶部了），appbar收缩到Toolbar设定的最小高度；向下滑动（当recyclerView滑动到顶部时），appbar开始随着下滑开始拉伸到Toolbar设定的高度，
@@ -84,7 +78,6 @@ class ConstraintMainActivity : Activity(){
             layoutManager = flm
             adapter = contentAdapter
         }
-
     }
 
     private fun initData() {
@@ -131,38 +124,6 @@ class ConstraintMainActivity : Activity(){
                     }
                 }
             })
-        }
-    }
-
-
-    inner class ContentAdapter(context: Context) : ListAdapter<Entity>(context){
-
-        override fun convert(baseViewHolder: BaseViewHolder, position: Int, itemData: Entity?) {
-            baseViewHolder.setText(baseViewHolder.convertView,itemData?.text)
-            itemData?.color?.let {
-                if (it == R.color.colorAccent)
-                    baseViewHolder.convertView.  setBackgroundResource(R.drawable.bg_rect_d81b60_20)
-                else  baseViewHolder.convertView.  setBackgroundResource(R.drawable.bg_rect_008577_20)
-            }
-        }
-        override fun createItemView(parent: ViewGroup?, viewType: Int): View {
-            return createTextView(context)
-        }
-
-        private fun createTextView(context: Context) : View {
-            val params: ViewGroup.MarginLayoutParams = FlexboxLayoutManager.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
-                topMargin = 50
-                leftMargin = 50
-            }
-            return Button(context).apply {
-                layoutParams = params
-                textSize = 16f
-                setTextColor(Color.WHITE)
-                isAllCaps = false
-                setPadding(30,0,30,0)
-                gravity = Gravity.CENTER
-
-            }
         }
     }
 }

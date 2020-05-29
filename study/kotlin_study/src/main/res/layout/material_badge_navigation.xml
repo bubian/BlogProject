@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_navigation_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/badge_test_parent"
+        android:layout_width="90dp"
+        android:layout_height="70dp"
+        android:background="@android:color/holo_blue_dark"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/badge_test"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@android:color/darker_gray"
+            android:scaleType="center"
+            android:src="@android:drawable/ic_menu_camera" />
+    </FrameLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorFullWidth="false"
+        android:layout_marginBottom="16dp">
+
+        <com.google.android.material.tabs.TabItem
+            android:icon="@android:drawable/ic_menu_share"
+            android:text="分享"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@android:drawable/ic_menu_call"
+            android:text="电话"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:text="相机"/>
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:labelVisibilityMode="labeled"
+        app:elevation="8dp"
+        app:menu="@menu/bottom_navigation_menu"/>
+
+    <!-- LABEL_VISIBILITY_AUTO (default): The label behaves as “labeled” when there are 3 items or less, or “selected” when there are 4 items or more
+         LABEL_VISIBILITY_SELECTED: The label is only shown on the selected navigation item
+         LABEL_VISIBILITY_LABELED: The label is shown on all navigation items
+         LABEL_VISIBILITY_UNLABELED: The label is hidden for all navigation items -->
+
+    <!-- style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"-->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:labelVisibilityMode="labeled"
+        app:elevation="8dp"
+        app:menu="@menu/bottom_navigation_menu"/>
+
+</LinearLayout>

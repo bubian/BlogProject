@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                app:backgroundTint="@color/colorAccent"
+                app:strokeColor="@color/colorPrimary"
+                app:strokeWidth="1dp"
+                android:textAllCaps="false"
+                android:layout_marginStart="16dp"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:text="Button"/>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="16dp"
+                app:backgroundTintMode="screen"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/colorAccent"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:text="Button one"/>
+
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start|left"
+        app:headerLayout="@layout/barrier_1"
+        app:menu="@menu/bottom_navigation_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>

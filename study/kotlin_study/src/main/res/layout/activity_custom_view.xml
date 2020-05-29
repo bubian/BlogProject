@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        tools:context=".ui.ViewActivity">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <com.pds.kotlin.study.ui.view.CustomView1
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        <com.pds.kotlin.study.ui.view.CustomView2
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        <com.pds.kotlin.study.ui.view.CustomView3
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        <com.pds.kotlin.study.ui.view.CustomView4
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        <com.pds.kotlin.study.ui.view.CustomView5
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        <com.pds.kotlin.study.ui.view.CustomView6
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        <com.pds.kotlin.study.ui.view.CustomView7
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        <com.pds.kotlin.study.ui.view.CustomView8
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        <com.pds.kotlin.study.ui.view.CustomView9
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        <com.pds.kotlin.study.ui.view.CustomView10
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        <com.pds.kotlin.study.ui.view.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"/>
+
+        <com.pds.kotlin.study.ui.view.CanvasOperateView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"/>
+
+        <com.pds.kotlin.study.ui.view.DrawingOrderView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"/>
+
+        <com.pds.kotlin.study.ui.view.PropertyAnimationView
+                android:id="@+id/property_an"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="change"
+                android:layout_marginTop="10dp"/>
+
+        <com.pds.kotlin.study.ui.view.SportsView
+                android:id="@+id/sports"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
+</ScrollView>

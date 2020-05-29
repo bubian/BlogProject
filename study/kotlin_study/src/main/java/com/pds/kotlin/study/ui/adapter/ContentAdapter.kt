@@ -18,7 +18,7 @@ import com.pds.kotlin.study.ui.entity.Entity
  * Description:
  */
 
-class ContentAdapter<T>(context: Context) : ListAdapter<T>(context){
+open class ContentAdapter<T>(context: Context) : ListAdapter<T>(context){
 
     companion object{
         val INIT_DATA  = mutableListOf(
@@ -45,11 +45,8 @@ class ContentAdapter<T>(context: Context) : ListAdapter<T>(context){
 
 
     override fun convert(baseViewHolder: BaseViewHolder, position: Int, itemData: T?) {
-        if (itemData is Entity){
-            baseViewHolder.setText(baseViewHolder.convertView,itemData?.text)
-        }else if (itemData is String){
-            baseViewHolder.setText(baseViewHolder.convertView,itemData)
-        }
+        val text = if (itemData is Entity) itemData.text else if (itemData is String) itemData else ""
+        if (baseViewHolder.convertView is TextView) (baseViewHolder.convertView as TextView).text = text
     }
     override fun createItemView(parent: ViewGroup?, viewType: Int): View {
         return createTextView(context)

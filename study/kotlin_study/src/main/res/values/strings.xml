@@ -107,11 +107,11 @@ See the License for the specific language governing permissions and
 limitations under the License. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.\n\nLorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo."</string>
 
 
-    <string name="BackDropBottomSheetBehavior">com.pds.kotlin.study.behavior.BackdropBottomSheetBehavior</string>
-    <string name="BottomSheetBehaviorGoogleMapsLike">com.pds.kotlin.study.behavior.BottomSheetBehaviorGoogleMapsLike</string>
-    <string name="ScrollAwareFABBehavior">com.pds.kotlin.study.behavior.ScrollAwareFABBehavior</string>
-    <string name="MergedAppBarLayoutBehavior">com.pds.kotlin.study.behavior.MergedAppBarLayoutBehavior</string>
-    <string name="ScrollingAppBarLayoutBehavior">com.pds.kotlin.study.behavior.ScrollingAppBarLayoutBehavior</string>
+    <string name="BackDropBottomSheetBehavior">com.pds.kotlin.study.ui.behavior.BackdropBottomSheetBehavior</string>
+    <string name="BottomSheetBehaviorGoogleMapsLike">com.pds.kotlin.study.ui.behavior.BottomSheetBehaviorGoogleMapsLike</string>
+    <string name="ScrollAwareFABBehavior">com.pds.kotlin.study.ui.behavior.ScrollAwareFABBehavior</string>
+    <string name="MergedAppBarLayoutBehavior">com.pds.kotlin.study.ui.behavior.MergedAppBarLayoutBehavior</string>
+    <string name="ScrollingAppBarLayoutBehavior">com.pds.kotlin.study.ui.behavior.ScrollingAppBarLayoutBehavior</string>
 
     <string name="share">Share</string>
     <string name="upload">Upload</string>
