@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="image_color">28dp</dimen>
+
+    <dimen name="image_color_margin">6dp</dimen>
+
+    <dimen name="image_mode_space">32dp</dimen>
+
+    <dimen name="image_23">23dp</dimen>
+    <dimen name="image_6">6dp</dimen>
+    <dimen name="image_2">2dp</dimen>
+    <dimen name="image_1">1dp</dimen>
+    <dimen name="image_280">280dp</dimen>
+    <dimen name="image_7">7dp</dimen>
+    <dimen name="image_12">12dp</dimen>
+    <dimen name="image_8">8dp</dimen>
+    <dimen name="image_82">82dp</dimen>
+
+    <dimen name="image_12_5">12.5dp</dimen>
+    <dimen name="image_5">5dp</dimen>
+    <dimen name="image_4">4dp</dimen>
+    <dimen name="image_6_5">6.5dp</dimen>
+    <dimen name="image_7_5">7.5dp</dimen>
+    <dimen name="image_28">28dp</dimen>
+
+</resources>

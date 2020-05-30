@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".IMGEditActivity">
+
+    <RelativeLayout
+        android:id="@+id/top_title"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:padding="12dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/top_nav_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_naviback_gray"
+            android:padding="4dp"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+            <!--<ImageView-->
+                <!--android:id="@+id/top_nav_step_forward"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@mipmap/operate_forward_n"-->
+                <!--android:padding="4dp"/>-->
+            <!--<ImageView-->
+                <!--android:id="@+id/top_nav_step_back"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@mipmap/operate_back_n"-->
+                <!--android:padding="4dp"-->
+                <!--android:layout_toRightOf="@+id/top_nav_step_forward"-->
+                <!--android:layout_marginLeft="60dp"/>-->
+
+            <ImageView
+                android:id="@+id/top_nav_step_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/operate_forward_n"
+                android:padding="4dp"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/top_nav_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@string/image_complete"
+            android:textColor="#FF0A6AFF"
+            android:textSize="16sp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+    <com.pds.edit.view.IMGDrawView
+        android:id="@+id/image_canvas"
+        android:layout_marginTop="64dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:layout_marginBottom="72dp"/>
+
+    <com.pds.edit.view.PaintTypeSelectView
+        android:id="@+id/paint_type_select"
+        android:layout_marginTop="64dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="72dp"/>
+
+    <com.pds.edit.view.BottomNavigation
+        android:id="@+id/editors_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom"
+        android:background="@android:color/white"/>
+
+    <include layout="@layout/image_edit_clip_layout" android:visibility="gone" />
+</merge>

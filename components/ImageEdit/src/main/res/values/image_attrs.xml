@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <attr name="image_gallery_span_count" format="integer" />
+    <attr name="image_gallery_select_shade" format="color" />
+
+    <declare-styleable name="IMGColorRadio" tools:ignore="ResourceName">
+
+        <attr name="image_color" format="color" />
+        <attr name="image_stroke_color" format="color" />
+
+    </declare-styleable>
+
+    <declare-styleable name="ColorCircleView" tools:ignore="ResourceName">
+        <attr name="in_circle_r" format="dimension"/>
+        <attr name="in_circle_color" format="string|color"/>
+        <attr name="out_circle_stroke_width" format="dimension"/>
+        <attr name="out_circle_color" format="string|color"/>
+        <attr name="out_circle_shadow_color" format="string|color"/>
+    </declare-styleable>
+
+</resources>

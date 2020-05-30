@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:med="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ResourceName">
+
+
+    <com.pds.edit.view.SizeProgressView
+        android:id="@+id/size_progress"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="13dp" />
+
+
+    <com.pds.edit.view.ColorCircleView
+        android:id="@+id/PaintCircle1"
+        android:layout_width="@dimen/image_23"
+        android:layout_height="@dimen/image_23"
+        med:in_circle_r="@dimen/image_7_5"
+        med:in_circle_color="@color/image_color_B256FC"
+        med:out_circle_stroke_width="@dimen/image_2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="@dimen/image_28"
+        android:layout_marginEnd="@dimen/image_28"
+        android:layout_marginBottom="18dp"
+        android:visibility="gone"/>
+
+
+    <com.pds.edit.view.ColorCircleView
+        android:id="@+id/PaintCircle2"
+        android:layout_width="@dimen/image_23"
+        android:layout_height="@dimen/image_23"
+        med:in_circle_r="@dimen/image_7_5"
+        med:in_circle_color="@color/image_color_FFD800"
+        med:out_circle_stroke_width="@dimen/image_2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="@dimen/image_28"
+        android:layout_marginEnd="@dimen/image_28"
+        android:layout_marginBottom="18dp"
+        android:visibility="gone"/>
+
+
+    <com.pds.edit.view.ColorCircleView
+        android:id="@+id/PaintCircle3"
+        android:layout_width="@dimen/image_23"
+        android:layout_height="@dimen/image_23"
+        med:in_circle_r="@dimen/image_7_5"
+        med:in_circle_color="@color/image_color_3D83FF"
+        med:out_circle_stroke_width="@dimen/image_2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="@dimen/image_28"
+        android:layout_marginEnd="@dimen/image_28"
+        android:layout_marginBottom="18dp"
+        android:visibility="gone"/>
+
+
+    <com.pds.edit.view.ColorCircleView
+        android:id="@+id/PaintCircle4"
+        android:layout_width="@dimen/image_23"
+        android:layout_height="@dimen/image_23"
+        med:in_circle_r="@dimen/image_7_5"
+        med:in_circle_color="@color/image_color_333332"
+        med:out_circle_stroke_width="@dimen/image_2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="@dimen/image_28"
+        android:layout_marginEnd="@dimen/image_28"
+        android:layout_marginBottom="18dp"
+        android:visibility="gone"/>
+
+    <com.pds.edit.view.ColorCircleView
+        android:id="@+id/PaintCircle5"
+        android:layout_width="@dimen/image_23"
+        android:layout_height="@dimen/image_23"
+        med:in_circle_r="@dimen/image_8"
+        med:in_circle_color="@color/image_color_red"
+        med:out_circle_stroke_width="@dimen/image_2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="18dp"
+        android:layout_marginRight="@dimen/image_28"
+        android:layout_marginEnd="@dimen/image_28" />
+
+
+
+</merge>
