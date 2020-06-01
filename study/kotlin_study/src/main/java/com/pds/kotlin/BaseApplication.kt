@@ -2,6 +2,7 @@ package com.pds.kotlin
 
 import android.util.Log
 import androidx.multidex.MultiDexApplication
+import com.pds.kotlin.study.dagger.DaggerApplicationComponent
 
 /**
  * @author: pengdaosong
@@ -9,7 +10,10 @@ import androidx.multidex.MultiDexApplication
  * Email：pengdaosong@medlinker.com
  * Description:
  */
+
 class BaseApplication : MultiDexApplication(){
+
+    val appComponent = DaggerApplicationComponent.create()
 
     companion object{
         private const val TAG = "BaseApplication"

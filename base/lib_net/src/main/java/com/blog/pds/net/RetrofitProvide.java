@@ -1,11 +1,14 @@
 package com.blog.pds.net;
 
+import android.os.Environment;
+
 import com.blog.pds.net.interceptor.InterceptorHelper;
 import com.blog.pds.net.interceptor.OkHttpLogInterceptor;
 
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Cache;
 import okhttp3.CipherSuite;
 import okhttp3.ConnectionSpec;
 import okhttp3.OkHttpClient;
@@ -70,6 +73,10 @@ public class RetrofitProvide {
         }
         builder.addInterceptor(InterceptorHelper.getInstance().getCacheInterceptor());
         builder.addNetworkInterceptor(InterceptorHelper.getInstance().getCacheInterceptor());
+
+        builder.cache(new Cache(Environment.getDataDirectory(), MAX_CACHE_SIZE));
+
+
         return builder.build();
     }
 
