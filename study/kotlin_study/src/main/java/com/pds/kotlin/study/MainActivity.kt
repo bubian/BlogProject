@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pds.base.adapter.ListAdapter
 import com.pds.base.adapter.SimpleItemOnClickListener
 import com.pds.base.holder.BaseViewHolder
+import com.pds.kotlin.study.recorder.RecordActivity
 import com.pds.kotlin.study.ui.material.MaterialDesignActivity
 import com.pds.kotlin.study.ui.ViewActivity
 import com.pds.kotlin.study.ui.constraint.ConstraintMainActivity
@@ -26,19 +27,22 @@ class MainActivity : AppCompatActivity() {
     private val clzArray = arrayOf(
        ConstraintMainActivity::class.java,
         ViewActivity::class.java,
-        MaterialDesignActivity::class.java
+        MaterialDesignActivity::class.java,
+        RecordActivity::class.java
     )
 
     private val titleArray = arrayOf(
         "Constraint",
         "Custom View 基础",
-        "Material Design"
+        "Material Design",
+        "音频录制"
     )
 
     private val contentArray = arrayOf(
         "简介：包含Constraint基本布局使用，CoordinatorLayout与AppBarLayout，CollapsingToolbarLayout结合使用的各种效果展示；bottom sheet使用，包含大量demo展示，不同属性对比演示等",
         "简介：参考HenCoder - 扔物线自定义View系列文章，亲自实践，通过例子学习不同api之间的差异，结合自己的理解，加一注释。",
-        "简介：通过demo讲解material库组件使用，文章参考：https://material.io/develop/android/components/cards/，demo参考：https://github.com/material-components/material-components-android"
+        "简介：通过demo讲解material库组件使用，文章参考：https://material.io/develop/android/components/cards/，demo参考：https://github.com/material-components/material-components-android",
+        "简介：一个简单，易用，的音频录制，用于学习安卓中的音频录制与控制"
     )
 
     private val contentAdapter = object : ListAdapter<MainEntity>(this@MainActivity,R.layout.item_main){

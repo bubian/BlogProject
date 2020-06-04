@@ -3,6 +3,9 @@
         xmlns:tools="http://schemas.android.com/tools"
         package="com.pds.kotlin.study">
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:name="com.pds.kotlin.BaseApplication"
         android:allowBackup="true"
@@ -49,6 +52,22 @@
             android:theme="@style/Theme.MaterialComponents.DayNight"/>
         <activity android:name=".ui.material.CommonMaterialComponentActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
+
+        <!-- record-->
+        <activity android:name=".recorder.RecordActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <service android:name=".recorder.RecordingService"/>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.pds.kotlin.provider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>
