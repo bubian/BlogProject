@@ -18,6 +18,7 @@ class BaseApplication : MultiDexApplication(){
     companion object{
         private const val TAG = "BaseApplication"
         private lateinit var application : BaseApplication
+        @JvmStatic
         fun app() : BaseApplication{
             return application
         }

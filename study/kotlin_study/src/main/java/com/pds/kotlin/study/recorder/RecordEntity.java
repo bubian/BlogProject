@@ -3,18 +3,16 @@ package com.pds.kotlin.study.recorder;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class RecordingItem implements Parcelable {
-    private String mName; // file name
-    private String mFilePath; //file path
-    private int mId; //id in database
-    private int mLength; // length of recording in seconds
-    private long mTime; // date/time of the recording
+public class RecordEntity implements Parcelable {
+    private String mName;
+    private String mFilePath;
+    private int mId;
+    private int mLength;
+    private long mTime;
 
-    public RecordingItem()
-    {
-    }
+    public RecordEntity() { }
 
-    public RecordingItem(Parcel in) {
+    public RecordEntity(Parcel in) {
         mName = in.readString();
         mFilePath = in.readString();
         mId = in.readInt();
@@ -62,13 +60,13 @@ public class RecordingItem implements Parcelable {
         mTime = time;
     }
 
-    public static final Creator<RecordingItem> CREATOR = new Creator<RecordingItem>() {
-        public RecordingItem createFromParcel(Parcel in) {
-            return new RecordingItem(in);
+    public static final Creator<RecordEntity> CREATOR = new Creator<RecordEntity>() {
+        public RecordEntity createFromParcel(Parcel in) {
+            return new RecordEntity(in);
         }
 
-        public RecordingItem[] newArray(int size) {
-            return new RecordingItem[size];
+        public RecordEntity[] newArray(int size) {
+            return new RecordEntity[size];
         }
     };
 

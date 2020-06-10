@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         card_view:cardElevation="3dp"
-        android:transitionName="open_mediaplayer"
+        android:transitionName="open_media_player"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
 

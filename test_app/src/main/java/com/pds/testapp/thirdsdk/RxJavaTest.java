@@ -1,8 +1,8 @@
-package com.pds.blog.test;
+package com.pds.testapp.thirdsdk;
 
+import org.junit.Test;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableEmitter;
@@ -12,10 +12,8 @@ import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Action;
 import io.reactivex.rxjava3.functions.BiFunction;
-import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.functions.Supplier;
-import io.reactivex.rxjava3.observables.ConnectableObservable;
 
 /**
  * @author: pengdaosong
@@ -23,8 +21,10 @@ import io.reactivex.rxjava3.observables.ConnectableObservable;
  * Email：pengdaosong@medlinker.com
  * Description:
  */
+
 public class RxJavaTest {
 
+    @Test
     private void create(){
         Observable.create((ObservableOnSubscribe<Integer>) emitter -> {
             ObservableEmitter<Integer> observableEmitter = emitter.serialize();
@@ -432,11 +432,9 @@ public class RxJavaTest {
 
     }
 
-    public static void main(String[] arg){
-        RxJavaTest rxJavaTest = new RxJavaTest();
-//        rxJavaTest.AndOrThenOrWhen();
-
-        Observable observable = Observable.create((ObservableOnSubscribe<Integer>) emitter -> {
+    @Test
+    public void publish(){
+        Observable<Integer> observable = Observable.<Integer>create(emitter -> {
             ObservableEmitter<Integer> observableEmitter = emitter.serialize();
             try {
                 // 序列化
@@ -445,11 +443,10 @@ public class RxJavaTest {
                         System.out.println("create operate--->emitter: "+i);
                         if (1==i){
                             // ExceptionHelper.TERMINATED
-//                            observableEmitter.onError(new Throwable("error"));
+                            observableEmitter.onError(new Throwable("error"));
                         }else {
                             observableEmitter.onNext(i);
                         }
-
                     }
                     observableEmitter.onComplete();
                 }
@@ -503,7 +500,6 @@ public class RxJavaTest {
 
 
 //        observable.connect();
-
     }
 
 }

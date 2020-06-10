@@ -57,7 +57,7 @@
         <activity android:name=".recorder.RecordActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
-        <service android:name=".recorder.RecordingService"/>
+        <service android:name=".recorder.core.RecordService"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

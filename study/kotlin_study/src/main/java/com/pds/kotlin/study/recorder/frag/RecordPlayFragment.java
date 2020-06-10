@@ -7,7 +7,6 @@ import android.graphics.LightingColorFilter;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,17 +18,15 @@ import androidx.fragment.app.DialogFragment;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.pds.kotlin.study.R;
-import com.pds.kotlin.study.recorder.RecordingItem;
+import com.pds.kotlin.study.recorder.RecordEntity;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class PlaybackFragment extends DialogFragment {
+public class RecordPlayFragment extends DialogFragment {
 
-    private static final String LOG_TAG = "PlaybackFragment";
-
-    private static final String ARG_ITEM = "recording_item";
-    private RecordingItem item;
+    private static final String ARG_ITEM = "record_entity";
+    private RecordEntity item;
 
     private Handler mHandler = new Handler();
 
@@ -41,15 +38,13 @@ public class PlaybackFragment extends DialogFragment {
     private TextView mFileNameTextView = null;
     private TextView mFileLengthTextView = null;
 
-    //stores whether or not the mediaplayer is currently playing audio
     private boolean isPlaying = false;
 
-    //stores minutes and seconds of the length of the file.
     long minutes = 0;
     long seconds = 0;
 
-    public PlaybackFragment newInstance(RecordingItem item) {
-        PlaybackFragment f = new PlaybackFragment();
+    public RecordPlayFragment newInstance(RecordEntity item) {
+        RecordPlayFragment f = new RecordPlayFragment();
         Bundle b = new Bundle();
         b.putParcelable(ARG_ITEM, item);
         f.setArguments(b);
@@ -220,7 +215,7 @@ public class PlaybackFragment extends DialogFragment {
                 }
             });
         } catch (IOException e) {
-            Log.e(LOG_TAG, "prepare() failed");
+            e.printStackTrace();
         }
 
         mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -247,18 +242,12 @@ public class PlaybackFragment extends DialogFragment {
             mSeekBar.setMax(mMediaPlayer.getDuration());
             mMediaPlayer.seekTo(progress);
 
-            mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    stopPlaying();
-                }
-            });
+            mMediaPlayer.setOnCompletionListener(mp -> stopPlaying());
 
         } catch (IOException e) {
-            Log.e(LOG_TAG, "prepare() failed");
+            e.printStackTrace();
         }
 
-        //keep screen on while playing audio
         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 

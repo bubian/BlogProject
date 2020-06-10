@@ -1,18 +1,22 @@
-package com.pds.kotlin.study.recorder;
+package com.pds.kotlin.study.recorder.core;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 import android.provider.BaseColumns;
 
+import com.pds.kotlin.study.R;
+import com.pds.kotlin.study.recorder.DatabaseChangedListener;
+import com.pds.kotlin.study.recorder.RecordEntity;
+
+import java.io.File;
 import java.util.Comparator;
 
-public class DBHelper extends SQLiteOpenHelper {
+public class RecordDBHelper extends SQLiteOpenHelper {
     private Context mContext;
-
-    private static final String LOG_TAG = "DBHelper";
 
     private static DatabaseChangedListener mOnDatabaseChangedListener;
 
@@ -51,7 +55,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public DBHelper(Context context) {
+    public RecordDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         mContext = context;
     }
@@ -60,7 +64,7 @@ public class DBHelper extends SQLiteOpenHelper {
         mOnDatabaseChangedListener = listener;
     }
 
-    public RecordingItem getItemAt(int position) {
+    public RecordEntity getItemAt(int position) {
         SQLiteDatabase db = getReadableDatabase();
         String[] projection = {
                 DBHelperItem._ID,
@@ -71,7 +75,7 @@ public class DBHelper extends SQLiteOpenHelper {
         };
         Cursor c = db.query(DBHelperItem.TABLE_NAME, projection, null, null, null, null, null);
         if (c.moveToPosition(position)) {
-            RecordingItem item = new RecordingItem();
+            RecordEntity item = new RecordEntity();
             item.setId(c.getInt(c.getColumnIndex(DBHelperItem._ID)));
             item.setName(c.getString(c.getColumnIndex(DBHelperItem.COLUMN_NAME_RECORDING_NAME)));
             item.setFilePath(c.getString(c.getColumnIndex(DBHelperItem.COLUMN_NAME_RECORDING_FILE_PATH)));
@@ -102,8 +106,8 @@ public class DBHelper extends SQLiteOpenHelper {
         return mContext;
     }
 
-    public class RecordingComparator implements Comparator<RecordingItem> {
-        public int compare(RecordingItem item1, RecordingItem item2) {
+    public class RecordingComparator implements Comparator<RecordEntity> {
+        public int compare(RecordEntity item1, RecordEntity item2) {
             Long o1 = item1.getTime();
             Long o2 = item2.getTime();
             return o2.compareTo(o1);
@@ -127,7 +131,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return rowId;
     }
 
-    public void renameItem(RecordingItem item, String recordingName, String filePath) {
+    public void renameItem(RecordEntity item, String recordingName, String filePath) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(DBHelperItem.COLUMN_NAME_RECORDING_NAME, recordingName);
@@ -140,7 +144,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public long restoreRecording(RecordingItem item) {
+    public long restoreRecording(RecordEntity item) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(DBHelperItem.COLUMN_NAME_RECORDING_NAME, item.getName());
@@ -153,5 +157,19 @@ public class DBHelper extends SQLiteOpenHelper {
             //mOnDatabaseChangedListener.onNewDatabaseEntryAdded();
         }
         return rowId;
+    }
+
+    public File getRecordFilePath(){
+        int count = 0;
+        File f;
+        do{
+            count++;
+            String mFileName = "我的录音" + "_" + (getCount() + count) + ".mp4";
+            String mFilePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+            mFilePath += "/SoundRecorder/" + mFileName;
+            f = new File(mFilePath);
+        }while (f.exists() && !f.isDirectory());
+
+        return f;
     }
 }
