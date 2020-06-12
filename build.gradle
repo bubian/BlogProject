@@ -21,6 +21,8 @@ buildscript {
 
         // app-joint
         classpath 'io.github.prototypez:app-joint:1.7'
+        // [doraemonkit](https://github.com/didi/DoraemonKit)
+        classpath 'com.didichuxing.doraemonkit:doraemonkit-plugin:3.1.6'
     }
 }
 

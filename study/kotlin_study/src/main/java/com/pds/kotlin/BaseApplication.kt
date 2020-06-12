@@ -2,6 +2,7 @@ package com.pds.kotlin
 
 import android.util.Log
 import androidx.multidex.MultiDexApplication
+import com.didichuxing.doraemonkit.DoraemonKit
 import com.pds.kotlin.study.dagger.DaggerApplicationComponent
 
 /**
@@ -27,5 +28,6 @@ class BaseApplication : MultiDexApplication(){
         super.onCreate()
         application = this
         Log.d(TAG,"onCreate")
+        DoraemonKit.install(this)
     }
 }
