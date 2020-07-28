@@ -68,6 +68,7 @@ dependencies {
     implementation 'com.google.android:flexbox:2.0.1'
 
     implementation project(path: ':base:lib_base')
+    implementation project(path: ':base:frame')
     implementation project(path: ':base:sdk_third')
 
     implementation 'com.cocosw:bottomsheet:1.5.0@aar'
@@ -86,4 +87,8 @@ dependencies {
     // doraemonkit
     debugImplementation "com.didichuxing.doraemonkit:doraemonkit:3.1.6"
     releaseImplementation "com.didichuxing.doraemonkit:doraemonkit-no-op:3.1.6"
+    // [xCrash](https://github.com/iqiyi/xCrash)
+    implementation 'com.iqiyi.xcrash:xcrash-android-lib:2.4.9'
+    // https://github.com/Meituan-Dianping/Logan/tree/master/Example/Logan-Android
+    implementation 'com.dianping.android.sdk:logan:1.2.4'
 }

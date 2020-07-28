@@ -1,0 +1,18 @@
+task makeJar(type:org.gradle.api.tasks.bundling.Jar) {
+    //指定生成的jar名
+    baseName project.name
+    //从哪里打包class文件
+    from('build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/pds/edit/')
+    //打包到jar后的目录结构
+    into('libs/')
+//    //去掉不需要打包的目录和文件
+//    exclude('test/', 'BuildConfig.class', 'R.class')
+//    //去掉R$开头的文件
+//    exclude{ it.name.startsWith('R$'); }
+}
+
+// 使用gradle打包指定包名和类的jar
+task clearJar(type: Delete) {
+    delete "libs/${project.name}.jar"
+}
+makeJar.dependsOn(clearJar, build)

@@ -1,9 +1,15 @@
 package com.pds.kotlin
 
-import android.util.Log
 import androidx.multidex.MultiDexApplication
+import com.dianping.logan.Logan
+import com.dianping.logan.LoganConfig
 import com.didichuxing.doraemonkit.DoraemonKit
+import com.pds.frame.log.Lg
+import com.pds.kotlin.study.dagger.ApplicationComponent
 import com.pds.kotlin.study.dagger.DaggerApplicationComponent
+import xcrash.XCrash
+import java.io.File
+
 
 /**
  * @author: pengdaosong
@@ -14,7 +20,7 @@ import com.pds.kotlin.study.dagger.DaggerApplicationComponent
 
 class BaseApplication : MultiDexApplication(){
 
-    val appComponent = DaggerApplicationComponent.create()
+    val appComponent: ApplicationComponent = DaggerApplicationComponent.create()
 
     companion object{
         private const val TAG = "BaseApplication"
@@ -27,7 +33,26 @@ class BaseApplication : MultiDexApplication(){
     override fun onCreate() {
         super.onCreate()
         application = this
-        Log.d(TAG,"onCreate")
+        Lg.d(TAG,"onCreate")
         DoraemonKit.install(this)
+        // xCrash 能为安卓 app 提供捕获 java 崩溃，native 崩溃和 ANR 的能力。不需要 root 权限或任何系统权限。（https://github.com/iqiyi/xCrash）
+        // 日志保存目录：/data/data/PACKAGE_NAME/files/tombstones
+        XCrash.init(this)
+        // logan
+        initLogan()
+    }
+
+    /**
+     * https://github.com/Meituan-Dianping/Logan/tree/master/Example/Logan-Android
+     * https://tech.meituan.com/2018/10/11/logan-open-source.html
+     */
+    private fun initLogan() {
+        val config = LoganConfig.Builder()
+            .setCachePath(applicationContext.filesDir.absolutePath)
+            .setPath((cacheDir.absolutePath + File.separator) + "logan_v1")
+            .setEncryptKey16("0123456789012345".toByteArray())
+            .setEncryptIV16("0123456789012345".toByteArray())
+            .build()
+        Logan.init(config)
     }
 }
