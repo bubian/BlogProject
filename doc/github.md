@@ -127,3 +127,8 @@ Timber是一个设计漂亮，功能完善的音乐播放器。如果你曾想�
 
 一个简单，轻量的计步器app，使用硬件传感器计算步数，而且对电池的消耗非常小。
 
+
+### gradle插件库开发
+[Hunter](https://github.com/Leaking/Hunter/blob/master/README_ch.md)
+
+Hunter是这么一个框架，帮你快速开发插件，在编译过程中修改字节码，它底层基于ASM 和 Gradle Transform API 实现

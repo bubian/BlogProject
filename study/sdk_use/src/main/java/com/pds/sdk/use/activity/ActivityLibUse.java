@@ -2,6 +2,7 @@ package com.pds.sdk.use.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 

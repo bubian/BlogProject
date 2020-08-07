@@ -4,6 +4,7 @@ import android.os.Environment;
 
 import com.blog.pds.net.interceptor.InterceptorHelper;
 import com.blog.pds.net.interceptor.OkHttpLogInterceptor;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
@@ -72,6 +73,7 @@ public class RetrofitProvide {
             builder.addInterceptor(InterceptorHelper.getInstance().getParamsInterceptor());
         }
         builder.addInterceptor(InterceptorHelper.getInstance().getCacheInterceptor());
+        builder.addNetworkInterceptor(new StethoInterceptor());
         builder.addNetworkInterceptor(InterceptorHelper.getInstance().getCacheInterceptor());
 
         builder.cache(new Cache(Environment.getDataDirectory(), MAX_CACHE_SIZE));

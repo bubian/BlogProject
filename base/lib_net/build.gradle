@@ -30,4 +30,6 @@ dependencies {
     compile 'com.qpdstudio.logger:logger:1.0.8'
 
     testImplementation 'junit:junit:4.12'
+
+    api project(path: ':base:debug_tool')
 }

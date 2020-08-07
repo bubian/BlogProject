@@ -10,6 +10,7 @@ import androidx.multidex.MultiDexApplication;
 import com.pds.blog.BuildConfig;
 import com.pds.blog.R;
 import com.pds.skin.SkinManager;
+import com.pds.tool.ToolApplicationManager;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -54,6 +55,7 @@ public class BlogApplication extends MultiDexApplication {
         }
 
         SkinManager.init(this);
+        ToolApplicationManager.onCreate(this);
     }
 
     private boolean isRunningInEmualtor(){
