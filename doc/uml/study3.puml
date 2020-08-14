@@ -1,0 +1,58 @@
+@startuml
+Bob -> Alice : hello
+activate Alice
+Alice -> Alice : some action
+return bye
+
+'你可以把关键字create放在第一次接收到消息之前，以强调本次消息实际上是在创建新的对象。
+
+Bob -> Alice : hello
+
+create Other
+Alice -> Other : new
+
+create control String
+Alice -> String
+note right : You can also put notes!
+
+Alice --> Bob : ok
+|||
+alice -> bob ++ : hello
+bob -> bob ++ : self call
+bob -> bib ++  #005500 : hello
+bob -> george ** : create
+return done
+return rc
+bob -> george !! : delete
+return success
+
+[-> A: DoWork
+
+activate A
+
+A -> A: Internal call
+activate A
+
+A ->] : << createRequest >>
+
+A<--] : RequestCreated
+deactivate A
+[<- A: Done
+deactivate A
+
+[-> Bob
+[o-> Bob
+[o->o Bob
+[x-> Bob
+
+[<- Bob
+[x<- Bob
+
+Bob ->]
+Bob ->o]
+Bob o->o]
+Bob ->x]
+
+Bob <-]
+Bob x<-]
+@enduml
