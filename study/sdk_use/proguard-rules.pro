@@ -19,3 +19,10 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+# virtualapk
+-keep class com.didi.virtualapk.internal.VAInstrumentation { *; }
+-keep class com.didi.virtualapk.internal.PluginContentResolver { *; }
+
+-dontwarn com.didi.virtualapk.**
+-dontwarn android.**
+-keep class android.** { *; }

@@ -36,4 +36,12 @@ dependencies {
 //    implementation "androidx.activity:activity-ktx:1.2.0-alpha07"
 
     implementation project(path: ':base:sdk_third')
+    implementation 'com.didi.virtualapk:core:0.9.8'
 }
+
+apply plugin: 'com.didi.virtualapk.plugin'
+//virtualApk {
+//    packageId = 0x6f
+//    targetHost='source/host/app'
+//    applyHostMapping = true
+//}
