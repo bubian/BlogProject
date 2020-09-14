@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.pds.sdk.use.activity.ActivityLibUse
+import com.pds.sdk.use.realm.RealmTestActivity
 import org.jetbrains.anko.internals.AnkoInternals
 
 
@@ -15,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun doClick(view: View) {
-        AnkoInternals.internalStartActivity(this,ActivityLibUse::class.java, emptyArray())
+        AnkoInternals.internalStartActivity(this, RealmTestActivity::class.java, emptyArray())
     }
 
 }

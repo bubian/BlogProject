@@ -26,3 +26,6 @@
 -dontwarn com.didi.virtualapk.**
 -dontwarn android.**
 -keep class android.** { *; }
+
+#robust
+-keepclassmembers class **{ public static com.meituan.robust.ChangeQuickRedirect *; }

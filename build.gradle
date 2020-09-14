@@ -28,6 +28,8 @@ buildscript {
 
         classpath 'com.didi.virtualapk:gradle:0.9.8.6'
 
+        classpath 'com.meituan.robust:gradle-plugin:0.4.99'
+        classpath 'com.meituan.robust:auto-patch-plugin:0.4.99'
     }
 }
 

@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'robust'
+apply plugin: 'realm-android'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
@@ -23,6 +27,10 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -37,9 +45,15 @@ dependencies {
 
     implementation project(path: ':base:sdk_third')
     implementation 'com.didi.virtualapk:core:0.9.8'
+    // https://github.com/Meituan-Dianping/Robust/blob/master/README-zh.md
+    // Robust是新一代热更新系统，无差别兼容Android2.3-10版本；无需重启补丁实时生效，快速修复线上问题，补丁修补成功率高达99.9%。
+    implementation 'com.meituan.robust:robust:0.4.99'
+    // https://github.com/facebook/stetho
+    compile 'com.uphyca:stetho_realm:2.1.0'
+    compile 'com.facebook.stetho:stetho:1.5.1'
 }
 
-apply plugin: 'com.didi.virtualapk.plugin'
+//apply plugin: 'com.didi.virtualapk.plugin'
 //virtualApk {
 //    packageId = 0x6f
 //    targetHost='source/host/app'
