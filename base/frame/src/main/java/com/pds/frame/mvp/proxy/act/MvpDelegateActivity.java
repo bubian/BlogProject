@@ -5,19 +5,11 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.pds.frame.mvp.presenter.BasePresenter;
-import com.pds.frame.mvp.view.BaseView;
-import com.pds.frame.mvp.proxy.MvpCallBack;
+import com.pds.frame.mvp.core.BasePresenter;
+import com.pds.frame.mvp.core.BaseView;
+import com.pds.frame.mvp.core.MvpCallBack;
 
-
-/**
- * 作者: Dream on 2017/8/29 22:40
- * QQ:510278658
- * E-mail:510278658@qq.com
- */
-
-//
-public abstract class MvpActivity<V extends BaseView, P extends BasePresenter<V>> extends Activity implements MvpCallBack<V, P> {
+public abstract class MvpDelegateActivity<V extends BaseView, P extends BasePresenter<V>> extends Activity implements MvpCallBack<V, P> {
 
     //持有目的对象引用
     private ActivityMvpDelegateImpl<V, P> delegate;

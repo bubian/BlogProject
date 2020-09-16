@@ -1,20 +1,22 @@
-package com.pds.frame.mvp.proxy.view;
+package com.pds.sample.mvp;
 
 import android.os.Bundle;
 import android.view.View;
 
-import com.pds.frame.mvp.presenter.BasePresenter;
-import com.pds.frame.mvp.view.BaseView;
-import com.pds.frame.mvp.proxy.anim.ILceAnimator;
-import com.pds.frame.mvp.proxy.frag.MvpFragment;
+import androidx.annotation.Nullable;
+
+import com.pds.frame.mvp.core.BasePresenter;
+import com.pds.frame.mvp.core.BaseView;
+import com.pds.frame.mvp.proxy.act.MvpDelegateActivity;
+import com.pds.sample.mvp.anim.ILceAnimator;
 
 /**
- * 作者: Dream on 2017/8/30 21:15
+ * 作者: Dream on 2017/8/30 21:14
  * QQ:510278658
  * E-mail:510278658@qq.com
  */
 
-public class MvpLceFragment<D, V extends BaseView, P extends BasePresenter<V>> extends MvpFragment<V, P> implements MvpLceView<D> {
+public abstract class MvpLceActivity<D, V extends BaseView, P extends BasePresenter<V>> extends MvpDelegateActivity<V, P> implements MvpLceView<D> {
 
     //持有目标对象引用
     private MvpLceViewImpl<D> mvpLceView;
@@ -27,10 +29,10 @@ public class MvpLceFragment<D, V extends BaseView, P extends BasePresenter<V>> e
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         //绑定
-        getMvpLceView().initLceView(view);
+        getMvpLceView().initLceView(getWindow().getDecorView());
         getMvpLceView().setOnErrorViewClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,8 +76,4 @@ public class MvpLceFragment<D, V extends BaseView, P extends BasePresenter<V>> e
         getMvpLceView().loadData(isPullToRefresh);
     }
 
-    @Override
-    public void onResult(String result) {
-
-    }
 }

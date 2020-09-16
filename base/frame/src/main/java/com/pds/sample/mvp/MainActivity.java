@@ -1,11 +1,11 @@
-package com.pds.frame.mvp.view;
+package com.pds.sample.mvp;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.pds.frame.mvp.base.MvpActivity;
-import com.pds.frame.mvp.presenter.CTPresenter;
+import com.pds.frame.mvp.core.MvpActivity;
+import com.pds.sample.mvp.presenter.CTPresenter;
 
 public class MainActivity extends MvpActivity<ICTView, CTPresenter> implements ICTView {
 
@@ -27,42 +27,5 @@ public class MainActivity extends MvpActivity<ICTView, CTPresenter> implements I
     public void login(View view){
         if (null == presenter)return;
         presenter.login("13982000002","jjr123","1688");
-    }
-
-    @Override
-    public CTPresenter createPresenter() {
-        return new CTPresenter();
-    }
-
-    @Override
-    public ICTView createView() {
-        return this;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        presenter.detachView();
-    }
-
-
-    @Override
-    public CTPresenter getP() {
-        return null;
-    }
-
-    @Override
-    public void setP(CTPresenter presenter) {
-
-    }
-
-    @Override
-    public ICTView getV() {
-        return null;
-    }
-
-    @Override
-    public void setV(ICTView view) {
-
     }
 }

@@ -1,4 +1,4 @@
-package com.pds.frame.mvp.proxy.anim;
+package com.pds.sample.mvp.anim;
 
 import android.view.View;
 

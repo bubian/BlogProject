@@ -1,4 +1,4 @@
-package com.pds.frame.mvp.proxy.anim;
+package com.pds.sample.mvp.anim;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -6,8 +6,6 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.res.Resources;
 import android.view.View;
-
-import com.pds.frame.R;
 
 /**
  * 作者: Dream on 2017/8/30 21:33

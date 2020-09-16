@@ -1,6 +1,4 @@
-package com.pds.frame.mvp.presenter;
-
-import com.pds.frame.mvp.view.BaseView;
+package com.pds.frame.mvp.core;
 
 public abstract class BasePresenter<V extends BaseView> implements IPresenter<V> {
 

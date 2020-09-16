@@ -1,8 +1,8 @@
-package com.pds.frame.mvp.proxy.view;
+package com.pds.sample.mvp;
 
 import android.view.View;
-import com.pds.frame.mvp.proxy.anim.DefaultLceAnimator;
-import com.pds.frame.mvp.proxy.anim.ILceAnimator;
+import com.pds.sample.mvp.anim.DefaultLceAnimator;
+import com.pds.sample.mvp.anim.ILceAnimator;
 
 /**
  * 作者: Dream on 2017/8/30 21:20
@@ -88,11 +88,6 @@ public class MvpLceViewImpl<D> implements MvpLceView<D> {
 
     @Override
     public void loadData(boolean isPullToRefresh) {
-
-    }
-
-    @Override
-    public void onResult(String result) {
 
     }
 }

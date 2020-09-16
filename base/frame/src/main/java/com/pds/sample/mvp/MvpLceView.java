@@ -1,6 +1,6 @@
-package com.pds.frame.mvp.proxy.view;
+package com.pds.sample.mvp;
 
-import com.pds.frame.mvp.view.BaseView;
+import com.pds.frame.mvp.core.BaseView;
 
 /**
  * 作者: Dream on 2017/8/30 21:07

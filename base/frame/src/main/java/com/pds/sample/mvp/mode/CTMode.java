@@ -1,4 +1,4 @@
-package com.pds.frame.mvp.mode;
+package com.pds.sample.mvp.mode;
 
 /**
  * Created by Administrator on 2017/10/18.

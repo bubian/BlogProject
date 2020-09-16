@@ -5,17 +5,11 @@ import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.pds.frame.mvp.presenter.BasePresenter;
-import com.pds.frame.mvp.view.BaseView;
-import com.pds.frame.mvp.proxy.MvpCallBack;
+import com.pds.frame.mvp.core.BasePresenter;
+import com.pds.frame.mvp.core.BaseView;
+import com.pds.frame.mvp.core.MvpCallBack;
 
-/**
- * 作者: Dream on 2017/8/30 20:48
- * QQ:510278658
- * E-mail:510278658@qq.com
- */
-
-public class MvpFragment<V extends BaseView, P extends BasePresenter<V>> extends Fragment implements MvpCallBack<V, P> {
+public class MvpDelegateFragment<V extends BaseView, P extends BasePresenter<V>> extends Fragment implements MvpCallBack<V, P> {
 
     private P presenter;
     private V view;

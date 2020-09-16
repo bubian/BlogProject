@@ -1,9 +1,9 @@
-package com.pds.frame.mvp.view;
+package com.pds.frame.mvp.core;
 
 /**
  * Created by Administrator on 2017/10/18.
  */
 
 public interface BaseView {
-    void onResult(String result);
+
 }

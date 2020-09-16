@@ -1,8 +1,5 @@
-package com.pds.frame.mvp.proxy;
+package com.pds.frame.mvp.core;
 
-
-import com.pds.frame.mvp.presenter.BasePresenter;
-import com.pds.frame.mvp.view.BaseView;
 
 /**
  * Created by Administrator on 2017/10/18.

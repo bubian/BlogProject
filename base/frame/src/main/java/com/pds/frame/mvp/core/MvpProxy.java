@@ -1,13 +1,10 @@
-package com.pds.frame.mvp.proxy;
-
-import com.pds.frame.mvp.presenter.BasePresenter;
-import com.pds.frame.mvp.view.BaseView;
+package com.pds.frame.mvp.core;
 
 /**
  * Created by Administrator on 2017/10/18.
  */
 
-public class MvpProxy<V extends BaseView,P extends BasePresenter<V>> implements MvpCallBack<V,P>{
+public class MvpProxy<V extends BaseView,P extends BasePresenter<V>> implements MvpCallBack<V,P> {
 
     private P mP;
     private V mV;
@@ -31,11 +28,6 @@ public class MvpProxy<V extends BaseView,P extends BasePresenter<V>> implements 
             throw new NullPointerException("v of mvp is null");
         }
         mP.attachView(mV);
-    }
-    public void onDestroy() {
-        if (mP != null){
-            mP.detachView();
-        }
     }
 
     @Override
@@ -86,7 +78,11 @@ public class MvpProxy<V extends BaseView,P extends BasePresenter<V>> implements 
         }
         return mV;
     }
-
+    public void onDestroy() {
+        if (mP != null){
+            mP.detachView();
+        }
+    }
     @Override
     public void setV(V v) {
         this.mvpCallBack.setV(v);
