@@ -5,11 +5,11 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.pds.frame.mvp.core.BasePresenter;
-import com.pds.frame.mvp.core.BaseView;
+import com.pds.frame.mvp.core.BaseP;
+import com.pds.frame.mvp.core.BaseV;
 import com.pds.frame.mvp.core.MvpCallBack;
 
-public abstract class MvpDelegateActivity<V extends BaseView, P extends BasePresenter<V>> extends Activity implements MvpCallBack<V, P> {
+public abstract class MvpDelegateActivity<V extends BaseV, P extends BaseP<V>> extends Activity implements MvpCallBack<V, P> {
 
     //持有目的对象引用
     private ActivityMvpDelegateImpl<V, P> delegate;
@@ -25,12 +25,12 @@ public abstract class MvpDelegateActivity<V extends BaseView, P extends BasePres
     private V view;
 
     @Override
-    public P createPresenter() {
+    public P createP() {
         return this.presenter;
     }
 
     @Override
-    public V createView() {
+    public V createV() {
         return this.view;
     }
 

@@ -5,11 +5,11 @@ package com.pds.frame.mvp.core;
  * Created by Administrator on 2017/10/18.
  */
 
-public interface MvpCallBack <V extends BaseView,P extends BasePresenter<V>>{
+public interface MvpCallBack <V extends BaseV,P extends BaseP<V>>{
     //创建P层
-    P createPresenter();
+    P createP();
     //创建V层
-    V createView();
+    V createV();
     //得到P层
     P getP();
 

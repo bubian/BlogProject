@@ -2,13 +2,13 @@ package com.pds.frame.mvp.proxy.act;
 
 import android.os.Bundle;
 
-import com.pds.frame.mvp.core.BasePresenter;
-import com.pds.frame.mvp.core.BaseView;
+import com.pds.frame.mvp.core.BaseP;
+import com.pds.frame.mvp.core.BaseV;
 import com.pds.frame.mvp.core.MvpCallBack;
 import com.pds.frame.mvp.core.MvpProxy;
 
 //目标对象：具体的实现->生命周期实现
-public class ActivityMvpDelegateImpl<V extends BaseView, P extends BasePresenter<V>> implements ActivityMvpDelegate<V, P> {
+public class ActivityMvpDelegateImpl<V extends BaseV, P extends BaseP<V>> implements ActivityMvpDelegate<V, P> {
 
     private MvpCallBack<V, P> callback;
     private MvpProxy<V, P> callbackProxy;
@@ -29,9 +29,9 @@ public class ActivityMvpDelegateImpl<V extends BaseView, P extends BasePresenter
     public void onCreate(Bundle savedInstanceState) {
         //绑定实现
         //回调
-        getCallbackProxy().createPresenter();
-        getCallbackProxy().createView();
-        getCallbackProxy().attachView();
+        getCallbackProxy().createP();
+        getCallbackProxy().createV();
+        getCallbackProxy().attachV();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class ActivityMvpDelegateImpl<V extends BaseView, P extends BasePresenter
 
     @Override
     public void onDestroy() {
-        getCallbackProxy().detachView();
+        getCallbackProxy().detachV();
     }
 
 }

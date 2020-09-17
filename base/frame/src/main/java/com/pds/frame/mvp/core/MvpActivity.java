@@ -12,7 +12,7 @@ import java.lang.reflect.Type;
  * Description: 自定义mvp层Activity，如果需要使用mvp，请继承改类
  */
 
-public class MvpActivity<V extends BaseView, P extends BasePresenter<V>> extends BaseActivity implements MvpCallBack<V, P> {
+public abstract class MvpActivity<V extends BaseV, P extends BaseP<V>> extends BaseActivity implements MvpCallBack<V, P> {
 
     private P mPresenter;
     private V mV;
@@ -27,8 +27,8 @@ public class MvpActivity<V extends BaseView, P extends BasePresenter<V>> extends
     }
 
     @Override
-    public P createPresenter() {
-        Type superClassType = MvpActivity.class.getGenericSuperclass();
+    public P createP() {
+        Type superClassType = getClass().getGenericSuperclass();
         if (superClassType instanceof ParameterizedType) {
             Type[] types = ((ParameterizedType) superClassType).getActualTypeArguments();
             try {
@@ -42,14 +42,13 @@ public class MvpActivity<V extends BaseView, P extends BasePresenter<V>> extends
     }
 
     @Override
-    public V createView() {
-        Type superClassType = MvpActivity.class.getGenericSuperclass();
+    public V createV() {
+        Type superClassType = getClass().getGenericSuperclass();
         if (superClassType instanceof ParameterizedType) {
             try {
-                Class superClass = (Class) superClassType;
                 Type[] types = ((ParameterizedType) superClassType).getActualTypeArguments();
                 Class<V> presenterClassType = (Class<V>) types[0];
-                if (superClass.isAssignableFrom(presenterClassType)) {
+                if (MvpActivity.this instanceof BaseV) {
                     mV = (V) MvpActivity.this;
                 } else {
                     mV = presenterClassType.newInstance();

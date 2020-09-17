@@ -114,14 +114,14 @@ public class BlogApplication extends MultiDexApplication {
                 .setSupportSubunits(Subunits.MM);
     }
 
-    private boolean isRunningInEmualtor(){
+    private boolean isRunningInEmualtor() {
         java.lang.Process process = null;
         DataOutputStream os = null;
         boolean qk = false;
         try {
             process = Runtime.getRuntime().exec("getprop ro.kernel.qemu");
             os = new DataOutputStream(process.getOutputStream());
-            BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream(),"GBK"));
+            BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream(), "GBK"));
             os.writeBytes("exit\n");
             os.flush();
             process.waitFor();
@@ -130,9 +130,9 @@ public class BlogApplication extends MultiDexApplication {
             qk = false;
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
-                if (os != null){
+                if (os != null) {
                     os.close();
                 }
                 process.destroy();
@@ -143,12 +143,12 @@ public class BlogApplication extends MultiDexApplication {
         return qk;
     }
 
-    private boolean isModifySignature(String packageName){
+    private boolean isModifySignature(String packageName) {
         PackageManager pm = getPackageManager();
         PackageInfo pi = null;
         int sig = 0;
         try {
-            pi = pm.getPackageInfo(packageName,PackageManager.GET_SIGNATURES);
+            pi = pm.getPackageInfo(packageName, PackageManager.GET_SIGNATURES);
             Signature[] s = pi.signatures;
             sig = s[0].hashCode();
         } catch (PackageManager.NameNotFoundException e) {
@@ -156,21 +156,21 @@ public class BlogApplication extends MultiDexApplication {
             e.printStackTrace();
         }
 
-        if (sig != 1111111111){
-            Log.e("","签名不一致");
+        if (sig != 1111111111) {
+            Log.e("", "签名不一致");
             return true;
         }
         return false;
     }
 
-    private boolean checkCRC(){
+    private boolean checkCRC() {
         boolean mod = false;
         long crc = Long.parseLong(getString(R.string.crc));
         ZipFile zf;
         try {
             zf = new ZipFile(getApplicationContext().getPackageCodePath());
             ZipEntry ze = zf.getEntry("classes.dex");
-            if (ze.getCrc() == crc){
+            if (ze.getCrc() == crc) {
                 mod = true;
             }
         } catch (IOException e) {

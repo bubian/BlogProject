@@ -3,10 +3,10 @@ package com.pds.frame.mvp.proxy.frag;
 import android.os.Bundle;
 import android.view.View;
 
-import com.pds.frame.mvp.core.BasePresenter;
-import com.pds.frame.mvp.core.BaseView;
+import com.pds.frame.mvp.core.BaseP;
+import com.pds.frame.mvp.core.BaseV;
 
-public interface FragmentMvpDelegate<V extends BaseView, P extends BasePresenter<V>> {
+public interface FragmentMvpDelegate<V extends BaseV, P extends BaseP<V>> {
 
     void onCreate(Bundle savedInstanceState);
 

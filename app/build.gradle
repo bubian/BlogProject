@@ -119,11 +119,10 @@ android {
 
 // https://github.com/didi/DroidAssist
 // DroidAssist 是一个轻量级的 Android 字节码编辑插件，基于 Javassist 对字节码操作，根据 xml 配置处理 class 文件，以达到对 class 文件进行动态修改的效果
-apply plugin: 'com.didichuxing.tools.droidassist'
-droidAssistOptions {
-    config file("droidassist.xml"),file("droidassist2.xml") //插件配置文件(必选配置,支持多配置文件)
-}
-
+//apply plugin: 'com.didichuxing.tools.droidassist'
+//droidAssistOptions {
+//    config file("droidassist.xml"),file("droidassist2.xml") //插件配置文件(必选配置,支持多配置文件)
+//}
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -171,6 +170,7 @@ dependencies {
     api project(path: ':base:lib_net')
     api project(path: ':base:m2app')
     api project(path: ':base:skin')
+    api project(path: ':base:frame')
     api project(path: ':base:debug_tool')
     api 'me.jessyan:autosize:1.2.1'
 }

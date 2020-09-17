@@ -3,13 +3,13 @@ package com.pds.frame.mvp.proxy.frag;
 import android.os.Bundle;
 import android.view.View;
 
-import com.pds.frame.mvp.core.BasePresenter;
-import com.pds.frame.mvp.core.BaseView;
+import com.pds.frame.mvp.core.BaseP;
+import com.pds.frame.mvp.core.BaseV;
 import com.pds.frame.mvp.core.MvpCallBack;
 import com.pds.frame.mvp.core.MvpProxy;
 
 //目标对象
-public class FragmentMvpDelegateImpl<V extends BaseView, P extends BasePresenter<V>> implements FragmentMvpDelegate<V, P> {
+public class FragmentMvpDelegateImpl<V extends BaseV, P extends BaseP<V>> implements FragmentMvpDelegate<V, P> {
 
     //实现功能->绑定UI层和接触绑定
     private MvpCallBack<V, P> callback;
@@ -36,9 +36,9 @@ public class FragmentMvpDelegateImpl<V extends BaseView, P extends BasePresenter
     public void onActivityCreated(Bundle savedInstanceState) {
         //绑定实现
         //回调
-        getCallbackProxy().createPresenter();
-        getCallbackProxy().createView();
-        getCallbackProxy().attachView();
+        getCallbackProxy().createP();
+        getCallbackProxy().createV();
+        getCallbackProxy().attachV();
     }
 
     @Override
@@ -73,6 +73,6 @@ public class FragmentMvpDelegateImpl<V extends BaseView, P extends BasePresenter
 
     @Override
     public void onDestroy() {
-        getCallbackProxy().detachView();
+        getCallbackProxy().detachV();
     }
 }

@@ -12,7 +12,7 @@ import java.lang.reflect.Type;
  * Created by Administrator on 2017/10/18.
  */
 
-public class MvpFragment<V extends BaseView, P extends BasePresenter<V>> extends Fragment implements MvpCallBack<V, P> {
+public class MvpFragment<V extends BaseV, P extends BaseP<V>> extends Fragment implements MvpCallBack<V, P> {
 
     private P mPresenter;
     private V mV;
@@ -26,7 +26,7 @@ public class MvpFragment<V extends BaseView, P extends BasePresenter<V>> extends
 
 
     @Override
-    public P createPresenter() {
+    public P createP() {
         Type superClassType = MvpActivity.class.getGenericSuperclass();
         if (superClassType instanceof ParameterizedType) {
             Type[] types = ((ParameterizedType) superClassType).getActualTypeArguments();
@@ -41,7 +41,7 @@ public class MvpFragment<V extends BaseView, P extends BasePresenter<V>> extends
     }
 
     @Override
-    public V createView() {
+    public V createV() {
         Type superClassType = MvpFragment.class.getGenericSuperclass();
         if (superClassType instanceof ParameterizedType) {
             try {

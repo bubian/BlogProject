@@ -5,22 +5,22 @@ import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-import com.pds.frame.mvp.core.BasePresenter;
-import com.pds.frame.mvp.core.BaseView;
+import com.pds.frame.mvp.core.BaseP;
+import com.pds.frame.mvp.core.BaseV;
 import com.pds.frame.mvp.core.MvpCallBack;
 
-public class MvpDelegateFragment<V extends BaseView, P extends BasePresenter<V>> extends Fragment implements MvpCallBack<V, P> {
+public class MvpDelegateFragment<V extends BaseV, P extends BaseP<V>> extends Fragment implements MvpCallBack<V, P> {
 
     private P presenter;
     private V view;
 
     @Override
-    public P createPresenter() {
+    public P createP() {
         return this.presenter;
     }
 
     @Override
-    public V createView() {
+    public V createV() {
         return this.view;
     }
 
