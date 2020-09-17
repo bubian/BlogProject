@@ -1,14 +1,6 @@
 apply from: "config/component.gradle"
 apply from: "config/base.gradle"
-
-ext {
-    project = [
-            hostTypeDev   : 0,
-            hostTypeQa    : 4,
-            hostTypeOnline: 3,
-    ]
-}
-
+apply from: "config/sdk.gradle"
 //aspectjx白名单配置
 //aspectjx {
 //    //includes the libs that you want to weave
