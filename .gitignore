@@ -8,3 +8,4 @@
 /build
 /captures
 .externalNativeBuild
+/nettyim/source/netty-all-4.1.43.Final-sources.jar
