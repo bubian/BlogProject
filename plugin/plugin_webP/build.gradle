@@ -6,9 +6,9 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
     // jdk gdk 引入 gdk
-    compile localGroovy()
-    compile gradleApi()
-    compile 'com.android.tools.build:gradle:3.3.2'
+    implementation localGroovy()
+    implementation gradleApi()
+    implementation 'com.android.tools.build:gradle:3.3.2'
 
 }
 

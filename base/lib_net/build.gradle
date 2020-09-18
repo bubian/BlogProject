@@ -27,7 +27,7 @@ dependencies {
 
     api project(path: ':base:data_entity')
     //logger
-    compile 'com.qpdstudio.logger:logger:1.0.8'
+    implementation 'com.qpdstudio.logger:logger:1.0.8'
 
     testImplementation 'junit:junit:4.12'
 

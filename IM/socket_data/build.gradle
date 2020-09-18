@@ -4,8 +4,8 @@ apply plugin: 'realm-android'
 
 dependencies {
     // realm数据库查看--chrome://inspect/#devices
-    debugCompile 'com.facebook.stetho:stetho:1.5.0'
-    debugCompile 'com.uphyca:stetho_realm:2.1.0'
+    debugImplementation 'com.facebook.stetho:stetho:1.5.0'
+    debugImplementation 'com.uphyca:stetho_realm:2.1.0'
     // 用implementation 运行工程报错 要用api
     api files('libs/protobuf-java-3.9.1.jar')
     implementation files('libs/protobuf-java-format-1.4.jar')

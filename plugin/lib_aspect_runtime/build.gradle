@@ -8,7 +8,7 @@ apply from: './upload.gradle'
 apply from: '../../config/android.gradle'
 
 dependencies {
-    compile 'org.aspectj:aspectjrt:1.8.13'
+    implementation 'org.aspectj:aspectjrt:1.8.13'
     // 放在这里始终编译报错，于是移动到主工程build.gradle中配置
 //    compile project(':lib_aspect_annotations')
 }
