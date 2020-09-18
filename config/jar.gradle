@@ -4,7 +4,7 @@ task clearJar(type: Delete) {
 }
 
 def module_name = project.name
-task makeSdkJar(type:Jar) {
+task makeSdkJar(type: Jar) {
     baseName module_name
     from('build/intermediates/classes/debug/org/cmdmac/') {
         include 'pluginsdk/impl'
@@ -14,7 +14,7 @@ task makeSdkJar(type:Jar) {
 }
 makeSdkJar.dependsOn(clearJar, build)
 
-task autoMakeSdkJar(type:Jar) << {
+task autoMakeSdkJar(type: Jar) doLast {
     println('module auto build jar111 autoMakeSdkJar')
     baseName module_name
     from('build/intermediates/classes/debug/org/cmdmac/') {
@@ -24,7 +24,7 @@ task autoMakeSdkJar(type:Jar) << {
     into('org/cmdmac/')
 }
 autoMakeSdkJar.dependsOn(clearJar)
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 def group_id = 'com.lib'
 def default_config = project.android.defaultConfig
 
@@ -32,11 +32,11 @@ String ROOT_DIR = System.getProperty("user.dir")
 def PROJECT_NAME = "BlogProject"
 def project_dir = ROOT_DIR
 
-if (!ROOT_DIR.endsWith(PROJECT_NAME)){
-    int index = ROOT_DIR.lastIndexOf (PROJECT_NAME)
-    project_dir = ROOT_DIR.substring(0,index + PROJECT_NAME.length())
+if (!ROOT_DIR.endsWith(PROJECT_NAME)) {
+    int index = ROOT_DIR.lastIndexOf(PROJECT_NAME)
+    project_dir = ROOT_DIR.substring(0, index + PROJECT_NAME.length())
 }
-uploadArchives << {
+task uploadArchives doLast {
     println('module auto build jar111 uploadArchives')
     repositories.mavenDeployer {
         repository(url: uri("$project_dir/repo")) //仓库的路径，此处是项目根目录下的 repo 的文件夹
@@ -45,10 +45,10 @@ uploadArchives << {
         pom.version = default_config.versionName //version 版本号
     }
 }
-uploadArchives.mustRunAfter(autoMakeSdkJar,makeSdkJar)
+uploadArchives.mustRunAfter(autoMakeSdkJar, makeSdkJar)
 
 static def getGroupId(String id) {
-    int index = id.findIndexOf  ('.')
-    return id.substring(0,index)
+    int index = id.findIndexOf('.')
+    return id.substring(0, index)
 }
 
