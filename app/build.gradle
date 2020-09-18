@@ -171,6 +171,7 @@ dependencies {
     api project(path: ':base:m2app')
     api project(path: ':base:skin')
     api project(path: ':base:frame')
+    api project(path: ':base:lib_base')
     api project(path: ':base:debug_tool')
     api 'me.jessyan:autosize:1.2.1'
 }

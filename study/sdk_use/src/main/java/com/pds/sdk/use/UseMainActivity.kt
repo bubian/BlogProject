@@ -8,7 +8,7 @@ import com.pds.sdk.use.realm.RealmTestActivity
 import org.jetbrains.anko.internals.AnkoInternals
 
 
-class MainActivity : AppCompatActivity() {
+class UseMainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

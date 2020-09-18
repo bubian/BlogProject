@@ -5,7 +5,7 @@ task clearJar(type: Delete) {
 
 def module_name = project.name
 task makeSdkJar(type: Jar) {
-    baseName module_name
+//    baseName module_name
     from('build/intermediates/classes/debug/org/cmdmac/') {
         include 'pluginsdk/impl'
         include 'gamecenter'

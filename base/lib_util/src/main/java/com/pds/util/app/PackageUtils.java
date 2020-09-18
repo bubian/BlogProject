@@ -29,6 +29,6 @@ public final class PackageUtils {
     }
 
     public static String getPackageName(Context mContext) {
-        return BuildConfig.APPLICATION_ID;
+        return "BuildConfig.APPLICATION_ID";
     }
 }

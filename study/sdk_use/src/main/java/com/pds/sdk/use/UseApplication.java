@@ -2,9 +2,6 @@ package com.pds.sdk.use;
 
 import android.app.Application;
 
-import com.facebook.stetho.Stetho;
-import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
-
 import io.realm.Realm;
 
 /**

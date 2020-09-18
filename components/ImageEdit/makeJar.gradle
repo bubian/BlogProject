@@ -1,6 +1,6 @@
 task makeJar(type:org.gradle.api.tasks.bundling.Jar) {
     //指定生成的jar名
-    baseName project.name
+//    baseName project.name
     //从哪里打包class文件
     from('build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/pds/edit/')
     //打包到jar后的目录结构
