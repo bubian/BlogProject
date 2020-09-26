@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frame_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <com.tencent.smtt.sdk.WebView
+        android:id="@+id/web_content"
+        android:layout_width="match_parent"
+        android:layout_above="@+id/vs_accept_condition"
+        android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/vs_accept_condition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/read_and_accept_med_condition"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp_14"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/selector_blue_to_deep_blue"
+        />
+
+
+</RelativeLayout>
+

@@ -1,0 +1,8 @@
+apply from: '../../config/module.gradle'
+
+dependencies {
+    // glide
+    api deps.data.glide
+    annotationProcessor deps.data.glideCompiler
+    implementation project(path:':base:lib_net')
+}
