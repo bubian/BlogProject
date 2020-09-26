@@ -1,8 +1,7 @@
 // app
 include ':app'
-// Application
-include ':module:BaseApplication'
 // mainModule
+include ':module:MainApplication'
 include ':module:mainModule'
 // IM
 include ':IM:socket_control'
