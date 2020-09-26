@@ -1,4 +1,4 @@
-package com.pds.base.adapter;
+package com.pds.base.adapter.base;
 
 import android.view.View;
 import android.view.ViewGroup;

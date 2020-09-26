@@ -1,8 +1,10 @@
-package com.pds.base.adapter;
+package com.pds.base.adapter.base;
 
 import android.content.Context;
 import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.pds.base.adapter.callback.IItemOnClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +17,9 @@ import java.util.List;
  */
 public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    Context mContext;
-    List<T> mDataList = new ArrayList<>();
-    IItemOnClickListener mIItemChildOnClickAction;
+    protected Context mContext;
+    protected List<T> mDataList = new ArrayList<>();
+    protected IItemOnClickListener mIItemChildOnClickAction;
 
 
     public Context getContext() {

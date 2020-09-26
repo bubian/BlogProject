@@ -8,7 +8,7 @@ import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
-import com.pds.base.adapter.SimpleItemOnClickListener
+import com.pds.base.adapter.callback.SimpleItemOnClickListener
 import com.pds.kotlin.study.R
 import com.pds.kotlin.study.ui.adapter.ContentAdapter1
 import com.pds.kotlin.study.ui.entity.Entity

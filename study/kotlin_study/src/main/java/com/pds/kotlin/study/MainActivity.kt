@@ -5,7 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pds.base.adapter.ListAdapter
-import com.pds.base.adapter.SimpleItemOnClickListener
+import com.pds.base.adapter.callback.SimpleItemOnClickListener
 import com.pds.base.holder.BaseViewHolder
 import com.pds.kotlin.study.recorder.RecordActivity
 import com.pds.kotlin.study.ui.material.MaterialDesignActivity

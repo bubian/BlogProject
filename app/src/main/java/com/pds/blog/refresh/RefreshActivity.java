@@ -24,12 +24,10 @@ import com.pds.blog.R;
 import com.pds.blog.base.BaseActivity;
 import com.pds.ui.view.refresh.BaseSwipeRefreshLayout;
 import com.pds.ui.view.refresh.MultipleSwipeRefreshLayout;
-import com.pds.ui.view.refresh.cb.OnRefreshListener;
 import com.pds.ui.view.refresh.view.TwoPointRefreshView;
-import com.pds.ui.view.refresh.CustomSwipeToRefresh;
 import com.pds.ui.view.refresh.view.CircleImageRefreshView;
 import com.pds.ui.view.refresh.view.ZoomRefreshHeaderView;
-import com.pds.ui.view.rl.VLayoutRecycleView;
+import com.pds.ui.view.vlayout.VLayoutRecycleView;
 import com.pds.util.unit.UnitConversionUtils;
 
 import java.util.ArrayList;

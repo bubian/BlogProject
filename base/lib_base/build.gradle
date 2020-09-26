@@ -13,4 +13,5 @@ dependencies {
 
 //    implementation rootProject.ext.dependencies["hilt"]
 //    kapt rootProject.ext.dependencies["hilt-compiler"]
+    implementation project(path : ":base:lib_util")
 }

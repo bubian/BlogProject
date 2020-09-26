@@ -7,7 +7,7 @@
         android:background="@android:color/holo_red_dark"
         android:id="@+id/refresh_st">
 
-<com.pds.ui.view.rl.VLayoutRecycleView
+<com.pds.ui.view.vlayout.VLayoutRecycleView
         android:id="@+id/refresh_vl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

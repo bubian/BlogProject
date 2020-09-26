@@ -60,4 +60,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    /**主module一定要加,不然会出问题 */
+    dataBinding {
+        enabled true
+    }
 }

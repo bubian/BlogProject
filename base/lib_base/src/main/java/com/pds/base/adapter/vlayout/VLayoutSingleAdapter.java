@@ -1,4 +1,4 @@
-package com.pds.base.adapter;
+package com.pds.base.adapter.vlayout;
 
 import android.view.LayoutInflater;
 import android.view.View;

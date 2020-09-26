@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pds.base.adapter.base.BaseListAdapter;
 import com.pds.base.holder.BaseViewHolder;
 
 import java.util.ArrayList;

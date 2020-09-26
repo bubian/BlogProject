@@ -1,4 +1,4 @@
-package com.pds.base.adapter;
+package com.pds.base.adapter.base;
 
 import android.os.Bundle;
 import android.util.SparseArray;

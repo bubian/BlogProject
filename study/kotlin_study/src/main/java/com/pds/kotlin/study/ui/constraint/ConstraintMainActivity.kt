@@ -4,7 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import com.google.android.flexbox.*
-import com.pds.base.adapter.SimpleItemOnClickListener
+import com.pds.base.adapter.callback.SimpleItemOnClickListener
 import com.pds.kotlin.study.R
 import com.pds.kotlin.study.ui.adapter.ContentAdapter1
 import com.pds.kotlin.study.ui.entity.Entity

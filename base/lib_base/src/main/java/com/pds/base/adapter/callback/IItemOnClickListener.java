@@ -1,4 +1,4 @@
-package com.pds.base.adapter;
+package com.pds.base.adapter.callback;
 
 
 import android.view.View;

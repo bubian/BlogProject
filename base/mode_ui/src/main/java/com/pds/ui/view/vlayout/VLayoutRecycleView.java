@@ -1,4 +1,4 @@
-package com.pds.ui.view.rl;
+package com.pds.ui.view.vlayout;
 
 import android.content.Context;
 import android.util.AttributeSet;
