@@ -1,7 +1,6 @@
 apply from: '../../config/module.gradle'
 apply from: "../../config/kotlin.gradle"
 apply plugin: 'com.jakewharton.butterknife'
-//apply plugin: 'dagger.hilt.android.plugin'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -10,8 +9,5 @@ dependencies {
     // For control over item selection of both touch and mouse driven selection
     api "androidx.recyclerview:recyclerview-selection:1.1.0-rc01"
     api ('com.alibaba.android:vlayout:1.2.8@aar') { transitive = true }
-
-//    implementation rootProject.ext.dependencies["hilt"]
-//    kapt rootProject.ext.dependencies["hilt-compiler"]
     implementation project(path : ":base:lib_util")
 }

@@ -24,6 +24,7 @@ include ':base:lib_base'
 include ':base:lib_compat'
 include ':base:debug_tool'
 include ':base:lib_api'
+include ':base:lib_hilt'
 // netty
 include ':nettyim'
 // plugin
