@@ -41,6 +41,12 @@ android {
         AndroidLibraryModuleIntegrationTest fail.
          */
         // testInstrumentationRunnerArgument "argument1", "make_test_fail
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     if (hasCMakeListFile) {

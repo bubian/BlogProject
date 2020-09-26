@@ -11,12 +11,12 @@ ext {
 
     deps = [
 
-            'jw': [
+            'jw'     : [
                     'butterknife'        : "com.jakewharton:butterknife:${versions["butterknife"]}",
                     'butterknifeCompiler': "com.jakewharton:butterknife-compiler:${versions["butterknife"]}",
             ],
 
-            'jp': [
+            'jp'     : [
                     'hilt'              : "com.google.dagger:hilt-android:${versions["hilt"]}",
                     'hiltCompiler'      : "com.google.dagger:hilt-android-compiler:${versions["butterknife"]}",
                     'lifecycleViewmodel': "androidx.lifecycle:lifecycle-viewmodel:${versions["lifecycleVersion"]}",
@@ -25,9 +25,13 @@ ext {
                     'pagingRxjava2'     : "androidx.paging:paging-rxjava2:${versions["paging_version"]}", // For Kotlin use paging-rxjava2-ktx,如果不用，可以不依赖
             ],
 
-            'ax': [
+            'ax'     : [
                     'appcompat': "androidx.appcompat:appcompat:1.1.0",
                     'multidex' : "androidx.multidex:multidex:2.0.1"
+            ],
+            'alibaba': [
+                    'arouter'       : "com.alibaba:arouter-api:1.5.0",
+                    'arouterompiler': "com.alibaba:arouter-compiler:1.2.2"
             ]
     ]
 

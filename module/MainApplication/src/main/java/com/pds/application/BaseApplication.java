@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.multidex.MultiDexApplication;
 
 import java.lang.reflect.InvocationHandler;
-import java.pds.application.ModuleApplication;
+import java.pds.main.application.ModuleApplication;
 
 /**
  * @author: pengdaosong

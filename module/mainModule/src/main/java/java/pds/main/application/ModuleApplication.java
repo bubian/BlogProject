@@ -1,4 +1,4 @@
-package java.pds.application;
+package java.pds.main.application;
 
 import android.app.Application;
 
@@ -24,6 +24,6 @@ public class ModuleApplication {
 
     public void onCreate(Application application) {
         Lg.i(TAG,"Life cycle：onCreate");
-        mApplication = mApplication;
+        mApplication = application;
     }
 }
