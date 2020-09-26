@@ -1,6 +1,6 @@
 package com.pds.demo;
 
-import com.pds.blog.web.common.HbParam;
+import com.pds.blog.web.common.HybridParam;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -32,7 +32,7 @@ import static org.mockito.Mockito.when;
 public class MockitoAnnotationsTest {
     //<--使用@Mock注解
     @Mock
-    HbParam mHbParam;
+    HybridParam mHbParam;
     // Spy的创建与mock一样
     @Spy
     Person mPerson;

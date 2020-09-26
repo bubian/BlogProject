@@ -6,15 +6,15 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
-import com.pds.blog.web.common.HbPath;
+import com.pds.blog.web.common.HybridPath;
 
 /**
  * com.tencent.smtt.sdk.CookieManager和com.tencent.smtt.sdk.CookieSyncManager的相关接口的调用，
  * ®在接入SDK后，需要放到创建X5的WebView之后（也就是X5内核加载完成）进行；否则，cookie的相关操作只能影响系统内核。
  */
-public class HbCookieSync {
+public class HybridCookieSync {
 
-    private static final String TAG = HbCookieSync.class.getSimpleName();
+    private static final String TAG = HybridCookieSync.class.getSimpleName();
 
 
     public static boolean cleanCookie(Context context) {
@@ -27,11 +27,11 @@ public class HbCookieSync {
     }
 
     public static boolean initCookie(Context context) {
-        String session = HbCookieHelper.instance().getSession();
+        String session = HybridCookieHelper.instance().getSession();
         CookieSyncManager.createInstance(context);
         final CookieManager cookieManager = CookieManager.getInstance();
         cookieManager.setAcceptCookie(true);
-        final String host = HbPath.getH5CookieDomain();
+        final String host = HybridPath.getH5CookieDomain();
         String cookie = cookieManager.getCookie(host);
         if (TextUtils.isEmpty(session)) {
             if (!TextUtils.isEmpty(cookie) && cookie.contains("sess=")) {

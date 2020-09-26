@@ -8,7 +8,7 @@ import android.webkit.JavascriptInterface;
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-public class HbJsInterface {
+public class HybridJsInterface {
     public static final String JSInterface = "HybridJSInterface";
 
     @JavascriptInterface

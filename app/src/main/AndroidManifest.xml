@@ -34,7 +34,7 @@
         </activity>
         <activity android:name=".MainActivityK" />
         <activity android:name=".base.BaseActivity" />
-        <activity android:name=".web.ui.HbActivity" />
+        <activity android:name=".web.ui.HybridActivity" />
         <activity
             android:name="com.tencent.smtt.sdk.VideoActivity"
             android:alwaysRetainTaskState="true"

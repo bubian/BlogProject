@@ -6,8 +6,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.pds.blog.R;
-import com.pds.blog.web.common.HbC;
-import com.pds.blog.web.common.HbParamAnimation;
+import com.pds.blog.web.common.HybridConstants;
+import com.pds.blog.web.common.HybridParamAnimation;
 
 /**
  * @author: pengdaosong
@@ -15,7 +15,7 @@ import com.pds.blog.web.common.HbParamAnimation;
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-public class HbBaseActivity extends AppCompatActivity {
+public class HybridBaseActivity extends AppCompatActivity {
     private static final String TAG = "HbBaseActivity";
 
     @Override
@@ -26,12 +26,12 @@ public class HbBaseActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        HbParamAnimation animation = (HbParamAnimation) getIntent().getSerializableExtra(HbC.INTENT_EXTRA_KEY_ANIMATION);
-        if (null == animation || animation.equals(HbParamAnimation.PUSH)) {
+        HybridParamAnimation animation = (HybridParamAnimation) getIntent().getSerializableExtra(HybridConstants.INTENT_EXTRA_KEY_ANIMATION);
+        if (null == animation || animation.equals(HybridParamAnimation.PUSH)) {
             overridePendingTransition(R.anim.hb_left_in, R.anim.hb_right_out);
-        } else if (animation.equals(HbParamAnimation.POP)) {
+        } else if (animation.equals(HybridParamAnimation.POP)) {
             overridePendingTransition(R.anim.hb_right_in, R.anim.hb_left_out);
-        } else if (animation.equals(HbParamAnimation.PRESENT)) {
+        } else if (animation.equals(HybridParamAnimation.PRESENT)) {
             overridePendingTransition(R.anim.hb_top_in, R.anim.hb_bottom_out);
         }
     }

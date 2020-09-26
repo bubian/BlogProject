@@ -6,7 +6,7 @@ package com.pds.blog.web.common;
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-public class HbC {
+public class HybridConstants {
     // 选择图片
     public static final int FILE_CHOOSER_RESULT_CODE = 1;
     //forward

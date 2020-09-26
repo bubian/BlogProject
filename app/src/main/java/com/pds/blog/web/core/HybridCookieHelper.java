@@ -10,14 +10,14 @@ import android.util.Log;
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-public class HbCookieHelper {
+public class HybridCookieHelper {
 
     private static final String TAG = "HbCookieHelper";
-    private static HbCookieHelper cookieHelper = new HbCookieHelper();
+    private static HybridCookieHelper cookieHelper = new HybridCookieHelper();
 
     private String session;
 
-    public static HbCookieHelper instance(){
+    public static HybridCookieHelper instance(){
         return cookieHelper;
     }
 

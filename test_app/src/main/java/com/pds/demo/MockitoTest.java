@@ -1,6 +1,6 @@
 package com.pds.demo;
 
-import com.pds.blog.web.common.HbParam;
+import com.pds.blog.web.common.HybridParam;
 
 import org.junit.Test;
 
@@ -17,7 +17,7 @@ public class MockitoTest {
 
     @Test
     public void testIsNotNull(){
-        HbParam mPerson = mock(HbParam.class); //<--使用mock方法
+        HybridParam mPerson = mock(HybridParam.class); //<--使用mock方法
         assertNotNull(mPerson);
     }
 }

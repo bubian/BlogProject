@@ -13,11 +13,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.pds.blog.R;
-import com.pds.blog.web.core.HbCookieHelper;
+import com.pds.blog.web.core.HybridCookieHelper;
 import com.pds.blog.web.x5.X5Settings;
 import com.pds.blog.web.widget.HybridWebView;
 import com.pds.ui.view.refresh.MultipleSwipeRefreshLayout;
-import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebView;
 
 /**
@@ -26,7 +25,7 @@ import com.tencent.smtt.sdk.WebView;
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-public class HbBaseFragment extends Fragment {
+public class HybridBaseFragment extends Fragment {
     private static final String TAG = "HbBaseFragment";
     protected WebView mHbWebView;
     private MultipleSwipeRefreshLayout mRefreshLayout;
@@ -52,7 +51,7 @@ public class HbBaseFragment extends Fragment {
     protected void loadUrl(String url) {
         if (TextUtils.isEmpty(url)) return;
         Log.i(TAG, " load url  = " + url);
-        mHbWebView.loadUrl(HbCookieHelper.instance().checkSession(url));
+        mHbWebView.loadUrl(HybridCookieHelper.instance().checkSession(url));
     }
 
     @Override

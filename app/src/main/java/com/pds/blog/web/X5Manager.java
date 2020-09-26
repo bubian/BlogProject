@@ -3,7 +3,7 @@ package com.pds.blog.web;
 import android.content.Context;
 import android.util.Log;
 
-import com.pds.blog.web.core.HbCookieSync;
+import com.pds.blog.web.core.HybridCookieSync;
 import com.tencent.smtt.sdk.QbSdk;
 
 /**
@@ -16,7 +16,7 @@ public class X5Manager {
 
     private static final String TAG = "X5Manager";
     public static void init(Context context){
-        HbCookieSync.initCookie(context);
+        HybridCookieSync.initCookie(context);
         preX5(context);
     }
 

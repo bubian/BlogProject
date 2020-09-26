@@ -7,7 +7,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.pds.blog.web.common.HbC;
+import com.pds.blog.web.common.HybridConstants;
 import com.tencent.smtt.sdk.ValueCallback;
 
 import static android.app.Activity.RESULT_OK;
@@ -18,7 +18,7 @@ import static android.app.Activity.RESULT_OK;
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-public class HbMiddleFragment extends HbBaseFragment {
+public class HybridMiddleFragment extends HybridBaseFragment {
     private static final String TAG = "HbMiddleFragment";
 
     private static ValueCallback<Uri> mUploadMessage;
@@ -30,7 +30,7 @@ public class HbMiddleFragment extends HbBaseFragment {
         Log.d(TAG,"Hb log:onActivityResult requestCode = " + requestCode + " resultCode = " + resultCode);
         if (RESULT_OK == resultCode){
             switch (requestCode){
-                case HbC.FILE_CHOOSER_RESULT_CODE:{
+                case HybridConstants.FILE_CHOOSER_RESULT_CODE:{
                     Uri result = intent == null  ? null : intent.getData();
                     if (uploadMessageAboveL != null) {
                         hbUploadPictures(intent);

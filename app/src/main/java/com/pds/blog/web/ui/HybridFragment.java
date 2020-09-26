@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 
 import com.pds.blog.R;
-import com.pds.blog.web.common.HbC;
+import com.pds.blog.web.common.HybridConstants;
 import com.pds.blog.web.widget.NavigationView;
 import com.pds.blog.web.widget.SearchBar;
 import com.pds.blog.web.x5.X5Settings;
@@ -22,7 +22,7 @@ import com.tencent.smtt.sdk.WebSettings;
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-public class HbFragment extends HbMiddleFragment {
+public class HybridFragment extends HybridMiddleFragment {
 
     public static final String ARG_PARAM_URL = "url";
     public static final String ARG_PARAM_FROM = "from";
@@ -38,14 +38,14 @@ public class HbFragment extends HbMiddleFragment {
     private SearchBar mSearchBar;
     private View viewShadow;
 
-    public HbFragment() {}
+    public HybridFragment() {}
 
-    public static HbFragment newInstance(String url) {
+    public static HybridFragment newInstance(String url) {
         return newInstance(url, null, true, true);
     }
 
-    public static HbFragment newInstance(String url, String from, boolean hasHeader, boolean hasBack) {
-        HbFragment fragment = new HbFragment();
+    public static HybridFragment newInstance(String url, String from, boolean hasHeader, boolean hasBack) {
+        HybridFragment fragment = new HybridFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM_URL, url);
         args.putString(ARG_PARAM_FROM, from);
@@ -72,10 +72,10 @@ public class HbFragment extends HbMiddleFragment {
         mSearchBar = view.findViewById(R.id.hb_search_bar);
 
         Intent intent = getActivity().getIntent();
-        boolean navigation = intent.getBooleanExtra(HbC.INTENT_EXTRA_KEY_HASNAVGATION, true);
+        boolean navigation = intent.getBooleanExtra(HybridConstants.INTENT_EXTRA_KEY_HASNAVGATION, true);
         //特殊处理首页
         if (navigation) {
-            boolean hasBack = mHasBack && intent.getBooleanExtra(HbC.INTENT_EXTRA_KEY_HASBACK, true);
+            boolean hasBack = mHasBack && intent.getBooleanExtra(HybridConstants.INTENT_EXTRA_KEY_HASBACK, true);
             if (hasBack) {
                 mNavigationView.appendNavgation(NavigationView.Direct.LEFT, "", R.mipmap.icon_nav_back_gray, (View.OnClickListener) v -> {
                     if (!onBackPressed()) {
@@ -90,7 +90,7 @@ public class HbFragment extends HbMiddleFragment {
             view.findViewById(R.id.hb_header).setVisibility(View.GONE);
         }
         viewShadow.setVisibility(getArguments().getBoolean(ARG_PARAM_SHOW_SHADOW, true) ? View.VISIBLE : View.GONE);
-        String userAgent = intent.getStringExtra(HbC.INTENT_EXTRA_KEY_USERAGENT);
+        String userAgent = intent.getStringExtra(HybridConstants.INTENT_EXTRA_KEY_USERAGENT);
         if (!TextUtils.isEmpty(userAgent)) {
             WebSettings settings = mHbWebView.getSettings();
             settings.setUserAgentString(settings.getUserAgentString() + userAgent);

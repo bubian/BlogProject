@@ -3,7 +3,7 @@ package com.pds.blog.web.x5;
 import android.app.Activity;
 import android.os.Build;
 import com.pds.blog.BuildConfig;
-import com.pds.blog.web.common.HbJsInterface;
+import com.pds.blog.web.common.HybridJsInterface;
 import com.pds.util.app.BuildVersionUtils;
 import com.pds.util.net.NetworkUtil;
 import com.tencent.smtt.sdk.WebSettings;
@@ -54,7 +54,7 @@ public class X5Settings {
         settings.setUserAgentString(user_agent);
         webView.setWebViewClient(new X5WebViewClient());
         webView.setWebChromeClient(new X5WebChromeClient(activity));
-        webView.addJavascriptInterface(new HbJsInterface(), HbJsInterface.JSInterface);
+        webView.addJavascriptInterface(new HybridJsInterface(), HybridJsInterface.JSInterface);
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             WebView.setWebContentsDebuggingEnabled(true);

@@ -11,12 +11,12 @@ import androidx.annotation.Nullable;
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-public class HbActivity extends HbBaseActivity {
+public class HybridActivity extends HybridBaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //X5兼容网页视频闪烁情况,这个对宿主没什么影响，建议声明
         getWindow().setFormat(PixelFormat.TRANSLUCENT);
-        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new HbFragment(), HbFragment.class.getSimpleName()).commit();
+        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new HybridFragment(), HybridFragment.class.getSimpleName()).commit();
     }
 }

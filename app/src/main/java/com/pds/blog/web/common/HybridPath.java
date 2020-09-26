@@ -4,7 +4,7 @@ package com.pds.blog.web.common;
  * Created by vane on 16/8/24.
  */
 
-public class HbPath {
+public class HybridPath {
     static final String CHECK_VERSION_QA_URL = "baidu.com";
     public static String getH5Host() {
         return "baidu.com";

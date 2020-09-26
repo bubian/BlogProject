@@ -9,7 +9,7 @@ import android.os.Parcelable;
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-public class HbParam implements Parcelable {
+public class HybridParam implements Parcelable {
     public int getId() {
         return id;
     }
@@ -30,21 +30,21 @@ public class HbParam implements Parcelable {
         dest.writeInt(this.id);
     }
 
-    public HbParam() { }
+    public HybridParam() { }
 
-    protected HbParam(Parcel in) {
+    protected HybridParam(Parcel in) {
         this.id = in.readInt();
     }
 
-    public static final Parcelable.Creator<HbParam> CREATOR = new Parcelable.Creator<HbParam>() {
+    public static final Parcelable.Creator<HybridParam> CREATOR = new Parcelable.Creator<HybridParam>() {
         @Override
-        public HbParam createFromParcel(Parcel source) {
-            return new HbParam(source);
+        public HybridParam createFromParcel(Parcel source) {
+            return new HybridParam(source);
         }
 
         @Override
-        public HbParam[] newArray(int size) {
-            return new HbParam[size];
+        public HybridParam[] newArray(int size) {
+            return new HybridParam[size];
         }
     };
 }

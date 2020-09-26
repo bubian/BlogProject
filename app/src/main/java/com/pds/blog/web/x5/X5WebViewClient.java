@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.pds.blog.BuildConfig;
-import com.pds.blog.web.common.HbPath;
+import com.pds.blog.web.common.HybridPath;
 import com.tencent.smtt.export.external.interfaces.WebResourceResponse;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
@@ -23,7 +23,7 @@ public class X5WebViewClient extends WebViewClient {
     public static boolean useCache = true;
 
     public X5WebViewClient() {
-        setHostFilter(HbPath.getH5Host());
+        setHostFilter(HybridPath.getH5Host());
     }
 
     private String mSubHost;

@@ -6,5 +6,5 @@ package com.pds.blog.web.core;
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-public class HbAjaxService {
+public class HybridAjaxService {
 }

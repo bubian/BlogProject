@@ -13,7 +13,7 @@ import java.lang.reflect.Type;
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-public enum HbParamAnimation {
+public enum HybridParamAnimation {
     PUSH("push"),//从左边进入,默认动画
     POP("pop"),//从右边出去,
     PRESENT("present"),//从下面进来(这种时候页面默认从下面出去)
@@ -22,12 +22,12 @@ public enum HbParamAnimation {
 
     public String mValue;
 
-    HbParamAnimation(String value) {
+    HybridParamAnimation(String value) {
         mValue = value;
     }
 
-    public static HbParamAnimation findByAbbr(String value) {
-        for (HbParamAnimation currEnum : HbParamAnimation.values()) {
+    public static HybridParamAnimation findByAbbr(String value) {
+        for (HybridParamAnimation currEnum : HybridParamAnimation.values()) {
             if (currEnum.mValue.equals(value)) {
                 return currEnum;
             }
@@ -35,12 +35,12 @@ public enum HbParamAnimation {
         return null;
     }
 
-    public static class TypeDeserializer implements JsonDeserializer<HbParamAnimation> {
+    public static class TypeDeserializer implements JsonDeserializer<HybridParamAnimation> {
 
         @Override
-        public HbParamAnimation deserialize(JsonElement arg0, Type arg1, JsonDeserializationContext arg2) throws JsonParseException {
+        public HybridParamAnimation deserialize(JsonElement arg0, Type arg1, JsonDeserializationContext arg2) throws JsonParseException {
             String type = arg0.getAsString();
-            return HbParamAnimation.findByAbbr(type);
+            return HybridParamAnimation.findByAbbr(type);
         }
     }
 }
