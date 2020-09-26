@@ -27,6 +27,7 @@ include ':base:lib_api'
 include ':base:lib_hilt'
 include ':base:lib_glide'
 include ':base:lib_gson'
+include ':base:lib_tools'
 // netty
 include ':nettyim'
 // plugin
