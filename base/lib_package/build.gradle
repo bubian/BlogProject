@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android-extensions'
 apply from: '../../config/android.gradle'
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin_version"
 
     // gson
     implementation 'com.google.code.gson:gson:2.8.5'

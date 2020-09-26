@@ -20,6 +20,7 @@ include ':base:skin'
 include ':base:lib_base'
 include ':base:lib_compat'
 include ':base:debug_tool'
+include ':base:lib_api'
 // netty
 include ':nettyim'
 // plugin

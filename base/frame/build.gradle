@@ -5,8 +5,8 @@ android {
     }
 }
 dependencies {
-    implementation  rootProject.ext.dependencies["appcompat"]
-    implementation  rootProject.ext.dependencies["lifecycle-viewmodel"]
-    implementation  rootProject.ext.dependencies["lifecycle-livedata"]
-    implementation  rootProject.ext.dependencies["paging-runtime"]
+    api  deps.ax.appcompat
+    api  deps.jp.lifecycleViewmodel
+    api  deps.jp.lifecycleLivedata
+    api  deps.jp.pagingRuntime
 }

@@ -20,4 +20,5 @@ public class BaseViewModel extends ViewModel implements LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     private void onPause(){}
 
+    protected void load(){}
 }

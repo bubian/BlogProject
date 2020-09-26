@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply from: "$rootDir/config/android.gradle"
 
+//参考：https://developer.android.google.cn/studio/build/gradle-tips?hl=zh-cn
+
 def dg = null != id[project.name] && "app" != project.name
 android {
     sourceSets {

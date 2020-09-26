@@ -1,10 +1,10 @@
-package com.blog.pds.net.func;
+package com.pds.api.func;
 
 import android.os.Parcel;
 
 import com.blog.pds.net.exception.ApiException;
-import com.pds.entity.BaseEntity;
-import com.pds.entity.DataEntity;
+import com.pds.entity.base.BaseEntity;
+import com.pds.entity.base.DataEntity;
 
 import io.reactivex.rxjava3.functions.Function;
 

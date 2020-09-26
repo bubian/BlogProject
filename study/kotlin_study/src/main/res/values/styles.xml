@@ -123,5 +123,10 @@
         <item name="bs_gridItemLayout">@layout/new_grid_entry</item>
         <item name="bs_headerLayout">@layout/new_header</item>
     </style>
+<!--    MaterialButton默认在style指定了insetTop和insetBottom为6dp，使得height看起来并没有Button实际设置值一样高，可以在xml将MaterialButton的insetTop和insetBottom都设置为0dp，这样MaterialButton的高度就和实际设置的高度一致了。-->
+    <style name="MaterialButton.UnelevatedButton" parent="@style/Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
 
 </resources>

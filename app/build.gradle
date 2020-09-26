@@ -3,10 +3,12 @@ apply from: "../config/kotlin.gradle"
 apply plugin: 'aspect'
 apply plugin: 'app-joint'
 //apply plugin: 'webp'
+//apply plugin: 'com.jakewharton.butterknife'
 
 apply plugin: 'cn.hikyson.methodcanary.plugin'
 AndroidGodEye {
-    enableMethodTracer true // 方法耗时检测，注意，生产包中关闭它，举例，这里可以这么写：!gradle.startParameter.taskNames.contains("assembleRelease")
+    enableMethodTracer true
+    // 方法耗时检测，注意，生产包中关闭它，举例，这里可以这么写：!gradle.startParameter.taskNames.contains("assembleRelease")
     enableLifecycleTracer true // 页面生命周期检测
     instrumentationRuleFilePath 'config/other/AndroidGodEye-MethodCanary.js'
     instrumentationRuleIncludeClassNamePrefix(['com.pds.blog'])
@@ -104,9 +106,11 @@ android {
 //        release.initWith(releaseWithLog)
         release {
             resValue("bool", "android_god_eye_manual_install", "false") // 是否手动安装，默认false
-            resValue("bool", "android_god_eye_need_notification", "false") // 是否展示通知栏，默认false，生产环境请关闭
+            resValue("bool", "android_god_eye_need_notification", "false")
+            // 是否展示通知栏，默认false，生产环境请关闭
             resValue("integer", "android_god_eye_monitor_port", "5390") // Monitor端口，默认5390
-            resValue("string", "android_god_eye_install_assets_path", "android-godeye-config/install.config") // 安装配置文件在assets中的路径
+            resValue("string", "android_god_eye_install_assets_path", "android-godeye-config/install.config")
+            // 安装配置文件在assets中的路径
 
             minifyEnabled true
             zipAlignEnabled true
@@ -125,7 +129,6 @@ android {
 //}
 
 dependencies {
-    implementation  rootProject.ext.dependencies["appcompat"]
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
@@ -162,16 +165,30 @@ dependencies {
     debugImplementation 'cn.hikyson.godeye:godeye-leakcanary:3.4.2'
     implementation files('libs/tbs_sdk_thirdapp_v4.3.0.3.jar')
 
+    implementation deps.ax.appcompat
+    implementation deps.jw.butterknife
+    annotationProcessor deps.jw.butterknifeCompiler
+
     // lib-module
     api project(':base:lib_package')
     api project(path: ':lib_preloader')
     api project(path: ':base:mode_ui')
     api project(path: ':base:lib_util')
-    api project(path: ':base:lib_net')
+    api project(path: ':base:lib_api')
     api project(path: ':base:m2app')
     api project(path: ':base:skin')
     api project(path: ':base:frame')
     api project(path: ':base:lib_base')
     api project(path: ':base:debug_tool')
     api 'me.jessyan:autosize:1.2.1'
+
+    implementation 'in.srain.cube:ptr-load-more:1.0.6'
+    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
+    implementation  'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
+    implementation  'com.scwang.smart:refresh-header-radar:2.0.1'       //雷达刷新头
+    implementation  'com.scwang.smart:refresh-header-falsify:2.0.1'     //虚拟刷新头
+    implementation  'com.scwang.smart:refresh-header-material:2.0.1'    //谷歌刷新头
+    implementation  'com.scwang.smart:refresh-header-two-level:2.0.1'   //二级刷新头
+    implementation  'com.scwang.smart:refresh-footer-ball:2.0.1'        //球脉冲加载
+    implementation  'com.scwang.smart:refresh-footer-classics:2.0.1'    //经典加载
 }

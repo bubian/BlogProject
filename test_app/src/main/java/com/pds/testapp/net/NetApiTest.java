@@ -1,11 +1,10 @@
 package com.pds.testapp.net;
 
-import com.blog.pds.net.ApiManager;
 import com.blog.pds.net.SchedulersCompat;
 import com.blog.pds.net.exception.ErrorConsumer;
 import com.blog.pds.net.func.HttpResultFunc;
-import com.pds.entity.BaseEntity;
-import com.pds.entity.DataEntity;
+import com.pds.entity.base.BaseEntity;
+import com.pds.entity.base.DataEntity;
 
 import org.junit.Test;
 

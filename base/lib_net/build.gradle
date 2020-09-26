@@ -25,7 +25,6 @@ dependencies {
     //    api 'io.reactivex:rxjava-async-util:0.20.4'
     //    api 'rxjava-computation-expressions:0.20.4'
 
-    api project(path: ':base:data_entity')
     //logger
     implementation 'com.qpdstudio.logger:logger:1.0.8'
 

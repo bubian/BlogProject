@@ -2,7 +2,7 @@ package com.blog.pds.net.exception;
 
 import com.blog.pds.net.utils.ResponseUtil;
 
-import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.functions.Consumer;
 
 /**
  * 网络请求错误捕获

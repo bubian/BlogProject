@@ -19,9 +19,11 @@ import java.lang.reflect.Type;
 public class VMActivity<VM extends BaseViewModel> extends BaseActivity {
 
     protected VM mViewModel;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        init(savedInstanceState);
         initVM();
     }
 
@@ -33,9 +35,13 @@ public class VMActivity<VM extends BaseViewModel> extends BaseActivity {
                 Class<VM> presenterClassType = (Class<VM>) types[0];
                 mViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(presenterClassType);
                 getLifecycle().addObserver(mViewModel);
+                mViewModel.load();
             } catch (Exception e) {
-                e.printStackTrace();
+                throw e;
             }
         }
+    }
+
+    protected void init(@Nullable Bundle savedInstanceState) {
     }
 }

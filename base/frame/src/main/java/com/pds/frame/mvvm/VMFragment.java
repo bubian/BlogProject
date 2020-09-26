@@ -37,7 +37,7 @@ public class VMFragment<VM extends BaseViewModel> extends BaseFragment {
                 mViewModel = new ViewModelProvider(this).get(presenterClassType);
                 getLifecycle().addObserver(mViewModel);
             } catch (Exception e) {
-                e.printStackTrace();
+                throw e;
             }
         }
     }

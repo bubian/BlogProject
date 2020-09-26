@@ -66,6 +66,17 @@
             android:layout_marginStart="16dp"
             android:textColor="@android:color/white"
             app:backgroundTint="@color/colorAccent"
+            app:cornerRadius="10dp"
+            android:textAllCaps="false"
+            style="@style/MaterialButton.UnelevatedButton"
+            android:text="Button two"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/white"
+            app:backgroundTint="@color/colorAccent"
             app:iconTint="@android:color/white"
             android:textAllCaps="false"
             app:icon="@android:drawable/ic_menu_camera"

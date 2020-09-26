@@ -1,14 +1,27 @@
-package com.pds.entity;
+package com.pds.entity.base;
 
 import com.google.gson.annotations.SerializedName;
 
-public class BaseEntity<T extends DataEntity> {
-    @SerializedName("errcode")
+/**
+ * @author: pengdaosong
+ * CreateTime:  2020/9/19 2:28 PM
+ * Email：pengdaosong@medlinker.com
+ * Description:
+ */
+public class BaseListEntity<T extends DataEntity> {
+    @SerializedName("code")
     private int code;
-    @SerializedName("errmsg")
+    @SerializedName("msg")
     private String msg;
+
+    /**
+     * 用于提示用的消息
+     */
+    @SerializedName("tipMsg")
+    private String tipMsg;
+
     @SerializedName("data")
-    private T data;
+    private DataListEntity<T> data;
 
     public int getCode() {
         return code;
@@ -30,11 +43,19 @@ public class BaseEntity<T extends DataEntity> {
         this.msg = msg;
     }
 
-    public T getData() {
+    public String getTipMsg() {
+        return tipMsg;
+    }
+
+    public void setTipMsg(String tipMsg) {
+        this.tipMsg = tipMsg;
+    }
+
+    public DataListEntity<T> getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(DataListEntity<T> data) {
         this.data = data;
     }
 
@@ -44,6 +65,7 @@ public class BaseEntity<T extends DataEntity> {
                 "code=" + code +
                 ", msg='" + msg + '\'' +
                 ", data=" + data +
+                ", tipMsg=" + tipMsg +
                 '}';
     }
 }

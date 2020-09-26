@@ -1,7 +1,7 @@
-package com.blog.pds.net.api;
+package com.pds.api;
 
-import com.pds.entity.BaseEntity;
-import com.pds.entity.DataEntity;
+import com.pds.entity.base.BaseEntity;
+import com.pds.entity.base.DataEntity;
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.Field;

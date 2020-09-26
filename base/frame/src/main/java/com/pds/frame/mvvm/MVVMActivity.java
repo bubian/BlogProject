@@ -20,8 +20,13 @@ public abstract class MVVMActivity<VM extends BaseViewModel, DB extends ViewData
     protected DB mVDB;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        initDataBinding();
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected final void init(@Nullable Bundle savedInstanceState) {
+        initR(savedInstanceState);
+        initDataBinding();
     }
 
     private void initDataBinding() {
@@ -35,10 +40,12 @@ public abstract class MVVMActivity<VM extends BaseViewModel, DB extends ViewData
                 } else setContentView(layoutId());
 
             } catch (Exception e) {
-                e.printStackTrace();
+                throw e;
             }
         }
     }
 
     protected abstract int layoutId();
+
+    protected void initR(@Nullable Bundle savedInstanceState){}
 }

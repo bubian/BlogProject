@@ -42,7 +42,7 @@ public abstract class MVVMFragment<VM extends BaseViewModel, DB extends ViewData
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                throw e;
             }
         }
         return super.onCreateView(inflater, container, savedInstanceState);

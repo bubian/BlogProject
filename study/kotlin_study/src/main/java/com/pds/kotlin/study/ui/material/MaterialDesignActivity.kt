@@ -23,7 +23,6 @@ import java.util.*
  * Description:
  */
 class MaterialDesignActivity : Activity() {
-
     private val textArray = arrayOf(
         "Badge+BottomNavigation,TabLayout",
         "BottomAppBar,Button,Checkboxes,Chips",
