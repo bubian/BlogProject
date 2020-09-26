@@ -6,8 +6,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import androidx.multidex.MultiDexApplication;
 
+import com.pds.application.BaseApplication;
 import com.pds.blog.BuildConfig;
 import com.pds.blog.R;
 import com.pds.skin.SkinManager;
@@ -30,7 +30,7 @@ import me.jessyan.autosize.unit.UnitsManager;
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-public class BlogApplication extends MultiDexApplication {
+public class BlogApplication extends BaseApplication {
     private static BlogApplication mApp;
 
     public static BlogApplication instance(){

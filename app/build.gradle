@@ -133,7 +133,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    implementation 'androidx.multidex:multidex:2.0.0'
     //    compile project(':lib_aspect_annotations')
     // rxlifecycle
     implementation 'com.trello.rxlifecycle3:rxlifecycle:3.1.0'
@@ -181,6 +180,7 @@ dependencies {
     api project(path: ':base:lib_base')
     api project(path: ':base:debug_tool')
     api 'me.jessyan:autosize:1.2.1'
+    implementation project(path: ":module:BaseApplication")
 
     implementation 'in.srain.cube:ptr-load-more:1.0.6'
     implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖

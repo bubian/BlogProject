@@ -1,0 +1,4 @@
+apply from: "../../config/module.gradle"
+dependencies {
+    api project(path: ':base:frame')
+}

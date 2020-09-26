@@ -1,10 +1,14 @@
+// app
+include ':app'
+// Application
+include ':module:BaseApplication'
+// mainModule
+include ':module:mainModule'
 // IM
 include ':IM:socket_control'
 include ':IM:socket_app'
 include ':IM:socket'
 include ':IM:socket_data'
-// app
-include ':app'
 // base
 include ':base:lib_package'
 include ':base:sdk_third'
