@@ -2,7 +2,8 @@ package com.pds.testapp.net;
 
 import com.blog.pds.net.SchedulersCompat;
 import com.blog.pds.net.exception.ErrorConsumer;
-import com.blog.pds.net.func.HttpResultFunc;
+import com.pds.api.func.HttpResultFunc;
+import com.pds.api.manager.ApiManager;
 import com.pds.entity.base.BaseEntity;
 import com.pds.entity.base.DataEntity;
 
@@ -35,11 +36,6 @@ public class NetApiTest {
                     @Override
                     public void accept(DataEntity data) throws Exception {
 
-                    }
-                }, new ErrorConsumer() {
-                    @Override
-                    public void accept(Throwable throwable) {
-                        super.accept(throwable);
                     }
                 });
     }

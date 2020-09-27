@@ -20,7 +20,7 @@ ext {
 
             'jp'     : [
                     'hilt'              : "com.google.dagger:hilt-android:${versions.hilt}",
-                    'hiltCompiler'      : "com.google.dagger:hilt-android-compiler:${versions.butterknife}",
+                    'hiltCompiler'      : "com.google.dagger:hilt-android-compiler:${versions.hilt}",
                     'lifecycleViewmodel': "androidx.lifecycle:lifecycle-viewmodel:${versions.lifecycleVersion}",
                     'lifecycleLivedata' : "androidx.lifecycle:lifecycle-livedata:${versions.lifecycleVersion}",
                     'pagingRuntime'     : "androidx.paging:paging-runtime:${versions.paging_version}",
