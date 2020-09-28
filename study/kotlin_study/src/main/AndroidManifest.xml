@@ -43,6 +43,9 @@
         <activity
             android:name=".ui.constraint.ConstraintMainActivity"
             android:theme="@style/Theme.MaterialComponents"/>
+        <activity
+            android:name=".dokit.DoKitMockActivity"
+            android:theme="@style/Theme.MaterialComponents"/>
 
         <activity
             android:name=".ui.ViewActivity"

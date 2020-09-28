@@ -3,10 +3,10 @@ package com.pds.kotlin
 import androidx.multidex.MultiDexApplication
 import com.dianping.logan.Logan
 import com.dianping.logan.LoganConfig
-import com.didichuxing.doraemonkit.DoraemonKit
 import com.pds.frame.log.Lg
 import com.pds.kotlin.study.dagger.ApplicationComponent
 import com.pds.kotlin.study.dagger.DaggerApplicationComponent
+import com.pds.tools.ModuleToolsManager
 import xcrash.XCrash
 import java.io.File
 
@@ -34,11 +34,11 @@ class BaseApplication : MultiDexApplication(){
         super.onCreate()
         application = this
         Lg.d(TAG,"onCreate")
-        DoraemonKit.install(this)
+        ModuleToolsManager.init(this,"34f2baf949b36b874a2e79e3089ff384")
         // xCrash 能为安卓 app 提供捕获 java 崩溃，native 崩溃和 ANR 的能力。不需要 root 权限或任何系统权限。（https://github.com/iqiyi/xCrash）
         // 日志保存目录：/data/data/PACKAGE_NAME/files/tombstones
         XCrash.init(this)
-        // logan
+        // logan:美团日志上报库
         initLogan()
     }
 

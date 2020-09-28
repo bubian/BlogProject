@@ -2,8 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-// doraemonkit
-//apply plugin: 'com.didi.dokit'
+apply plugin: 'com.didi.dokit'
 android {
     compileSdkVersion 28
     buildToolsVersion "29.0.3"
@@ -74,23 +73,19 @@ dependencies {
     implementation project(path: ':base:lib_base')
     implementation project(path: ':base:frame')
     implementation project(path: ':base:sdk_third')
+    implementation project(path:":base:lib_tools")
+    implementation project(path:":base:lib_net")
+    implementation project(path:":base:data_entity")
 
     implementation 'com.cocosw:bottomsheet:1.5.0@aar'
     implementation 'com.cocosw:query:0.2.2'
 
     implementation 'androidx.multidex:multidex:2.0.1'
 
-//    api 'com.google.dagger:dagger-android:2.15'
-//    api 'com.google.dagger:dagger-android-support:2.15' // if you use the support libraries
-//    kapt 'com.google.dagger:dagger-android-processor:2.15'
-
     implementation 'com.google.dagger:dagger:2.15'
     kapt 'com.google.dagger:dagger-compiler:2.15'
     // [日志分析](https://github.com/JakeWharton/timber)
     implementation 'com.jakewharton.timber:timber:4.7.1'
-    // doraemonkit
-    debugImplementation "com.didichuxing.doraemonkit:doraemonkit:3.1.6"
-    releaseImplementation "com.didichuxing.doraemonkit:doraemonkit-no-op:3.1.6"
     // [xCrash](https://github.com/iqiyi/xCrash)
     implementation 'com.iqiyi.xcrash:xcrash-android-lib:2.4.9'
     // https://github.com/Meituan-Dianping/Logan/tree/master/Example/Logan-Android

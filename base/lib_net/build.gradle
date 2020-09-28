@@ -10,25 +10,28 @@ android{
     }
 }
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation deps.ax.appcompat
+    api deps.net.retrofit
+    api deps.net.retrofitConverterGson
+    api deps.net.retrofitConverterScalars
+    api deps.net.retrofitAdapterRxjava2
 
-    api 'com.squareup.retrofit2:retrofit:2.8.1'
-    api 'com.squareup.retrofit2:converter-gson:2.8.1'
-    api 'com.squareup.retrofit2:converter-scalars:2.8.1'
-    api 'com.squareup.retrofit2:adapter-rxjava2:2.8.1'
     // 额外依赖，如果项目使用OkHttp作为网络请求可以用这个库完成网络监控
-    api 'com.squareup.okhttp3:okhttp:4.6.0'
+    api deps.net.okhttp3
 
     // RxJava
-    api 'io.reactivex.rxjava3:rxandroid:3.0.0'
-    api 'io.reactivex.rxjava3:rxjava:3.0.0'
-    //    api 'io.reactivex:rxjava-async-util:0.20.4'
-    //    api 'rxjava-computation-expressions:0.20.4'
+    // api 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    // api 'io.reactivex.rxjava3:rxjava:3.0.0'
+    // api 'io.reactivex:rxjava-async-util:0.20.4'
+    // api 'rxjava-computation-expressions:0.20.4'
 
+    api deps.rx.rxjava
+    api deps.rx.rxlifecycle
+    api deps.rx.rxlifecycle-android
+    api deps.rx.rxlifecycle-components
+    api deps.rx.rxandroid
+    api deps.rx.rxbinding
     //logger
-    implementation 'com.qpdstudio.logger:logger:1.0.8'
-
-    testImplementation 'junit:junit:4.12'
-
+    implementation deps.data.logger
     api project(path: ':base:debug_tool')
 }

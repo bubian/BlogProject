@@ -1,8 +1,13 @@
 apply from: '../../config/module.gradle'
+// 必须要在主module里面应用，不然不生效
 apply plugin: 'com.didi.dokit'
+
+android {
+    apply from: 'dokitExt.gradle'
+}
 dependencies {
+    // 滴滴工具库：http://xingyun.xiaojukeji.com/docs/dokit/#/intro
     debugImplementation deps.tools.doraemonkit
     releaseImplementation deps.tools.doraemonkitNo
     releaseImplementation deps.tools.doraemonkitLeakcanary
-
 }
