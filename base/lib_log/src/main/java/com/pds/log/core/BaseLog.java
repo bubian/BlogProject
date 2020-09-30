@@ -1,4 +1,4 @@
-package com.pds.frame.log;
+package com.pds.log.core;
 
 import android.util.Log;
 

@@ -1,10 +1,12 @@
-package com.pds.frame.log;
+package com.pds.log.core;
 
 import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import static com.pds.frame.log.Lg.printLine;
+
+import static com.pds.log.core.Lg.printLine;
 
 public class JsonLog {
 

@@ -10,12 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 参考：http://xingyun.xiaojukeji.com/docs/dokit#/intro
  * @author: pengdaosong
  * @CreateTime: 2020/9/27 2:18 PM
  * @Email: pengdaosong@medlinker.com
  * @Description:
  */
-public class ModuleToolsManager {
+public class DoKitManager {
 
     public static void init(Application application){
         DoraemonKit.install(application);

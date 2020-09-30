@@ -2,7 +2,7 @@ package com.pds.kotlin.study.logan
 
 import android.annotation.SuppressLint
 import com.dianping.logan.Logan
-import com.pds.frame.log.Lg
+import com.pds.log.core.Lg
 import java.text.SimpleDateFormat
 
 

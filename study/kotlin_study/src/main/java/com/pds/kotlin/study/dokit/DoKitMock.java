@@ -3,6 +3,7 @@ package com.pds.kotlin.study.dokit;
 import android.util.Log;
 
 import com.blog.pds.net.SchedulersCompat;
+import com.blog.pds.net.exception.ErrorConsumer;
 import com.pds.kotlin.study.net.ApiManager;
 
 /**
@@ -17,7 +18,7 @@ public class DoKitMock {
         ApiManager.getApi().getLoginSmsCode("text", phone, useType)
                 .compose(SchedulersCompat.applyIoSchedulers())
                 .subscribe(entity -> {
-                    Log.e("DoKitMock","=====111");
-                });
+                    Log.e("DoKitMock","=====111:" + entity.toString());
+                },new ErrorConsumer());
     }
 }

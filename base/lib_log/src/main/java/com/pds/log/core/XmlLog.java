@@ -1,18 +1,18 @@
-package com.pds.frame.log;
+package com.pds.log.core;
 
 import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import static com.pds.frame.log.Lg.printLine;
-
+import static com.pds.log.core.Lg.printLine;
 public class XmlLog {
 
     public static void printXml(String tag, String xml, String headString) {
