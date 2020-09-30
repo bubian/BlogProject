@@ -25,3 +25,12 @@ if(autoBuildJar){
         }
     }
 }
+repositories {
+    flatDir {
+        try {
+            dirs 'libs'
+        } catch (e) {
+
+        }
+    }
+}

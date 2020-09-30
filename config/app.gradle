@@ -75,3 +75,13 @@ android {
         }
     }
 }
+
+repositories {
+    flatDir {
+        try {
+            dirs 'libs','../*/libs','../*/*/libs'
+        } catch (e) {
+
+        }
+    }
+}
