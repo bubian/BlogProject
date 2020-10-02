@@ -1,6 +1,7 @@
 package com.pds.kotlin.study.net;
 
 import com.blog.pds.net.RetrofitProvide;
+import com.pds.env.med.PatientEnv;
 
 /**
  * @author: pengdaosong
@@ -20,7 +21,7 @@ public enum ApiManager {
     public static AppApi getApi() {
         if (sAppApi == null) {
             sAppApi = RetrofitProvide.getInstance()
-                    .build(RetrofitProvide.getInstance().buildRetrofit2(ApiEnv.getAppEnv()),
+                    .build(RetrofitProvide.getInstance().buildRetrofit2(PatientEnv.getAppEnv()),
                             AppApi.class);
         }
         return sAppApi;

@@ -1,0 +1,10 @@
+apply from: '../../config/module.gradle'
+
+def HOST_TYPE_DEV = envP.hostTypeDev
+def HOST_TYPE_ONLINE = envP.hostTypeOnline
+def urlType = project.hasProperty('hostType') ? Integer.parseInt(hostType) : HOST_TYPE_ONLINE
+android {
+    defaultConfig {
+        buildConfigField "int", "API_URL_TYPE", "${urlType}"
+    }
+}

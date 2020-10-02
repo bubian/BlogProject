@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="med_env_switch">环境切换</string>
+    <string name="med_online">线上Env</string>
+    <string name="med_qa">测试Env</string>
+    <string name="med_dev">开发Env</string>
+    <string name="med_default">默认Env</string>
+    <string name="med_custom">自定义Env</string>
+    <string name="input_env_hint">请输入自定义env</string>
+    <string name="med_api">当前页面接口请求</string>
+</resources>

@@ -1,14 +1,4 @@
 apply from: '../../config/module.gradle'
-
-def HOST_TYPE_DEV = rootProject.ext.project.hostTypeDev
-def HOST_TYPE_ONLINE = rootProject.ext.project.hostTypeOnline
-def urlType = project.hasProperty('hostType') ? Integer.parseInt(hostType) : HOST_TYPE_DEV
-
-android{
-    defaultConfig {
-        buildConfigField "int", "API_URL_TYPE", "${urlType}"
-    }
-}
 dependencies {
     implementation deps.ax.appcompat
     api deps.net.retrofit
@@ -34,4 +24,5 @@ dependencies {
     //logger
     implementation deps.data.logger
     api project(path: ':base:debug_tool')
+    api project(path: ':base:lib_env')
 }

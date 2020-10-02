@@ -13,12 +13,18 @@ import com.pds.kotlin.study.net.ApiManager;
  * @Description:
  */
 public class DoKitMock {
+    private static String TAG = "DoKitMock";
     public static void getLoginSmsCode(String phone, String useType) {
-        Log.e("DoKitMock","=====");
+        Log.e(TAG,"=====");
+        test();
         ApiManager.getApi().getLoginSmsCode("text", phone, useType)
                 .compose(SchedulersCompat.applyIoSchedulers())
                 .subscribe(entity -> {
-                    Log.e("DoKitMock","=====111:" + entity.toString());
+                    Log.e(TAG,"=====111:" + entity.toString());
                 },new ErrorConsumer());
+    }
+
+    private static void test(){
+
     }
 }

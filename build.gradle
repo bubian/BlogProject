@@ -1,7 +1,7 @@
 apply from: "config/config.gradle"
-
 buildscript {
     apply from: "config/sdk.gradle"
+    apply from: "config/base.gradle"
     ext {
         kotlin_version = '1.4.10'
     }
@@ -26,10 +26,11 @@ buildscript {
 
         // app-joint
         classpath 'io.github.prototypez:app-joint:1.7'
-        // [doraemonkit](https://github.com/didi/DoraemonKit)
+        // https://github.com/didi/DoraemonKit
         classpath "com.didichuxing.doraemonkit:doraemonkit-plugin:$versions.doraemonkit"
-
-        classpath "com.didichuxing.tools:droidassist:1.1.0"
+        // 滴滴AOP框架
+        // https://github.com/didi/DroidAssist
+        classpath "com.didichuxing.tools:droidassist:1.1.1"
 
         classpath 'com.didi.virtualapk:gradle:0.9.8.6'
 

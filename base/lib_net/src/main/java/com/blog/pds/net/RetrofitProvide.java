@@ -68,7 +68,7 @@ public class RetrofitProvide {
 //            builder.addNetworkInterceptor(new OkHttpLogInterceptor(true));
         } else { //  2017/8/28 如果是qa要打release包请注释掉下面代码
             //新增，如果不是线上https取消配置
-            if (BuildConfig.API_URL_TYPE == 3) {
+            if (com.pds.env.BuildConfig.API_URL_TYPE == 3) {
                 builder.connectionSpecs(Collections.singletonList(spec)).protocols(Collections.singletonList(Protocol.HTTP_1_1));
             }
         }

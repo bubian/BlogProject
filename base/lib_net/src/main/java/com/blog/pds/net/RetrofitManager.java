@@ -1,5 +1,6 @@
 package com.blog.pds.net;
 
+import com.pds.env.blog.AppEnv;
 import retrofit2.Retrofit;
 
 /**
@@ -16,19 +17,6 @@ public class RetrofitManager {
     private RetrofitManager() {
     }
 
-    private static String getBaseUrl() {
-        String url;
-        switch (BuildConfig.API_URL_TYPE) {
-            case 1:
-                url = "http://47.104.91.148";
-                break;
-            default:
-                url = "http://47.104.91.148";
-                break;
-        }
-        return url;
-    }
-
     public static synchronized RetrofitManager getInstance() {
         if (mInstance == null) {
             mInstance = new RetrofitManager();
@@ -38,7 +26,7 @@ public class RetrofitManager {
 
 
     private void buildRetrofit() {
-        mRetrofit = RetrofitProvide.getInstance().buildRetrofit(getBaseUrl());
+        mRetrofit = RetrofitProvide.getInstance().buildRetrofit(AppEnv.getAppEnv());
     }
 
     private Retrofit getRetrofit() {

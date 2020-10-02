@@ -5,9 +5,42 @@ apply plugin: 'com.didi.dokit'
 android {
     apply from: 'dokitExt.gradle'
 }
+
+/**
+ * dokit工具mock配置需要
+ *
+ * 如果mock或者环境切换不能正常使用，可以将改配置放到主module的build.gradle文件中
+ */
+//configurations.all {
+//    resolutionStrategy.eachDependency { details ->
+//        if (details.requested.group == 'com.squareup.okhttp3'
+//                && details.requested.name == 'okhttp') {
+//            details.useVersion "3.12.1"
+//        }
+//    }
+//}
+
+// DroidAssist 是一个轻量级的 Android 字节码编辑插件，基于 Javassist 对字节码操作，根据 xml 配置处理 class 文件，以达到对 class 文件进行动态修改的效果
+apply plugin: 'com.didichuxing.tools.droidassist'
+droidAssistOptions {
+    config file("config/med/droidassist.xml")
+    //插件配置文件(必选配置,支持多配置文件)
+    // 如果需要停用 DroidAssist 插件功能，可以添加 enable false 以停用插件 (可选配置)
+    enable true
+    // 日志输出等级：0 关闭日志输出，1 输出日志到控制台 2 输出日志到文件 3 输出日志到控制台以及日志 (可选配置)
+    logLevel 3
+    // 日志输出目录，当日志输出到文件时，默认的输出目录是当前 model 的 build/outputs/logs 目录 (可选配置)
+    logDir file('build/outputs/logs')
+}
+
 dependencies {
+    implementation deps.ax.appcompat
+    api deps.net.okhttp3
     // 滴滴工具库：http://xingyun.xiaojukeji.com/docs/dokit/#/intro
     debugImplementation deps.tools.doraemonkit
     releaseImplementation deps.tools.doraemonkitNo
     releaseImplementation deps.tools.doraemonkitLeakcanary
+    // FreeReflection is a library that lets you use reflection without any restriction above Android P (includes Q and R)
+    // https://github.com/tiann/FreeReflection
+    implementation deps.tools.freeReflection
 }

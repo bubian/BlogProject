@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.didichuxing.doraemonkit.DoraemonKit;
 import com.didichuxing.doraemonkit.kit.AbstractKit;
-import com.pds.tools.dokit.EnvSwitchKit;
+import com.pds.tools.dokit.MedEnvSwitchKit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,7 @@ import java.util.List;
  */
 public class DoKitManager {
 
+    public static String sProductId;
     public static void init(Application application){
         DoraemonKit.install(application);
     }
@@ -28,12 +29,13 @@ public class DoKitManager {
      * @param productId 在Dokit申请的产品id
      */
     public static void init(Application application,String productId){
+        sProductId = productId;
         DoraemonKit.install(application, getKits(),productId);
     }
 
     private static List<AbstractKit> getKits(){
         List<AbstractKit> kits = new ArrayList<>();
-        kits.add(new EnvSwitchKit());
+        kits.add(new MedEnvSwitchKit(sProductId));
         return kits;
     }
 }
