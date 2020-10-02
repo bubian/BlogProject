@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.pds.frame.base.BaseActivity;
+import com.pds.base.act.BaseActivity;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

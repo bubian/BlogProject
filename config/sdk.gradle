@@ -11,22 +11,26 @@ ext {
             glide                   : '4.11.0',
             doraemonkit             : '3.2.0',
             retrofit                : '2.8.1',
-            rxlifecycleVersion      : "3.1.0",
             okhttp3                 : "4.6.0",
+            rxlifecycle3            : "3.1.0",
     ]
 
     deps = [
 
             'jw'     : [
+                    // 资源注入
                     'butterknife'        : "com.jakewharton:butterknife:${versions["butterknife"]}",
                     'butterknifeCompiler': "com.jakewharton:butterknife-compiler:${versions["butterknife"]}",
             ],
 
             'jp'     : [
+                    // 注解
                     'hilt'              : "com.google.dagger:hilt-android:${versions.hilt}",
                     'hiltCompiler'      : "com.google.dagger:hilt-android-compiler:${versions.hilt}",
+                    // VM
                     'lifecycleViewmodel': "androidx.lifecycle:lifecycle-viewmodel:${versions.lifecycleVersion}",
                     'lifecycleLivedata' : "androidx.lifecycle:lifecycle-livedata:${versions.lifecycleVersion}",
+                    // 分页
                     'pagingRuntime'     : "androidx.paging:paging-runtime:${versions.paging_version}",
                     'pagingRxjava2'     : "androidx.paging:paging-rxjava2:${versions.paging_version}", // For Kotlin use paging-rxjava2-ktx,如果不用，可以不依赖
             ],
@@ -37,19 +41,25 @@ ext {
             ],
 
             'alibaba': [
+                    // 阿里路由框架
                     'arouter'       : "com.alibaba:arouter-api:1.5.0",
                     'arouterompiler': "com.alibaba:arouter-compiler:1.2.2"
             ],
 
             'list'   : [
-                    'smartRefreshKernel': 'com.scwang.smart:refresh-layout-kernel:2.0.1',     //核心必须依赖
-                    'smartRefreshHC'    : 'com.scwang.smart:refresh-header-classics:2.0.1',  //经典刷新头
-                    'smartRefreshHR'    : 'com.scwang.smart:refresh-header-radar:2.0.1',  //雷达刷新头
-                    'smartRefreshHF'    : 'com.scwang.smart:refresh-header-falsify:2.0.1',  //虚拟刷新头
-                    'smartRefreshHM'    : 'com.scwang.smart:refresh-header-material:2.0.1',  //谷歌刷新头
-                    'smartRefreshHTL'   : 'com.scwang.smart:refresh-header-two-level:2.0.1',  //二级刷新头
-                    'smartRefreshFB'    : 'com.scwang.smart:refresh-footer-ball:2.0.1',  //球脉冲加载
-                    'smartRefreshFC'    : 'com.scwang.smart:refresh-footer-classics:2.0.1',  //经典加载
+                    // 列表刷新控件
+                    'smartRefreshKernel'   : 'com.scwang.smart:refresh-layout-kernel:2.0.1',     //核心必须依赖
+                    'smartRefreshHC'       : 'com.scwang.smart:refresh-header-classics:2.0.1',  //经典刷新头
+                    'smartRefreshHR'       : 'com.scwang.smart:refresh-header-radar:2.0.1',  //雷达刷新头
+                    'smartRefreshHF'       : 'com.scwang.smart:refresh-header-falsify:2.0.1',  //虚拟刷新头
+                    'smartRefreshHM'       : 'com.scwang.smart:refresh-header-material:2.0.1',  //谷歌刷新头
+                    'smartRefreshHTL'      : 'com.scwang.smart:refresh-header-two-level:2.0.1',  //二级刷新头
+                    'smartRefreshFB'       : 'com.scwang.smart:refresh-footer-ball:2.0.1',  //球脉冲加载
+                    'smartRefreshFC'       : 'com.scwang.smart:refresh-footer-classics:2.0.1',  //经典加载
+                    // 列表控件
+                    'vlayout'              : "com.alibaba.android:vlayout:1.2.8@aar",
+                    'recyclerview'         : "androidx.recyclerview:recyclerview:1.2.0-alpha06",
+                    'recyclerviewSelection': "androidx.recyclerview:recyclerview-selection:1.1.0-rc03",
             ],
 
             'data'   : [
@@ -62,26 +72,36 @@ ext {
                     'eventbus': 'org.greenrobot:eventbus:3.2.0'
             ],
             'tools'  : [
+                    // 滴滴工具库
                     'doraemonkit'          : "com.didichuxing.doraemonkit:doraemonkit:${versions.doraemonkit}",
                     'doraemonkitNo'        : "com.didichuxing.doraemonkit:doraemonkit-no-op:${versions.doraemonkit}",
                     'doraemonkitLeakcanary': "com.didichuxing.doraemonkit:doraemonkit-leakcanary:${versions.doraemonkit}",
+                    // 反射增强
                     'freeReflection'       : 'me.weishu:free_reflection:3.0.1',
             ],
             'rx'     : [
-                    "rxjava"                : "io.reactivex.rxjava2:rxjava:2.2.19",
-                    "rxlifecycle"           : "com.trello.rxlifecycle3:rxlifecycle:${versions["rxlifecycleVersion"]}",
-                    "rxlifecycle-android"   : "com.trello.rxlifecycle3:rxlifecycle-android:${versions["rxlifecycleVersion"]}",
-                    "rxlifecycle-components": "com.trello.rxlifecycle3:rxlifecycle-components:${versions["rxlifecycleVersion"]}",
-                    "rxandroid"             : "io.reactivex.rxjava2:rxandroid:2.0.1",
-                    "rxbinding"             : "com.jakewharton.rxbinding2:rxbinding:2.0.0",
+                    // RxJava响应书编程
+                    "rxjava"                         : "io.reactivex.rxjava2:rxjava:2.2.19",
+                    "rxandroid"                      : "io.reactivex.rxjava2:rxandroid:2.0.1",
+                    "rxbinding"                      : "com.jakewharton.rxbinding2:rxbinding:2.0.0",
+                    // 解决RxJava使用中存在的内存泄漏问题
+                    'rxlifecycle3'                   : "com.trello.rxlifecycle3:rxlifecycle:${versions.rxlifecycle3}",
+                    'rxlifecycleAndroid'             : "com.trello.rxlifecycle3:rxlifecycle-android:${versions.rxlifecycle3}",
+                    'rxlifecycleComponents'          : "com.trello.rxlifecycle3:rxlifecycle-components:${versions.rxlifecycle3}",
+                    'rxlifecycleComponentsPreference': "com.trello.rxlifecycle3:rxlifecycle-components-preference:${versions.rxlifecycle3}",
+                    'rxlifecycleAndroidLifecycle'    : "com.trello.rxlifecycle3:rxlifecycle-android-lifecycle:${versions.rxlifecycle3}",
+
             ],
             'net'    : [
                     'retrofit'                : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
                     'retrofitConverterGson'   : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
                     'retrofitConverterScalars': "com.squareup.retrofit2:converter-scalars:${versions.retrofit}",
                     'retrofitAdapterRxjava2'  : "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}",
-
                     'okhttp3'                 : "com.squareup.okhttp3:okhttp:${versions.okhttp3}",
+            ],
+            'fit'    : [
+                    // 今日头条屏幕适配框架
+                    'autosize': "me.jessyan:autosize:1.2.1",
             ]
     ]
 

@@ -5,8 +5,7 @@ import android.app.Application;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pds.application.BaseApplication;
-
-import java.pds.main.module.ModuleMainService;
+import com.pds.sample.module.ModuleMainService;
 
 
 /**
@@ -15,7 +14,7 @@ import java.pds.main.module.ModuleMainService;
  * @Email: pengdaosong@medlinker.com
  * @Description:
  */
-@Route(path = "/service/main")
+@Route(path = "/service/sample")
 public class ModuleMainServiceImpl implements ModuleMainService {
 
     @Override

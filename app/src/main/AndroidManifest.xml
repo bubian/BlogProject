@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivityK" />
-        <activity android:name=".base.BaseActivity" />
+        <activity android:name="com.pds.base.act.BaseRxActivity" />
         <activity android:name=".web.ui.HybridActivity" />
         <activity
             android:name="com.tencent.smtt.sdk.VideoActivity"

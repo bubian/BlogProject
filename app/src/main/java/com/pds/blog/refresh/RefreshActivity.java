@@ -21,7 +21,7 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.pds.blog.R;
-import com.pds.blog.base.BaseActivity;
+import com.pds.base.act.BaseRxActivity;
 import com.pds.ui.view.refresh.BaseSwipeRefreshLayout;
 import com.pds.ui.view.refresh.MultipleSwipeRefreshLayout;
 import com.pds.ui.view.refresh.view.TwoPointRefreshView;
@@ -39,7 +39,7 @@ import java.util.List;
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-public class RefreshActivity extends BaseActivity {
+public class RefreshActivity extends BaseRxActivity {
 
     private static final String TAG = "RefreshActivity";
     private VLayoutRecycleView vLayoutRecycleView;

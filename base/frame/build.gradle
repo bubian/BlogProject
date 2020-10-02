@@ -9,4 +9,5 @@ dependencies {
     api  deps.jp.lifecycleViewmodel
     api  deps.jp.lifecycleLivedata
     api  deps.jp.pagingRuntime
+    api project(path:':base:lib_base')
 }

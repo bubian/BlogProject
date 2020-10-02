@@ -16,9 +16,9 @@ dependencies {
     // api 'rxjava-computation-expressions:0.20.4'
 
     api deps.rx.rxjava
-    api deps.rx.rxlifecycle
-    api deps.rx.rxlifecycle-android
-    api deps.rx.rxlifecycle-components
+    api deps.rx.rxlifecycle3
+    api deps.rx.rxlifecycleAndroid
+    api deps.rx.rxlifecycleComponents
     api deps.rx.rxandroid
     api deps.rx.rxbinding
     //logger

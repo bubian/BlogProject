@@ -1,4 +1,4 @@
-package java.pds.main.application;
+package com.pds.sample.application;
 
 import android.app.Application;
 
@@ -14,10 +14,9 @@ public class ModuleApplication {
     private static ModuleApplication sModuleApplication = new ModuleApplication();
     private Application mApplication;
 
-    private ModuleApplication() {
-    }
+    private ModuleApplication(){}
 
-    public static ModuleApplication instance() {
+    public static ModuleApplication instance(){
         return sModuleApplication;
     }
 

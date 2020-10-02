@@ -172,7 +172,6 @@ dependencies {
     api project(path: ':base:frame')
     api project(path: ':base:lib_base')
     api project(path: ':base:debug_tool')
-    api 'me.jessyan:autosize:1.2.1'
     implementation project(path: ":module:MainApplication")
 
     implementation 'in.srain.cube:ptr-load-more:1.0.6'

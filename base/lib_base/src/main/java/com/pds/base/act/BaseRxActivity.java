@@ -1,4 +1,4 @@
-package com.pds.blog.base;
+package com.pds.base.act;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +14,7 @@ import io.reactivex.Observable;
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-public class BaseActivity extends RxAppCompatActivity {
+public class BaseRxActivity extends RxAppCompatActivity {
     private static final String TAG = "BaseActivity";
 
     @Override

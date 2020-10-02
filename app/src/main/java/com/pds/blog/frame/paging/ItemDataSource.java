@@ -3,7 +3,6 @@ package com.pds.blog.frame.paging;
 import androidx.annotation.NonNull;
 import androidx.paging.ItemKeyedDataSource;
 
-import com.blog.pds.net.SchedulersCompat;
 import com.blog.pds.net.exception.ErrorConsumer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -11,7 +10,7 @@ import com.pds.api.func.HttpResultListFunc;
 import com.pds.api.manager.ApiManager;
 import com.pds.entity.PagingEntity;
 import com.pds.entity.base.BaseListEntity;
-import com.pds.frame.log.Lg;
+import com.pds.log.core.Lg;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -34,7 +33,7 @@ public class ItemDataSource extends ItemKeyedDataSource<Integer, PagingEntity> {
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams params, @NonNull LoadInitialCallback callback) {
-        Lg.i("=====>loadInitial = "+ params.requestedInitialKey + " size = "+ params.requestedLoadSize);
+        Lg.i("=====>loadInitial = " + params.requestedInitialKey + " size = " + params.requestedLoadSize);
         Disposable observable
                 = ApiManager
                 .getPagingApi()
@@ -55,7 +54,7 @@ public class ItemDataSource extends ItemKeyedDataSource<Integer, PagingEntity> {
 
     @Override
     public void loadAfter(@NonNull LoadParams params, @NonNull LoadCallback callback) {
-        Lg.i("=====>loadAfter = "+ params.key + " size = "+ params.requestedLoadSize);
+        Lg.i("=====>loadAfter = " + params.key + " size = " + params.requestedLoadSize);
         Disposable observable
                 = ApiManager
                 .getPagingApi()
@@ -82,7 +81,7 @@ public class ItemDataSource extends ItemKeyedDataSource<Integer, PagingEntity> {
 
     @Override
     public void loadBefore(@NonNull LoadParams params, @NonNull LoadCallback callback) {
-        Lg.i("=====>loadBefore = "+ params.key + " size = "+ params.requestedLoadSize);
+        Lg.i("=====>loadBefore = " + params.key + " size = " + params.requestedLoadSize);
     }
 
     @NonNull

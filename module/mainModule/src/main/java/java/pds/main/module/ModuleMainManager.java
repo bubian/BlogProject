@@ -1,4 +1,4 @@
-package java.pds.main.application.module;
+package java.pds.main.module;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 
