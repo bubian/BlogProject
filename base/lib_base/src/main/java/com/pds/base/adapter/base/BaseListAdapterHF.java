@@ -7,8 +7,8 @@ import androidx.collection.SparseArrayCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pds.base.adapter.viewhold.ViewHolder;
 import com.pds.base.helper.WrapperHelper;
-import com.pds.base.holder.BaseViewHolder;
 
 
 public class BaseListAdapterHF extends BaseListAdapter {
@@ -28,9 +28,9 @@ public class BaseListAdapterHF extends BaseListAdapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (mHeaderViews.get(viewType) != null) {
-            return new BaseViewHolder(mHeaderViews.get(viewType));
+            return new ViewHolder(mHeaderViews.get(viewType));
         } else if (mFootViews.get(viewType) != null) {
-            return new BaseViewHolder(mFootViews.get(viewType));
+            return new ViewHolder(mFootViews.get(viewType));
         }
         return mInnerAdapter.onCreateViewHolder(parent, viewType);
     }

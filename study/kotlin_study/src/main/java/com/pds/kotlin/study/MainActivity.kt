@@ -6,16 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pds.base.adapter.ListAdapter
 import com.pds.base.adapter.callback.SimpleItemOnClickListener
-import com.pds.base.holder.BaseViewHolder
+import com.pds.base.adapter.viewhold.ViewHolder
 import com.pds.kotlin.study.dokit.DoKitMockActivity
 import com.pds.kotlin.study.recorder.RecordActivity
-import com.pds.kotlin.study.ui.material.MaterialDesignActivity
 import com.pds.kotlin.study.ui.ViewActivity
 import com.pds.kotlin.study.ui.constraint.ConstraintMainActivity
 import com.pds.kotlin.study.ui.entity.MainEntity
+import com.pds.kotlin.study.ui.material.MaterialDesignActivity
 import kotlinx.android.synthetic.main.constraint_common.*
 import org.jetbrains.anko.internals.AnkoInternals
-import java.util.ArrayList
+import java.util.*
 
 /**
  * @author: pengdaosong
@@ -26,7 +26,7 @@ import java.util.ArrayList
 class MainActivity : AppCompatActivity() {
 
     private val clzArray = arrayOf(
-       ConstraintMainActivity::class.java,
+        ConstraintMainActivity::class.java,
         ViewActivity::class.java,
         MaterialDesignActivity::class.java,
         RecordActivity::class.java,
@@ -49,25 +49,30 @@ class MainActivity : AppCompatActivity() {
         "滴滴旗下的一款多功能调试工具"
     )
 
-    private val contentAdapter = object : ListAdapter<MainEntity>(this@MainActivity,R.layout.item_main){
-        override fun convert(baseViewHolder: BaseViewHolder, position: Int, itemData: MainEntity?) {
-            itemData?.let {
-                baseViewHolder
-                    .setText(R.id.title_tv,itemData.title)
-                    .setText(R.id.des_tv,itemData.content)
+    private val contentAdapter =
+        object : ListAdapter<MainEntity>(this@MainActivity, R.layout.item_main) {
+            override fun convert(baseViewHolder: ViewHolder, position: Int, itemData: MainEntity?) {
+                itemData?.let {
+                    baseViewHolder
+                        .setText(R.id.title_tv, itemData.title)
+                        .setText(R.id.des_tv, itemData.content)
 
 
-            }
-        }
-    }.apply {
-        setItemChildOnClickListener(object : SimpleItemOnClickListener<MainEntity>(){
-            override fun onItemClick(v: View?, position: Int, data: MainEntity?) {
-                data?.let {
-                    AnkoInternals.internalStartActivity(this@MainActivity, data.clz, emptyArray())
                 }
             }
-        })
-    }
+        }.apply {
+            setItemChildOnClickListener(object : SimpleItemOnClickListener<MainEntity>() {
+                override fun onItemClick(v: View?, position: Int, data: MainEntity?) {
+                    data?.let {
+                        AnkoInternals.internalStartActivity(
+                            this@MainActivity,
+                            data.clz,
+                            emptyArray()
+                        )
+                    }
+                }
+            })
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,7 +82,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        val flm =  LinearLayoutManager(this)
+        val flm = LinearLayoutManager(this)
         recyclerView.apply {
             layoutManager = flm
             adapter = contentAdapter
@@ -86,8 +91,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initData() {
         val data: MutableList<MainEntity> = ArrayList()
-        for ((i ,value) in titleArray.withIndex()) {
-            data.add(MainEntity(clzArray[i],value,contentArray[i]))
+        for ((i, value) in titleArray.withIndex()) {
+            data.add(MainEntity(clzArray[i], value, contentArray[i]))
         }
         contentAdapter.dataList = data
     }

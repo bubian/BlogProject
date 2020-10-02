@@ -1,6 +1,6 @@
 package java.pds.main;
 
-import com.pds.frame.base.BaseActivity;
+import com.pds.base.act.BaseActivity;
 
 /**
  * @author: pengdaosong

@@ -1,9 +1,8 @@
 apply from: "../config/module.gradle"
 apply from: "../config/kotlin.gradle"
+
 apply plugin: 'aspect'
-apply plugin: 'app-joint'
 //apply plugin: 'webp'
-//apply plugin: 'com.jakewharton.butterknife'
 
 apply plugin: 'cn.hikyson.methodcanary.plugin'
 AndroidGodEye {
@@ -19,10 +18,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
-
         //获取命令行输入参数,获取后控制使用测试环境，还是线上环境
 //        def urlType = project.hasProperty('platformService') ? Integer.parseInt(platformService) : TEST
-
 //        javaCompileOptions {
 //            annotationProcessorOptions {
 //                includeCompileClasspath = true
@@ -50,7 +47,6 @@ android {
 //    dexOptions {
 //        incremental true
 //    }
-
 
     defaultConfig {
         //只支持中文
@@ -123,26 +119,12 @@ android {
 
 
 dependencies {
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    //    compile project(':lib_aspect_annotations')
-    // rxlifecycle
-    implementation 'com.trello.rxlifecycle3:rxlifecycle:3.1.0'
-    implementation 'com.trello.rxlifecycle3:rxlifecycle-android:3.1.0'
-    implementation 'com.trello.rxlifecycle3:rxlifecycle-components:3.1.0'
-    // If you want pre-written support preference Fragments you can subclass as providers
-    implementation 'com.trello.rxlifecycle3:rxlifecycle-components-preference:3.1.0'
-    // If you want to use Android Lifecycle for providers
-    implementation 'com.trello.rxlifecycle3:rxlifecycle-android-lifecycle:3.1.0'
     // https://github.com/JakeWharton/RxBinding/
     implementation 'com.jakewharton.rxbinding3:rxbinding-material:3.1.0'
     // Guava是Google的一组核心Java库，其中包括新的集合类型（例如多图和多集），不可变的集合，图形库以及用于并发，I / O，哈希，缓存，基元，字符串等的实用程序！
     // 它广泛用于Google的大多数Java项目中，也被许多其他公司广泛使用。
     // https://github.com/google/guava/
     implementation 'com.google.guava:guava:28.2-android'
-    implementation 'com.zhy:base-adapter:2.0.0'
     // AndroidGodEye(https://github.com/Kyson/AndroidGodEye)
     // 核心模块，必须依赖
     implementation 'cn.hikyson.godeye:godeye-core:3.4.2'
@@ -156,31 +138,8 @@ dependencies {
     implementation 'cn.hikyson.godeye:godeye-xcrash:3.4.2'
     // 额外依赖，添加此依赖可以监控内存泄漏，如果不依赖则无法监控（安装了也不会生效），如果你也依赖了LeakCanary则无法依赖这个库，否则你项目中的LeakCanary会失效
     debugImplementation 'cn.hikyson.godeye:godeye-leakcanary:3.4.2'
-    implementation files('libs/tbs_sdk_thirdapp_v4.3.0.3.jar')
 
     implementation deps.ax.appcompat
-    implementation deps.jw.butterknife
-    annotationProcessor deps.jw.butterknifeCompiler
-
-    // lib-module
-    api project(':base:lib_package')
-    api project(path: ':lib_preloader')
-    api project(path: ':base:mode_ui')
-    api project(path: ':base:lib_util')
-    api project(path: ':base:lib_api')
-    api project(path: ':base:skin')
-    api project(path: ':base:frame')
-    api project(path: ':base:lib_base')
-    api project(path: ':base:debug_tool')
     implementation project(path: ":module:MainApplication")
 
-    implementation 'in.srain.cube:ptr-load-more:1.0.6'
-    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
-    implementation  'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
-    implementation  'com.scwang.smart:refresh-header-radar:2.0.1'       //雷达刷新头
-    implementation  'com.scwang.smart:refresh-header-falsify:2.0.1'     //虚拟刷新头
-    implementation  'com.scwang.smart:refresh-header-material:2.0.1'    //谷歌刷新头
-    implementation  'com.scwang.smart:refresh-header-two-level:2.0.1'   //二级刷新头
-    implementation  'com.scwang.smart:refresh-footer-ball:2.0.1'        //球脉冲加载
-    implementation  'com.scwang.smart:refresh-footer-classics:2.0.1'    //经典加载
 }

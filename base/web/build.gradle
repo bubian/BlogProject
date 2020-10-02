@@ -9,8 +9,10 @@ dependencies {
     implementation project(path:":base:lib_net")
 
     implementation deps.alibaba.arouter
+    implementation project(path: ':base:lib_util')
     annotationProcessor deps.alibaba.arouterompiler
 
     implementation project(path:':base:lib_glide')
     implementation project(path:':base:lib_gson')
+    api deps.list.recyclerview
 }

@@ -2,6 +2,9 @@ package com.pds.sample.application;
 
 import android.app.Application;
 
+import com.pds.skin.SkinManager;
+import com.pds.tool.ToolApplicationManager;
+
 /**
  * @author: pengdaosong
  * @CreateTime: 2020/9/26 2:31 PM
@@ -22,5 +25,11 @@ public class ModuleApplication {
 
     public void onCreate(Application application) {
         mApplication = application;
+        SkinManager.init(mApplication);
+        ToolApplicationManager.onCreate(application);
+    }
+
+    public Application application(){
+        return mApplication;
     }
 }

@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.pds.frame.base.BaseFragment;
+import com.pds.base.act.BaseFragment;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.pds.base.adapter.ListAdapter
-import com.pds.base.holder.BaseViewHolder
+import com.pds.base.adapter.viewhold.ViewHolder
 import com.pds.kotlin.study.R
 import com.pds.kotlin.study.ui.entity.Entity
 
@@ -22,7 +22,7 @@ import com.pds.kotlin.study.ui.entity.Entity
 
 open class ContentAdapter1 @JvmOverloads constructor(context: Context,layoutId : Int = 0) : ListAdapter<Entity>(context){
 
-    override fun convert(baseViewHolder: BaseViewHolder, position: Int, itemData: Entity?) {
+    override fun convert(baseViewHolder: ViewHolder, position: Int, itemData: Entity?) {
         if (baseViewHolder.convertView is TextView) (baseViewHolder.convertView as TextView).text = itemData?.text
         itemData?.color?.let {
             if (it == R.color.colorAccent)

@@ -23,9 +23,6 @@ buildscript {
         // butterknife
         classpath "com.jakewharton:butterknife-gradle-plugin:$versions.butterknife"
         classpath "cn.hikyson.methodcanary:plugin:0.15.4"
-
-        // app-joint
-        classpath 'io.github.prototypez:app-joint:1.7'
         // https://github.com/didi/DoraemonKit
         classpath "com.didichuxing.doraemonkit:doraemonkit-plugin:$versions.doraemonkit"
         // 滴滴AOP框架

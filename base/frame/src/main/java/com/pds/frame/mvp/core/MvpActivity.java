@@ -2,7 +2,7 @@ package com.pds.frame.mvp.core;
 
 import android.os.Bundle;
 
-import com.pds.frame.base.BaseActivity;
+import com.pds.base.act.BaseActivity;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

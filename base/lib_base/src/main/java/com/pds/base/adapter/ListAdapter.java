@@ -8,13 +8,13 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pds.base.adapter.base.BaseListAdapter;
-import com.pds.base.holder.BaseViewHolder;
+import com.pds.base.adapter.viewhold.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public  class ListAdapter<T> extends BaseListAdapter<T> {
+public class ListAdapter<T> extends BaseListAdapter<T> {
 
     private int mLayoutId;
 
@@ -38,14 +38,14 @@ public  class ListAdapter<T> extends BaseListAdapter<T> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new BaseViewHolder(createItemView(parent,viewType));
+        return new ViewHolder(createItemView(parent, viewType));
     }
 
-    public View createItemView(ViewGroup parent, int viewType){
+    public View createItemView(ViewGroup parent, int viewType) {
         return LayoutInflater.from(parent.getContext()).inflate(mLayoutId, parent, false);
     }
 
-    public ListAdapter getAdapter(){
+    public ListAdapter getAdapter() {
         return this;
     }
 
@@ -64,13 +64,14 @@ public  class ListAdapter<T> extends BaseListAdapter<T> {
                     if (mDataList != null && !mDataList.isEmpty()) {
                         object = mDataList.get(position);
                     }
-                    mIItemChildOnClickAction.onItemClick(v,position, object);
+                    mIItemChildOnClickAction.onItemClick(v, position, object);
                 }
             }
         });
-        convert(new BaseViewHolder(holder.itemView), position, object);
+        convert(new ViewHolder(holder.itemView), position, object);
     }
 
-    public void convert(BaseViewHolder baseViewHolder, int position, T itemData){}
+    public void convert(ViewHolder baseViewHolder, int position, T itemData) {
+    }
 
 }

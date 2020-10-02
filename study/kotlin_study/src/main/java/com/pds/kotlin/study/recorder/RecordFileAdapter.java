@@ -5,28 +5,29 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.text.format.DateUtils;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
+
 import com.pds.base.adapter.ListAdapter;
-import com.pds.base.holder.BaseViewHolder;
+import com.pds.base.adapter.viewhold.ViewHolder;
 import com.pds.kotlin.study.R;
 import com.pds.kotlin.study.recorder.core.RecordDBHelper;
 import com.pds.kotlin.study.recorder.frag.RecordPlayFragment;
 
 import java.io.File;
-import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class RecordFileAdapter<T> extends ListAdapter<RecordEntity>
-    implements DatabaseChangedListener {
+        implements DatabaseChangedListener {
 
     private static final String LOG_TAG = "FileViewerAdapter";
 
@@ -40,14 +41,14 @@ public class RecordFileAdapter<T> extends ListAdapter<RecordEntity>
 
     @NonNull
     @Override
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view, parent, false);
-        return new BaseViewHolder(itemView);
+        return new ViewHolder(itemView);
     }
 
     @Override
-    public void convert(BaseViewHolder holder, int position, RecordEntity item) {
-        if (null == item){
+    public void convert(ViewHolder holder, int position, RecordEntity item) {
+        if (null == item) {
             item = mDatabase.getItemAt(position);
         }
         long itemDuration = item.getLength();
@@ -59,10 +60,10 @@ public class RecordFileAdapter<T> extends ListAdapter<RecordEntity>
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_NUMERIC_DATE | DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_YEAR
         );
         RecordEntity finalItem = item;
-        holder.setText(R.id.file_name_text,item.getName())
-                .setText(R.id.file_length_text,String.format("%02d:%02d", minutes, seconds))
-                .setText(R.id.file_date_added_text,date)
-                .setOnClickListener(R.id.card_view,(v -> {
+        holder.setText(R.id.file_name_text, item.getName())
+                .setText(R.id.file_length_text, String.format("%02d:%02d", minutes, seconds))
+                .setText(R.id.file_date_added_text, date)
+                .setOnClickListener(R.id.card_view, (v -> {
                     try {
                         RecordPlayFragment playbackFragment =
                                 new RecordPlayFragment().newInstance(finalItem);
@@ -77,7 +78,7 @@ public class RecordFileAdapter<T> extends ListAdapter<RecordEntity>
                         Log.e(LOG_TAG, "exception", e);
                     }
                 }))
-                .setOnLongClickListener(R.id.card_view,(v -> {
+                .setOnLongClickListener(R.id.card_view, (v -> {
                     ArrayList<String> entity = new ArrayList<>();
                     Context context = getContext();
                     entity.add(context.getString(R.string.dialog_file_share));
@@ -89,9 +90,12 @@ public class RecordFileAdapter<T> extends ListAdapter<RecordEntity>
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setTitle(context.getString(R.string.dialog_title_options));
                     builder.setItems(items, (dialog, item1) -> {
-                        if (item1 == 0) { shareFileDialog(holder.getPosition());
-                        } else if (item1 == 1) { renameFileDialog(holder.getPosition());
-                        } else if (item1 == 2) { deleteFileDialog(holder.getPosition());
+                        if (item1 == 0) {
+                            shareFileDialog(holder.getPosition());
+                        } else if (item1 == 1) {
+                            renameFileDialog(holder.getPosition());
+                        } else if (item1 == 2) {
+                            deleteFileDialog(holder.getPosition());
                         }
                     });
                     builder.setCancelable(true);
@@ -122,7 +126,8 @@ public class RecordFileAdapter<T> extends ListAdapter<RecordEntity>
     }
 
     @Override
-    public void onDatabaseEntryRenamed() { }
+    public void onDatabaseEntryRenamed() {
+    }
 
     public void remove(int position) {
         File file = new File(getItem(position).getFilePath());
@@ -154,7 +159,7 @@ public class RecordFileAdapter<T> extends ListAdapter<RecordEntity>
         getContext().startActivity(Intent.createChooser(shareIntent, getContext().getText(R.string.send_to)));
     }
 
-    public void renameFileDialog (final int position) {
+    public void renameFileDialog(final int position) {
         AlertDialog.Builder renameFileBuilder = new AlertDialog.Builder(getContext());
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -184,7 +189,7 @@ public class RecordFileAdapter<T> extends ListAdapter<RecordEntity>
         alert.show();
     }
 
-    public void deleteFileDialog (final int position) {
+    public void deleteFileDialog(final int position) {
         AlertDialog.Builder confirmDelete = new AlertDialog.Builder(getContext());
         confirmDelete.setTitle(getContext().getString(R.string.dialog_title_delete));
         confirmDelete.setMessage(getContext().getString(R.string.dialog_text_delete));
