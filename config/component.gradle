@@ -2,6 +2,8 @@ ext {
     // 默认 - lib  1 - debug  2 - java lib 3 - test
     module_type = [
             app               : 1,
+            kotlin_study      : 1,
+            sdk_use           : 1,
             socket_app        : 1,
             nettyim           : 1,
             fmod              : 1,
@@ -22,6 +24,8 @@ ext {
     id = [
             socket_app        : "blog.pds.com.socket.app",
             app               : "com.pds.blog",
+            apkotlin_studyp   : "com.pds.kotlin.study",
+            sdk_use           : "com.pds.sdk.use",
             nettyim           : "com.pds.netty",
             fmod              : "com.pds.fmod",
             bzip2             : "com.pds.bzip2",

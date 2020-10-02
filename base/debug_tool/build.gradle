@@ -1,7 +1,5 @@
 apply from: '../../config/module.gradle'
-
-
 dependencies {
     //官网：http://facebook.github.io/stetho/
-    api 'com.facebook.stetho:stetho-okhttp3:1.5.1'
+    api deps.tools.stethoOkhttp3
 }

@@ -1,8 +1,7 @@
 apply from: "../../config/module.gradle"
 apply from: "../../config/kotlin.gradle"
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
-    // gson
-    compileOnly 'com.google.code.gson:gson:2.8.5'
+    implementation deps.ax.appcompat
+    compileOnly deps.data.gson
+    implementation deps.kt.core
 }

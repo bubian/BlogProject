@@ -2,11 +2,7 @@ apply from: '../../config/module.gradle'
 
 dependencies {
     // Android6.0权限适配
-    implementation 'com.github.tbruyelle:rxpermissions:0.12'
-    // Java language implementation
-    implementation "androidx.activity:activity:1.2.0-alpha07"
-    // Kotlin
-    // implementation "androidx.activity:activity-ktx:1.2.0-alpha02"
-
-    implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation deps.other.rxpermissions
+    implementation deps.other.easypermissions
+    implementation deps.ax.activity
 }
