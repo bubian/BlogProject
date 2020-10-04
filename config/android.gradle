@@ -11,6 +11,9 @@ android {
             applicationId id
             multiDexEnabled true
         }
+        // 用于子module通过反射获取应用上下文，对应类请不要混淆
+        buildConfigField "String", "APPLICATION_CLASS_NAME", "\"com.pds.blog.BlogApplication\""
+        buildConfigField "String", "APPLICATION_VAR_NAME", "\"mApp\""
         minSdkVersion app.minSdkVersion
         targetSdkVersion app.targetSdkVersion
         versionCode app.versionCode

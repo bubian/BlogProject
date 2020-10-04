@@ -1,7 +1,5 @@
 package com.pds.demo;
 
-import com.pds.blog.web.common.HybridParam;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,7 +30,7 @@ import static org.mockito.Mockito.when;
 public class MockitoAnnotationsTest {
     //<--使用@Mock注解
     @Mock
-    HybridParam mHbParam;
+//    HybridParam mHbParam;
     // Spy的创建与mock一样
     @Spy
     Person mPerson;
@@ -51,16 +49,16 @@ public class MockitoAnnotationsTest {
 
     @Test
     public void testIsNotNull(){
-        assertNotNull(mHbParam);
+//        assertNotNull(mHbParam);
     }
 
     @Test
     public void testPersonReturn(){
-        when(mHbParam.getId()).thenReturn(1111);
-        when(mHbParam.getId()).thenThrow(new NullPointerException("icon is null"));
-
-        System.out.println("------->"+ mHbParam.getId());
-        System.out.println("------->"+ mHbParam.getId());
+//        when(mHbParam.getId()).thenReturn(1111);
+//        when(mHbParam.getId()).thenThrow(new NullPointerException("icon is null"));
+//
+//        System.out.println("------->"+ mHbParam.getId());
+//        System.out.println("------->"+ mHbParam.getId());
     }
 
     @Test

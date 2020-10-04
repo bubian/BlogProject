@@ -42,6 +42,7 @@ dependencies {
     implementation project(path:":base:lib_tools")
     implementation project(path:":base:lib_net")
     implementation project(path:":base:data_entity")
+    implementation project(path:":base:lib_storage")
 
     implementation 'com.cocosw:bottomsheet:1.5.0@aar'
     implementation 'com.cocosw:query:0.2.2'
