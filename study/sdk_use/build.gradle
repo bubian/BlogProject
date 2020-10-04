@@ -1,5 +1,5 @@
-apply from: "../config/module.gradle"
-apply from: "../config/kotlin.gradle"
+apply from: "../../config/module.gradle"
+apply from: "../../config/kotlin.gradle"
 
 apply plugin: 'robust'
 apply plugin: 'realm-android'
@@ -7,7 +7,7 @@ apply plugin: 'realm-android'
 dependencies {
     implementation deps.kt.kotlinJdk
     implementation deps.ax.appcompat
-    implementation deps.kt.core - ktx
+    implementation deps.kt.core
     implementation deps.ui.constraintlayout
     // activity
     implementation deps.ax.activity

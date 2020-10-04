@@ -7,7 +7,10 @@ def hasCMakeListFile = new File(cMakeListPath).exists()
 android {
     compileSdkVersion app.compileSdkVersion
     defaultConfig {
-        if (id) applicationId id
+        if (id) {
+            applicationId id
+            multiDexEnabled true
+        }
         minSdkVersion app.minSdkVersion
         targetSdkVersion app.targetSdkVersion
         versionCode app.versionCode

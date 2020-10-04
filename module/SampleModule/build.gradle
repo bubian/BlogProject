@@ -1,6 +1,6 @@
 apply from: "../../config/module.gradle"
 
-apply plugin: 'aspect'
+//apply plugin: 'aspect'
 dependencies {
     implementation deps.alibaba.arouter
     annotationProcessor deps.alibaba.arouterompiler

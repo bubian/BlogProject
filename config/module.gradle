@@ -1,5 +1,5 @@
 def module_type = module_type[project.name]
-if(1 == module_type){
+if(1 == module_type || 11 == module_type){
     apply from: "$rootDir/config/app.gradle"
 }else if(2 == module_type){
     apply from: "$rootDir/config/java.gradle"
