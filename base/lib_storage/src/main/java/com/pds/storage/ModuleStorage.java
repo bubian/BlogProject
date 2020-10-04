@@ -1,6 +1,9 @@
 package com.pds.storage;
 
 import android.app.Application;
+
+import com.pds.storage.mmkv.MMKVManager;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -14,8 +17,13 @@ public class ModuleStorage {
     public ModuleStorage mModuleStorage;
     private Application mApplication;
 
+    /**
+     * 不一定要在启动的时候初始化，根据业务而定
+     * @param application
+     */
     public static void init(Application application) {
         instance().mApplication = application;
+        MMKVManager.init(application);
     }
 
     public static final ModuleStorage instance() {
