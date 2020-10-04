@@ -9,4 +9,12 @@
     <string name="text_freed_refresh">释放刷新</string>
     <string name="text_refresh_count">已更新%d条数据</string>
     <string name="text_refresh_fail">刷新失败</string>
+
+    <string name="input_mobile_hint">请输入您的手机号码</string>
+    <string name="input_sms_code_hint">请输入短信验证码</string>
+    <string name="input_password_hint">请输入您的密码</string>
+    <string name="login_pwd_error">密码长度应该为6到16位</string>
+    <string name="get_verify_code">获取验证码</string>
+    <string name="error_phone">手机号格式错误</string>
+    <string name="get_again">再次获取</string>
 </resources>
