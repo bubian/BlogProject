@@ -27,7 +27,7 @@
         android:textColor="@drawable/et_color_selector"
         android:textColorHint="@color/ffa8afc3"
         android:textCursorDrawable="@drawable/et_input_cursor"
-        android:textSize="@dimen/sp_14" />
+        android:textSize="14sp" />
 
     <RelativeLayout
         android:id="@+id/password_layout"
@@ -51,7 +51,7 @@
             android:textColor="@drawable/et_color_selector"
             android:textColorHint="@color/ffa8afc3"
             android:textCursorDrawable="@drawable/et_input_cursor"
-            android:textSize="@dimen/sp_14" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/password_assist_view"
@@ -63,23 +63,23 @@
             android:paddingRight="6dp"
             android:paddingTop="15dp"
             android:text="@string/get_verify_code"
-            android:textColor="@color/ff0a6aff"
+            android:textColor="#ff0a6aff"
             android:textSize="16sp" />
     </RelativeLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45"
+        android:layout_height="45dp"
         android:textColor="@android:color/white"
         android:textAllCaps="false"
         android:layout_marginTop="30dp"
         android:gravity="center"
         android:textSize="17sp"
         android:layout_gravity="center_horizontal"
-        android:text="@string/start_login"
-        app:backgroundTint="@color/ff007eff"
-        app:rippleColor="@color/ff095BAE"
+        android:text="登录"
+        app:backgroundTint="#ff007eff"
+        app:rippleColor="#ff095BAE"
         style="@style/MaterialButton.UnelevatedButton"
         android:elevation="0dp"
         app:cornerRadius="22.5dp" />
