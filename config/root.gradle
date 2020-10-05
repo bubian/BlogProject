@@ -1,0 +1,10 @@
+subprojects {
+    project.afterEvaluate {
+        project.plugins.withId('com.android.library') {
+            project.android.compileSdkVersion rootProject.ext.android.compileSdkVersion
+            project.android.buildToolsVersion rootProject.ext.android.buildToolsVersion
+            project.android.defaultConfig.minSdkVersion rootProject.ext.android.minSdkVersion
+            project.android.defaultConfig.targetSdkVersion rootProject.ext.android.targetSdkVersion
+        }
+    }
+}

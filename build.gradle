@@ -2,39 +2,30 @@ apply from: "config/config.gradle"
 buildscript {
     apply from: "config/sdk.gradle"
     apply from: "config/base.gradle"
-    ext {
-        kotlin_version = '1.4.10'
-    }
     repositories {
         google()
         jcenter()
-        maven {
-            url uri('./repo')
-        }
+        maven {url uri('./repo')}
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin_version"
-        classpath "io.realm:realm-gradle-plugin:5.12.0"
-        classpath 'org.aspectj:aspectjtools:1.8.6'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-        classpath 'com.plugin:aspect:1.0.0'
-        classpath 'com.plugin:webp:1.0.0'
-        // butterknife
-        classpath "com.jakewharton:butterknife-gradle-plugin:$versions.butterknife"
-        classpath "cn.hikyson.methodcanary:plugin:0.15.4"
-        // https://github.com/didi/DoraemonKit
-        classpath "com.didichuxing.doraemonkit:doraemonkit-plugin:$versions.doraemonkit"
-        // 滴滴AOP框架
-        // https://github.com/didi/DroidAssist
-        classpath "com.didichuxing.tools:droidassist:1.1.1"
+        classpath plugin.root.gradle
+        classpath plugin.root.kotlinGradle
 
-        classpath 'com.didi.virtualapk:gradle:0.9.8.6'
+        classpath plugin.db.realm
 
-        classpath 'com.meituan.robust:gradle-plugin:0.4.99'
-        classpath 'com.meituan.robust:auto-patch-plugin:0.4.99'
-        // hilt
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt"
+        classpath plugin.custom.aspect
+        classpath plugin.custom.webp
+
+        classpath plugin.tools.methodcanary
+        classpath plugin.tools.doraemonkit
+
+        classpath plugin.aop.aspectjtools
+        classpath plugin.aop.droidassist
+
+        classpath plugin.inject.butterknife
+        classpath plugin.inject.hilt
+
+        classpath plugin.upload.androidMaven
     }
 }
 
@@ -42,29 +33,12 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven {
-            url uri('../repo')
-        }
-
+        maven {url uri('../repo')}
         maven { url "https://oss.jfrog.org/libs-snapshot" }
-        // 添加，下载stetho_realm
-        maven {
-            url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'
-        }
+        maven {url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'}
         maven { url 'https://jitpack.io' }
     }
 }
-
-//subprojects {
-//    project.afterEvaluate {
-//        project.plugins.withId('com.android.library') {
-//            project.android.compileSdkVersion rootProject.ext.android.compileSdkVersion
-//            project.android.buildToolsVersion rootProject.ext.android.buildToolsVersion
-//            project.android.defaultConfig.minSdkVersion rootProject.ext.android.minSdkVersion
-//            project.android.defaultConfig.targetSdkVersion rootProject.ext.android.targetSdkVersion
-//        }
-//    }
-//}
 
 task clean(type: Delete) {
     delete rootProject.buildDir

@@ -27,6 +27,8 @@ ext {
                     // 更多参考：https://github.com/JakeWharton/RxBinding
                     'rxbindingMaterial'  : "com.jakewharton.rxbinding3:rxbinding-material:3.1.0",
                     'okio'               : "com.squareup.okio:okio:2.9.0",
+                    // log工具库
+                    'timber'             : "com.jakewharton.timber:timber:4.7.1",
             ],
 
             'jp'     : [
@@ -148,6 +150,47 @@ ext {
             'help'   : [
                     'ankoCommons': "org.jetbrains.anko:anko-commons:0.10.5",
                     'guava'      : "com.google.guava:guava:28.0-android",
+            ]
+    ]
+
+    plugin = [
+            'root'  : [
+                    'gradle'      : "com.android.tools.build:gradle:4.0.1",
+                    'kotlinGradle': "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin_version",
+            ],
+
+            'aop'   : [
+                    'hugo'        : "com.jakewharton.hugo:hugo-plugin:1.2.1",
+                    'aspectjtools': "org.aspectj:aspectjtools:1.8.6",
+                    // https://github.com/didi/DroidAssist
+                    'droidassist' : "com.didichuxing.tools:droidassist:1.1.1"
+            ],
+            'db'    : [
+                    'realm': "io.realm:realm-gradle-plugin:5.12.0"
+            ],
+            'upload': [
+                    'androidMaven': "com.github.dcendents:android-maven-gradle-plugin:2.1"
+            ],
+            'custom': [
+                    'aspect': 'com.plugin:aspect:1.0.0',
+                    'webp'  : 'com.plugin:webp:1.0.0'
+            ],
+            'inject': [
+                    'butterknife': "com.jakewharton:butterknife-gradle-plugin:$versions.butterknife",
+                    'hilt' : "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt"
+            ],
+            'tools' : [
+                    'methodcanary': "cn.hikyson.methodcanary:plugin:0.15.4",
+                    // https://github.com/didi/DoraemonKit
+                    'doraemonkit' : "com.didichuxing.doraemonkit:doraemonkit-plugin:$versions.doraemonkit"
+            ],
+            'fix'   : [
+                    // 美团热修复
+                    'robust'   : 'com.meituan.robust:gradle-plugin:0.4.99',
+                    'autoPatch': 'com.meituan.robust:auto-patch-plugin:0.4.99'
+            ],
+            'other' : [
+                    'virtualapk': "com.didi.virtualapk:gradle:0.9.8.6"
             ]
     ]
 }

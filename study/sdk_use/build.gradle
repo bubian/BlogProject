@@ -1,7 +1,6 @@
 apply from: "../../config/module.gradle"
 apply from: "../../config/kotlin.gradle"
 
-apply plugin: 'robust'
 apply plugin: 'realm-android'
 
 dependencies {
