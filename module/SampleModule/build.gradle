@@ -7,7 +7,7 @@ dependencies {
 
     implementation project(path: ':base:frame')
     implementation project(path: ':base:lib_base')
-    implementation project(path: ':base:data_entity')
+    implementation project(path: ':base:lib_entity')
     implementation project(path: ':base:lib_gson')
     implementation project(path: ':base:lib_net')
     implementation project(path: ':base:lib_api')

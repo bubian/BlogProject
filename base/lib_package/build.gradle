@@ -6,7 +6,7 @@ dependencies {
     implementation deps.data.gson
     api deps.data.glide
     annotationProcessor deps.data.glideCompiler
-    // 里面使用了protobuf,如果项目中使用自己的protobuf版本，编译会报错
+    // 里面使用了ProtoBuf,如果项目中使用自己ProtoBuf的版本，编译会报错
     implementation deps.data.tinkAndroid
 }
 

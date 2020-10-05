@@ -134,6 +134,10 @@ ext {
                     'easypermissions': "pub.devrel:easypermissions:3.0.0",
                     'activity'       : "androidx.activity:activity-ktx:1.2.0-alpha02",
                     'tessTwo'        : "com.rmtheis:tess-two:7.0.0",
+            ],
+            'help' : [
+                   'ankoCommons': "org.jetbrains.anko:anko-commons:0.10.5",
+                   'guava': "com.google.guava:guava:28.0-android",
             ]
     ]
 }

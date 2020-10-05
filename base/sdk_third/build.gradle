@@ -1,6 +1,0 @@
-apply from: "../../config/module.gradle"
-dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
-    api "org.jetbrains.anko:anko-commons:0.10.5"
-    api 'com.google.guava:guava:28.0-android'
-}

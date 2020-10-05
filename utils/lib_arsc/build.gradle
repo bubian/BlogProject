@@ -1,7 +1,7 @@
 apply plugin: 'java-library'
 
 dependencies {
-    api 'com.google.guava:guava:28.0-android'
+    api deps.help.guava
     // https://github.com/google/auto/tree/master/value/userguide
     implementation "com.google.auto.value:auto-value-annotations:1.7"
     // https://github.com/cbeust/jcommander

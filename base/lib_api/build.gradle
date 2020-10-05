@@ -1,6 +1,6 @@
 apply from: "../../config/module.gradle"
 
 dependencies {
-    api project(path: ':base:data_entity')
+    api project(path: ':base:lib_entity')
     api project(path: ':base:lib_net')
 }
