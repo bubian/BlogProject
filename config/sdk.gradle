@@ -103,6 +103,10 @@ ext {
                     "rxjava"                         : "io.reactivex.rxjava2:rxjava:2.2.19",
                     "rxandroid"                      : "io.reactivex.rxjava2:rxandroid:2.0.1",
                     "rxbinding"                      : "com.jakewharton.rxbinding2:rxbinding:2.0.0",
+                    'rxjava3'                        : 'io.reactivex.rxjava3:rxjava:3.0.0',
+                    "rxandroid3"                     : 'io.reactivex.rxjava3:rxandroid:3.0.0',
+                    'rxjavaAsyncUtil'                : "io.reactivex:rxjava-async-util:0.20.4",
+                    'rxjavaComputationExpressions'   : 'rxjava-computation-expressions:0.20.4',
                     // 解决RxJava使用中存在的内存泄漏问题
                     'rxlifecycle3'                   : "com.trello.rxlifecycle3:rxlifecycle:${versions.rxlifecycle3}",
                     'rxlifecycleAndroid'             : "com.trello.rxlifecycle3:rxlifecycle-android:${versions.rxlifecycle3}",
@@ -177,7 +181,7 @@ ext {
             ],
             'inject': [
                     'butterknife': "com.jakewharton:butterknife-gradle-plugin:$versions.butterknife",
-                    'hilt' : "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt"
+                    'hilt'       : "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt"
             ],
             'tools' : [
                     'methodcanary': "cn.hikyson.methodcanary:plugin:0.15.4",

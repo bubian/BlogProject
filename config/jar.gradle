@@ -1,11 +1,15 @@
-//使用gradle打包指定包名和类的jar
+def group_id = 'com.lib'
+def module_name = project.name
+//  使用gradle打包指定包名和类的jar
 task clearJar(type: Delete) {
-    delete 'libs/sdk.jar'
+    String d = "$rootDir/repo/$group_id/$module_name"
+    printf("============path = $d")
+    delete d
 }
 
-def module_name = project.name
+
 task makeSdkJar(type: Jar) {
-//    baseName module_name
+    baseName module_name
     from('build/intermediates/classes/debug/org/cmdmac/') {
         include 'pluginsdk/impl'
         include 'gamecenter'
@@ -15,7 +19,6 @@ task makeSdkJar(type: Jar) {
 makeSdkJar.dependsOn(clearJar, build)
 
 task autoMakeSdkJar(type: Jar) doLast {
-    println('module auto build jar111 autoMakeSdkJar')
     baseName module_name
     from('build/intermediates/classes/debug/org/cmdmac/') {
         include 'pluginsdk/impl'
@@ -24,8 +27,8 @@ task autoMakeSdkJar(type: Jar) doLast {
     into('org/cmdmac/')
 }
 autoMakeSdkJar.dependsOn(clearJar)
+// 上传仓库
 apply plugin: 'maven-publish'
-def group_id = 'com.lib'
 def default_config = project.android.defaultConfig
 
 String ROOT_DIR = System.getProperty("user.dir")
@@ -37,7 +40,6 @@ if (!ROOT_DIR.endsWith(PROJECT_NAME)) {
     project_dir = ROOT_DIR.substring(0, index + PROJECT_NAME.length())
 }
 task uploadArchives doLast {
-    println('module auto build jar111 uploadArchives')
     repositories.mavenDeployer {
         repository(url: uri("$project_dir/repo")) //仓库的路径，此处是项目根目录下的 repo 的文件夹
         pom.groupId = group_id  //groupId ，自行定义，一般是包名

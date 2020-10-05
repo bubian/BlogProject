@@ -9,12 +9,6 @@ dependencies {
     // 额外依赖，如果项目使用OkHttp作为网络请求可以用这个库完成网络监控
     api deps.net.okhttp3
 
-    // RxJava
-    // api 'io.reactivex.rxjava3:rxandroid:3.0.0'
-    // api 'io.reactivex.rxjava3:rxjava:3.0.0'
-    // api 'io.reactivex:rxjava-async-util:0.20.4'
-    // api 'rxjava-computation-expressions:0.20.4'
-
     api deps.rx.rxjava
     api deps.rx.rxlifecycle3
     api deps.rx.rxlifecycleAndroid
