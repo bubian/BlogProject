@@ -1,5 +1,8 @@
 apply from: "../../config/module.gradle"
 dependencies {
     api deps.help.ankoCommons
+    // Guava是Google的一组核心Java库，其中包括新的集合类型（例如多图和多集），不可变的集合，图形库以及用于并发，I / O，哈希，缓存，基元，字符串等的实用程序！
+    // 它广泛用于Google的大多数Java项目中，也被许多其他公司广泛使用。
+    // https://github.com/google/guava/
     api deps.help.guava
 }

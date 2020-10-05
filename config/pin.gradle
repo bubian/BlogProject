@@ -1,0 +1,25 @@
+android {
+    sourceSets {
+        def dirs = ['p_restaurant', 'p_goods_detail', 'p_comment', 'p_compose_order',
+                    'p_shopping_cart', 'p_base', 'p_product_set']
+        main {
+            manifest.srcFile 'src/p_restaurant/main/AndroidManifest.xml'
+            dirs.each { dir ->
+                java.srcDir("src/${dir}/main/java")
+                res.srcDir("src/${dir}/main/res")
+            }
+        }
+        wm {
+            dirs.each { dir ->
+                java.srcDir("src/${dir}/wm/java")
+                res.srcDir("src/${dir}/wm/res")
+            }
+        }
+        mt {
+            dirs.each { dir ->
+                java.srcDir("src/${dir}/mt/java")
+                res.srcDir("src/${dir}/mt/res")
+            }
+        }
+    }
+}

@@ -53,6 +53,23 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
+
+        //获取命令行输入参数,获取后控制使用测试环境，还是线上环境
+        // def urlType = project.hasProperty('platformService') ? Integer.parseInt(platformService) : TEST
+        // javaCompileOptions {
+        //   annotationProcessorOptions {
+        //       includeCompileClasspath = true
+        //    }
+        // }
+    }
+
+    // dexOptions {
+    //   incremental true
+    // }
+
+    defaultConfig {
+        //只支持中文
+        resConfigs "zh"
     }
 
     if (hasCMakeListFile) {

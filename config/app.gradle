@@ -8,6 +8,7 @@ def dg = 1 != module_type && 11 != module_type
 android {
     sourceSets {
         main {
+            jniLibs.srcDirs = ['libs']
             if (dg){
                 java.srcDirs =  ['src/debug/java','src/main/java']
                 manifest.srcFile 'src/debug/AndroidManifest.xml'
