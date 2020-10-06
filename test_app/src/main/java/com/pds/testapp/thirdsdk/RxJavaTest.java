@@ -114,7 +114,7 @@ public class RxJavaTest {
         Observable.<Integer>fromAction(new Action() {
             @Override
             public void run() throws Throwable {
-                
+
             }
         });
 

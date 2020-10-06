@@ -7,6 +7,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
+import com.pds.blog.MainActivity;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -24,9 +26,9 @@ public class ActTest {
     @Test
     public void launchMarqueeTextPage() {
         Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        Intent intent = new Intent(context, GlideTestActivity.class);
+        Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        ActivityTestRule<GlideTestActivity> activityTestRule = new ActivityTestRule<>(GlideTestActivity.class, true, false);
+        ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class, true, false);
         activityTestRule.launchActivity(intent);
         // 让界面不自动退出
         try {

@@ -19,7 +19,7 @@ ext {
             h264rtmp2         : 1,
             idcardrecognitioon: 1,
             webrtc            : 1,
-            download          : 1,
+//            download          : 1,
 //            mode_ui           : 1,
             lib_java_study    : 2,
             test_app          : 3,
@@ -43,7 +43,7 @@ ext {
             h264rtmp2         : "com.pds.h264rtmp2",
             idcardrecognitioon: "com.pds.idcardrecognitioon",
             webrtc            : "com.pds.webrtc",
-            download          : "com.pds.download",
+//            download          : "com.pds.download",
 //            mode_ui           : "com.pds.ui",
     ]
 

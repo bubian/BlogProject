@@ -19,4 +19,7 @@ dependencies {
     implementation deps.data.logger
     api project(path: ':base:debug_tool')
     api project(path: ':base:lib_env')
+    // RxJava3
+    api deps.rx.rxjava3
+    api deps.rx.rxandroid3
 }

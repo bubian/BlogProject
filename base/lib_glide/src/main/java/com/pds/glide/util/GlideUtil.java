@@ -13,9 +13,8 @@ import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-
-import blog.pds.com.three.glide.shapetransform.GlideCircleBorderTransform;
-import blog.pds.com.three.glide.shapetransform.GlideCircleTransform;
+import com.pds.glide.shapetransform.GlideCircleBorderTransform;
+import com.pds.glide.shapetransform.GlideCircleTransform;
 
 /**
  * Author: KindyFung.
