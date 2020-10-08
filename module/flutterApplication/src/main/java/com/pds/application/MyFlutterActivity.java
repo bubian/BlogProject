@@ -1,8 +1,6 @@
 package com.pds.application;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 
 import io.flutter.app.FlutterActivity;
 import io.flutter.plugins.GeneratedPluginRegistrant;
@@ -11,7 +9,7 @@ import io.flutter.plugins.GeneratedPluginRegistrant;
  * @author: pengdaosong
  * @CreateTime: 2020/10/8 2:32 PM
  * @Email: pengdaosong@medlinker.com
- * @Description:
+ * @Description: 参考：https://blog.codemagic.io/flutter-module-android-yaml/
  */
 public class MyFlutterActivity extends FlutterActivity {
 
