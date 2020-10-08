@@ -5,6 +5,8 @@ include ':module:MainApplication'
 include ':module:mainModule'
 include ':module:SampleApplication'
 include ':module:SampleModule'
+include ':module:flutterApplication'
+include ':module:flutterModule'
 // IM
 include ':IM:socket_control'
 include ':IM:socket_app'

@@ -1,0 +1,7 @@
+apply from: "../../config/module.gradle"
+dependencies {
+    api project(path: ':base:frame')
+    api project(path: ':base:mode_ui')
+    api deps.alibaba.arouter
+    annotationProcessor deps.alibaba.arouterompiler
+}

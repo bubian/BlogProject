@@ -1,0 +1,5 @@
+apply from: "../../config/module.gradle"
+dependencies {
+    api deps.ax.multidex
+    implementation project(path : ":module:flutterModule")
+}
