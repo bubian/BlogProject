@@ -75,6 +75,7 @@ include ':test_app'
 // components
 include  ':components:ImageEdit'
 
+// flutter
 setBinding(new Binding([gradle:this]))
 evaluate(new File('./module/flutter_module/.android/include_flutter.groovy'
 ))
