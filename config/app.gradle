@@ -57,6 +57,10 @@ android {
             debuggable true
             shrinkResources false // 移除无用的resource文件
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            ndk {
+                //flutter:这里要加上，否则debug包会出问题,后面三个为可选，x86建议加上不然部分模拟器回报错
+                abiFilters "armeabi","armeabi-v7a","arm64-v8a", "x86"
+            }
         }
         release {
             minifyEnabled false

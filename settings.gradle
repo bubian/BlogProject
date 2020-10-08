@@ -6,7 +6,7 @@ include ':module:mainModule'
 include ':module:SampleApplication'
 include ':module:SampleModule'
 include ':module:flutterApplication'
-include ':module:flutterModule'
+
 // IM
 include ':IM:socket_control'
 include ':IM:socket_app'
@@ -74,3 +74,10 @@ include ':ndk:webrtc'
 include ':test_app'
 // components
 include  ':components:ImageEdit'
+
+setBinding(new Binding([gradle:this]))
+evaluate(new File('./module/flutter_module/.android/include_flutter.groovy'
+))
+
+include ':flutter_module'
+project(':flutter_module').projectDir = new File('./module/flutter_module')
