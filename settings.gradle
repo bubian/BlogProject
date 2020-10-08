@@ -36,6 +36,7 @@ include ':base:lib_pay'
 include ':base:lib_log'
 include ':base:lib_env'
 include ':base:lib_storage'
+include ':base:lib_res'
 // netty
 include ':nettyim'
 // plugin
