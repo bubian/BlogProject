@@ -5,6 +5,10 @@
     
     更多参考：https://github.com/JakeWharton/diffuse
 
+### dependency-tree-diff.jar
+
+    列出依赖差异，更多参考：https://github.com/JakeWharton/dependency-tree-diff
+
 ### 核心工具（core）
 ##### dokit
 
