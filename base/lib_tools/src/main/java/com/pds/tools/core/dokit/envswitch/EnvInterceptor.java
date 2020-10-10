@@ -1,17 +1,13 @@
-package com.pds.tools.module.med;
-
-import android.net.Uri;
+package com.pds.tools.core.dokit.envswitch;
 
 import com.didichuxing.doraemonkit.DoraemonKit;
 import com.didichuxing.doraemonkit.kit.network.okhttp.InterceptorUtil;
-import com.pds.tools.module.med.env.PatientEnv;
-import com.pds.tools.storage.PreferencesKey;
-import com.pds.tools.storage.PreferencesManager;
+import com.pds.tools.business.med.env.PatientEnv;
+import com.pds.tools.common.cache.PreferencesKey;
+import com.pds.tools.common.cache.PreferencesManager;
 
 import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
-import java.net.URL;
 
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -25,7 +21,7 @@ import okhttp3.Response;
  * @Description:
  */
 
-public class MedEnvInterceptor implements Interceptor {
+public class EnvInterceptor implements Interceptor {
 
     @NotNull
     @Override

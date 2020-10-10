@@ -8,13 +8,13 @@
     </Global>
     <Insert>
         <BeforeMethodCall>
-            <Source>void com.pds.tools.module.med.MedNetEnvSwitchActivity.initEnv()</Source>
-            <Target>{com.pds.tools.module.med.WebUrlHandle.doUrl($0);}</Target>
+            <Source>void com.pds.tools.core.dokit.envswitch.NetEnvSwitchActivity.initEnv()</Source>
+            <Target>{com.pds.tools.business.med.WebUrlHandle.doUrl($0);}</Target>
         </BeforeMethodCall>
 
         <BeforeMethodCall>
             <Source>void com.pds.kotlin.study.dokit.DoKitMock.test()</Source>
-            <Target>{com.pds.tools.module.med.WebUrlHandle.doUrl();}</Target>
+            <Target>{com.pds.tools.business.med.WebUrlHandle.doUrl();}</Target>
         </BeforeMethodCall>
     </Insert>
 </DroidAssist>

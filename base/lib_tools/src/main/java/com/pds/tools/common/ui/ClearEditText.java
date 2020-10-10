@@ -1,4 +1,4 @@
-package com.pds.tools.widget;
+package com.pds.tools.common.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

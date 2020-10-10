@@ -1,4 +1,4 @@
-package com.pds.tools.module.med.env;
+package com.pds.tools.business.med.env;
 
 /**
  * @author: pengdaosong

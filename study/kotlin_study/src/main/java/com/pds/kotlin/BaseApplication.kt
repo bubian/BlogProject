@@ -1,12 +1,12 @@
 package com.pds.kotlin
 
+import android.app.Application
 import androidx.multidex.MultiDexApplication
 import com.dianping.logan.Logan
 import com.dianping.logan.LoganConfig
 import com.pds.kotlin.study.dagger.ApplicationComponent
 import com.pds.kotlin.study.dagger.DaggerApplicationComponent
 import com.pds.log.core.Lg
-import com.pds.tools.DoKitManager
 import xcrash.XCrash
 import java.io.File
 
@@ -18,28 +18,44 @@ import java.io.File
  * Description:
  */
 
-class BaseApplication : MultiDexApplication(){
+class BaseApplication : MultiDexApplication() {
 
     val appComponent: ApplicationComponent = DaggerApplicationComponent.create()
 
-    companion object{
+    companion object {
         private const val TAG = "BaseApplication"
-        private lateinit var application : BaseApplication
+        private lateinit var application: BaseApplication
+
         @JvmStatic
-        fun app() : BaseApplication{
+        fun app(): BaseApplication {
             return application
         }
     }
+
     override fun onCreate() {
         super.onCreate()
         application = this
-        Lg.d(TAG,"onCreate")
-        DoKitManager.init(this,"34f2baf949b36b874a2e79e3089ff384")
+        Lg.d(TAG, "onCreate")
+        initToolsLib()
         // xCrash 能为安卓 app 提供捕获 java 崩溃，native 崩溃和 ANR 的能力。不需要 root 权限或任何系统权限。（https://github.com/iqiyi/xCrash）
         // 日志保存目录：/data/data/PACKAGE_NAME/files/tombstones
         XCrash.init(this)
         // logan:美团日志上报库
         initLogan()
+    }
+
+
+    /**
+     * 工具库
+     */
+    private fun initToolsLib() {
+        try {
+            val clazz = Class.forName("com.pds.tools.ModuleTools")
+            val method = clazz.getMethod("init", Application::class.java)
+            method.isAccessible = true
+            method.invoke(clazz, this)
+        } catch (ignored: Exception) {
+        }
     }
 
     /**

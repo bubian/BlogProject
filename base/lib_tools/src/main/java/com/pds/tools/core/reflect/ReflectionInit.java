@@ -1,4 +1,4 @@
-package com.pds.tools;
+package com.pds.tools.core.reflect;
 
 import android.app.Application;
 
@@ -12,7 +12,7 @@ import me.weishu.reflection.Reflection;
  *
  * 参考：https://github.com/tiann/FreeReflection
  */
-public class ReflectionManager {
+public class ReflectionInit {
     public static void init(Application application) {
         Reflection.unseal(application);
     }

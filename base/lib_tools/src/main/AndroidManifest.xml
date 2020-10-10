@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.pds.tools">
     <application>
-        <activity android:name=".module.med.MedNetEnvSwitchActivity"
+        <activity android:name=".core.dokit.envswitch.NetEnvSwitchActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait"/>
     </application>

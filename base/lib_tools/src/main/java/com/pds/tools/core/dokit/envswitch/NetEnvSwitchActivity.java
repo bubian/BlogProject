@@ -1,4 +1,4 @@
-package com.pds.tools.module.med;
+package com.pds.tools.core.dokit.envswitch;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -13,9 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.pds.tools.R;
-import com.pds.tools.storage.PreferencesKey;
-import com.pds.tools.storage.PreferencesManager;
-import com.pds.tools.widget.ClearEditText;
+import com.pds.tools.common.cache.PreferencesKey;
+import com.pds.tools.common.cache.PreferencesManager;
+import com.pds.tools.common.ui.ClearEditText;
 
 import java.lang.reflect.Field;
 
@@ -25,7 +25,7 @@ import java.lang.reflect.Field;
  * @Email: pengdaosong@medlinker.com
  * @Description: 用于环境切换，比如线上切qa
  */
-public class MedNetEnvSwitchActivity extends AppCompatActivity {
+public class NetEnvSwitchActivity extends AppCompatActivity {
     private static final String TAG = "MedNetEnvSwitchActivity";
 //    private static final String BUILD_PATH = "com.medlinker.base.BuildConfig";
     private static final String BUILD_PATH = "com.pds.env.BuildConfig";

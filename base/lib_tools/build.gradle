@@ -43,4 +43,7 @@ dependencies {
     // FreeReflection is a library that lets you use reflection without any restriction above Android P (includes Q and R)
     // https://github.com/tiann/FreeReflection
     implementation deps.tools.freeReflection
+
+    implementation deps.list.vlayout
+    implementation deps.list.recyclerview
 }

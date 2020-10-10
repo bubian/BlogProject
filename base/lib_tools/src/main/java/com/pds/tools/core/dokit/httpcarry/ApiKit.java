@@ -1,4 +1,4 @@
-package com.pds.tools.dokit;
+package com.pds.tools.core.dokit.httpcarry;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,21 +7,20 @@ import com.didichuxing.doraemonkit.aop.OkHttpHook;
 import com.didichuxing.doraemonkit.kit.AbstractKit;
 import com.didichuxing.doraemonkit.kit.Category;
 import com.pds.tools.R;
-import com.pds.tools.module.med.MedEnvInterceptor;
-import com.pds.tools.module.med.MedNetEnvSwitchActivity;
+import com.pds.tools.core.dokit.httpcarry.act.ApiActivity;
 
 /**
  * @author: pengdaosong
- * @CreateTime: 2020/9/28 10:13 AM
+ * @CreateTime: 2020/10/4 2:54 PM
  * @Email: pengdaosong@medlinker.com
  * @Description:
  */
-public class MedEnvSwitchKit extends AbstractKit {
+public class ApiKit extends AbstractKit {
 
-    private MedEnvInterceptor mEnvInterceptor;
+    private ApiInterceptor mInterceptor;
 
-    public MedEnvSwitchKit(String kitId) {
-        mEnvInterceptor = new MedEnvInterceptor();
+    public ApiKit(String kitId) {
+        mInterceptor = new ApiInterceptor();
     }
 
     @Override
@@ -31,28 +30,27 @@ public class MedEnvSwitchKit extends AbstractKit {
 
     @Override
     public int getIcon() {
-        return R.mipmap.med;
+        return R.mipmap.api;
     }
 
     @Override
     public int getName() {
-        return R.string.med_env_switch;
+        return R.string.app_name;
     }
 
     @Override
     public String innerKitId() {
-        return "med_env_switch";
+        return "med_api";
     }
 
     @Override
     public void onAppInit(Context context) {
-        OkHttpHook.globalInterceptors.add(0, mEnvInterceptor);
+        OkHttpHook.globalInterceptors.add(mInterceptor);
     }
 
     @Override
     public void onClick(Context context) {
-        Intent intent = new Intent(context, MedNetEnvSwitchActivity.class);
+        Intent intent = new Intent(context, ApiActivity.class);
         context.startActivity(intent);
     }
-
 }

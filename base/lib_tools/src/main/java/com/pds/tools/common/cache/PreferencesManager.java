@@ -1,4 +1,4 @@
-package com.pds.tools.storage;
+package com.pds.tools.common.cache;
 
 import android.content.Context;
 import android.content.SharedPreferences;
