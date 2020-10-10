@@ -1,4 +1,4 @@
 apply plugin: 'com.didi.dokit'
 dependencies {
-    implementation project(':LibTools')
+    implementation project(':base:lib_tools')
 }
