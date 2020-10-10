@@ -9,6 +9,14 @@
 
     列出依赖差异，更多参考：https://github.com/JakeWharton/dependency-tree-diff
 
+    执行./gradlew :app:dependencies --configuration releaseRuntimeClasspath > old.txt命令，
+    生成改变前的依赖配置信息。
+    
+    执行./gradlew :app:dependencies --configuration releaseRuntimeClasspath > new.txt命令，
+    生成修改后的依赖配置信息
+    
+    执行./dependency-tree-diff.jar old.txt new.txt 生成改变前后依赖差异信息。
+
 ### 核心工具（core）
 ##### dokit
 
