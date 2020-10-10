@@ -1,6 +1,9 @@
 apply from: "../../config/module.gradle"
 apply from: "../../config/kotlin.gradle"
-apply plugin: 'com.didi.dokit'
+try {
+    // 可以根据具体业务，加if判断是否引入
+    apply from:'../LibTools/config/tools.gradle'
+} catch (e) {}
 android {
     configurations {
         compile.exclude group: 'com.google.zxing'
