@@ -3,7 +3,7 @@ apply from: '../../config/module.gradle'
 apply plugin: 'com.didi.dokit'
 
 android {
-    apply from: 'dokitExt.gradle'
+    apply from: 'config/dokitExt.gradle'
 }
 
 /**
