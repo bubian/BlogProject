@@ -1,0 +1,27 @@
+apply from: "../../config/module.gradle"
+
+project.ext.react = [
+        entryFile: "index.js"
+]
+
+apply from: "../rn/node_modules/react-native/react.gradle"
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url "module/rn/node_modules/react-native/android"
+        }
+    }
+}
+dependencies {
+    implementation deps.ax.appcompat
+    api "com.facebook.react:react-native:0.56.0"
+    implementation deps.ax.swiperefreshlayout
+}
+
+task copyDownloadableDepsToLibs(type: Copy) {
+    from configurations.compile
+    into 'libs'
+}

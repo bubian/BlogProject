@@ -1,12 +1,13 @@
 package com.pds.blog;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.pds.application.FlutterHelper;
+import com.pds.rn.RnActivity;
 
 /**
  * @author: pengdaosong
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void doFlutter(View view) {
-        FlutterHelper.startFlutter(this);
+        Intent intent = new Intent(this, RnActivity.class);
+        startActivity(intent);
     }
 }

@@ -44,9 +44,10 @@ ext {
             ],
 
             'ax'     : [
-                    'appcompat': "androidx.appcompat:appcompat:1.1.0",
-                    'multidex' : "androidx.multidex:multidex:2.0.1",
-                    'activity' : "androidx.activity:activity:1.2.0-beta01",
+                    'appcompat'         : "androidx.appcompat:appcompat:1.1.0",
+                    'multidex'          : "androidx.multidex:multidex:2.0.1",
+                    'activity'          : "androidx.activity:activity:1.2.0-beta01",
+                    'swiperefreshlayout': "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
             ],
 
             'alibaba': [

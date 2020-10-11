@@ -5,5 +5,5 @@ apply plugin: 'aspect'
 
 dependencies {
     implementation deps.ax.appcompat
-    implementation project(path: ":module:flutterApplication")
+    implementation project(path: ":module:RnApplication")
 }

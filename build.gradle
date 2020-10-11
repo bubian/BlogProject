@@ -37,6 +37,9 @@ allprojects {
         maven { url "https://oss.jfrog.org/libs-snapshot" }
         maven { url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo' }
         maven { url 'https://jitpack.io' }
+        maven {
+            url "$rootDir/module/rn/node_modules/react-native/android"
+        }
     }
 }
 
