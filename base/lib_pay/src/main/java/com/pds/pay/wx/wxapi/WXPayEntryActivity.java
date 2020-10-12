@@ -12,6 +12,8 @@ import com.medlinker.pay.wx.WXPayManager;
  * @author pengdaosong
  *
  * 这个界面用于显示第三方app通过微信支付的结果
+ *
+ * 必须配置在应用包名下，不然支付不回调，所以配置在这里是有问题的
  */
 public class WXPayEntryActivity extends AppCompatActivity {
 
