@@ -3,8 +3,8 @@ apply from: '../../config/module.gradle'
 dependencies {
 
     implementation deps.ax.appcompat
-//    implementation files('libs/libammsdk.jar')
-    implementation files('libs/wx-sdk-debug.jar')
+    implementation files('libs/libammsdk.jar')
+//    implementation files('libs/wx-sdk-debug.jar')
     compile (name: 'alipaySdk', ext: 'aar')
 
 }

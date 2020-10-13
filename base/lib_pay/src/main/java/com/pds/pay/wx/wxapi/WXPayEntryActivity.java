@@ -5,8 +5,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.medlinker.pay.R;
-import com.medlinker.pay.wx.WXPayManager;
+import com.pds.pay.R;
+import com.pds.pay.wx.WXPayManager;
 
 /**
  * @author pengdaosong
