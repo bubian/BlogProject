@@ -1,0 +1,5 @@
+apply from: '../../config/module.gradle'
+dependencies {
+    implementation deps.alibaba.arouter
+    annotationProcessor deps.alibaba.arouterompiler
+}

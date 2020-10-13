@@ -39,6 +39,7 @@ include ':base:lib_log'
 include ':base:lib_env'
 include ':base:lib_storage'
 include ':base:lib_res'
+include ':base:lib_router'
 // netty
 include ':nettyim'
 // plugin
