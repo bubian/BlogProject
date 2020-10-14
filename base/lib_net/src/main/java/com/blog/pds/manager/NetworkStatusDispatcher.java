@@ -6,11 +6,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.blog.pds.utils.NetworkUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.CONNECTIVITY_SERVICE;
 
 /**
  * @author: pengdaosong.
@@ -28,6 +33,14 @@ public class NetworkStatusDispatcher {
 
   private NetworkStatusDispatcher(){
     init(null);
+  }
+
+  @RequiresApi(api = Build.VERSION_CODES.N)
+  private void initOne(Application application){
+    ConnectivityManager  connectivityManager = (ConnectivityManager) application.getSystemService(CONNECTIVITY_SERVICE);
+    connectivityManager.registerDefaultNetworkCallback(new ConnectivityManager.NetworkCallback(){
+
+    });
   }
 
   public static final NetworkStatusDispatcher instance(Application application){
