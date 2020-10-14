@@ -8,7 +8,11 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Build;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.blog.pds.utils.NetworkUtil;
 
@@ -16,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
+import static androidx.lifecycle.Lifecycle.State.DESTROYED;
 
 /**
  * @author: pengdaosong.
@@ -74,11 +79,36 @@ public class NetworkStatusDispatcher {
     }
   };
 
-  public void register(NetworkStatusListener listener){
-    if (mListeners.contains(listener)){
+  class LifecycleBoundObserver implements LifecycleEventObserver {
+
+    @NonNull
+    final LifecycleOwner mOwner;
+    final NetworkStatusListener mListener;
+
+    LifecycleBoundObserver(@NonNull LifecycleOwner owner, NetworkStatusListener listener) {
+      mListener = listener;
+      mOwner = owner;
+    }
+
+    @Override
+    public void onStateChanged(@NonNull LifecycleOwner source,
+                               @NonNull Lifecycle.Event event) {
+      if (mOwner.getLifecycle().getCurrentState() == DESTROYED) {
+        unregister(mListener);
+      }
+    }
+  }
+
+  public void register(@NonNull LifecycleOwner owner, NetworkStatusListener listener) {
+    if (owner.getLifecycle().getCurrentState() == DESTROYED) {
       return;
     }
+    if (mListeners.contains(listener)) {
+      return;
+    }
+    LifecycleBoundObserver wrapper = new LifecycleBoundObserver(owner, listener);
     mListeners.add(listener);
+    owner.getLifecycle().addObserver(wrapper);
   }
 
   public void unregister(NetworkStatusListener listener){
