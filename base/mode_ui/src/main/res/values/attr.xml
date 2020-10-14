@@ -82,4 +82,11 @@
             <enum name="mirror" value="2" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="BgContainer">
+        <attr name="cbRadius" format="dimension" />
+        <attr name="cbStrokeWidth" format="dimension" />
+        <attr name="cbStrokeColor" format="color" />
+        <attr name="cbBgColor" format="color" />
+    </declare-styleable>
 </resources>
