@@ -18,4 +18,5 @@
     <color name="ff4f5163">#ff4f5163</color>
     <color name="ff9a9aa4">#ff9a9aa4</color>
     <color name="ff0064ff">#ff0064ff</color>
+    <color name="white">ffffffff</color>
 </resources>

@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
  */
 public class BaseDialogFragment extends DialogFragment {
 
-    private boolean mIsLoading = false;
+    protected boolean mIsLoading = false;
 
     protected void setNoTitle() {
         Window window = getDialog().getWindow();

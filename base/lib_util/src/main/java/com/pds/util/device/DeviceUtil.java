@@ -1,5 +1,6 @@
 package com.pds.util.device;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.database.Cursor;
+import android.graphics.Rect;
 import android.net.Uri;
 
 import com.pds.util.R;
@@ -115,5 +117,34 @@ public class DeviceUtil {
             }
         }
         return null;
+    }
+
+    /**
+     * 获取状态栏高度
+     *
+     * @param activity
+     * @return
+     */
+    private static int STATUSBAR_HEIGHT = 0;
+    public static int getStatusBarHeight(Activity activity) {
+        if (STATUSBAR_HEIGHT > 0) {
+            return STATUSBAR_HEIGHT;
+        }
+        Rect frame = new Rect();
+        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+        int statusHeight = frame.top;
+        if (statusHeight <= 0) {
+            Class<?> localClass;
+            try {
+                localClass = Class.forName("com.android.internal.R$dimen");
+                Object localObject = localClass.newInstance();
+                int i5 = Integer.parseInt(localClass.getField("status_bar_height").get(localObject).toString());
+                statusHeight = activity.getResources().getDimensionPixelSize(i5);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        STATUSBAR_HEIGHT = statusHeight;
+        return statusHeight;
     }
 }

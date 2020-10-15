@@ -18,4 +18,5 @@ dependencies {
     api deps.rx.rxlifecycleComponents
     api deps.rx.rxlifecycleComponentsPreference
     api deps.rx.rxlifecycleAndroidLifecycle
+    implementation project(path: ':base:mode_ui')
 }
