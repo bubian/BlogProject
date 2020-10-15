@@ -5,6 +5,6 @@ apply plugin: 'aspect'
 
 dependencies {
     implementation deps.ax.appcompat
-    implementation project(path: ":module:RnApplication")
+    implementation project(path: ":module:SampleApplication")
     implementation project(path: ':base:lib_pay')
 }

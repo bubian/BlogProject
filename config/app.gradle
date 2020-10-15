@@ -87,7 +87,7 @@ android {
 repositories {
     flatDir {
         try {
-            dirs 'libs','../*/libs','../*/*/libs'
+            dirs 'libs','../base/lib_pay/libs'
         } catch (e) {
 
         }

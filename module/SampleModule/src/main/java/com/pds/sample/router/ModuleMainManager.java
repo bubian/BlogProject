@@ -3,8 +3,8 @@ package com.pds.sample.router;
 import com.alibaba.android.arouter.launcher.ARouter;
 
 /**
- * @author hmy
- * @time 2020/9/18 12:40
+ * 也可以直接用下面的方式调用，详情参考官网
+ * ((HelloService) ARouter.getInstance().build("/service/sample").navigation()).getApplication();
  */
 public class ModuleMainManager {
 

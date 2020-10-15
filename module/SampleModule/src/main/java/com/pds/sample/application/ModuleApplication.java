@@ -3,6 +3,7 @@ package com.pds.sample.application;
 import android.app.Application;
 
 import com.pds.base.manager.ActivityLifecycle;
+import com.pds.router.ModuleRouter;
 import com.pds.skin.SkinManager;
 import com.pds.tool.ToolApplicationManager;
 
@@ -29,6 +30,7 @@ public class ModuleApplication {
         SkinManager.init(mApplication);
         ToolApplicationManager.onCreate(application);
         application.registerActivityLifecycleCallbacks(ActivityLifecycle.getInstance());
+        ModuleRouter.init(application);
     }
 
     public Application application(){

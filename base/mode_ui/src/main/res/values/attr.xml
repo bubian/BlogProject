@@ -48,13 +48,6 @@
         <attr name="rtvStrokeColor" format="color"/>
     </declare-styleable>
 
-    <declare-styleable name="BgLinearLayout">
-        <attr format="dimension" name="cbRadius" />
-        <attr format="dimension" name="cbStrokeWidth" />
-        <attr format="color" name="cbStrokeColor" />
-        <attr format="color" name="cbBgColor" />
-    </declare-styleable>
-
     <declare-styleable name="RoundedImageView">
         <attr name="riv_corner_radius" format="dimension" />
         <attr name="riv_corner_radius_top_left" format="dimension" />

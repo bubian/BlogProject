@@ -6,11 +6,11 @@ import android.text.TextUtils;
 import com.alipay.sdk.app.H5PayCallback;
 import com.alipay.sdk.app.PayTask;
 import com.alipay.sdk.util.H5PayResultModel;
-import com.medlinker.pay.ali.task.AsyncTaskCompat;
-import com.medlinker.pay.ali.task.ITaskManager;
-import com.medlinker.pay.ali.task.PayAsyncTask;
-import com.medlinker.pay.ali.task.TaskManagerImpl;
-import com.medlinker.pay.wx.WXPayManager;
+import com.pds.pay.ali.task.AsyncTaskCompat;
+import com.pds.pay.ali.task.ITaskManager;
+import com.pds.pay.ali.task.PayAsyncTask;
+import com.pds.pay.ali.task.TaskManagerImpl;
+import com.pds.pay.wx.WXPayManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +38,7 @@ public class AliPayManager {
 
     public static AliPayManager instance(Activity activity) {
         if (null == sPayManager) {
-            synchronized (WXPayManager.class) {
+            synchronized (AliPayManager.class) {
                 if (null == sPayManager) {
                     sPayManager = new AliPayManager(activity);
                 }

@@ -5,3 +5,13 @@ dependencies {
     api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:5.4.3'
     compile (name: 'alipaySdk', ext: 'aar')
 }
+
+repositories {
+    flatDir {
+        try {
+            dirs 'libs'
+        } catch (e) {
+
+        }
+    }
+}
