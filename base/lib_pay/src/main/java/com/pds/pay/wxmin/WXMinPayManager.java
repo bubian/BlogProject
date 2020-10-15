@@ -1,17 +1,18 @@
-package com.pds.pay.wx;
+package com.pds.pay.wxmin;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.Application;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.pds.pay.SignUtil;
+import com.pds.pay.wx.WXConfig;
+import com.pds.pay.wx.WXPayState;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
-import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -19,39 +20,25 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.ref.WeakReference;
 import java.util.Observer;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class WXPayManager {
+;
 
-    private static final String TAG = "WXPayManager";
+/**
+ * @author: pengdaosong
+ * @CreateTime: 2020/10/15 3:38 PM
+ * @Email: pengdaosong@medlinker.com
+ * @Description:
+ */
+public class WXMinPayManager {
+
+    private static final String TAG = "WXMinPayManager";
+    private volatile static WXMinPayManager sPayManager;
+    private final AtomicBoolean mProcessing = new AtomicBoolean(false);
     private IWXAPI mWxApi;
     private Observer mObserver;
-    private final AtomicBoolean mProcessing = new AtomicBoolean(false);
-    private Context mApplication;
-    private WeakReference<Activity> mWeakActivity;
-    private volatile static WXPayManager sPayManager;
-
-    private WXPayManager() {
-    }
-
-    public static WXPayManager instance(Activity activity) {
-        if (null == sPayManager) {
-            synchronized (WXPayManager.class) {
-                if (null == sPayManager) {
-                    sPayManager = new WXPayManager();
-                }
-            }
-        }
-        sPayManager.initWXPayApi(activity);
-        return sPayManager;
-    }
-
-    private Activity getActivity() {
-        return mWeakActivity != null ? mWeakActivity.get() : null;
-    }
-
+    private Application mApplication;
     private IWXAPIEventHandler mWeiXinHandler = new IWXAPIEventHandler() {
         // 微信发送请求到第三方应用时，会回调到该方法
         @Override
@@ -71,29 +58,45 @@ public class WXPayManager {
         public void onResp(BaseResp resp) {
             int type = resp.getType();
             Log.d(TAG, "onResp = " + type);
-            if (type == ConstantsAPI.COMMAND_PAY_BY_WX) {
-                doCallback(mObserver, resp.errCode, resp.errStr);
+            if (resp.getType() == ConstantsAPI.COMMAND_LAUNCH_WX_MINIPROGRAM) {
+                WXLaunchMiniProgram.Resp launchMiniProResp = (WXLaunchMiniProgram.Resp) resp;
+                // 对应小程序组件 <button open-type="launchApp"> 中的 app-parameter 属性
+                String extraData = launchMiniProResp.extMsg;
+                doCallback(mObserver, resp.errCode, resp.errStr, extraData);
                 mObserver = null;
             }
             mProcessing.set(false);
         }
     };
 
-    /**
-     * 初始化微信支付
-     */
-    public void initWXPayApi(Activity activity) {
-        if (mProcessing.get() || null == activity) {
-            return;
+    private WXMinPayManager() {
+    }
+
+    public static WXMinPayManager instance(Activity activity) {
+        if (null == sPayManager) {
+            synchronized (WXMinPayManager.class) {
+                if (null == sPayManager) {
+                    sPayManager = new WXMinPayManager();
+                }
+            }
         }
-        mWeakActivity = new WeakReference<>(activity);
-        mApplication = activity.getApplicationContext();
-        mWxApi = WXAPIFactory.createWXAPI(activity.getApplicationContext(), WXConfig.APP_ID);
-        mWxApi.registerApp(WXConfig.APP_ID);
+        sPayManager.initWXPayApi(activity.getApplication());
+        return sPayManager;
     }
 
     /**
-     * 注册微信支付结果回调
+     * 初始化微信小程序
+     */
+    public void initWXPayApi(Application application) {
+        if (mProcessing.get() || null == application) {
+            return;
+        }
+        mApplication = application;
+        mWxApi = WXAPIFactory.createWXAPI(mApplication, WXConfig.APP_ID);
+    }
+
+    /**
+     * 注册小程序结果回调
      */
     public boolean onHandleIntent(Intent intent) {
         return mWxApi.handleIntent(intent, mWeiXinHandler);
@@ -110,8 +113,8 @@ public class WXPayManager {
             return;
         }
 
-        if (null == mWxApi && null != getActivity()) {
-            initWXPayApi(getActivity());
+        if (null == mWxApi && null != mApplication) {
+            initWXPayApi(mApplication);
         }
         if (null == mWxApi) {
             doCallback(observer, WXPayState.ERROR_NOT_API,
@@ -129,19 +132,6 @@ public class WXPayManager {
         sendWXPay(payInfo);
     }
 
-    private void doCallback(Observer observer, int code, String result) {
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("code", code);
-            jsonObject.put("result", result);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        if (null != observer) {
-            observer.update(null, jsonObject.toString());
-        }
-    }
-
     /**
      * 发起微信支付
      *
@@ -150,21 +140,13 @@ public class WXPayManager {
     private void sendWXPay(String payInfo) {
         try {
             JSONObject json = new JSONObject(payInfo);
-            PayReq req = new PayReq();
-            req.appId = json.getString("appId");
-            // 商户号
-            req.partnerId = json.getString("mchId");
-            req.prepayId = json.getString("prepayId");
-            req.packageValue = json.getString("package");
-            req.nonceStr = json.getString("nonceStr");
-            req.timeStamp = json.getString("timestamp");
-            req.sign = json.getString("sign");
-            if (!doSignCheck(json)) {
-                doCallback(mObserver, WXPayState.ERROR_SIGN,
-                        WXPayState.getTipMsg(WXPayState.ERROR_SIGN));
-                destroy();
-                return;
-            }
+            WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
+            // 填小程序原始id
+            req.userName = json.getString("userName");
+            // 拉起小程序页面的可带参路径，不填默认拉起小程序首页，对于小游戏，可以只传入 query 部分，来实现传参效果，如：传入 "?foo=bar"。
+            req.path = json.getString("path");
+            req.miniprogramType = json.getInt("miniProgramType");
+            req.extData = json.getString("payInfo");
             mWxApi.sendReq(req);
         } catch (JSONException e) {
             doCallback(mObserver, WXPayState.ERROR_JSON,
@@ -175,22 +157,26 @@ public class WXPayManager {
         }
     }
 
-    /**
-     * 这里校验应用签名
-     */
-    private boolean doSignCheck(JSONObject json) {
-        boolean isSignCheck = false;
-        if (null != json) {
-            isSignCheck = json.optBoolean("isSignCheck", false);
-        }
-        if (isSignCheck) {
-            String serviceSign = json.optString("sign");
-            String sign = SignUtil.md5(SignUtil.getSignature(getActivity()));
-            Log.d(TAG, "doSignCheck:sign = " + sign + " serviceSign = " + serviceSign);
-            return TextUtils.equals(sign, serviceSign);
-        }
-        return true;
+    private void doCallback(Observer observer, int code, String result) {
+        doCallback(observer, code, result, null);
     }
+
+    private void doCallback(Observer observer, int code, String result, String extraData) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("code", code);
+            jsonObject.put("result", result);
+            if (!TextUtils.isEmpty(extraData)) {
+                jsonObject.put("extraData", extraData);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (null != observer) {
+            observer.update(null, jsonObject.toString());
+        }
+    }
+
 
     /**
      * 支付提示
@@ -201,7 +187,6 @@ public class WXPayManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void destroy() {
@@ -210,4 +195,5 @@ public class WXPayManager {
         mApplication = null;
         sPayManager = null;
     }
+
 }

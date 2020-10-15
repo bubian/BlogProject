@@ -12,9 +12,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.function.Function;
-import java.util.function.Predicate;
+
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 
 
 public class ActivityStashManager {
@@ -33,6 +35,14 @@ public class ActivityStashManager {
     private static WeakReference<Activity> sCurrentActivity = null;
     //activity 启动的顺序列表
     private static LinkedList<WeakReference<Activity>> activityList = new LinkedList<>();
+
+    public static LinkedList<WeakReference<Activity>> getActivityList() {
+        return activityList;
+    }
+
+    public static void setActivityList(LinkedList<WeakReference<Activity>> activityList) {
+        ActivityStashManager.activityList = activityList;
+    }
 
     /**
      * activity创建时调用此方法
@@ -148,7 +158,7 @@ public class ActivityStashManager {
         return activities != null && !activities.isEmpty();
     }
 
-    public static Activity getsCurrentActivity() {
+    public static Activity getCurrentActivity() {
         return sCurrentActivity != null ? sCurrentActivity.get() : null;
     }
 
@@ -210,7 +220,7 @@ public class ActivityStashManager {
             for (int i = size - 1; i >= size - num; i--) {
                 Activity currentAct = activityList.get(i).get();
                 if (currentAct != null && currentAct.getClass() == hybridActivityClass) {
-                    finishLastActivity();
+                    finishLastestActivity();
                 } else {
                     return;
                 }
@@ -228,7 +238,7 @@ public class ActivityStashManager {
             return;
         }
         if (num == 0) {
-            getsCurrentActivity().finish();
+            getCurrentActivity().finish();
             return;
         }
         if (activityList.size() > num) {
@@ -251,7 +261,7 @@ public class ActivityStashManager {
             for (int i = size - 1; i >= 0; i--) {
                 Activity currentAct = activityList.get(i).get();
                 if (currentAct != null && currentAct.getClass() == hybridActivity) {
-                    finishLastActivity();
+                    finishLastestActivity();
                 } else {
                     return;
                 }
@@ -268,7 +278,7 @@ public class ActivityStashManager {
                 if (currentAct != null && preAct != null
                         && (preAct.getClass() == currentAct.getClass())
                         && (currentAct.getClass() == hybridActivity)) {
-                    finishLastActivity();
+                    finishLastestActivity();
                 } else {
                     break;
                 }
@@ -281,23 +291,46 @@ public class ActivityStashManager {
      * finish最近启动的activity
      */
     @SuppressLint("CheckResult")
-    public static void finishLastActivity() {
-        if (activityList == null || activityList.isEmpty()) {
-            return;
+    public static void finishLastestActivity() {
+        if (activityList != null && !activityList.isEmpty()) {
+            Observable.just(activityList.pollLast())
+                    .map(new Function<WeakReference<Activity>, ActivityInfo>() {
+                        @Override
+                        public ActivityInfo apply(WeakReference<Activity> s) throws Exception {
+                            LinkedList<ActivityInfo> activityInfos = COUNTER.get(s.get().getClass().getName());
+                            ActivityInfo info = activityInfos.pollLast();
+                            return info;
+                        }
+                    })
+                    .map(new Function<ActivityInfo, Activity>() {
+                        @Override
+                        public Activity apply(ActivityInfo activityInfo) throws Exception {
+                            return activityInfo.wrfActivity.get();
+                        }
+                    })
+                    .filter(new Predicate<Activity>() {
+                        @Override
+                        public boolean test(Activity activity) throws Exception {
+//                            return !isTargetRouterActivity(activity, "/app/main");
+                            return false;
+                        }
+                    })
+                    .subscribe(new Consumer<Activity>() {
+                        @Override
+                        public void accept(Activity activity) throws Exception {
+                            if (activity != null) {
+                                Log.i("WebFragment", "activityName" + activity.getClass().getName());
+                                activity.finish();
+                            }
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            throwable.printStackTrace();
+                        }
+                    });
         }
-        WeakReference<Activity> weakReference = activityList.pollLast();
-        LinkedList<ActivityInfo> activityInfo = COUNTER.get(weakReference.get().getClass().getName());
-        ActivityInfo info = activityInfo.pollLast();
-        if (null == info){
-            return;
-        }
-        Activity activity = info.wrfActivity.get();
-        if (!"MainActivity".equals(activity.getClass().getSimpleName())){
-            return;
-        }
-        activity.finish();
     }
-
 
     public static class ActivityInfo {
         public WeakReference<Activity> wrfActivity;

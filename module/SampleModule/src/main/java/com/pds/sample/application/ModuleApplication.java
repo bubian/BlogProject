@@ -2,6 +2,7 @@ package com.pds.sample.application;
 
 import android.app.Application;
 
+import com.pds.base.manager.ActivityLifecycle;
 import com.pds.skin.SkinManager;
 import com.pds.tool.ToolApplicationManager;
 
@@ -27,6 +28,7 @@ public class ModuleApplication {
         mApplication = application;
         SkinManager.init(mApplication);
         ToolApplicationManager.onCreate(application);
+        application.registerActivityLifecycleCallbacks(ActivityLifecycle.getInstance());
     }
 
     public Application application(){
