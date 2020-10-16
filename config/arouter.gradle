@@ -1,0 +1,32 @@
+dependencies {
+    implementation deps.alibaba.arouter
+    // 每个module都要配置的，为了应对单个module 分别编译的场景
+    annotationProcessor deps.alibaba.arouterCompiler
+}
+
+// 更新 build.gradle, 添加参数 AROUTER_GENERATE_DOC = enable
+// 生成的文档路径 : build/generated/source/apt/(debug or release)/com/alibaba/android/arouter/docs/arouter-map-of-${moduleName}.json
+android {
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
+            }
+        }
+    }
+}
+
+// Kotlin项目中的配置方式
+// 可以参考 module-kotlin 模块中的写法
+//apply plugin: 'kotlin-kapt'
+//
+//kapt {
+//    arguments {
+//        arg("AROUTER_MODULE_NAME", project.getName())
+//    }
+//}
+//
+//dependencies {
+//    compile 'com.alibaba:arouter-api:x.x.x'
+//    kapt 'com.alibaba:arouter-compiler:x.x.x'
+//}

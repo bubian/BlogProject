@@ -1,8 +1,5 @@
 apply from: "../../config/module.gradle"
-apply from: "../../config/kotlin.gradle"
-apply plugin: 'dagger.hilt.android.plugin'
-
+apply from: "../../config/hilt.gradle"
 dependencies {
-    implementation deps.jp.hilt
-    kapt deps.jp.hiltCompiler
+    implementation deps.ax.appcompat
 }

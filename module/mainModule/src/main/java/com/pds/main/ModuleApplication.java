@@ -1,11 +1,8 @@
-package com.pds.sample.application;
+package com.pds.main;
 
 import android.app.Application;
 
-import com.pds.base.manager.ActivityLifecycle;
 import com.pds.router.ModuleRouter;
-import com.pds.skin.SkinManager;
-import com.pds.tool.ToolApplicationManager;
 
 /**
  * @author: pengdaosong
@@ -19,21 +16,15 @@ public class ModuleApplication {
     private static ModuleApplication sModuleApplication = new ModuleApplication();
     private Application mApplication;
 
-    private ModuleApplication(){}
+    private ModuleApplication() {
+    }
 
-    public static ModuleApplication instance(){
+    public static ModuleApplication instance() {
         return sModuleApplication;
     }
 
     public void onCreate(Application application) {
         mApplication = application;
         ModuleRouter.init(application);
-        SkinManager.init(mApplication);
-        ToolApplicationManager.onCreate(application);
-        application.registerActivityLifecycleCallbacks(ActivityLifecycle.getInstance());
-    }
-
-    public Application application(){
-        return mApplication;
     }
 }

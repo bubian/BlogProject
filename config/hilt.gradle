@@ -1,0 +1,6 @@
+apply from: "${rootDir}/config/kotlin.gradle"
+apply plugin: 'dagger.hilt.android.plugin'
+dependencies {
+    api deps.jp.hilt
+    kapt deps.jp.hiltCompiler
+}

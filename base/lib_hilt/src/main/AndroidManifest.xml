@@ -2,4 +2,7 @@
     package="com.pds.hilt">
 
     /
+    <application>
+        <activity android:name=".ExampleActivity" />
+    </application>
 </manifest>

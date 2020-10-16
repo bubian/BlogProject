@@ -1,5 +1,9 @@
 apply from: "../../config/module.gradle"
+apply from: "../../config/hilt.gradle"
+
+apply plugin: 'dagger.hilt.android.plugin'
 dependencies {
     api deps.ax.multidex
+    implementation deps.ax.appcompat
     implementation project(path : ":module:SampleModule")
 }

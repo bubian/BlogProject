@@ -56,7 +56,7 @@ ext {
             'alibaba': [
                     // 阿里路由框架
                     'arouter'       : "com.alibaba:arouter-api:1.5.0",
-                    'arouterompiler': "com.alibaba:arouter-compiler:1.2.2"
+                    'arouterCompiler': "com.alibaba:arouter-compiler:1.2.2"
             ],
 
             'list'   : [
@@ -163,7 +163,7 @@ ext {
 
     plugin = [
             'root'  : [
-                    'gradle'      : "com.android.tools.build:gradle:4.0.1",
+                    'gradle'      : "com.android.tools.build:gradle:4.0.2",
                     'kotlinGradle': "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin_version",
             ],
 

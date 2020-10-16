@@ -4,8 +4,10 @@ import android.content.Context;
 
 import androidx.multidex.MultiDexApplication;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+
 import java.lang.reflect.InvocationHandler;
-import java.pds.main.application.ModuleApplication;
+import com.pds.main.ModuleApplication;
 
 /**
  * @author: pengdaosong
@@ -31,6 +33,12 @@ public class BaseApplication extends MultiDexApplication {
         super.onCreate();
         sApplication = this;
         ModuleApplication.instance().onCreate(sApplication);
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        ARouter.getInstance().destroy();
     }
 
     /**

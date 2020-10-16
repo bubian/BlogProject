@@ -1,7 +1,7 @@
 apply from: "../../config/module.gradle"
 dependencies {
+    api project(path: ':base:lib_router')
     api project(path: ':base:frame')
     api project(path: ':base:mode_ui')
-    api deps.alibaba.arouter
-    annotationProcessor deps.alibaba.arouterompiler
+    api project(path: ':base:lib_hilt')
 }

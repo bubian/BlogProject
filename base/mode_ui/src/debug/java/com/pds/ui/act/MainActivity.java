@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.ui_main);
         suitLines =  findViewById(R.id.suitlines);
         onBtnClick2(null);
         onBtnClick101(null);
