@@ -36,6 +36,11 @@ public class WXPayState {
      */
     public static final int ERROR_JSON = -3;
 
+    /**
+     * 小程序launch中
+     */
+    public static final int WX_MIN_LAUNCHING = -9;
+
 
     public static String getTipMsg(int code) {
         switch (code) {

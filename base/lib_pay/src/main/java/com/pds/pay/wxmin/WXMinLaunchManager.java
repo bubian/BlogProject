@@ -23,7 +23,6 @@ import org.json.JSONObject;
 import java.util.Observer;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-;
 
 /**
  * @author: pengdaosong
@@ -31,10 +30,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @Email: pengdaosong@medlinker.com
  * @Description:
  */
-public class WXMinPayManager {
+public class WXMinLaunchManager {
 
     private static final String TAG = "WXMinPayManager";
-    private volatile static WXMinPayManager sPayManager;
+    private volatile static WXMinLaunchManager sWXMinLaunchManager;
     private final AtomicBoolean mProcessing = new AtomicBoolean(false);
     private IWXAPI mWxApi;
     private Observer mObserver;
@@ -69,25 +68,25 @@ public class WXMinPayManager {
         }
     };
 
-    private WXMinPayManager() {
+    private WXMinLaunchManager() {
     }
 
-    public static WXMinPayManager instance(Activity activity) {
-        if (null == sPayManager) {
-            synchronized (WXMinPayManager.class) {
-                if (null == sPayManager) {
-                    sPayManager = new WXMinPayManager();
+    public static WXMinLaunchManager instance(Activity activity) {
+        if (null == sWXMinLaunchManager) {
+            synchronized (WXMinLaunchManager.class) {
+                if (null == sWXMinLaunchManager) {
+                    sWXMinLaunchManager = new WXMinLaunchManager();
                 }
             }
         }
-        sPayManager.initWXPayApi(activity.getApplication());
-        return sPayManager;
+        sWXMinLaunchManager.initWXApi(activity.getApplication());
+        return sWXMinLaunchManager;
     }
 
     /**
      * 初始化微信小程序
      */
-    public void initWXPayApi(Application application) {
+    public void initWXApi(Application application) {
         if (mProcessing.get() || null == application) {
             return;
         }
@@ -106,15 +105,15 @@ public class WXMinPayManager {
         return mProcessing.get();
     }
 
-    public void sendPay(String payInfo, Observer observer) {
+    public void launch(String payInfo, Observer observer) {
         if (isProcessing()) {
-            doCallback(observer, WXPayState.ERROR_PAYING,
-                    WXPayState.getTipMsg(WXPayState.ERROR_PAYING));
+            doCallback(observer, WXPayState.WX_MIN_LAUNCHING,
+                    WXPayState.getTipMsg(WXPayState.WX_MIN_LAUNCHING));
             return;
         }
 
         if (null == mWxApi && null != mApplication) {
-            initWXPayApi(mApplication);
+            initWXApi(mApplication);
         }
         if (null == mWxApi) {
             doCallback(observer, WXPayState.ERROR_NOT_API,
@@ -129,7 +128,7 @@ public class WXMinPayManager {
 
         mProcessing.set(true);
         this.mObserver = observer;
-        sendWXPay(payInfo);
+        launchWXMin(payInfo);
     }
 
     /**
@@ -137,7 +136,7 @@ public class WXMinPayManager {
      *
      * @param payInfo json参数
      */
-    private void sendWXPay(String payInfo) {
+    private void launchWXMin(String payInfo) {
         try {
             JSONObject json = new JSONObject(payInfo);
             WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
@@ -146,7 +145,7 @@ public class WXMinPayManager {
             // 拉起小程序页面的可带参路径，不填默认拉起小程序首页，对于小游戏，可以只传入 query 部分，来实现传参效果，如：传入 "?foo=bar"。
             req.path = json.getString("path");
             req.miniprogramType = json.getInt("miniProgramType");
-            req.extData = json.getString("payInfo");
+            req.extData = json.getString("extra");
             mWxApi.sendReq(req);
         } catch (JSONException e) {
             doCallback(mObserver, WXPayState.ERROR_JSON,
@@ -193,7 +192,6 @@ public class WXMinPayManager {
         mProcessing.set(false);
         mObserver = null;
         mApplication = null;
-        sPayManager = null;
+        sWXMinLaunchManager = null;
     }
-
 }

@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.pds.blog.R;
-import com.pds.pay.wxmin.WXMinPayManager;
+import com.pds.pay.wxmin.WXMinLaunchManager;
 
 
 /**
@@ -13,14 +13,14 @@ import com.pds.pay.wxmin.WXMinPayManager;
  */
 public class WXEntryActivity extends Activity {
 
-    private WXMinPayManager mWXMinPayManager;
+    private WXMinLaunchManager mWXMinPayManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wx_entry);
         try {
-            mWXMinPayManager = WXMinPayManager.instance(this);
+            mWXMinPayManager = WXMinLaunchManager.instance(this);
             if (mWXMinPayManager.onHandleIntent(getIntent())) {
                 finish();
             }
