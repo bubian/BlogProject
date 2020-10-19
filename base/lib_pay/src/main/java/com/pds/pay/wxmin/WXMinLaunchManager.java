@@ -38,6 +38,7 @@ public class WXMinLaunchManager {
     private IWXAPI mWxApi;
     private Observer mObserver;
     private Application mApplication;
+    private long mLastTimestamp;
     private IWXAPIEventHandler mWeiXinHandler = new IWXAPIEventHandler() {
         // 微信发送请求到第三方应用时，会回调到该方法
         @Override
@@ -101,11 +102,22 @@ public class WXMinLaunchManager {
         return mWxApi.handleIntent(intent, mWeiXinHandler);
     }
 
+    private boolean isCap(){
+        boolean cap =  (System.currentTimeMillis() - mLastTimestamp) > 1000;
+        if (cap){
+            mLastTimestamp = System.currentTimeMillis();
+        }
+        return cap;
+    }
+
     public boolean isProcessing() {
         return mProcessing.get();
     }
 
     public void launch(String payInfo, Observer observer) {
+        if (isCap()){
+            mProcessing.set(false);
+        }
         if (isProcessing()) {
             doCallback(observer, WXPayState.WX_MIN_LAUNCHING,
                     WXPayState.getTipMsg(WXPayState.WX_MIN_LAUNCHING));
