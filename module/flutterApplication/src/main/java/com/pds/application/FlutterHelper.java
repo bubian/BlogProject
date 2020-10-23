@@ -11,7 +11,7 @@ import android.content.Intent;
  */
 public class FlutterHelper {
     public static void startFlutter(Activity activity) {
-        Intent intent = new Intent(activity, MyFlutterActivity.class);
+        Intent intent = new Intent(activity, MainActivity.class);
         activity.startActivity(intent);
     }
 }

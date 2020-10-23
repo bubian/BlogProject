@@ -55,7 +55,7 @@ ext {
 
             'alibaba': [
                     // 阿里路由框架
-                    'arouter'       : "com.alibaba:arouter-api:1.5.0",
+                    'arouter'        : "com.alibaba:arouter-api:1.5.0",
                     'arouterCompiler': "com.alibaba:arouter-compiler:1.2.2"
             ],
 
@@ -137,7 +137,7 @@ ext {
                     'gifDrawable'     : "pl.droidsonroids.gif:android-gif-drawable:1.2.+"
             ],
             'kt'     : [
-                    'core'   : "androidx.core:core-ktx:${versions.core_version}",
+                    'core'     : "androidx.core:core-ktx:${versions.core_version}",
                     'kotlinJdk': "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin_version}",
             ],
             'test'   : [
@@ -158,6 +158,24 @@ ext {
             'help'   : [
                     'ankoCommons': "org.jetbrains.anko:anko-commons:0.10.5",
                     'guava'      : "com.google.guava:guava:28.0-android",
+            ],
+            'file'   : [
+                    // 参考：https://github.com/barteksc/AndroidPdfViewer
+                    // 本地浏览PDF文件，和第三方软件效果一直，体积增加4M多
+                    'pdfViewer' : "com.github.barteksc:android-pdf-viewer:3.2.0-beta.1",
+                    // 简单的pdf加载，效果一般，体积增加1M多点
+                    'AndroidPDF': "https://github.com/lidong1665/AndroidPDF"
+            ],
+            // 快速开发框架
+            'fast'   : [
+                    // 参考：https://github.com/androidannotations/androidannotations/wiki
+                    'androidannotationsApi': 'org.androidannotations:androidannotations-api:4.6.0',
+                    'androidannotations'   : "org.androidannotations:androidannotations:4.6.0"
+            ],
+            // 更多参考：https://github.com/Ccapton/Collection-Android-Progress
+            'process': [
+                    // https://github.com/JorgeCastilloPrz/AndroidFillableLoaders
+                    'fillableloaders': 'com.github.jorgecastilloprz:fillableloaders:1.03@aar'
             ]
     ]
 

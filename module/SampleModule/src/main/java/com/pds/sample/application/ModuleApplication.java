@@ -6,6 +6,7 @@ import com.pds.base.manager.ActivityLifecycle;
 import com.pds.router.ModuleRouter;
 import com.pds.skin.SkinManager;
 import com.pds.tool.ToolApplicationManager;
+import com.pds.web.X5SDK;
 
 /**
  * @author: pengdaosong
@@ -29,6 +30,7 @@ public class ModuleApplication {
         mApplication = application;
         ModuleRouter.init(application);
         SkinManager.init(mApplication);
+        X5SDK.init(application);
         ToolApplicationManager.onCreate(application);
         application.registerActivityLifecycleCallbacks(ActivityLifecycle.getInstance());
     }

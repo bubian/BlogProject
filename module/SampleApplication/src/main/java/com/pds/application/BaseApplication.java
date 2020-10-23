@@ -1,8 +1,11 @@
 package com.pds.application;
 
 import android.content.Context;
+
 import androidx.multidex.MultiDexApplication;
+
 import com.pds.sample.application.ModuleApplication;
+
 import java.lang.reflect.InvocationHandler;
 
 import dagger.hilt.android.HiltAndroidApp;

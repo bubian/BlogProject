@@ -26,7 +26,7 @@ import java.io.File;
 @Route(path = ARouterPath.WEB_PDF)
 public class PDFWebLoadActivity extends BaseActivity {
 
-    private static final String PDF_URL = "https://pub-med-casem.medlinker.com/guanxin_paitent_test.pdf";
+    private static final String PDF_URL = "http://47.104.91.148/web/guanxin_paitent_test.pdf";
 
     private WebView mWebView;
 
@@ -36,7 +36,7 @@ public class PDFWebLoadActivity extends BaseActivity {
         setContentView(R.layout.activity_web_pdf);
         mWebView = findViewById(R.id.web_view);
         initSetting(mWebView);
-        mWebView.loadUrl(buildUrl(PDF_URL));
+        mWebView.loadUrl(buildUrlLocal(PDF_URL));
     }
 
     protected void initSetting(WebView webView) {
@@ -62,7 +62,13 @@ public class PDFWebLoadActivity extends BaseActivity {
         settings.setPluginState(WebSettings.PluginState.ON_DEMAND);
         settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
         // settings.setUserAgentString("");
-        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
         webView.setWebChromeClient(new WebChromeClient());
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -91,7 +97,20 @@ public class PDFWebLoadActivity extends BaseActivity {
         return getPdfLink(true) + "?file=" + pdfUrl;
     }
 
+    private String buildUrlLocal(String pdfUrl) {
+        return getPdfLinkLocal() + "?file=" + pdfUrl;
+    }
+
+    /**
+     * Android10访问被拒绝
+     * @param isOld
+     * @return
+     */
     private String getPdfLink(boolean isOld) {
         return isOld ? "https://mozilla.github.io/pdf.js/es5/web/viewer.html" : "https://mozilla.github.io/pdf.js/web/viewer.html";
+    }
+
+    private String getPdfLinkLocal() {
+        return "file:///android_asset/pdfweb/web/viewer.html";
     }
 }

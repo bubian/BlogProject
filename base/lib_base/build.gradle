@@ -6,6 +6,7 @@ dependencies {
     implementation deps.ax.appcompat
     api project(path : ":base:lib_util")
     api project(path : ":base:lib_log")
+    api project(path : ":base:lib_res")
 
     api deps.list.vlayout
     api deps.list.recyclerview

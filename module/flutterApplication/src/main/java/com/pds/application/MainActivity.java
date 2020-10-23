@@ -11,7 +11,7 @@ import io.flutter.plugins.GeneratedPluginRegistrant;
  * @Email: pengdaosong@medlinker.com
  * @Description: 参考：https://blog.codemagic.io/flutter-module-android-yaml/
  */
-public class MyFlutterActivity extends FlutterActivity {
+public class MainActivity extends FlutterActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

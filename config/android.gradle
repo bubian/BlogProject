@@ -7,6 +7,7 @@ def hasCMakeListFile = new File(cMakeListPath).exists()
 android {
     compileSdkVersion app.compileSdkVersion
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true
         if (id) {
             applicationId id
             multiDexEnabled true

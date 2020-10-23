@@ -8,3 +8,6 @@
 
 ### png压缩
 -网址：https://github.com/kyleduo/TinyPNG4Mac
+
+### svg转path（得到String路径）
+- 网站：http://www.useragentman.com/blog/2013/04/26/how-to-create-svg-paths-easily-using-the-gimp/

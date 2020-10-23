@@ -1,7 +1,7 @@
 apply from: '../../config/module.gradle'
 
 dependencies {
-    implementation files('libs/tbs_sdk_thirdapp_v4.3.0.3.jar')
+    api files('libs/tbs_sdk_thirdapp_v4.3.0.3.jar')
     implementation deps.ax.appcompat
     implementation deps.list.smartRefreshKernel
     implementation deps.list.smartRefreshHM
@@ -14,4 +14,6 @@ dependencies {
     implementation project(path:':base:lib_glide')
     implementation project(path:':base:lib_gson')
     api deps.list.recyclerview
+
+    annotationProcessor deps.alibaba.arouterCompiler
 }

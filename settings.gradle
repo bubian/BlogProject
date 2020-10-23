@@ -40,6 +40,7 @@ include ':base:lib_env'
 include ':base:lib_storage'
 include ':base:lib_res'
 include ':base:lib_router'
+include ':base:lib_pdf'
 // netty
 include ':nettyim'
 // plugin
