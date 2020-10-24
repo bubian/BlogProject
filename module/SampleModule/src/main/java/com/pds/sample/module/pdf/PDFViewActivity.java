@@ -32,6 +32,7 @@ import com.pds.pdf.core.Constants;
 import com.pds.pdf.core.ExtPDFView;
 import com.pds.pdf.core.X5PDFView;
 import com.pds.pdf.utils.FileUtils;
+import com.pds.router.module.BundleKey;
 import com.pds.router.module.ModuleGroupRouter;
 import com.shockwave.pdfium.PdfDocument;
 
@@ -53,7 +54,7 @@ public class PDFViewActivity extends AppCompatActivity implements OnPageChangeLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdf);
         pdfView = findViewById(R.id.pdfView);
-        mUrl = getIntent().getStringExtra("url");
+        mUrl = getIntent().getStringExtra(BundleKey.PARAM);
         // displayFromUrl(mUrl);
         displayFromX5(mUrl);
         setTitle(pdfFileName);

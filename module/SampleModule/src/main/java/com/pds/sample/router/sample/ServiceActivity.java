@@ -1,4 +1,4 @@
-package com.pds.router;
+package com.pds.sample.router.sample;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -6,7 +6,8 @@ import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.pds.router.service.SingleService;
+import com.pds.router.core.ARouterServiceHelper;
+import com.pds.router.core.service.SingleService;
 
 /**
  * @author: pengdaosong

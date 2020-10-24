@@ -8,6 +8,7 @@ import androidx.core.app.ActivityOptionsCompat;
 
 import com.alibaba.android.arouter.facade.callback.NavCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.pds.router.module.BundleKey;
 
 /**
  * @author: pengdaosong
@@ -20,6 +21,17 @@ import com.alibaba.android.arouter.launcher.ARouter;
 public class ARouterHelper {
     public static void nav(Activity activity, String url) {
         ARouter.getInstance().build(url).navigation(activity);
+    }
+
+    public static void nav(Activity activity, String url,String value) {
+        ARouter.getInstance().build(url).withString(BundleKey.PARAM,value).navigation(activity);
+    }
+
+    public static void nav(Activity activity, String url,String param,String extra) {
+        ARouter.getInstance().build(url)
+                .withString(BundleKey.PARAM,param)
+                .withString(BundleKey.EXTRA,extra)
+                .navigation(activity);
     }
 
     public static void navAnim(Activity activity, String url,int enter,int out) {

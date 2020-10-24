@@ -9,4 +9,5 @@ package com.pds.router.module;
 public class ModuleGroupRouter {
     private static final String LIB = "/module";
     public static final String PDF = LIB +"/pdf";
+    public static final String HYBRID = LIB + "/hybrid";
 }

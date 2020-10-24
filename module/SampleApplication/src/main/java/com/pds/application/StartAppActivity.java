@@ -1,4 +1,4 @@
-package com.pds.sample;
+package com.pds.application;
 
 import android.content.Intent;
 import android.graphics.Color;

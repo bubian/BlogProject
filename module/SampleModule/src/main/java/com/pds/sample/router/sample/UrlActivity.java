@@ -1,4 +1,4 @@
-package com.pds.router;
+package com.pds.sample.router.sample;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.util.Log;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.pds.router.data.UrlObj;
+import com.pds.sample.router.sample.data.UrlObj;
 
 import java.util.List;
 import java.util.Map;
@@ -17,7 +17,6 @@ import java.util.Map;
  * @CreateTime: 2020/10/15 7:38 PM
  * @Email: pengdaosong@medlinker.com
  * @Description:
- *
  */
 // 为每一个参数声明一个字段，并使用 @Autowired 标注
 // URL中不能传递Parcelable类型数据，通过ARouter api可以传递Parcelable对象
@@ -47,6 +46,7 @@ public class UrlActivity extends Activity {
     List<UrlObj> list;
     @Autowired
     Map<String, List<UrlObj>> map;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

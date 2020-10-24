@@ -11,6 +11,8 @@ import android.webkit.WebViewClient;
 import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.facade.service.DegradeService;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.pds.base.act.BaseActivity;
 import com.pds.sample.R;
 import com.pds.sample.router.ARouterPath;
@@ -37,6 +39,7 @@ public class PDFWebLoadActivity extends BaseActivity {
         mWebView = findViewById(R.id.web_view);
         initSetting(mWebView);
         mWebView.loadUrl(buildUrlLocal(PDF_URL));
+        ARouter.getInstance().navigation(DegradeService.class);
     }
 
     protected void initSetting(WebView webView) {

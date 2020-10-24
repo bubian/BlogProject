@@ -1,4 +1,4 @@
-package com.pds.router;
+package com.pds.sample.router.sample;
 
 import android.app.Activity;
 import android.os.Bundle;

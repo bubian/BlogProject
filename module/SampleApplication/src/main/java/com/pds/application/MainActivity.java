@@ -1,14 +1,13 @@
 package com.pds.application;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.pds.router.module.BundleKey;
 import com.pds.router.module.ModuleGroupRouter;
-import com.pds.sample.module.pdf.PDFViewActivity;
 
 /**
  * @author: pengdaosong
@@ -23,11 +22,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         findViewById(R.id.jump).setOnClickListener(v -> {
             ARouter.getInstance().build(ModuleGroupRouter.PDF)
-                    .withString("url","https://pub-med-casem.medlinker.com/guanxin_paitent_test.pdf")
+                    .withString(BundleKey.PARAM,"https://pub-med-casem.medlinker.com/guanxin_paitent_test.pdf")
                     .navigation(this);
-//            Intent intent = new Intent(this, PDFViewActivity.class);
-//            intent.putExtra("url","https://pub-med-casem.medlinker.com/guanxin_paitent_test.pdf");
-//            startActivity(intent);
         });
     }
 }

@@ -11,7 +11,7 @@
         </activity>
 
         <activity
-            android:name=".StartAppActivity"
+            android:name="com.pds.application.StartAppActivity"
             android:exported="true"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"

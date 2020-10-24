@@ -1,8 +1,8 @@
-package com.pds.application.router.core;
+package com.pds.router.core;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.pds.application.router.interceptor.DegradeServiceImpl;
+import com.pds.router.core.interceptor.DegradeServiceImpl;
 
 /**
  * @author: pengdaosong

@@ -4,4 +4,5 @@ dependencies {
     // 每个module都要配置的，为了应对单个module 分别编译的场景
     annotationProcessor deps.alibaba.arouterCompiler
     implementation deps.ax.core
+    implementation deps.ax.appcompat
 }

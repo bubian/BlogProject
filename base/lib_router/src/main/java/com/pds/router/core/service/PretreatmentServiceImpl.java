@@ -1,4 +1,4 @@
-package com.pds.router.service;
+package com.pds.router.core.service;
 
 import android.content.Context;
 

@@ -7,4 +7,6 @@ package com.pds.router.module;
  * @Description:
  */
 public interface BundleKey {
+    String PARAM = "param";
+    String EXTRA = "extra";
 }

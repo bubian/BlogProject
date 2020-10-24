@@ -1,4 +1,4 @@
-package com.pds.router.data;
+package com.pds.sample.router.sample.data;
 
 /**
  * @author: pengdaosong
