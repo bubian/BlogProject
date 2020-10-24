@@ -3,6 +3,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <application>
-        <activity android:name=".sample.PDFViewActivity" />
+        <activity android:name="com.pds.sample.module.pdf.PDFViewActivity" />
     </application>
 </manifest>

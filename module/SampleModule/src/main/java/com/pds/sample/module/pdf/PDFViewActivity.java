@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.pds.pdf.sample;
+package com.pds.sample.module.pdf;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
@@ -31,10 +32,12 @@ import com.pds.pdf.core.Constants;
 import com.pds.pdf.core.ExtPDFView;
 import com.pds.pdf.core.X5PDFView;
 import com.pds.pdf.utils.FileUtils;
+import com.pds.router.module.ModuleGroupRouter;
 import com.shockwave.pdfium.PdfDocument;
 
 import java.util.List;
 
+@Route(path = ModuleGroupRouter.PDF)
 public class PDFViewActivity extends AppCompatActivity implements OnPageChangeListener, OnLoadCompleteListener,
         OnPageErrorListener {
 

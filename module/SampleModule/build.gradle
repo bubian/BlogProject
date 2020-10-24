@@ -18,10 +18,9 @@ dependencies {
     implementation project(path : ":base:web")
     api project(path: ':base:lib_hilt')
     api project(path: ':base:lib_router')
-    api project(path: ':base:lib_pdf')
+    implementation project(path: ':base:lib_pdf')
     // 下拉刷新和加载更多
     implementation 'in.srain.cube:ptr-load-more:1.0.6'
-    api deps.alibaba.arouter
     // 每个module都要配置的，为了应对单个module 分别编译的场景
     kapt deps.alibaba.arouterCompiler
 }

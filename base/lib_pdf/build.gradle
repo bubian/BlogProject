@@ -1,7 +1,7 @@
 apply from: '../../config/module.gradle'
 dependencies {
     implementation deps.ax.appcompat
-    implementation deps.file.pdfViewer
+    api deps.file.pdfViewer
     implementation deps.process.fillableloaders
     implementation project(path:':base:web')
 }

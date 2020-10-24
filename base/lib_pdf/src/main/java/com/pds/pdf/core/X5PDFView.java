@@ -20,6 +20,7 @@ import java.io.File;
  * @CreateTime: 2020/10/23 6:51 PM
  * @Email: pengdaosong@medlinker.com
  * @Description:
+ * 错误：TbsReaderView: not supported by:pdf 这是X5没有正常初始化造成的
  */
 public class X5PDFView extends FrameLayout {
 

@@ -7,7 +7,6 @@ dependencies {
     implementation deps.ax.appcompat
     implementation project(path : ":module:SampleModule")
     implementation project(path : ":base:lib_res")
-    api deps.alibaba.arouter
     // 每个module都要配置的，为了应对单个module 分别编译的场景
     annotationProcessor deps.alibaba.arouterCompiler
 }
