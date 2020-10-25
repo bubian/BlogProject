@@ -195,7 +195,8 @@ ext {
                     'realm': "io.realm:realm-gradle-plugin:5.12.0"
             ],
             'upload': [
-                    'androidMaven': "com.github.dcendents:android-maven-gradle-plugin:2.1"
+                    'androidMaven': "com.github.dcendents:android-maven-gradle-plugin:2.1",
+                    'bintray'     : 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4',
             ],
             'custom': [
                     'aspect': 'com.plugin:aspect:1.0.0',

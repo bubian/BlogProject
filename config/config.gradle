@@ -1,4 +1,4 @@
-apply from: "config/component.gradle"
+apply from: "$rootDir/config/component.gradle"
 //aspectjx白名单配置
 //aspectjx {
 //    //includes the libs that you want to weave

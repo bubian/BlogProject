@@ -27,13 +27,13 @@ import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
-import com.pds.pdf.R;
 import com.pds.pdf.core.Constants;
 import com.pds.pdf.core.ExtPDFView;
 import com.pds.pdf.core.X5PDFView;
 import com.pds.pdf.utils.FileUtils;
 import com.pds.router.module.BundleKey;
 import com.pds.router.module.ModuleGroupRouter;
+import com.pds.sample.R;
 import com.shockwave.pdfium.PdfDocument;
 
 import java.util.List;

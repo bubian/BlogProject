@@ -122,7 +122,9 @@ public class ExtPDFView extends RelativeLayout {
                 if (mProgress >= 98) {
                     mProgress = 98;
                 }
-                covert().onProgress(mProgress);
+                if (mProgressView instanceof ProgressListener) {
+                    ((ProgressListener)mProgressView).onProgress(mProgress);
+                }
             }
             if (null != mDownloadListener) {
                 mDownloadListener.onProgress(mProgress);
@@ -137,18 +139,13 @@ public class ExtPDFView extends RelativeLayout {
                 mLoadCompleteListener.loadComplete(nbPages);
             }
             if (null != mProgressView) {
-                covert().onComplete();
+                if (mProgressView instanceof ProgressListener) {
+                    ((ProgressListener)mProgressView).onComplete();
+                }
                 postDelayed(() -> mProgressView.setVisibility(GONE), 500);
             }
         }
     };
-
-    private ProgressListener covert() {
-        if (mProgressView instanceof ProgressListener) {
-            return (ProgressListener) mProgressView;
-        }
-        return new ProgressListenerImpl();
-    }
 
     public void go() {
         if (null != mConfigurator) {
@@ -180,7 +177,9 @@ public class ExtPDFView extends RelativeLayout {
             public void onStartDownload() {
                 mProgress = 0;
                 post(() -> {
-                    covert().onStartDownload();
+                    if (mProgressView instanceof ProgressListener) {
+                        ((ProgressListener)mProgressView).onStartDownload();
+                    }
                     if (null != mDownloadListener) {
                         mDownloadListener.onStartDownload();
                     }
@@ -190,7 +189,9 @@ public class ExtPDFView extends RelativeLayout {
             @Override
             public void onFail(String message) {
                 post(() -> {
-                    covert().onComplete();
+                    if (mProgressView instanceof ProgressListener) {
+                        ((ProgressListener)mProgressView).onComplete();
+                    }
                     if (null != mDownloadListener) {
                         mDownloadListener.onFail(message);
                     }

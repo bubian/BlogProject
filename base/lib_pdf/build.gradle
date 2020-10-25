@@ -1,7 +1,17 @@
 apply from: '../../config/module.gradle'
+ext {
+    bintrayName = 'pdf-x5'
+    artifact = bintrayName
+    libraryName = 'pdf-x5'
+    libraryDescription = 'pdf load for android by x5'
+    libraryVersion = pdf_load_version
+}
 dependencies {
     implementation deps.ax.appcompat
     api deps.file.pdfViewer
     implementation deps.process.fillableloaders
     implementation project(path:':base:web')
 }
+
+apply from: '../../config/jcenter/install.gradle'
+apply from: '../../config/jcenter/bintray.gradle'

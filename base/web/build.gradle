@@ -1,7 +1,7 @@
 apply from: '../../config/module.gradle'
 
 dependencies {
-    api files('libs/tbs_sdk_thirdapp_v4.3.0.3.jar')
+    api files('libs/tbs_sdk_thirdapp_v4.3.0.67.jar')
     implementation deps.ax.appcompat
     implementation deps.list.smartRefreshKernel
     implementation deps.list.smartRefreshHM
