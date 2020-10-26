@@ -6,7 +6,7 @@
     android:padding="@dimen/dp_16"
     android:layout_height="match_parent">
 
-    <WebView
+    <com.pds.web.widget.HybridWebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

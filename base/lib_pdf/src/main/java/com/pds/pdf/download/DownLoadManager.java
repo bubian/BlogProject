@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.Executors;
 
 /**
  * @author: pengdaosong
@@ -21,6 +22,7 @@ public class DownLoadManager {
     private Thread mDownloadThread;
     private boolean mRunning = false;
     private String mUrl;
+    private boolean mRunMask = false;
 
     public void downLoad(String url, final String filePath, final DownloadListener listener) {
         mUrl = url;
@@ -28,12 +30,20 @@ public class DownLoadManager {
             Log.d(TAG,"same url task running");
             return;
         }
-        mDownloadThread = new Thread(() -> startDownLoad(url, filePath, listener));
-        mRunning = true;
+        mDownloadThread = Executors.defaultThreadFactory().newThread(() -> startDownLoad(url, filePath, listener));
         mDownloadThread.start();
+        mRunning = true;
+    }
+
+    public void destroy(){
+        mRunMask = false;
+        if (null != mDownloadThread){
+            mDownloadThread.interrupt();
+        }
     }
 
     private void startDownLoad(String url, final String filePath, final DownloadListener listener) {
+        mRunMask = true;
         FileOutputStream fos = null;
         InputStream is = null;
         long currentLen = 0;
@@ -66,7 +76,7 @@ public class DownLoadManager {
             listener.onStartDownload();
             fos = new FileOutputStream(file);
 
-            while ((len = is.read(buf)) != -1) {
+            while ((len = is.read(buf)) != -1 && mRunMask) {
                 fos.write(buf, 0, len);
                 currentLen += len;
                 int progress = (int) (currentLen * 100 / contentLength);

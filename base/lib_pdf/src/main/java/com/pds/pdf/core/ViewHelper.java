@@ -78,14 +78,14 @@ public class ViewHelper {
         return params;
     }
 
-    public static ViewGroup.LayoutParams buildPDFViewLayoutParams(View process, View pdfView, int direction) {
+    public static ViewGroup.LayoutParams buildPDFViewLayoutParams(View process, View fileView, int direction) {
         if (null == process) {
-            return pdfView.getLayoutParams();
+            return fileView.getLayoutParams();
         }
 
         RelativeLayout.LayoutParams params;
-        if (pdfView.getLayoutParams() instanceof RelativeLayout.LayoutParams) {
-            params = (RelativeLayout.LayoutParams) pdfView.getLayoutParams();
+        if (fileView.getLayoutParams() instanceof RelativeLayout.LayoutParams) {
+            params = (RelativeLayout.LayoutParams) fileView.getLayoutParams();
         } else {
             params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         }

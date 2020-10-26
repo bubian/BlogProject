@@ -114,7 +114,7 @@ public class ExtPDFView extends RelativeLayout {
         mLoadCompleteListener = loadCompleteListener;
     }
 
-    private int mProgress;
+    private volatile int mProgress;
     private Runnable mProgressRunnable = new Runnable() {
         @Override
         public void run() {

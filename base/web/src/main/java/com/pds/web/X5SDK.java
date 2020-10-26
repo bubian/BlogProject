@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.tencent.smtt.export.external.TbsCoreSettings;
 import com.tencent.smtt.sdk.QbSdk;
+import com.tencent.smtt.sdk.TbsListener;
 
 import java.util.HashMap;
 
@@ -17,6 +18,12 @@ public class X5SDK {
         new Handler().postDelayed(() -> {
             preInit(context);
         }, 1000);
+    }
+
+    public static void check(Context context){
+        if (!QbSdk.isTbsCoreInited()){
+            preInit(context);
+        }
     }
 
     private static void preInit(Context context) {
@@ -41,5 +48,25 @@ public class X5SDK {
                 Log.d(TAG, "x5 core onViewInitFinished result = " + b);
             }
         });
+    }
+
+    private void X5Download(){
+        QbSdk.setTbsListener(
+                new TbsListener() {
+                    @Override
+                    public void onDownloadFinish(int i) {
+                        Log.d("QbSdk", "onDownloadFinish -->下载X5内核完成：" + i);
+                    }
+
+                    @Override
+                    public void onInstallFinish(int i) {
+                        Log.d("QbSdk", "onInstallFinish -->安装X5内核进度：" + i);
+                    }
+
+                    @Override
+                    public void onDownloadProgress(int i) {
+                        Log.d("QbSdk", "onDownloadProgress -->下载X5内核进度：" + i);
+                    }
+                });
     }
 }

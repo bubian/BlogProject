@@ -21,7 +21,7 @@ public class HybridWebView extends WebView {
         init();
     }
 
-    private void init(){
+    private void init() {
         // KITKAT
 //        if (Build.VERSION.SDK_INT >= 19) {
 //            setLayerType(View.LAYER_TYPE_SOFTWARE, null);

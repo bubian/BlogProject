@@ -17,7 +17,6 @@ package com.pds.sample.module.pdf;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,18 +26,15 @@ import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
-import com.pds.pdf.core.Constants;
 import com.pds.pdf.core.ExtPDFView;
-import com.pds.pdf.core.X5PDFView;
 import com.pds.pdf.utils.FileUtils;
 import com.pds.router.module.BundleKey;
-import com.pds.router.module.ModuleGroupRouter;
-import com.pds.sample.R;
+import com.pds.router.module.SampleGroupRouter;
 import com.shockwave.pdfium.PdfDocument;
 
 import java.util.List;
 
-@Route(path = ModuleGroupRouter.PDF)
+@Route(path = SampleGroupRouter.PDF_LOAD)
 public class PDFViewActivity extends AppCompatActivity implements OnPageChangeListener, OnLoadCompleteListener,
         OnPageErrorListener {
 
@@ -52,15 +48,14 @@ public class PDFViewActivity extends AppCompatActivity implements OnPageChangeLi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pdf);
-        pdfView = findViewById(R.id.pdfView);
         mUrl = getIntent().getStringExtra(BundleKey.PARAM);
-        // displayFromUrl(mUrl);
-        displayFromX5(mUrl);
+        displayFromUrl(mUrl);
         setTitle(pdfFileName);
     }
 
     private void displayFromUrl(String url) {
+        pdfView = new ExtPDFView(this);
+        setContentView(pdfView);
         pdfFileName = FileUtils.getFileNameByUrl(url);
         pdfView.fromUrl(url)
                 .defaultPage(pageNumber)
@@ -70,13 +65,7 @@ public class PDFViewActivity extends AppCompatActivity implements OnPageChangeLi
                 .scrollHandle(new DefaultScrollHandle(this))
                 .spacing(10) // in dp
                 .onPageError(this);
-        pdfView.enableCache(true).addDefaultProgress(Constants.DEFAULT_TYPE_ONE,Constants.DIRECTION_OVER).go();
-    }
-
-    private void displayFromX5(String url) {
-        X5PDFView  pdfView = new X5PDFView(this);
-        ((ViewGroup)getWindow().getDecorView()).addView(pdfView);
-        pdfView.loadPDFromUrl(url);
+        pdfView.enableCache(true).useDefaultProgressView().go();
     }
 
     @Override

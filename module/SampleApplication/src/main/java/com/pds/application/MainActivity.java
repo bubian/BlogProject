@@ -6,8 +6,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.pds.router.core.ARouterHelper;
 import com.pds.router.module.BundleKey;
 import com.pds.router.module.ModuleGroupRouter;
+import com.pds.router.module.SampleGroupRouter;
+import com.pds.sample.router.ARouterPath;
 
 /**
  * @author: pengdaosong
@@ -20,10 +23,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.jump).setOnClickListener(v -> {
-            ARouter.getInstance().build(ModuleGroupRouter.PDF)
-                    .withString(BundleKey.PARAM,"https://pub-med-casem.medlinker.com/guanxin_paitent_test.pdf")
-                    .navigation(this);
-        });
+        findViewById(R.id.jump).setOnClickListener(v -> ARouterHelper.nav(this,SampleGroupRouter.FILE_LOAD));
     }
 }

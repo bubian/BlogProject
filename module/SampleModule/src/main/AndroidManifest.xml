@@ -10,23 +10,15 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.pds.application.StartAppActivity"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:taskAffinity="${applicationId}">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:host="com.pds.blog"
-                    android:scheme="blog" />
-            </intent-filter>
-        </activity>
-
         <activity android:name=".module.pdf.PDFWebLoadActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".module.pdf.FileLoadActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".module.pdf.PDFX5Activity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".module.pdf.QBX5Activity"
             android:screenOrientation="portrait"/>
     </application>
 
