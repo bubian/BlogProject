@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.pds.pdf.download.DownLoadManager;
 import com.pds.pdf.download.DownloadListener;
 import com.pds.pdf.process.ProgressListener;
+import com.pds.pdf.process.ProgressView;
 import com.pds.pdf.utils.FileUtils;
 import com.tencent.smtt.sdk.TbsReaderView;
 
@@ -44,6 +45,7 @@ public class X5PDFView extends RelativeLayout {
     private PDFLoadListener mPDFLoadListener;
     private TbsReaderView.ReaderCallback mReaderCallback;
     private View mProgressView;
+    private int mProgressColor;
 
     public X5PDFView(Context context) {
         super(context);
@@ -212,6 +214,17 @@ public class X5PDFView extends RelativeLayout {
 
     public void setTempPath(String mTempPath) {
         this.mTempPath = mTempPath;
+    }
+
+    public void setProgressColor(int color) {
+        this.mProgressColor = color;
+        if (mProgressView instanceof ProgressView){
+            ((ProgressView)mProgressView).setColor(color);
+        }
+    }
+
+    public View getProgressView(){
+        return mProgressView;
     }
 
     private String parseFormat(String fileName) {
