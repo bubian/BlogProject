@@ -30,6 +30,6 @@ dependencies {
     implementation project(path: ':base:lib_package')
     implementation project(path: ':base:lib_glide')
     implementation project(path: ':base:lib_gson')
-    implementation project(path: ':lib_preloader')
+    implementation project(path: ':base:lib_preloader')
     implementation project(path: ':base:skin')
 }

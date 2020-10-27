@@ -41,6 +41,7 @@ include ':base:lib_storage'
 include ':base:lib_res'
 include ':base:lib_router'
 include ':base:lib_pdf'
+include ':base:lib_preloader'
 // netty
 include ':nettyim'
 // plugin
@@ -48,12 +49,10 @@ include ':plugin:lib_aspect_annotations'
 include ':plugin:lib_aspect_runtime'
 include ':plugin:plugin_aspect'
 include ':plugin:plugin_webP'
-// optimization
-include':lib_preloader'
 // utils
-include':utils:lib_arsc'
-include':utils:LibJavaTools'
-include':utils:antidebug'
+include ':utils:lib_arsc'
+include ':utils:LibJavaTools'
+include ':utils:antidebug'
 include 'utils:lib_res_guard'
 // XPosed
 include ':xposed:xposed_restart'
@@ -77,10 +76,10 @@ include ':ndk:webrtc'
 // test
 include ':test_app'
 // components
-include  ':components:ImageEdit'
+include ':components:ImageEdit'
 
 // flutter
-setBinding(new Binding([gradle:this]))
+setBinding(new Binding([gradle: this]))
 evaluate(new File('./module/flutter_module/.android/include_flutter.groovy'))
 
 include ':flutter_module'
