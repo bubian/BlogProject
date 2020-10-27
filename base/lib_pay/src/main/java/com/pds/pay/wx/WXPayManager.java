@@ -32,7 +32,7 @@ public class WXPayManager {
     private Context mApplication;
     private WeakReference<Activity> mWeakActivity;
     private volatile static WXPayManager sPayManager;
-
+    private long mLastTimestamp;
     private WXPayManager() {
     }
 
@@ -103,7 +103,18 @@ public class WXPayManager {
         return mProcessing.get();
     }
 
+    private boolean isCap(){
+        boolean cap =  (System.currentTimeMillis() - mLastTimestamp) > 1000;
+        if (cap){
+            mLastTimestamp = System.currentTimeMillis();
+        }
+        return cap;
+    }
+
     public void sendPay(String payInfo, Observer observer) {
+        if (isCap()){
+            mProcessing.set(false);
+        }
         if (isProcessing()) {
             doCallback(observer, WXPayState.ERROR_PAYING,
                     WXPayState.getTipMsg(WXPayState.ERROR_PAYING));

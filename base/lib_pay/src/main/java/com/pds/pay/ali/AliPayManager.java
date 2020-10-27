@@ -33,6 +33,8 @@ public class AliPayManager {
     private final AtomicBoolean mProcessing = new AtomicBoolean(false);
     private final ITaskManager mTaskManager = new TaskManagerImpl();
 
+    private long mLastTimestamp;
+
     private AliPayManager(Activity activity) {
     }
 
@@ -52,6 +54,9 @@ public class AliPayManager {
     }
 
     public void pay(Activity activity, String payInfo, Observer observer) {
+        if (isCap()){
+            mProcessing.set(false);
+        }
         if (mProcessing.get()) {
             doCallback(observer, AliPayState.ERROR_PAYING,
                     AliPayState.getTipMsg(AliPayState.ERROR_PAYING));
@@ -61,6 +66,14 @@ public class AliPayManager {
         this.mWeakActivity = new WeakReference<>(activity);
         this.mObserver = observer;
         AsyncTaskCompat.executeParallel(new InternalPayTask(mTaskManager), payInfo);
+    }
+
+    private boolean isCap(){
+        boolean cap =  (System.currentTimeMillis() - mLastTimestamp) > 1000;
+        if (cap){
+            mLastTimestamp = System.currentTimeMillis();
+        }
+        return cap;
     }
 
     /**

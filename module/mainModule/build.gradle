@@ -1,4 +1,5 @@
-apply from: "../../config/module.gradle"
+apply from: "$rootDir/config/module.gradle"
+apply from: "$rootDir/config/kotlin.gradle"
 dependencies {
     api project(path: ':base:lib_router')
     api project(path: ':base:frame')
