@@ -1,6 +1,7 @@
 package com.pds.pdf.core;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -45,7 +46,7 @@ public class X5PDFView extends RelativeLayout {
     private PDFLoadListener mPDFLoadListener;
     private TbsReaderView.ReaderCallback mReaderCallback;
     private View mProgressView;
-    private int mProgressColor;
+    private int mProgressColor = Color.GREEN;
 
     public X5PDFView(Context context) {
         super(context);
@@ -89,6 +90,9 @@ public class X5PDFView extends RelativeLayout {
 
     public X5PDFView useDefaultProgressView() {
         mProgressView = ViewHelper.buildDefaultProcessView(this, Constants.DEFAULT_TYPE);
+        if (mProgressView instanceof ProgressView){
+            ((ProgressView)mProgressView).setColor(mProgressColor);
+        }
         ViewHelper.addProcessView(this, mProgressView, Constants.DIRECTION_TOP);
         mTbsReaderView.setLayoutParams(ViewHelper.buildPDFViewLayoutParams(mProgressView, mTbsReaderView,Constants.DIRECTION_TOP));
         return this;
