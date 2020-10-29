@@ -20,15 +20,16 @@ import java.util.Observable;
 
 public class SkinManager extends Observable {
 
-    private static SkinManager instance;
+    private volatile static SkinManager instance;
     private SkinActivityLifecycle skinActivityLifecycle;
     private Application application;
 
-
     public static void init(Application application) {
-        synchronized (SkinManager.class) {
-            if (null == instance) {
-                instance = new SkinManager(application);
+        if (null == instance) {
+            synchronized (SkinManager.class) {
+                if (null == instance) {
+                    instance = new SkinManager(application);
+                }
             }
         }
     }
@@ -41,10 +42,9 @@ public class SkinManager extends Observable {
         this.application = application;
         SkinPreference.init(application);
         SkinResources.init(application);
-        //注册Activity生命周期回调
+        //  注册Activity生命周期回调
         skinActivityLifecycle = new SkinActivityLifecycle();
         application.registerActivityLifecycleCallbacks(skinActivityLifecycle);
-
         loadSkin(SkinPreference.getInstance().getSkin());
     }
 
@@ -62,8 +62,7 @@ public class SkinManager extends Observable {
             try {
                 AssetManager assetManager = AssetManager.class.newInstance();
                 // 添加资源进入资源管理器
-                Method addAssetPath = assetManager.getClass().getMethod("addAssetPath", String
-                        .class);
+                Method addAssetPath = assetManager.getClass().getMethod("addAssetPath", String.class);
                 addAssetPath.setAccessible(true);
                 addAssetPath.invoke(assetManager, path);
 
@@ -73,8 +72,7 @@ public class SkinManager extends Observable {
                         resources.getConfiguration());
                 //获取外部Apk(皮肤包) 包名
                 PackageManager mPm = application.getPackageManager();
-                PackageInfo info = mPm.getPackageArchiveInfo(path, PackageManager
-                        .GET_ACTIVITIES);
+                PackageInfo info = mPm.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES);
                 String packageName = info.packageName;
                 SkinResources.getInstance().applySkin(skinResource, packageName);
                 //保存当前使用的皮肤包
@@ -91,6 +89,6 @@ public class SkinManager extends Observable {
 
 
     public void updateSkin(Activity activity) {
-        skinActivityLifecycle.updateSkin( activity);
+        skinActivityLifecycle.updateSkin(activity);
     }
 }

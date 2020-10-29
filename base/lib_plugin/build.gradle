@@ -1,0 +1,39 @@
+apply from: '../../config/module.gradle'
+
+android {
+//    sourceSets {
+//        main {
+//            manifest.srcFile 'AndroidManifest.xml'
+//            java.srcDirs = ['src']
+//            resources.srcDirs = ['src']
+//            aidl.srcDirs = ['src']
+//            renderscript.srcDirs = ['src']
+//            res.srcDirs = ['res']
+//            assets.srcDirs = ['assets']
+//            jniLibs.srcDirs = ['libs']
+//        }
+//
+//        instrumentTest.setRoot('tests')
+//        debug.setRoot('build-types/debug')
+//        release.setRoot('build-types/release')
+//    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    defaultConfig{
+
+        // 建议改为自己的 packageName + .plugin_stub ，防止跟其它本插件使用者冲突
+        def authorityName = "com.pds.plugin_stub"
+        buildConfigField "String", "AUTHORITY_NAME", "\"${authorityName}\""
+        manifestPlaceholders = [
+                authorityName:"${authorityName}",
+        ]
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation files('libs/layoutlib.jar')
+}

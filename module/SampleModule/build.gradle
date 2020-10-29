@@ -14,6 +14,7 @@ dependencies {
     implementation project(path: ':base:lib_glide')
     implementation project(path: ':base:lib_gson')
     implementation project(path: ':base:lib_preloader')
+    implementation project(path: ':base:lib_plugin')
     implementation project(path: ':base:skin')
     implementation project(path : ":base:web")
     api project(path: ':base:lib_hilt')

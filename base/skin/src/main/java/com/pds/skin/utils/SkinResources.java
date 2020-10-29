@@ -9,7 +9,7 @@ import android.text.TextUtils;
 
 public class SkinResources {
 
-    private static SkinResources instance;
+    private volatile static SkinResources instance;
 
     private Resources mSkinResources;
     private String mSkinPkgName;
