@@ -27,6 +27,8 @@ buildscript {
 
         classpath plugin.upload.androidMaven
         classpath plugin.upload.bintray
+
+        classpath plugin.other.virtualapk
     }
 }
 

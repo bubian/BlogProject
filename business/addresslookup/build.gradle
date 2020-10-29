@@ -1,0 +1,15 @@
+apply from: "$rootDir/config/module.gradle"
+apply from: "$rootDir/config/kotlin.gradle"
+
+apply plugin: 'com.didi.virtualapk.plugin'
+
+dependencies {
+    implementation deps.ax.appcompat
+    implementation deps.ui.constraintlayout
+}
+
+virtualApk {
+    packageId = 0x6f             // The package id of Resources.
+    targetHost='source/host/app' // The path of application module in host project.
+    applyHostMapping = true      // [Optional] Default value is true.
+}

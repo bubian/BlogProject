@@ -7,6 +7,7 @@ ext {
             xposed_restart    : 11,
             xposed_hook       : 11,
             antidebug         : 11,
+            addresslookup     : 11,
             socket_app        : 1,
             nettyim           : 1,
             fmod              : 1,
@@ -43,6 +44,7 @@ ext {
             h264rtmp2         : "com.pds.h264rtmp2",
             idcardrecognitioon: "com.pds.idcardrecognitioon",
             webrtc            : "com.pds.webrtc",
+            addresslookup     : "com.pds.address",
 //            download          : "com.pds.download",
 //            mode_ui           : "com.pds.ui",
     ]

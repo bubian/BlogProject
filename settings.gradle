@@ -9,6 +9,9 @@ include ':module:flutterApplication'
 include ':module:RnApplication'
 include ':module:RnModule'
 
+// business
+include ':business:addresslookup'
+
 // IM
 include ':IM:socket_control'
 include ':IM:socket_app'
@@ -43,6 +46,7 @@ include ':base:lib_router'
 include ':base:lib_pdf'
 include ':base:lib_preloader'
 include ':base:lib_plugin'
+include ':base:vapk'
 // netty
 include ':nettyim'
 // plugin

@@ -1,0 +1,6 @@
+apply from: '../../config/module.gradle'
+apply plugin: 'com.didi.virtualapk.host'
+dependencies {
+    implementation deps.ax.appcompat
+    implementation deps.plugin.virtualapk
+}

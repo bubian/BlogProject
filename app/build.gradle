@@ -1,5 +1,5 @@
-apply from: "../config/module.gradle"
-apply from: "../config/kotlin.gradle"
+apply from: "$rootDir/config/module.gradle"
+apply from: "$rootDir/config/kotlin.gradle"
 // 自定义插件
 apply plugin: 'aspect'
 

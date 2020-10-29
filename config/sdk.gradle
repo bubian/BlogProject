@@ -188,6 +188,9 @@ ext {
             ],
             'optimum': [
                     'startup': "androidx.startup:startup-runtime:1.0.0-rc01",
+            ],
+            'plugin':[
+                    'virtualapk' : "com.didi.virtualapk:core:0.9.8",
             ]
     ]
 
