@@ -1,2 +1,31 @@
 <resources>
+
+    <style name="invite_activity_change_anim" parent="@android:style/Animation.Activity">
+        <!-- A启动B B的进入动画 -->
+        <item name="android:activityOpenEnterAnimation">@anim/act_in_from_right</item>
+        <!-- A启动B A的退出动画 -->
+        <item name="android:activityOpenExitAnimation">@anim/act_out_from_left</item>
+        <!-- B回退到A    A的进入动画 -->
+        <item name="android:activityCloseEnterAnimation">@anim/act_in_from_left</item>
+        <!-- B回退到A    B的退出动画 -->
+        <item name="android:activityCloseExitAnimation">@anim/act_out_from_right</item>
+    </style>
+
+    <!--    应用基本主题，不指定，默认为该主题-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:screenOrientation">portrait</item>
+        <item name="android:configChanges">keyboardHidden|screenSize</item>
+        <item name="android:windowAnimationStyle">@style/invite_activity_change_anim</item>
+    </style>
+
+    <!--    透明主题，在原生Android8.0系统会崩溃，网上说是Android8.0对透明主题做了限制，如果要使用请注意-->
+    <style name="AppTheme.Transparent" parent="AppTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>

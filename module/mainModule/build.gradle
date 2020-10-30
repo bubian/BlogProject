@@ -1,8 +1,17 @@
 apply from: "$rootDir/config/module.gradle"
 apply from: "$rootDir/config/kotlin.gradle"
+
+apply plugin: 'com.jakewharton.butterknife'
+
 dependencies {
+    kapt deps.alibaba.arouterCompiler
     api project(path: ':base:lib_router')
-    api project(path: ':base:frame')
     api project(path: ':base:mode_ui')
-    api project(path: ':base:lib_hilt')
+    api project(path: ':base:lib_res')
+    api project(path: ':base:frame')
+
+    implementation project(path: ':base:lib_hilt')
+
+    implementation deps.jw.butterknife
+    kapt deps.jw.butterknifeCompiler
 }

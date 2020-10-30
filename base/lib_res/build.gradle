@@ -1,1 +1,5 @@
 apply from: '../../config/module.gradle'
+dependencies {
+    implementation deps.ax.appcompat
+    implementation deps.ui.material
+}

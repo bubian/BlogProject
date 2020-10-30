@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ff007aff">#007aff</color>
-    <color name="ffe2e7f1">#ffe2e7f1</color>
-    <color name="ff777777">#ff777777</color>
-    <color name="ff454553">#ff454553</color>
-    <color name="ffa8afc3">#ffa8afc3</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <!--    颜色命令都按照这个来-->
+    <color name="c_007aff">#007aff</color>
+    <color name="c_e2e7f1">#e2e7f1</color>
+    <color name="c_777777">#777777</color>
+    <color name="c_454553">#454553</color>
+    <color name="c_a8afc3">#a8afc3</color>
+    <color name="c_bfbfbf">#bfbfbf</color>
 </resources>

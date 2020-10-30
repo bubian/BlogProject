@@ -17,7 +17,7 @@ dependencies {
     implementation project(path: ':base:lib_plugin')
     implementation project(path: ':base:skin')
     implementation project(path : ":base:web")
-    implementation project(path : ":base:vapk")
+//    implementation project(path : ":base:vapk")
     api project(path: ':base:lib_hilt')
     api project(path: ':base:lib_router')
     implementation project(path: ':base:lib_pdf')

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    Material主题，使用material UI库时使用-->
+    <style name="AppTheme.MaterialComponents" parent="@style/Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:screenOrientation">portrait</item>
+        <item name="android:configChanges">keyboardHidden|screenSize</item>
+        <item name="android:windowAnimationStyle">@style/invite_activity_change_anim</item>
+    </style>
+
+    <!--    透明主题，在原生Android8.0系统会崩溃，网上说是Android8.0对透明主题做了限制，如果要使用请注意-->
+    <style name="AppTheme.MaterialComponents.Transparent" parent="@style/AppTheme.MaterialComponents">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <!--    在使用MaterialButton时，看到的按钮宽度比设置的小，用该主题可以解决-->
+    <style name="MaterialButton.UnelevatedButton" parent="@style/Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
+</resources>

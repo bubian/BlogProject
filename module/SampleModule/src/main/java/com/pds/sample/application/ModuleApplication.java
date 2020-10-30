@@ -6,7 +6,6 @@ import com.pds.base.manager.ActivityLifecycle;
 import com.pds.router.ModuleRouter;
 import com.pds.skin.SkinManager;
 import com.pds.tool.ToolApplicationManager;
-import com.pds.vapk.ModuleVAPK;
 import com.pds.web.X5SDK;
 
 /**
@@ -41,6 +40,5 @@ public class ModuleApplication {
     }
 
     public void attachBaseContext(Application application) {
-        ModuleVAPK.init(mApplication);
     }
 }

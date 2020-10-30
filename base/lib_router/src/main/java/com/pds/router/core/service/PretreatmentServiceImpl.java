@@ -17,8 +17,8 @@ import com.pds.router.core.RouterConstants;
 public class PretreatmentServiceImpl implements PretreatmentService {
     @Override
     public boolean onPretreatment(Context context, Postcard postcard) {
-        // 跳转前预处理，如果需要自行处理跳转，该方法返回 false 即可
-        return false;
+        // 跳转前预处理，如果需要自行处理跳转，该方法返回 false
+        return true;
     }
 
     @Override

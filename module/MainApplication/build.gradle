@@ -1,6 +1,6 @@
-apply from: "../../config/module.gradle"
+apply from: "$rootDir/config/module.gradle"
 dependencies {
     api deps.ax.multidex
     implementation deps.ax.appcompat
-    api project(path : ":module:mainModule")
+    implementation project(path : ":module:mainModule")
 }

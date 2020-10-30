@@ -5,7 +5,7 @@ apply plugin: 'aspect'
 
 dependencies {
     implementation deps.ax.appcompat
-    implementation project(path: ":module:SampleApplication")
+    implementation project(path: ":module:MainApplication")
     implementation project(path: ':base:lib_pay')
     api deps.alibaba.arouter
     // 每个module都要配置的，为了应对单个module 分别编译的场景
