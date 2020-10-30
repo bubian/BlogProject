@@ -23,12 +23,6 @@ import com.pds.ui.R;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-
-/**
- * 小红点和带数字的红点，可以绑定到目标布局，也可以直接在xml中使用
- *
- * @author hmy
- */
 public class BadgeView extends View implements Badge {
 
     public static final int CIRCLE = 1, POINT = 2;
@@ -79,7 +73,7 @@ public class BadgeView extends View implements Badge {
         mText = typedArray.getString(R.styleable.BadgeView_badgeText);
         mTextSize = typedArray.getDimension(R.styleable.BadgeView_badgeTextSize, spToPx(DEFAULT_TEXT_SIZE));
         mPadding = typedArray.getDimensionPixelOffset(R.styleable.BadgeView_badgePadding, (int) dp2px(DEFAULT_PADDING));
-//        mBadgeStyle = typedArray.getInt(R.styleable.BadgeView_badgeStyle, CIRCLE);
+        mBadgeStyle = typedArray.getInt(R.styleable.BadgeView_cBadgeStyle, CIRCLE);
         mPointRadius = typedArray.getDimensionPixelOffset(R.styleable.BadgeView_pointRadius, (int) dp2px(DEFAULT_POINT_RADIUS));
         typedArray.recycle();
 

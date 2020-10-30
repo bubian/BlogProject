@@ -4,11 +4,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * 红点状态
- *
- * @author hmy
- */
 public class BadgeViewStatus {
 
     public static final String DEFAULT = "default";

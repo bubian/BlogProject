@@ -2,11 +2,6 @@ package com.pds.ui.view.badgeview;
 
 import android.view.View;
 
-/**
- * BadgeView 接口
- *
- * @author hmy
- */
 public interface Badge {
 
     /***/

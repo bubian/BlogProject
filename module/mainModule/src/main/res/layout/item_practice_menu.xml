@@ -15,16 +15,16 @@
         android:layout_centerHorizontal="true"
         tools:src="@mipmap/ic_ui" />
 
-<!--    <com.pds.ui.view.badgeview.BadgeView-->
-<!--        android:id="@+id/bv_red_point"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="end"-->
-<!--        android:layout_marginStart="-5dp"-->
-<!--        android:layout_toEndOf="@id/iv_icon"-->
-<!--        android:visibility="gone"-->
-<!--        app:badgeStyle="point"-->
-<!--        app:pointRadius="@dimen/dp_3" />-->
+    <com.pds.ui.view.badgeview.BadgeView
+        android:id="@+id/bv_red_point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginStart="-5dp"
+        android:layout_toEndOf="@id/iv_icon"
+        android:visibility="gone"
+        app:cBadgeStyle="point"
+        app:pointRadius="@dimen/dp_3" />
 
     <TextView
         android:id="@+id/tv_name"
