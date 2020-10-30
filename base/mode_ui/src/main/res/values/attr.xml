@@ -82,4 +82,17 @@
         <attr name="cbStrokeColor" format="color" />
         <attr name="cbBgColor" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="BadgeView">
+        <attr format="color" name="badgeBackgroundColor"/>
+        <attr format="color" name="badgeTextColor"/>
+        <attr format="string" name="badgeText"/>
+        <attr format="dimension" name="badgeTextSize"/>
+        <attr format="dimension" name="badgePadding"/>
+        <attr format="dimension" name="pointRadius"/>
+<!--        <attr format="enum" name="badgeStyle">-->
+<!--            <enum name="circle" value="1"/>-->
+<!--            <enum name="point" value="2"/>-->
+<!--        </attr>-->
+    </declare-styleable>
 </resources>

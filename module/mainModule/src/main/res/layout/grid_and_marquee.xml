@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.pds.ui.list.LCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="-7dp"
+    app:cardBackgroundColor="@color/white"
+    app:cornerRadius="10dp"
+    app:shadowColor="#C9D2E8"
+    app:shadowFluidShape="linear"
+    app:shadowSize="15dp"
+    app:shadowStartAlpha="80"
+    app:topOffset="-10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <com.pds.ui.gvp.GridViewPager
+            android:id="@+id/gv_menu"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_160"
+            android:layout_marginTop="@dimen/dp_5" />
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/dp_12"/>
+
+        <com.pds.ui.view.indicator.LinePageIndicator
+            android:id="@+id/layout_grid_indicator"
+            android:layout_width="@dimen/dp_42"
+            android:layout_height="@dimen/dp_4"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/dp_6"
+            app:gapWidth="0dp"
+            app:selectedColor="@color/c_007aff"
+            app:strokeWidth="@dimen/dp_4"
+            app:unselectedColor="@color/c_d5d9e1" />
+    </LinearLayout>
+</com.pds.ui.list.LCardView>

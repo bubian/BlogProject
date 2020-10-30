@@ -47,6 +47,4 @@ public abstract class MVVMFragment<VM extends BaseViewModel, DB extends ViewData
         }
         return super.onCreateView(inflater, container, savedInstanceState);
     }
-
-    protected abstract int layoutId();
 }
