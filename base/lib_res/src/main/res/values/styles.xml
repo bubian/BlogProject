@@ -4,9 +4,9 @@
         <!-- A启动B B的进入动画 -->
         <item name="android:activityOpenEnterAnimation">@anim/act_in_from_right</item>
         <!-- A启动B A的退出动画 -->
-        <item name="android:activityOpenExitAnimation">@anim/act_out_from_left</item>
+        <item name="android:activityOpenExitAnimation">@anim/act_out_from_left_t</item>
         <!-- B回退到A    A的进入动画 -->
-        <item name="android:activityCloseEnterAnimation">@anim/act_in_from_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/act_in_from_left_t</item>
         <!-- B回退到A    B的退出动画 -->
         <item name="android:activityCloseExitAnimation">@anim/act_out_from_right</item>
     </style>

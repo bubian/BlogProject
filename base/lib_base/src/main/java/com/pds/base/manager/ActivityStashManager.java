@@ -21,7 +21,7 @@ import io.reactivex.functions.Predicate;
 
 public class ActivityStashManager {
 
-    private static final String TAG = "Live_ActivityStash";
+    private static final String TAG = "ActivityStash";
     /**
      * 存放所有Activity的Map
      */

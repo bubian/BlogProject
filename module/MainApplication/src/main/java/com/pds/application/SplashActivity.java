@@ -45,4 +45,10 @@ public class SplashActivity extends BaseActivity {
     private void jumpHome(){
         ARouterHelper.nav(this, MainGroupRouter.HOME);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        getWindow().getDecorView().postDelayed(this::finish,2_000);
+    }
 }

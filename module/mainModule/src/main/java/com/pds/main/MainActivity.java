@@ -96,4 +96,10 @@ public class MainActivity extends BaseActivity {
             return false;
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        System.exit(0);
+    }
 }
