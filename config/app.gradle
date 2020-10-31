@@ -9,6 +9,7 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
+            assets.srcDirs = ['src/main/assets']
             if (dg){
                 java.srcDirs =  ['debug/java','src/main/java']
                 manifest.srcFile 'debug/AndroidManifest.xml'

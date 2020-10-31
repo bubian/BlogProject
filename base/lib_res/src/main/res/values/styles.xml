@@ -22,6 +22,10 @@
         <item name="android:windowAnimationStyle">@style/invite_activity_change_anim</item>
     </style>
 
+    <style name="AppTheme.Write" parent="AppTheme">
+        <item name="backgroundColor">@android:color/white</item>
+    </style>
+
     <!--toolbar替代actionbar后必须设置主题为NoActionBar-->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

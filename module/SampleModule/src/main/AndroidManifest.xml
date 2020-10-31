@@ -2,17 +2,18 @@
     package="com.pds.sample">
 
     <application>
-        <activity android:name=".module.paging.PagingActivity"/>
-        <activity android:name=".module.pdf.PDFWebLoadActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".module.paging.PagingActivity" />
+        <activity
+            android:name=".module.pdf.PDFWebLoadActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".module.pdf.FileLoadActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".module.pdf.PDFX5Activity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".module.pdf.QBX5Activity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".module.pdf.FileLoadActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".module.pdf.PDFX5Activity" />
+        <activity android:name=".module.pdf.QBX5Activity" />
+        <activity android:name=".module.pdf.PDFViewActivity" />
     </application>
 
 </manifest>

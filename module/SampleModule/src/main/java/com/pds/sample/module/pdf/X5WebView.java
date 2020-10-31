@@ -42,6 +42,9 @@ public class X5WebView extends HybridWebView {
         webSetting.setSupportZoom(true);
         webSetting.setBuiltInZoomControls(true);
         webSetting.setUseWideViewPort(true);
+        webSetting.setAllowUniversalAccessFromFileURLs(true);
+        webSetting.setAllowFileAccessFromFileURLs(true);
+        webSetting.setAllowFileAccess(true);
         webSetting.setSupportMultipleWindows(true);
         // webSetting.setLoadWithOverviewMode(true);
         webSetting.setAppCacheEnabled(true);

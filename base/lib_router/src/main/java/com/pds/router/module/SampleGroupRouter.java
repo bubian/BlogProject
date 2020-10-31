@@ -13,5 +13,6 @@ public class SampleGroupRouter {
     public static final String FIlE_X5_LOAD = SAMPLE +"/file-x5";
     public static final String PDF_LOAD = SAMPLE +"/pdf-native";
     public static final String X5_QB = SAMPLE +"/x5-qb";
+    public static final String PDF_JS = SAMPLE +"/pdsJs";
 
 }

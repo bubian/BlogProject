@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.pds.base.adapter.viewhold.ViewHolder;
 import com.pds.base.adapter.vlayout.VLayoutSingleAdapter;
+import com.pds.entity.common.ItemEntity;
 import com.pds.main.R;
-import com.pds.main.entity.ItemEntity;
 import com.pds.router.core.ARouterHelper;
 import com.pds.ui.gvp.GVPAdapter;
 import com.pds.ui.gvp.GridViewPager;
@@ -78,7 +78,7 @@ public class AndroidAdapter extends VLayoutSingleAdapter<List<ItemEntity>> {
 
         @Override
         public int getItemLayoutId() {
-            return R.layout.item_practice_menu;
+            return R.layout.db_practice_menu;
         }
 
         @Override
@@ -90,5 +90,5 @@ public class AndroidAdapter extends VLayoutSingleAdapter<List<ItemEntity>> {
         }
     }
 
-    private OnItemClickListener<ItemEntity> mOnItemGridClick = (view, position, data) -> ARouterHelper.nav((Activity) view.getContext(),data.url);
+    private OnItemClickListener<ItemEntity> mOnItemGridClick = (view, position, data) -> ARouterHelper.nav((Activity) view.getContext(), data.url);
 }

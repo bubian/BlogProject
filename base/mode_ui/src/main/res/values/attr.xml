@@ -46,6 +46,7 @@
         <attr name="rtvRadius" format="dimension"/>
         <attr name="rtvStrokeWidth" format="dimension"/>
         <attr name="rtvStrokeColor" format="color"/>
+        <attr name="rtvBgColor" format="color"/>
     </declare-styleable>
 
     <declare-styleable name="RoundedImageView">

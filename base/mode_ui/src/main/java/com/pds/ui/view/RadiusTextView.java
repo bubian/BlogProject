@@ -7,9 +7,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+
 import com.pds.ui.R;
 
 /**
@@ -19,6 +18,7 @@ import com.pds.ui.R;
  * Email：pengdaosong@medlinker.com.
  * <p>
  * Description:
+ *
  * @author pengdaosong
  */
 public class RadiusTextView extends androidx.appcompat.widget.AppCompatTextView {
@@ -28,7 +28,7 @@ public class RadiusTextView extends androidx.appcompat.widget.AppCompatTextView 
     private int mStrokeColor;
     private int mBgColor;
     private boolean mIsDrawStroke = false;
-    private boolean mIsDrawRadius = false;
+    private boolean mIsDrawBg = false;
 
     private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private RectF mRectF = new RectF();
@@ -47,45 +47,38 @@ public class RadiusTextView extends androidx.appcompat.widget.AppCompatTextView 
         mRadius = a.getDimensionPixelSize(R.styleable.RadiusTextView_rtvRadius, 0);
         mStrokeWidth = a.getDimensionPixelSize(R.styleable.RadiusTextView_rtvStrokeWidth, 0);
         mStrokeColor = a.getColor(R.styleable.RadiusTextView_rtvStrokeColor, Color.TRANSPARENT);
+        mBgColor = a.getColor(R.styleable.RadiusTextView_rtvBgColor, Color.TRANSPARENT);
         a.recycle();
         mIsDrawStroke = mStrokeWidth > 0 && mStrokeColor != Color.TRANSPARENT;
-        mIsDrawRadius = mRadius > 0;
-        mBgColor = getBgColor();
+        mIsDrawBg = mRadius > 0 && mBgColor != Color.TRANSPARENT;
     }
 
-    private int getBgColor() {
-        Drawable drawable = getBackground();
-        if (null == drawable) {
-            return Color.TRANSPARENT;
-        }
-        int color = ((ColorDrawable) drawable).getColor();
-        setBackgroundColor(Color.TRANSPARENT);
-        return color;
-    }
 
     public void setBgColor(int color) {
         mBgColor = color;
-        setBackgroundColor(Color.TRANSPARENT);
+        invalidate();
     }
 
-    public void setAttributes(boolean hasStroke,int backgroundColor,int textColor) {
-        mBgColor = backgroundColor;
-        mIsDrawStroke = hasStroke;
+    public void setAttributes(int strokeColor, int strokeWidth, int textColor) {
+        mIsDrawStroke = true;
+        mStrokeColor = strokeColor;
+        mStrokeWidth = strokeWidth;
         setTextColor(textColor);
-        setBackgroundColor(Color.TRANSPARENT);
+        invalidate();
     }
 
-    public void setAttributes(boolean hasStroke,int textColor) {
-        mIsDrawStroke = hasStroke;
-        setTextColor(textColor);
-        setBackgroundColor(Color.TRANSPARENT);
+    public void setAttributes(int strokeColor, int strokeWidth) {
+        mIsDrawStroke = true;
+        mStrokeColor = strokeColor;
+        mStrokeWidth = strokeWidth;
+        invalidate();
     }
-
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
         mRectF.set(2.5f, 2.5f, getWidth() - 2.5f, getHeight() - 2.5f);
-        if (mIsDrawRadius) {
+        if (mIsDrawBg) {
             mPaint.reset();
             mPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
             mPaint.setColor(mBgColor);
@@ -100,7 +93,5 @@ public class RadiusTextView extends androidx.appcompat.widget.AppCompatTextView 
             mPaint.setStyle(Style.STROKE);
             canvas.drawRoundRect(mRectF, mRadius, mRadius, mPaint);
         }
-        super.onDraw(canvas);
-
     }
 }

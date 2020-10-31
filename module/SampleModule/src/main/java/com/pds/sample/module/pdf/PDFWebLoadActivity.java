@@ -1,21 +1,19 @@
 package com.pds.sample.module.pdf;
 
-import android.os.Build;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
+import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.pds.base.act.BaseActivity;
 import com.pds.log.core.Lg;
 import com.pds.router.module.BundleKey;
-import com.pds.sample.router.ARouterPath;
+import com.pds.router.module.SampleGroupRouter;
 import com.pds.web.widget.HybridWebView;
-import com.tencent.smtt.sdk.WebChromeClient;
-import com.tencent.smtt.sdk.WebSettings;
-import com.tencent.smtt.sdk.WebView;
-import com.tencent.smtt.sdk.WebViewClient;
 
 /**
  * @author: pengdaosong
@@ -23,80 +21,46 @@ import com.tencent.smtt.sdk.WebViewClient;
  * @Email: pengdaosong@medlinker.com
  * @Description:
  */
-@Route(path = ARouterPath.WEB_PDF)
+@Route(path = SampleGroupRouter.PDF_JS)
 public class PDFWebLoadActivity extends BaseActivity {
 
-    private static final String PDF_URL = "http://47.104.91.148/web/guanxin_paitent_test.pdf";
+    private static final String TAG = "PDFWebLoadActivity";
 
+    private static final String NATIVE = "1";
+    private static final String ASSETS = "2";
     private HybridWebView mWebView;
+
+    @Autowired(name = "type")
+    String mType;
+    @Autowired(name = "path")
+    String mPdfJsPath;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_web_pdf);
-        mWebView = new HybridWebView(this);
+        ARouter.getInstance().inject(this);
+        mWebView = new X5WebView(this);
         setContentView(mWebView);
-        initSetting(mWebView);
         String url = getIntent().getStringExtra(BundleKey.PARAM);
-        Lg.d("==========>url:" + url);
-        mWebView.loadUrl(url);
-    }
-
-    protected void initSetting(HybridWebView webView) {
-        WebSettings settings = webView.getSettings();
-
-        settings.setAppCacheEnabled(true);
-        settings.setAllowFileAccess(true);
-//        settings.setLayoutAlgorithm(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
-//                ? WebSettings.LayoutAlgorithm.NORMAL : WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
-        settings.setSupportZoom(true);
-        settings.setBuiltInZoomControls(true);
-        settings.setUseWideViewPort(true);
-        settings.setSupportMultipleWindows(false);
-        settings.setLoadWithOverviewMode(true);
-        settings.setDatabaseEnabled(true);
-        settings.setDomStorageEnabled(true);
-        settings.setJavaScriptEnabled(true);
-        settings.setGeolocationEnabled(true);
-        settings.setAllowFileAccessFromFileURLs(true);
-        settings.setAllowUniversalAccessFromFileURLs(true);
-        settings.setAppCacheMaxSize(Long.MAX_VALUE);
-        settings.setPluginState(WebSettings.PluginState.ON_DEMAND);
-        settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
-        // settings.setUserAgentString("");
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-        });
-        webView.setWebChromeClient(new WebChromeClient());
-        settings.setJavaScriptCanOpenWindowsAutomatically(true);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //方便webview在choreme调试
-            HybridWebView.setWebContentsDebuggingEnabled(true);
+        Uri uri = Uri.parse(url);
+        mType = uri.getQueryParameter("type");
+        if (TextUtils.isEmpty(mType)) {
+            mWebView.loadUrl(buildUrl(url));
+        } else {
+            mWebView.loadUrl(buildUrl(url.substring(0, url.lastIndexOf("?"))));
         }
-
-        //Http和Https混合问题
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            settings.setMixedContentMode(android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        }
-    }
-
-    /**
-     * 通过网页导入PDF文件
-     * <p>
-     * 参考：https://github.com/mozilla/pdf.js
-     *
-     * @param view
-     */
-    public void doWebLoadPdf(View view) {
 
     }
 
     private String buildUrl(String pdfUrl) {
-        return getPdfLink(true) + "?file=" + pdfUrl;
+        Lg.d(TAG, "mType = " + mType + ",mPdfJsPath = " + mPdfJsPath);
+        if (ASSETS.equals(mType)) {
+            return buildUrlLocal(pdfUrl);
+        } else if (NATIVE.equals(mType)) {
+            return mPdfJsPath;
+        } else {
+            return getPdfLink(true,pdfUrl);
+        }
     }
 
     private String buildUrlLocal(String pdfUrl) {
@@ -109,11 +73,12 @@ public class PDFWebLoadActivity extends BaseActivity {
      * @param isOld
      * @return
      */
-    private String getPdfLink(boolean isOld) {
-        return isOld ? "https://mozilla.github.io/pdf.js/es5/web/viewer.html" : "https://mozilla.github.io/pdf.js/web/viewer.html";
+    private String getPdfLink(boolean isOld, String pdfUrl) {
+        String u = isOld ? "http://47.104.91.148/pdfjs-es5/web/viewer.html" : "http://47.104.91.148/pdfjs/web/viewer.html";
+        return u + "?file=" + pdfUrl;
     }
 
     private String getPdfLinkLocal() {
-        return "file:///android_asset/pdfweb/web/viewer.html";
+        return "file:///android_asset/pdfJs-es5/web/viewer.html";
     }
 }

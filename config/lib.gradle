@@ -33,6 +33,12 @@ android {
     defaultConfig {
         consumerProguardFiles "consumer-rules.pro"
     }
+    sourceSets {
+        main {
+            // jniLibs.srcDirs = ['libs']
+            assets.srcDirs = ['src/main/assets']
+        }
+    }
 }
 
 repositories {

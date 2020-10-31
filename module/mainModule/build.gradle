@@ -10,6 +10,7 @@ dependencies {
     api project(path: ':base:lib_res')
     api project(path: ':base:frame')
     api project(path: ':base:lib_net')
+    implementation project(path: ':base:lib_entity')
     implementation project(path: ':base:lib_hilt')
 
     implementation project(path: ':study:kotlin_study')
