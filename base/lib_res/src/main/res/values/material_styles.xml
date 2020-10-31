@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--    Material主题，使用material UI库时使用-->
-    <style name="AppTheme.MaterialComponents" parent="@style/Theme.MaterialComponents.NoActionBar">
+    <style name="AppTheme.MaterialComponents" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:screenOrientation">portrait</item>
         <item name="android:configChanges">keyboardHidden|screenSize</item>
         <item name="android:windowAnimationStyle">@style/invite_activity_change_anim</item>

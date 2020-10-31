@@ -9,7 +9,7 @@
     <application>
         <activity
             android:name="com.pds.kotlin.study.UiStudyActivity"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
+            android:theme="@style/AppTheme.MaterialComponents"/>
         <activity
             android:theme="@style/AppTheme.NoActionBar"
             android:name="com.pds.kotlin.study.ui.constraint.ConstraintLayoutActivity"/>
