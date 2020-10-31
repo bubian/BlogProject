@@ -4,7 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.pds.sample.application.ModuleApplication;
+import com.pds.sample.application.ModuleSample;
 import com.pds.util.file.FileUtils;
 import com.pds.util.file.ZipUtils;
 import com.pds.util.safe.DesEncryptUtil;
@@ -53,7 +53,7 @@ public class AssetsDecodeManager {
     }
 
     private static String getAppCacheDir() {
-        return ModuleApplication.instance().application().getCacheDir().getParent() + "/rich";
+        return ModuleSample.instance().application().getCacheDir().getParent() + "/rich";
     }
 
     public static String getRichLoadPath() {

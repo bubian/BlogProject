@@ -1,9 +1,11 @@
 package com.pds.main;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.pds.kotlin.study.ModuleKotlin;
 import com.pds.router.ModuleRouter;
+import com.pds.sample.application.ModuleSample;
 
 /**
  * @author: pengdaosong
@@ -26,7 +28,12 @@ public class ModuleApplication {
 
     public void onCreate(Application application) {
         mApplication = application;
+        ModuleSample.instance().onCreate(application);
         ModuleRouter.init(application);
         ModuleKotlin.instance().init(application);
+    }
+
+    public void attachBaseContext(Context base) {
+        ModuleSample.instance().attachBaseContext(base);
     }
 }

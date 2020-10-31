@@ -1,6 +1,7 @@
 package com.pds.sample.application;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.pds.base.manager.ActivityLifecycle;
 import com.pds.router.ModuleRouter;
@@ -14,15 +15,15 @@ import com.pds.web.X5SDK;
  * @Email: pengdaosong@medlinker.com
  * @Description:
  */
-public class ModuleApplication {
+public class ModuleSample {
 
-    private static final String TAG = "MainApplication";
-    private static ModuleApplication sModuleApplication = new ModuleApplication();
+    private static final String TAG = "ModuleSample";
+    private static ModuleSample sModuleApplication = new ModuleSample();
     private Application mApplication;
 
-    private ModuleApplication(){}
+    private ModuleSample(){}
 
-    public static ModuleApplication instance(){
+    public static ModuleSample instance(){
         return sModuleApplication;
     }
 
@@ -39,6 +40,6 @@ public class ModuleApplication {
         return mApplication;
     }
 
-    public void attachBaseContext(Application application) {
+    public void attachBaseContext(Context context) {
     }
 }

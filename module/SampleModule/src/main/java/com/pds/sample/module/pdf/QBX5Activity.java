@@ -10,9 +10,8 @@ import com.pds.base.act.BaseActivity;
 import com.pds.pdf.core.QbSdkManager;
 import com.pds.pdf.download.DownloadListener;
 import com.pds.pdf.process.ProgressView;
-import com.pds.router.module.BundleKey;
 import com.pds.router.module.SampleGroupRouter;
-import com.pds.sample.application.ModuleApplication;
+import com.pds.sample.application.ModuleSample;
 import com.pds.web.X5SDK;
 
 /**
@@ -33,7 +32,7 @@ public class QBX5Activity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setQbContentView();
         mFileUrl = getIntent().getStringExtra("param");
-        X5SDK.check(ModuleApplication.instance().application());
+        X5SDK.check(ModuleSample.instance().application());
         mManager = new QbSdkManager();
         initQbCallback();
         setDownloadListener();

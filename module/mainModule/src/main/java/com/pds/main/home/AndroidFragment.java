@@ -10,6 +10,7 @@ import com.pds.main.R;
 import com.pds.main.adapter.AndroidAdapter;
 import com.pds.main.entity.ItemEntity;
 import com.pds.router.module.ModuleGroupRouter;
+import com.pds.router.module.SampleGroupRouter;
 import com.pds.ui.view.vlayout.VLayoutRecycleView;
 
 import java.util.ArrayList;
@@ -26,8 +27,9 @@ public class AndroidFragment extends BaseFragment {
     private VLayoutRecycleView mRecycleView;
     private DelegateAdapter mDelegateAdapter;
 
-    private static final int[] mTitle = {R.string.base_area};
+    private static final int[] mTitle = {R.string.base_area,R.string.file_area};
     private List<ItemEntity> mUIAreaData;
+    private List<ItemEntity> mFileAreaData;
     private SparseArray<List<ItemEntity>> mSparseArray = new SparseArray<List<ItemEntity>>();
 
     @Override
@@ -44,10 +46,15 @@ public class AndroidFragment extends BaseFragment {
     }
 
     private void addBaseAreaData() {
+        // 基本专区
         mUIAreaData = new ArrayList<>();
         mUIAreaData.add(buildItemEntity(R.mipmap.ic_ui, "UI学习", ModuleGroupRouter.UI_STUDY));
         mUIAreaData.add(buildItemEntity(R.mipmap.ic_record, "音频录制",ModuleGroupRouter.UI_AUDIO_RECORD));
         mSparseArray.append(mTitle[0], mUIAreaData);
+        // 文件专区
+        mFileAreaData = new ArrayList<>();
+        mFileAreaData.add(buildItemEntity(R.mipmap.ic_file_browse,"文件浏览", SampleGroupRouter.FILE_LOAD));
+        mSparseArray.append(mTitle[1], mFileAreaData);
     }
 
     private ItemEntity buildItemEntity(int icon, String title,String router) {

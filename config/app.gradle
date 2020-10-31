@@ -10,9 +10,9 @@ android {
         main {
             jniLibs.srcDirs = ['libs']
             if (dg){
-                java.srcDirs =  ['src/debug/java','src/main/java']
-                manifest.srcFile 'src/debug/AndroidManifest.xml'
-                res.srcDirs = ['src/main/res','src/debug/res']
+                java.srcDirs =  ['debug/java','src/main/java']
+                manifest.srcFile 'debug/AndroidManifest.xml'
+                res.srcDirs = ['src/main/res','debug/res']
             }
         }
     }

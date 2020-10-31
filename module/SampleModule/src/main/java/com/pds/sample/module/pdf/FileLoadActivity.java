@@ -57,7 +57,7 @@ public class FileLoadActivity extends BaseActivity {
             SampleGroupRouter.FIlE_X5_LOAD,
             SampleGroupRouter.FIlE_X5_LOAD,
             SampleGroupRouter.FIlE_X5_LOAD,
-            SampleGroupRouter.FIlE_X5_LOAD,
+            SampleGroupRouter.X5_QB,
             SampleGroupRouter.X5_QB};
 
     private VLayoutListAdapter<String> adapter;

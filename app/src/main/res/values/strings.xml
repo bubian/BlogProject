@@ -1,4 +1,3 @@
 <resources>
-    <string name="app_name">BlogProject</string>
     <string name="crc">classes.dex crc 值</string>
 </resources>

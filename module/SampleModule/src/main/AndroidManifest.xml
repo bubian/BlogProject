@@ -2,14 +2,7 @@
     package="com.pds.sample">
 
     <application>
-        <activity android:name=".module.paging.PagingActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+        <activity android:name=".module.paging.PagingActivity"/>
         <activity android:name=".module.pdf.PDFWebLoadActivity"
             android:screenOrientation="portrait"/>
 

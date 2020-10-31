@@ -160,11 +160,15 @@ public class QbSdkManager {
      * // fileReaderClosed
      */
     private void load(Context context) {
-        QbSdk.openFileReader(context, mFile.getAbsolutePath(), mExtraParams, s -> {
-            Log.d(TAG,s);
-            if (null != mQbCallback){
-                mQbCallback.onReceiveValue(s);
-            }
-        });
+        try {
+            QbSdk.openFileReader(context, mFile.getAbsolutePath(), mExtraParams, s -> {
+                Log.d(TAG,s);
+                if (null != mQbCallback){
+                    mQbCallback.onReceiveValue(s);
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

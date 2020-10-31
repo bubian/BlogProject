@@ -1,4 +1,4 @@
-apply from: '../../config/module.gradle'
+apply from: "$rootDir/config/module.gradle"
 ext {
     bintrayName = 'pdf-x5'
     artifact = bintrayName
@@ -13,5 +13,5 @@ dependencies {
     implementation project(path:':base:web')
 }
 
-apply from: '../../config/jcenter/install.gradle'
-apply from: '../../config/jcenter/bintray.gradle'
+apply from: "$rootDir/config/jcenter/install.gradle"
+apply from: "$rootDir/config/jcenter/bintray.gradle"
