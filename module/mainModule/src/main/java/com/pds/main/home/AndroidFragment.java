@@ -46,7 +46,7 @@ public class AndroidFragment extends BaseFragment {
     private void addBaseAreaData() {
         mUIAreaData = new ArrayList<>();
         mUIAreaData.add(buildItemEntity(R.mipmap.ic_ui, "UI学习", ModuleGroupRouter.UI_STUDY));
-        mUIAreaData.add(buildItemEntity(R.mipmap.ic_record, "音频录制",ModuleGroupRouter.UI_STUDY));
+        mUIAreaData.add(buildItemEntity(R.mipmap.ic_record, "音频录制",ModuleGroupRouter.UI_AUDIO_RECORD));
         mSparseArray.append(mTitle[0], mUIAreaData);
     }
 
