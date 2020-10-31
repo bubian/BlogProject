@@ -22,6 +22,12 @@
         <item name="android:windowAnimationStyle">@style/invite_activity_change_anim</item>
     </style>
 
+    <!--toolbar替代actionbar后必须设置主题为NoActionBar-->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <!--    透明主题，在原生Android8.0系统会崩溃，网上说是Android8.0对透明主题做了限制，如果要使用请注意-->
     <style name="AppTheme.Transparent" parent="AppTheme">
         <item name="android:windowBackground">@android:color/transparent</item>

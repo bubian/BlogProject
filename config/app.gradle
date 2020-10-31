@@ -4,7 +4,7 @@ apply from: "$rootDir/config/android.gradle"
 //参考：https://developer.android.google.cn/studio/build/gradle-tips?hl=zh-cn
 
 def module_type = module_type[project.name]
-def dg = 1 != module_type && 11 != module_type
+def dg = 1 == module_type
 android {
     sourceSets {
         main {

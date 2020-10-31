@@ -2,7 +2,7 @@ package com.pds.kotlin.study.recorder.core;
 
 import android.media.MediaRecorder;
 
-import com.pds.kotlin.BaseApplication;
+import com.pds.kotlin.study.ModuleKotlin;
 
 /**
  * @author: pengdaosong
@@ -19,6 +19,6 @@ public class MediaConfig {
     public static final int OUTPUT_FORMAT = MediaRecorder.OutputFormat.MPEG_4;
 
     // 音频文件缓存目录
-    public static final String AUDIO_FILE_DIR = BaseApplication.app().getCacheDir().getAbsolutePath();
+    public static final String AUDIO_FILE_DIR = ModuleKotlin.instance().appContext().getCacheDir().getAbsolutePath();
 
 }

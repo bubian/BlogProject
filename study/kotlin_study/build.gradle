@@ -1,9 +1,5 @@
 apply from: "../../config/module.gradle"
 apply from: "../../config/kotlin.gradle"
-try {
-    // 可以根据具体业务，加if判断是否引入
-    apply from:'../LibTools/config/tools.gradle'
-} catch (e) {}
 android {
     configurations {
         compile.exclude group: 'com.google.zxing'
@@ -45,12 +41,11 @@ dependencies {
     implementation project(path:":base:lib_net")
     implementation project(path:":base:lib_entity")
     implementation project(path:":base:lib_storage")
+    implementation project(path:":base:lib_res")
 
     implementation 'com.cocosw:bottomsheet:1.5.0@aar'
     implementation 'com.cocosw:query:0.2.2'
 
-    implementation 'com.google.dagger:dagger:2.15'
-    kapt 'com.google.dagger:dagger-compiler:2.15'
     // [日志分析](https://github.com/JakeWharton/timber)
     implementation 'com.jakewharton.timber:timber:4.7.1'
     // [xCrash](https://github.com/iqiyi/xCrash)
@@ -62,4 +57,7 @@ dependencies {
     // kotlin携程库
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7'
+
+    kapt deps.alibaba.arouterCompiler
+    implementation project(path: ':base:lib_router')
 }

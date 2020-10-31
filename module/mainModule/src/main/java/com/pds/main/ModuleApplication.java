@@ -2,6 +2,7 @@ package com.pds.main;
 
 import android.app.Application;
 
+import com.pds.kotlin.study.ModuleKotlin;
 import com.pds.router.ModuleRouter;
 
 /**
@@ -26,5 +27,6 @@ public class ModuleApplication {
     public void onCreate(Application application) {
         mApplication = application;
         ModuleRouter.init(application);
+        ModuleKotlin.instance().init(application);
     }
 }

@@ -1,4 +1,9 @@
 apply from: "$rootDir/config/module.gradle"
+try {
+    // 可以根据具体业务，加if判断是否引入
+    apply from:'../LibTools/config/tools.gradle'
+} catch (e) {}
+
 dependencies {
     api deps.ax.multidex
     implementation deps.ax.appcompat

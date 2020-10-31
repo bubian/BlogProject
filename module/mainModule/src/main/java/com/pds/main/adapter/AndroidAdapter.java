@@ -1,5 +1,6 @@
 package com.pds.main.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import com.pds.base.adapter.viewhold.ViewHolder;
 import com.pds.base.adapter.vlayout.VLayoutSingleAdapter;
 import com.pds.main.R;
 import com.pds.main.entity.ItemEntity;
+import com.pds.router.core.ARouterHelper;
 import com.pds.ui.gvp.GVPAdapter;
 import com.pds.ui.gvp.GridViewPager;
 import com.pds.ui.gvp.OnItemClickListener;
@@ -88,11 +90,5 @@ public class AndroidAdapter extends VLayoutSingleAdapter<List<ItemEntity>> {
         }
     }
 
-    private OnItemClickListener<ItemEntity> mOnItemGridClick = new OnItemClickListener<ItemEntity>() {
-
-        @Override
-        public void onItemClick(View view, int position, ItemEntity data) {
-
-        }
-    };
+    private OnItemClickListener<ItemEntity> mOnItemGridClick = (view, position, data) -> ARouterHelper.nav((Activity) view.getContext(),data.url);
 }

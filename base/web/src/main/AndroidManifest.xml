@@ -35,7 +35,7 @@
 
         <provider
             android:name="com.tencent.smtt.utils.FileProvider"
-            android:authorities="com.pds.blog.provider"
+            android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.pds.base.adapter.ListAdapter
 import com.pds.base.adapter.callback.SimpleItemOnClickListener
 import com.pds.base.adapter.viewhold.ViewHolder
@@ -13,6 +14,7 @@ import com.pds.kotlin.study.ui.ViewActivity
 import com.pds.kotlin.study.ui.constraint.ConstraintMainActivity
 import com.pds.kotlin.study.ui.entity.MainEntity
 import com.pds.kotlin.study.ui.material.MaterialDesignActivity
+import com.pds.router.module.ModuleGroupRouter
 import kotlinx.android.synthetic.main.constraint_common.*
 import org.jetbrains.anko.internals.AnkoInternals
 import java.util.*
@@ -23,7 +25,8 @@ import java.util.*
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-class MainActivity : AppCompatActivity() {
+@Route(path = ModuleGroupRouter.UI_STUDY)
+class UiStudyActivity : AppCompatActivity() {
 
     private val clzArray = arrayOf(
         ConstraintMainActivity::class.java,
@@ -50,7 +53,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     private val contentAdapter =
-        object : ListAdapter<MainEntity>(this@MainActivity, R.layout.item_main) {
+        object : ListAdapter<MainEntity>(this@UiStudyActivity, R.layout.item_main) {
             override fun convert(baseViewHolder: ViewHolder, position: Int, itemData: MainEntity?) {
                 itemData?.let {
                     baseViewHolder
@@ -65,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onItemClick(v: View?, position: Int, data: MainEntity?) {
                     data?.let {
                         AnkoInternals.internalStartActivity(
-                            this@MainActivity,
+                            this@UiStudyActivity,
                             data.clz,
                             emptyArray()
                         )
@@ -76,7 +79,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_ui_study)
         initView()
         initData()
     }

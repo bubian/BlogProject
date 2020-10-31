@@ -3,7 +3,7 @@ package com.pds.kotlin.study.recorder.core;
 import android.content.Context;
 import android.media.MediaRecorder;
 
-import com.pds.kotlin.BaseApplication;
+import com.pds.kotlin.study.ModuleKotlin;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +30,7 @@ public class AudioRecordManager {
     private String mFilePath;
 
     private AudioRecordManager() {
-        mContext = BaseApplication.app();
+        mContext = ModuleKotlin.instance().appContext();
         notificationManager = RecordNotificationManager.instance(mContext);
         mDatabase = new RecordDBHelper(mContext);
         File f = mDatabase.getRecordFilePath();

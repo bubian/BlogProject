@@ -10,4 +10,5 @@ public class ModuleGroupRouter {
     private static final String LIB = "/module";
     public static final String PDF = LIB +"/pdf";
     public static final String HYBRID = LIB + "/hybrid";
+    public static final String UI_STUDY = LIB + "/uiStudy";
 }

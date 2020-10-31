@@ -204,19 +204,14 @@ public class ListActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     void onClick(String name, int which) {
-        switch (which) {
-            case R.id.share:
-                q.toast("Share to " + name);
-                break;
-            case R.id.upload:
-                q.toast("Upload for " + name);
-                break;
-            case R.id.call:
-                q.toast("Call to " + name);
-                break;
-            case R.id.help:
-                q.toast("Help me!");
-                break;
+        if (which == R.id.share) {
+            q.toast("Share to " + name);
+        } else if (which == R.id.upload) {
+            q.toast("Upload for " + name);
+        } else if (which == R.id.call) {
+            q.toast("Call to " + name);
+        } else if (which == R.id.help) {
+            q.toast("Help me!");
         }
     }
 }

@@ -1,8 +1,8 @@
 ext {
-    // 默认 - lib  1 - debug  2 - java lib 3 - test
+    // 默认 - lib  1 - debug  2 - java lib 3 - test 11 - app
     module_type = [
             app               : 11,
-            kotlin_study      : 11,
+//            kotlin_study      : 11,
             sdk_use           : 11,
             xposed_restart    : 11,
             xposed_hook       : 11,
@@ -27,7 +27,7 @@ ext {
     ]
     id = [
             app               : "com.pds.blog",
-            kotlin_study      : "com.pds.kotlin.study",
+//            kotlin_study      : "com.pds.kotlin.study",
             sdk_use           : "com.pds.sdk.use",
             xposed_restart    : "com.pds.restart",
             xposed_hook       : "com.pds.xposed.hook",

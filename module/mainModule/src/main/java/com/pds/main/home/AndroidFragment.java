@@ -9,6 +9,7 @@ import com.pds.base.adapter.vlayout.VLayoutSingleAdapter;
 import com.pds.main.R;
 import com.pds.main.adapter.AndroidAdapter;
 import com.pds.main.entity.ItemEntity;
+import com.pds.router.module.ModuleGroupRouter;
 import com.pds.ui.view.vlayout.VLayoutRecycleView;
 
 import java.util.ArrayList;
@@ -44,12 +45,13 @@ public class AndroidFragment extends BaseFragment {
 
     private void addBaseAreaData() {
         mUIAreaData = new ArrayList<>();
-        mUIAreaData.add(buildItemEntity(R.mipmap.ic_ui, "UI学习"));
+        mUIAreaData.add(buildItemEntity(R.mipmap.ic_ui, "UI学习", ModuleGroupRouter.UI_STUDY));
+        mUIAreaData.add(buildItemEntity(R.mipmap.ic_record, "音频录制",ModuleGroupRouter.UI_STUDY));
         mSparseArray.append(mTitle[0], mUIAreaData);
     }
 
-    private ItemEntity buildItemEntity(int icon, String title) {
-        ItemEntity entity = new ItemEntity(icon, title);
+    private ItemEntity buildItemEntity(int icon, String title,String router) {
+        ItemEntity entity = new ItemEntity(icon, title,router);
         return entity;
     }
 

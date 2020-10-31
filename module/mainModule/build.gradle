@@ -9,6 +9,7 @@ dependencies {
     api project(path: ':base:mode_ui')
     api project(path: ':base:lib_res')
     api project(path: ':base:frame')
+    implementation project(path: ':study:kotlin_study')
 
     implementation project(path: ':base:lib_hilt')
 
