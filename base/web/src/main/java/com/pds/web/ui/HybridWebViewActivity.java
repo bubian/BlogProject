@@ -44,15 +44,14 @@ public class HybridWebViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //X5兼容网页视频闪烁情况
         getWindow().setFormat(PixelFormat.TRANSLUCENT);//（这个对宿主没什么影响，建议声明）
-        ModuleHybridManager.getInstance().getService().configImmersiveMode(this);
+        // ModuleHybridManager.getInstance().getService().configImmersiveMode(this);
         try {
             Intent intent = getIntent();
             if (null == intent) {
                 finish();
                 return;
             }
-            boolean isNormal = intent
-                    .getBooleanExtra(HybridConstant.INTENT_EXTRA_KEY_ISNORMAL, false);
+            boolean isNormal = intent.getBooleanExtra(HybridConstant.INTENT_EXTRA_KEY_ISNORMAL, false);
             url = intent.getStringExtra(HybridConstant.INTENT_EXTRA_KEY_TOPAGE);
             fragment = createHybridFragment(isNormal);
             getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment,

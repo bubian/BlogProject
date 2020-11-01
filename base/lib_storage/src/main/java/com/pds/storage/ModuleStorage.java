@@ -14,7 +14,6 @@ import java.lang.reflect.Method;
  * @Description:
  */
 public class ModuleStorage {
-    public ModuleStorage mModuleStorage;
     private Application mApplication;
 
     /**

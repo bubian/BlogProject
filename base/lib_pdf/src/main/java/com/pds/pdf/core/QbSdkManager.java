@@ -38,7 +38,7 @@ public class QbSdkManager {
     private String mUrl;
     private String mName;
     private File mFile;
-    private boolean mEnableCache;
+    private boolean mEnableCache = true;
     private Handler mHandle = new Handler(Looper.getMainLooper());
     private HashMap<String, String> mExtraParams = new HashMap<>();
     private QbCallback<String> mQbCallback;
@@ -91,6 +91,11 @@ public class QbSdkManager {
 
     public void setQbCallback(QbCallback<String> mQbCallback) {
         this.mQbCallback = mQbCallback;
+    }
+
+    public boolean isExist(String url){
+        File file = new File(mCacheFilePath, FileUtils.getFileNameByUrl(url));
+        return file.exists() && mEnableCache;
     }
 
     public void loadPDFromUrl(Context context,String url) {

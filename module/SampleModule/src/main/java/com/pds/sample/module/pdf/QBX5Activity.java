@@ -14,6 +14,12 @@ import com.pds.router.module.SampleGroupRouter;
 import com.pds.sample.application.ModuleSample;
 import com.pds.web.X5SDK;
 
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Consumer;
+
 /**
  * @author: pengdaosong
  * @CreateTime: 2020/10/26 3:10 PM
@@ -26,6 +32,8 @@ public class QBX5Activity extends BaseActivity {
     private String mUrl;
     private QbSdkManager mManager;
     private ProgressView mProgressView;
+    private boolean mStop;
+    private Disposable mDisposable;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +47,29 @@ public class QBX5Activity extends BaseActivity {
         loadPDFromUrl();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mStop){
+            finish();
+        }
+        mStop = true;
+    }
+
     public void loadPDFromUrl(){
+        if (mManager.isExist(mFileUrl)){
+            mProgressView.onStartDownload();
+            mDisposable = Observable.interval(500,100, TimeUnit.MILLISECONDS).subscribe(new Consumer<Long>() {
+                @Override
+                public void accept(Long aLong) {
+                    if (aLong >= 9){
+                        aLong = 9L;
+                        mDisposable.dispose();
+                    }
+                    mProgressView.onProgress((int) (10 * aLong));
+                }
+            });
+        }
         mManager.loadPDFromUrl(this, mFileUrl);
     }
 
@@ -93,6 +123,19 @@ public class QBX5Activity extends BaseActivity {
                 || "TbsReaderDialogClosed".equals(s)
                 || "default browser:".equals(s)
                 || "filepath error".equals(s);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mProgressView.onComplete();
+        mDisposable.dispose();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mStop = true;
     }
 
     @Override

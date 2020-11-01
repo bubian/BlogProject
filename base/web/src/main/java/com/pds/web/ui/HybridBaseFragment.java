@@ -104,11 +104,10 @@ public class HybridBaseFragment extends Fragment {
         mWebChromeClient = new HybridWebChromeClient(getActivity(), HybridWebViewActivity.FILECHOOSER_RESULTCODE);
         webView.setWebChromeClient(mWebChromeClient);
         webView.addJavascriptInterface(new HybridJsInterface(), HybridConfig.JSInterface);
-        HashMap<String, Object> jsInterfaceMap = ModuleHybridManager.getInstance().getService()
-                .getJsInterface(mWebView, getActivity());
-        for (Map.Entry<String, Object> entry : jsInterfaceMap.entrySet()) {
-            webView.addJavascriptInterface(entry.getValue(), entry.getKey());
-        }
+        // HashMap<String, Object> jsInterfaceMap = ModuleHybridManager.getInstance().getService().getJsInterface(mWebView, getActivity());
+        // for (Map.Entry<String, Object> entry : jsInterfaceMap.entrySet()) {
+            // webView.addJavascriptInterface(entry.getValue(), entry.getKey());
+        // }
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //方便webview在choreme调试
@@ -150,7 +149,7 @@ public class HybridBaseFragment extends Fragment {
 //            mWebView.destroy();
             mWebView = null;
         }
-        ModuleHybridManager.getInstance().getService().onDestroyHybrid();
+//        ModuleHybridManager.getInstance().getService().onDestroyHybrid();
     }
 
     private boolean mIntercepterVisibleHint;

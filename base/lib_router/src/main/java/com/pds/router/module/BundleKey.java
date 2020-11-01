@@ -9,4 +9,6 @@ package com.pds.router.module;
 public interface BundleKey {
     String PARAM = "param";
     String EXTRA = "extra";
+    String URL = "url";
+    String ROUTER = "route";
 }

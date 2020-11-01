@@ -7,7 +7,11 @@ import androidx.multidex.MultiDexApplication;
 import com.alibaba.android.arouter.launcher.ARouter;
 
 import java.lang.reflect.InvocationHandler;
+
+import com.facebook.react.ReactApplication;
+import com.facebook.react.ReactNativeHost;
 import com.pds.main.ModuleApplication;
+import com.pds.rn.ModuleRn;
 
 /**
  * @author: pengdaosong
@@ -15,7 +19,7 @@ import com.pds.main.ModuleApplication;
  * @Email: pengdaosong@medlinker.com
  * @Description: 在这里初始化相关sdk
  */
-public class BaseApplication extends MultiDexApplication {
+public class BaseApplication extends MultiDexApplication implements ReactApplication {
     private static BaseApplication sApplication;
     private InvocationHandler mHandler;
 
@@ -40,6 +44,11 @@ public class BaseApplication extends MultiDexApplication {
     public void onTerminate() {
         super.onTerminate();
         ARouter.getInstance().destroy();
+    }
+
+    @Override
+    public ReactNativeHost getReactNativeHost() {
+        return ModuleRn.instance().getReactNativeHost();
     }
 
     /**

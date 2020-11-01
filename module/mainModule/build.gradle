@@ -16,6 +16,9 @@ dependencies {
     implementation project(path: ':study:kotlin_study')
     implementation project(path : ":module:SampleModule")
 
+    api project(path: ':react:RnModule')
+    implementation project(path: ':flutter:FlutterModule')
+
     implementation deps.jw.butterknife
     kapt deps.jw.butterknifeCompiler
 

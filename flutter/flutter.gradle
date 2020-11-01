@@ -1,0 +1,7 @@
+include ':flutter:FlutterModule'
+
+setBinding(new Binding([gradle: this]))
+evaluate(new File("$rootDir/flutter/flutter_module/.android/include_flutter.groovy"))
+
+include ':flutter_module'
+project(':flutter_module').projectDir = new File("$rootDir/flutter/flutter_module")

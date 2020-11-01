@@ -1,0 +1,34 @@
+apply from: "$rootDir/config/module.gradle"
+
+project.ext.react = [
+        entryFile: "index.js"
+]
+
+apply from: "../rn/node_modules/react-native/react.gradle"
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url "module/rn/node_modules/react-native/android"
+        }
+    }
+}
+dependencies {
+    implementation deps.ax.appcompat
+    api "com.facebook.react:react-native:0.56.0"
+    implementation deps.ax.swiperefreshlayout
+
+    // api project(':react-native-gesture-handler')
+    api project(':react-native-vector-icons')
+
+    api project(path: ':base:lib_res')
+    implementation project(path: ':base:lib_router')
+    annotationProcessor deps.alibaba.arouterCompiler
+}
+
+task copyDownloadableDepsToLibs(type: Copy) {
+    from configurations.compile
+    into 'libs'
+}

@@ -7,5 +7,5 @@ try {
 dependencies {
     api deps.ax.multidex
     implementation deps.ax.appcompat
-    implementation project(path : ":module:mainModule")
+    api project(path : ":module:mainModule")
 }

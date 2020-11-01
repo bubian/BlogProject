@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.view.View;
 
 import androidx.core.app.ActivityOptionsCompat;
+import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.callback.NavCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -87,5 +88,18 @@ public class ARouterHelper {
 
     public static void nav(Activity activity, String url, NavCallback callback) {
         ARouter.getInstance().build(url).navigation(activity);
+    }
+
+    public static void navWith(Activity activity,String url,String key,String value) {
+        ARouter.getInstance().build(url)
+                .withString(key,value)
+                .navigation(activity);
+    }
+
+    public static Fragment navFrag(String url,String key,String value){
+        return (Fragment) ARouter.getInstance().build(url).withString(key,value).navigation();
+    }
+    public static Fragment navFrag(String url){
+        return (Fragment) ARouter.getInstance().build(url).navigation();
     }
 }

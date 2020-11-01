@@ -1,0 +1,9 @@
+apply from: "$rootDir/config/module.gradle"
+dependencies {
+    implementation deps.ax.appcompat
+    api deps.ax.multidex
+    implementation project(path: ':flutter')
+
+    annotationProcessor deps.alibaba.arouterCompiler
+    implementation project(path: ':base:lib_router')
+}

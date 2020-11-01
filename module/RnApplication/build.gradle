@@ -1,5 +1,0 @@
-apply from: "../../config/module.gradle"
-dependencies {
-    api deps.ax.multidex
-    api project(path:":module:RnModule")
-}

@@ -1,12 +1,9 @@
-// app
+include ':FlutterModule'// app
 include ':app'
 // mainModule
 include ':module:MainApplication'
 include ':module:mainModule'
 include ':module:SampleModule'
-include ':module:flutterApplication'
-include ':module:RnApplication'
-include ':module:RnModule'
 
 // business
 include ':business:addresslookup'
@@ -81,10 +78,7 @@ include ':ndk:webrtc'
 include ':test_app'
 // components
 include ':components:ImageEdit'
-
 // flutter
-setBinding(new Binding([gradle: this]))
-evaluate(new File('./module/flutter_module/.android/include_flutter.groovy'))
-
-include ':flutter_module'
-project(':flutter_module').projectDir = new File('./module/flutter_module')
+apply from: "$rootDir/flutter/flutter.gradle"
+// react
+apply from: "$rootDir/react/react.gradle"

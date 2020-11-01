@@ -157,7 +157,7 @@ public class HybridWebViewFragment extends HybridBaseFragment {
                         }
                     }
                 }).setVisibility(View.VISIBLE);
-                mNavgationView.setTitle(ModuleHybridManager.getInstance().getService().getAppName(getContext()));
+                // mNavgationView.setTitle(ModuleHybridManager.getInstance().getService().getAppName(getContext()));
             } else {
                 mNavgationView.setVisibility(View.VISIBLE);
             }
@@ -179,10 +179,10 @@ public class HybridWebViewFragment extends HybridBaseFragment {
     @Override
     protected void initConfig(WebView webView) {
         super.initConfig(webView);
-        if (mUrl != null && mUrl.contains(ModuleHybridManager.getInstance().getService().getPayUrl())) {
-            //如果是支付页面或者钱包页面，不缓存。
-            webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-        }
+//        if (mUrl != null && mUrl.contains(ModuleHybridManager.getInstance().getService().getPayUrl())) {
+//            //如果是支付页面或者钱包页面，不缓存。
+//            webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+//        }
     }
 
     @Override
@@ -358,20 +358,20 @@ public class HybridWebViewFragment extends HybridBaseFragment {
         if (null == msg || null == mWebView || msg.id != mWebView.hashCode()) {
             return;
         }
-        ModuleHybridManager.getInstance().getService().startPay(msg, new Observer() {
-            @Override
-            public void update(Observable o, Object arg) {
-                HybridParamPayInfo info = (HybridParamPayInfo) arg;
-                handleHybridCallback(info);
-            }
-        });
+//        ModuleHybridManager.getInstance().getService().startPay(msg, new Observer() {
+//            @Override
+//            public void update(Observable o, Object arg) {
+//                HybridParamPayInfo info = (HybridParamPayInfo) arg;
+//                handleHybridCallback(info);
+//            }
+//        });
     }
 
     @Subscribe
     public void onEventMainThread(final HybridParamDevice param) {
         if (null == param) return;
         if (param.id != mWebView.hashCode()) return;
-        param.data = ModuleHybridManager.getInstance().getService().getDeviceId(getContext());
+        // param.data = ModuleHybridManager.getInstance().getService().getDeviceId(getContext());
         handleHybridCallback(param);
     }
 
@@ -403,71 +403,71 @@ public class HybridWebViewFragment extends HybridBaseFragment {
      */
     @Subscribe
     public void onEventMainThread(final HybridParamAjax msg) {
-        if (null == msg || null == mWebView) return;
-        if (msg.id != mWebView.hashCode()) return;
-        if (TextUtils.isEmpty(msg.url)) return;
-        if (!msg.url.startsWith("http")) {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(ModuleHybridManager.getInstance().getService().getBaseUrl());
-            if (!msg.url.startsWith("/"))
-                stringBuilder.append("/");
-            stringBuilder.append(msg.url);
-            msg.url = stringBuilder.toString();
-        }
-        Uri uri = Uri.parse(msg.url);
-        HybridAjaxService.IApiService service = HybridAjaxService.getService(uri);
-        HashMap<String, String> map = ModuleHybridManager.getInstance().getService().getNetworkCommonParams();
-        //get参数
-        Set<String> queryParameterNames = uri.getQueryParameterNames();
-        if (null != queryParameterNames && !queryParameterNames.isEmpty()) {
-            Iterator<String> iterator = queryParameterNames.iterator();
-            while (iterator.hasNext()) {
-                String next = iterator.next();
-                map.put(next, uri.getQueryParameter(next));
-            }
-        }
-        //post参数
-        if (null != msg.param) {
-            Set<Map.Entry<String, JsonElement>> entries = msg.param.entrySet();
-            Iterator<Map.Entry<String, JsonElement>> keys = entries.iterator();
-            while (keys.hasNext()) {
-                Map.Entry<String, JsonElement> next = keys.next();
-                map.put(next.getKey(), next.getValue().getAsString());
-            }
-        }
-        String path = uri.getPath();
-        Call<String> call = msg.tagname.equals(HybridParamAjax.ACTION.POST) ?
-                service.post(path, map) : service.get(path, map);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (TextUtils.isEmpty(msg.callback)) return;
-                HybridParamCallback hybridParamCallback = new HybridParamCallback();
-                hybridParamCallback.callback = msg.callback;
-                String body = response.body();
-                if (TextUtils.isEmpty(body)) return;
-                try {
-                    JSONObject jsonObject = new JSONObject(body);
-                    if (jsonObject.has("data")) {
-                        JSONObject data = jsonObject.getJSONObject("data");
-                        if (null != data) {
-                            hybridParamCallback.data = data.toString();
-                        } else {
-                            hybridParamCallback.data = body;
-                        }
-                    } else {
-                        hybridParamCallback.data = body;
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                handleHybridCallback(hybridParamCallback);
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-            }
-        });
+//        if (null == msg || null == mWebView) return;
+//        if (msg.id != mWebView.hashCode()) return;
+//        if (TextUtils.isEmpty(msg.url)) return;
+//        if (!msg.url.startsWith("http")) {
+//            StringBuilder stringBuilder = new StringBuilder();
+//            stringBuilder.append(ModuleHybridManager.getInstance().getService().getBaseUrl());
+//            if (!msg.url.startsWith("/"))
+//                stringBuilder.append("/");
+//            stringBuilder.append(msg.url);
+//            msg.url = stringBuilder.toString();
+//        }
+//        Uri uri = Uri.parse(msg.url);
+//        HybridAjaxService.IApiService service = HybridAjaxService.getService(uri);
+//        HashMap<String, String> map = ModuleHybridManager.getInstance().getService().getNetworkCommonParams();
+//        //get参数
+//        Set<String> queryParameterNames = uri.getQueryParameterNames();
+//        if (null != queryParameterNames && !queryParameterNames.isEmpty()) {
+//            Iterator<String> iterator = queryParameterNames.iterator();
+//            while (iterator.hasNext()) {
+//                String next = iterator.next();
+//                map.put(next, uri.getQueryParameter(next));
+//            }
+//        }
+//        //post参数
+//        if (null != msg.param) {
+//            Set<Map.Entry<String, JsonElement>> entries = msg.param.entrySet();
+//            Iterator<Map.Entry<String, JsonElement>> keys = entries.iterator();
+//            while (keys.hasNext()) {
+//                Map.Entry<String, JsonElement> next = keys.next();
+//                map.put(next.getKey(), next.getValue().getAsString());
+//            }
+//        }
+//        String path = uri.getPath();
+//        Call<String> call = msg.tagname.equals(HybridParamAjax.ACTION.POST) ?
+//                service.post(path, map) : service.get(path, map);
+//        call.enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+//                if (TextUtils.isEmpty(msg.callback)) return;
+//                HybridParamCallback hybridParamCallback = new HybridParamCallback();
+//                hybridParamCallback.callback = msg.callback;
+//                String body = response.body();
+//                if (TextUtils.isEmpty(body)) return;
+//                try {
+//                    JSONObject jsonObject = new JSONObject(body);
+//                    if (jsonObject.has("data")) {
+//                        JSONObject data = jsonObject.getJSONObject("data");
+//                        if (null != data) {
+//                            hybridParamCallback.data = data.toString();
+//                        } else {
+//                            hybridParamCallback.data = body;
+//                        }
+//                    } else {
+//                        hybridParamCallback.data = body;
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//                handleHybridCallback(hybridParamCallback);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+//            }
+//        });
     }
 
     /**
@@ -508,13 +508,13 @@ public class HybridWebViewFragment extends HybridBaseFragment {
         if (null == msg || null == mWebView || getActivity() == null) return;
         if (msg.id != mWebView.hashCode()) return;
 
-        ModuleHybridManager.getInstance().getService().startShare(mWebView, msg, new Observer() {
-            @Override
-            public void update(Observable o, Object arg) {
-                HybridParamShare paramShare = (HybridParamShare) arg;
-                handleHybridCallback(paramShare);
-            }
-        });
+//        ModuleHybridManager.getInstance().getService().startShare(mWebView, msg, new Observer() {
+//            @Override
+//            public void update(Observable o, Object arg) {
+//                HybridParamShare paramShare = (HybridParamShare) arg;
+//                handleHybridCallback(paramShare);
+//            }
+//        });
     }
 
     /**
@@ -678,8 +678,8 @@ public class HybridWebViewFragment extends HybridBaseFragment {
         layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         imageView.setLayoutParams(layoutParams);
 
-        imageView.setMaxWidth(ModuleHybridManager.getInstance().getService().getScreenWidth());
-        imageView.setMaxHeight(ModuleHybridManager.getInstance().getService().getScreenHeight());
+//        imageView.setMaxWidth(ModuleHybridManager.getInstance().getService().getScreenWidth());
+//        imageView.setMaxHeight(ModuleHybridManager.getInstance().getService().getScreenHeight());
 
         Glide.with(this).load(msg.imgUrl)
                 .listener(new RequestListener<Drawable>() {
@@ -742,14 +742,14 @@ public class HybridWebViewFragment extends HybridBaseFragment {
     public void onEventMainThread(HybridParamScreenshot msg) {
         if (null == msg || null == mWebView || getActivity() == null) return;
         if (msg.id != mWebView.hashCode()) return;
-        ModuleHybridManager.getInstance().getService().saveImgToLocal(mWebView.getContext().getApplicationContext(), mWebView, true);
+        // ModuleHybridManager.getInstance().getService().saveImgToLocal(mWebView.getContext().getApplicationContext(), mWebView, true);
     }
 
     @Subscribe
     public void onEventMainThread(HybridParamUpdateApp msg) {
         if (null == msg || null == mWebView) return;
         if (msg.id != mWebView.hashCode()) return;
-        ModuleHybridManager.getInstance().getService().toAppStore(getContext());
+        // ModuleHybridManager.getInstance().getService().toAppStore(getContext());
     }
 
     private final class H5UpdateHeaderClickListener implements View.OnClickListener {

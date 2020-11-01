@@ -10,6 +10,13 @@ public class ModuleGroupRouter {
     private static final String LIB = "/module";
     public static final String PDF = LIB +"/pdf";
     public static final String HYBRID = LIB + "/hybrid";
+    public static final String RN_ACTIVITY = LIB + "/rnActivity";
+    public static final String RN_FRAGMENT = LIB + "/rnFragment";
+
+    public static final String FLUTTER_ACTIVITY = LIB + "/flutterActivity";
+    public static final String FLUTTER_FRAGMENT = LIB + "/flutterFragment";
+
+    public static final String LINK_HYBRID = "/link/hybrid";
 
     private static final String LIB_STUDY = "/study/";
     public static final String UI_STUDY = LIB_STUDY + "/uiStudy";

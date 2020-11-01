@@ -7,7 +7,7 @@ package com.pds.web.core;
 public interface HybridConstant {
     //forward
     String INTENT_EXTRA_KEY_ANIMATION = "intent_extra_key_animation";
-    String INTENT_EXTRA_KEY_TOPAGE = "intent_extra_key_topage";
+    String INTENT_EXTRA_KEY_TOPAGE = "url";
     String INTENT_EXTRA_KEY_HASNAVGATION = "intent_extra_key_hasnavgation";
     String INTENT_EXTRA_KEY_USERAGENT = "intent_extra_key_useragent";
     String INTENT_EXTRA_KEY_HASBACK = "intent_extra_key_hasback";

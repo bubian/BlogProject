@@ -91,6 +91,10 @@ public class HyBridWebViewClient extends WebViewClient {
             Log.d(TAG, "shouldOverrideUrlLoading url=" + url);
         }
 
+        if (url.startsWith("jianshu")){
+            return true;
+        }
+
         String scheme = parse.getScheme();
         if (HybridConfig.SCHEME.equals(scheme)) {
             String host = parse.getHost();

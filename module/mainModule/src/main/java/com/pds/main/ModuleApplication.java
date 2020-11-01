@@ -3,7 +3,9 @@ package com.pds.main;
 import android.app.Application;
 import android.content.Context;
 
+import com.pds.flutter.ModuleFlutter;
 import com.pds.kotlin.study.ModuleKotlin;
+import com.pds.rn.ModuleRn;
 import com.pds.router.ModuleRouter;
 import com.pds.sample.application.ModuleSample;
 
@@ -28,6 +30,8 @@ public class ModuleApplication {
 
     public void onCreate(Application application) {
         mApplication = application;
+        ModuleRn.init(application);
+        ModuleFlutter.init(application);
         ModuleSample.instance().onCreate(application);
         ModuleRouter.init(application);
         ModuleKotlin.instance().init(application);
