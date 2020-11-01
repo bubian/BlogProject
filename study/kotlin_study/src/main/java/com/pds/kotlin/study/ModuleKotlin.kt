@@ -31,7 +31,7 @@ class ModuleKotlin {
      * 不一定要在启动的时候初始化，根据业务而定
      * @param application
      */
-    public fun init(application: Application) {
+    fun init(application: Application) {
         mApplication = application
         initToolsLib()
         // xCrash 能为安卓 app 提供捕获 java 崩溃，native 崩溃和 ANR 的能力。不需要 root 权限或任何系统权限。（https://github.com/iqiyi/xCrash）

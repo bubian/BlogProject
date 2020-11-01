@@ -109,7 +109,7 @@
 
     </RelativeLayout>
 
-    <com.medlinker.tools.widget.ClearEditText
+    <com.pds.tools.common.ui.ClearEditText
         android:id="@+id/et_env"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

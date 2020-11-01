@@ -7,9 +7,9 @@ package com.pds.router.core;
  * @Description:
  */
 public interface RouterConstants {
-    String SERVICE_SINGLE= "/service/single";
-    String SERVICE_JSON= "/service/json";
-    String SERVICE_DEGRADE= "/service/degrade";
-    String SERVICE_PRETREATMENT= "/service/pretreatment";
-    String SERVICE_PATH_REPLACE= "/service/path/replace";
+    String SERVICE_SINGLE= "/ser/single";
+    String SERVICE_JSON= "/ser/json";
+    String SERVICE_DEGRADE= "/ser/degrade";
+    String SERVICE_PRETREATMENT= "/ser/pretreatment";
+    String SERVICE_PATH_REPLACE= "/ser/path/replace";
 }

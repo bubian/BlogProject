@@ -2,12 +2,15 @@ apply from: "$rootDir/config/module.gradle"
 apply from: "$rootDir/config/kotlin.gradle"
 // 自定义插件
 apply plugin: 'aspect'
-
+try {
+    // 可以根据具体业务，加if判断是否引入
+    // apply from:"$rootDir/base/lib_tools/config/tools.gradle"
+} catch (e) {}
 dependencies {
     implementation deps.ax.appcompat
     implementation project(path: ":module:MainApplication")
     implementation project(path: ':base:lib_pay')
-    api deps.alibaba.arouter
+    // api deps.alibaba.arouter
     // 每个module都要配置的，为了应对单个module 分别编译的场景
-    kapt deps.alibaba.arouterCompiler
+    // kapt deps.alibaba.arouterCompiler
 }

@@ -38,9 +38,9 @@
             android:onClick="doClear"/>
     </RelativeLayout>
 
-    <com.medlinker.tools.vlayout.VLayoutRecycleView
+    <com.pds.tools.common.vlayout.VLayoutRecycleView
         android:id="@+id/recycleView"
-        android:background="@color/fff8f8fa"
+        android:background="#fff8f8fa"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
