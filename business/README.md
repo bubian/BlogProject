@@ -1,0 +1,7 @@
+### 动态换肤方法
+
+[Android-skin-support](https://github.com/ximsfei/Android-skin-support)
+
+[AndroidChangeSkin](https://github.com/hongyangAndroid/AndroidChangeSkin)
+
+[Android-Skin-Loader](https://github.com/fengjundev/Android-Skin-Loader)

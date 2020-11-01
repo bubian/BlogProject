@@ -16,6 +16,8 @@ public class ModuleGroupRouter {
     public static final String FLUTTER_ACTIVITY = LIB + "/flutterActivity";
     public static final String FLUTTER_FRAGMENT = LIB + "/flutterFragment";
 
+    public static final String ADDRESS_FIND = LIB + "/addressFind";
+
     public static final String LINK_HYBRID = "/link/hybrid";
 
     private static final String LIB_STUDY = "/study/";

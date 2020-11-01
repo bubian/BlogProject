@@ -1,8 +1,10 @@
 package com.pds.base.adapter.vlayout;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.LayoutRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter.Adapter;
@@ -19,11 +21,24 @@ import java.util.List;
  * @Email：pengdaosong@medlinker.com.
  * @Description:
  */
-public abstract class VLayoutGridAdapter<T> extends Adapter {
+public class VLayoutGridAdapter<T> extends Adapter {
 
     public List<T> mDataList;
+    private int mLayoutId;
     private GridLayoutHelper mGridLayoutHelper;
     private int mGap;
+
+    public VLayoutGridAdapter() {
+    }
+
+    public VLayoutGridAdapter(@LayoutRes int id) {
+        this.mLayoutId = id;
+    }
+
+    public VLayoutGridAdapter(@LayoutRes int id, List<T> data) {
+        this.mLayoutId = id;
+        mDataList = data;
+    }
 
     public void setDataList(List<T> dataList) {
         mDataList = dataList;
@@ -48,22 +63,33 @@ public abstract class VLayoutGridAdapter<T> extends Adapter {
         return mGap;
     }
 
-    public abstract View createItemView(ViewGroup parent, int viewType);
+    public View createItemView(ViewGroup parent, int viewType){
+        return null;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(createItemView(parent, viewType));
+        View itemView;
+        if (mLayoutId <= 0) {
+            itemView = createItemView(parent, viewType);
+        } else {
+            itemView = LayoutInflater.from(parent.getContext()).inflate(mLayoutId, parent, false);
+        }
+        return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (null == mDataList || position >= mDataList.size()) {
+            return;
+        }
         final ViewHolder viewHolder = (ViewHolder) holder;
         T data = mDataList.get(position);
         convert(viewHolder, data, position);
 
     }
 
-    public abstract void convert(ViewHolder viewHolder, T data, int position);
+    public void convert(ViewHolder viewHolder, T data, int position){}
 
     @Override
     public int getItemCount() {

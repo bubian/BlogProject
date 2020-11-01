@@ -58,7 +58,7 @@ public class VLayoutListAdapter<T> extends Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (position >= mDataList.size() || null == mDataList) {
+        if (null == mDataList || position >= mDataList.size()) {
             return;
         }
         T entity = mDataList.get(position);

@@ -41,11 +41,11 @@ public class AndroidFragment extends BaseFragment {
     protected void initView() {
         mRecycleView = mView.findViewById(R.id.recycleView);
         mDelegateAdapter = mRecycleView.getDelegateAdapter();
-        addBaseAreaData();
-        initUIArea();
+        addAreaData();
+        initArea();
     }
 
-    private void addBaseAreaData() {
+    private void addAreaData() {
         // 基本专区
         mUIAreaData = new ArrayList<>();
         mUIAreaData.add(buildItemEntity(R.mipmap.ic_ui, "UI学习", ModuleGroupRouter.UI_STUDY));
@@ -65,7 +65,7 @@ public class AndroidFragment extends BaseFragment {
     /**
      * UI相关使用
      */
-    private void initUIArea() {
+    private void initArea() {
         for (int i = 0; i < mTitle.length; i++) {
             mDelegateAdapter.addAdapter(new VLayoutSingleAdapter<Integer>(R.layout.item_home_title, mTitle[i]) {
                 @Override
