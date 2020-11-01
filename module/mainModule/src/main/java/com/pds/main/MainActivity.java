@@ -1,5 +1,6 @@
 package com.pds.main;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -22,6 +23,7 @@ import com.pds.router.core.ARouterHelper;
 import com.pds.router.module.BundleKey;
 import com.pds.router.module.MainGroupRouter;
 import com.pds.router.module.ModuleGroupRouter;
+import com.pds.util.ui.ImmersiveModeUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -83,6 +85,9 @@ public class MainActivity extends BaseActivity implements DefaultHardwareBackBtn
                 MenuItem menuItem = mBnv.getMenu().getItem(position);
                 if (!menuItem.isChecked()) {
                     mBnv.getMenu().getItem(position).setChecked(true);
+                }
+                if (R.id.page2 ==  menuItem.getItemId()){
+                    mVp2.postDelayed(() -> ImmersiveModeUtil.setStatusBarDarkMode(MainActivity.this,true),2_000);
                 }
             }
         });
