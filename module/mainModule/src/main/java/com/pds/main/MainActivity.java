@@ -1,6 +1,5 @@
 package com.pds.main;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -86,8 +85,8 @@ public class MainActivity extends BaseActivity implements DefaultHardwareBackBtn
                 if (!menuItem.isChecked()) {
                     mBnv.getMenu().getItem(position).setChecked(true);
                 }
-                if (R.id.page2 ==  menuItem.getItemId()){
-                    mVp2.postDelayed(() -> ImmersiveModeUtil.setStatusBarDarkMode(MainActivity.this,true),2_000);
+                if (R.id.page2 == menuItem.getItemId()) {
+                    mVp2.postDelayed(() -> ImmersiveModeUtil.setStatusBarDarkMode(MainActivity.this, true), 2_000);
                 }
             }
         });
@@ -97,13 +96,13 @@ public class MainActivity extends BaseActivity implements DefaultHardwareBackBtn
         mBnv.setOnNavigationItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.page1) {
-                mVp2.setCurrentItem(0,false);
+                mVp2.setCurrentItem(0, false);
             } else if (itemId == R.id.page2) {
-                mVp2.setCurrentItem(1,false);
+                mVp2.setCurrentItem(1, false);
             } else if (itemId == R.id.page3) {
-                mVp2.setCurrentItem(2,false);
+                mVp2.setCurrentItem(2, false);
             } else if (itemId == R.id.page4) {
-                mVp2.setCurrentItem(3,false);
+                mVp2.setCurrentItem(3, false);
             }
             // 返回true点击tab时候会闪烁
             return false;

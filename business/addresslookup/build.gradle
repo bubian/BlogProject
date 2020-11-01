@@ -6,6 +6,9 @@ apply from: "$rootDir/config/kotlin.gradle"
 dependencies {
     implementation deps.ax.appcompat
     implementation deps.ui.constraintlayout
+
+    implementation project(path: ':base:lib_router')
+    kapt deps.alibaba.arouterCompiler
 }
 
 //virtualApk {

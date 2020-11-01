@@ -30,10 +30,10 @@ public class ModuleApplication {
 
     public void onCreate(Application application) {
         mApplication = application;
+        ModuleRouter.init(application);
         ModuleRn.init(application);
         ModuleFlutter.init(application);
         ModuleSample.instance().onCreate(application);
-        ModuleRouter.init(application);
         ModuleKotlin.instance().init(application);
     }
 

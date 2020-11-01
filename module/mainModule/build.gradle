@@ -13,6 +13,7 @@ dependencies {
     implementation project(path: ':base:lib_entity')
     implementation project(path: ':base:lib_hilt')
 
+    implementation project(path : ':business:addresslookup')
     implementation project(path: ':study:kotlin_study')
     implementation project(path : ":module:SampleModule")
 

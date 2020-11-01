@@ -20,7 +20,7 @@ public class ModuleGroupRouter {
 
     public static final String LINK_HYBRID = "/link/hybrid";
 
-    private static final String LIB_STUDY = "/study/";
+    private static final String LIB_STUDY = "/study";
     public static final String UI_STUDY = LIB_STUDY + "/uiStudy";
     public static final String UI_AUDIO_RECORD = LIB_STUDY + "/audioRecord";
 }

@@ -5,12 +5,9 @@ import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.pds.base.act.BaseFragment;
 import com.pds.base.adapter.databinding.DBVLayoutListAdapter;
 import com.pds.base.adapter.viewhold.DBViewHolder;
-import com.pds.base.adapter.viewhold.ViewHolder;
-import com.pds.base.adapter.vlayout.VLayoutGridAdapter;
 import com.pds.entity.common.ItemEntity;
 import com.pds.main.R;
 import com.pds.router.module.ModuleGroupRouter;
-import com.pds.router.module.SampleGroupRouter;
 import com.pds.sample.databinding.DbPracticeMenuBinding;
 import com.pds.ui.view.vlayout.VLayoutRecycleView;
 
@@ -46,12 +43,12 @@ public class ToolsFragment extends BaseFragment {
     protected void initView() {
         initData();
         mRecycleView = mView.findViewById(R.id.recycleView);
-        mRecycleView.getDelegateAdapter().addAdapter(new DBVLayoutListAdapter<ItemEntity, DbPracticeMenuBinding>(com.pds.sample.R.layout.db_practice_menu, data) {
+        mRecycleView.getDelegateAdapter().addAdapter(new DBVLayoutListAdapter<ItemEntity, DbPracticeMenuBinding>(R.layout.db_practice_menu, data) {
             @Override
             public LayoutHelper onCreateLayoutHelper() {
                 int dp_8 = getResources().getDimensionPixelSize(com.pds.sample.R.dimen.dp_8);
                 GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(4, data.size(), 3 * dp_8, dp_8);
-                gridLayoutHelper.setMarginBottom(2*dp_8);
+                gridLayoutHelper.setMarginBottom(2 * dp_8);
                 gridLayoutHelper.setAutoExpand(false);
                 return gridLayoutHelper;
             }
@@ -66,7 +63,7 @@ public class ToolsFragment extends BaseFragment {
 
     private void initData() {
         for (int i = 0; i < mRouter.length; i++) {
-            data.add(new ItemEntity(mIcon[i],mTitle[i],mRouter[i]));
+            data.add(new ItemEntity(mIcon[i], mTitle[i], mRouter[i]));
         }
     }
 }
