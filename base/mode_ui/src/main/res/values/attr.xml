@@ -96,4 +96,10 @@
             <enum name="point" value="2"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="SwitchButton">
+        <attr name="tintColor" format="reference|color" />
+        <attr name="outerStrokeWidth" format="reference|dimension" />
+        <attr name="shadowSpace" format="reference|dimension" />
+    </declare-styleable>
 </resources>
