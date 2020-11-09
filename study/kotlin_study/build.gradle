@@ -37,6 +37,7 @@ dependencies {
     implementation project(path: ':base:frame')
     implementation project(path: ':base:lib_help')
     implementation project(path:":base:lib_net")
+    implementation project(path:":base:mode_ui")
     implementation project(path:":base:lib_entity")
     implementation project(path:":base:lib_storage")
     implementation project(path:":base:lib_res")

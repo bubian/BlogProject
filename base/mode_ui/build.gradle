@@ -19,4 +19,7 @@ dependencies {
     api deps.ui.material
     api deps.ui.constraintlayout
     implementation deps.ax.appcompat
+
+    implementation project(path:':base:lib_res')
+
 }
