@@ -75,13 +75,4 @@ public class SkinCircleView extends View implements SkinViewSupport {
             setCorcleColor(color);
         }
     }
-
-
-//    @Override
-//    public void applySkin() {
-//        if (corcleColorResId != 0) {
-//            int color = SkinResources.getInstance().getColor(corcleColorResId);
-//            setCorcleColor(color);
-//        }
-//    }
 }

@@ -80,8 +80,7 @@ public class SkinAttribute {
         //将View与之对应的可以动态替换的属性集合 放入 集合中
         if (!skinPairs.isEmpty() || view instanceof TextView || view instanceof SkinViewSupport) {
             SkinView skinView = new SkinView(view, skinPairs);
-            skinView.
-                    applySkin(typeface);
+            skinView.applySkin(typeface);
             mSkinViews.add(skinView);
         }
     }
@@ -120,8 +119,7 @@ public class SkinAttribute {
                 Drawable left = null, top = null, right = null, bottom = null;
                 switch (skinPair.attributeName) {
                     case "background":
-                        Object background = SkinResources.getInstance().getBackground(skinPair
-                                .resId);
+                        Object background = SkinResources.getInstance().getBackground(skinPair.resId);
                         //Color
                         if (background instanceof Integer) {
                             view.setBackgroundColor((Integer) background);
@@ -130,18 +128,15 @@ public class SkinAttribute {
                         }
                         break;
                     case "src":
-                        background = SkinResources.getInstance().getBackground(skinPair
-                                .resId);
+                        background = SkinResources.getInstance().getBackground(skinPair.resId);
                         if (background instanceof Integer) {
-                            ((ImageView) view).setImageDrawable(new ColorDrawable((Integer)
-                                    background));
+                            ((ImageView) view).setImageDrawable(new ColorDrawable((Integer) background));
                         } else {
                             ((ImageView) view).setImageDrawable((Drawable) background);
                         }
                         break;
                     case "textColor":
-                        ((TextView) view).setTextColor(SkinResources.getInstance().getColorStateList
-                                (skinPair.resId));
+                        ((TextView) view).setTextColor(SkinResources.getInstance().getColorStateList(skinPair.resId));
                         break;
                     case "drawableLeft":
                         left = SkinResources.getInstance().getDrawable(skinPair.resId);
@@ -163,8 +158,7 @@ public class SkinAttribute {
                         break;
                 }
                 if (null != left || null != right || null != top || null != bottom) {
-                    ((TextView) view).setCompoundDrawablesWithIntrinsicBounds(left, top, right,
-                            bottom);
+                    ((TextView) view).setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom);
                 }
             }
         }

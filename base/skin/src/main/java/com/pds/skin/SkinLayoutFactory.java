@@ -55,7 +55,7 @@ public class SkinLayoutFactory implements LayoutInflater.Factory2, Observer {
 
     private View createViewFromTag(String name, Context context, AttributeSet attrs) {
         //包含了 . 自定义控件
-        if (-1 != name.indexOf(".")) {
+        if (name.contains(".")) {
             return null;
         }
         View view = null;

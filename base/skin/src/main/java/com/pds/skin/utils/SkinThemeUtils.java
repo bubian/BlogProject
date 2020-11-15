@@ -61,8 +61,8 @@ public class SkinThemeUtils {
      * @param activity
      */
     public static Typeface getSkinTypeface(Activity activity) {
-        int skinTypeceId = getResId(activity, TYPEFACE_ATTR)[0];
-        return SkinResources.getInstance().getTypeface(skinTypeceId);
+        int skinTypeId = getResId(activity, TYPEFACE_ATTR)[0];
+        return SkinResources.getInstance().getTypeface(skinTypeId);
     }
 
     public static void updateStatusBarColor(Activity activity) {
