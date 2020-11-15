@@ -3,7 +3,7 @@
     package="com.pds.address">
 
     <application>
-        <activity android:name=".AddressFindActivity"/>
+        <activity android:name="com.pds.address.AddressFindActivity"/>
     </application>
 
 </manifest>
