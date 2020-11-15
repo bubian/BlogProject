@@ -27,9 +27,10 @@ public class AndroidFragment extends BaseFragment {
     private VLayoutRecycleView mRecycleView;
     private DelegateAdapter mDelegateAdapter;
 
-    private static final int[] mTitle = {R.string.base_area, R.string.file_area};
+    private static final int[] mTitle = {R.string.base_area, R.string.file_area, R.string.plugin_area};
     private List<ItemEntity> mUIAreaData;
     private List<ItemEntity> mFileAreaData;
+    private List<ItemEntity> mPluginAreaData;
     private SparseArray<List<ItemEntity>> mSparseArray = new SparseArray<List<ItemEntity>>();
 
     @Override
@@ -55,10 +56,19 @@ public class AndroidFragment extends BaseFragment {
         mFileAreaData = new ArrayList<>();
         mFileAreaData.add(buildItemEntity(R.mipmap.ic_file_browse, "文件浏览", SampleGroupRouter.FILE_LOAD));
         mSparseArray.append(mTitle[1], mFileAreaData);
+        // 插件化专区
+        mPluginAreaData = new ArrayList<>();
+        mPluginAreaData.add(buildItemEntity(R.mipmap.ic_plugin, "号码查询", ModuleGroupRouter.PLUGIN_PHONE_PROXY));
+        mSparseArray.append(mTitle[2], mPluginAreaData);
     }
 
     private ItemEntity buildItemEntity(int icon, String title, String router) {
         ItemEntity entity = new ItemEntity(icon, title, router);
+        return entity;
+    }
+
+    private ItemEntity buildItemEntity(int icon, String title, String router,String extra) {
+        ItemEntity entity = new ItemEntity(icon, title, router,extra);
         return entity;
     }
 

@@ -2,4 +2,5 @@
 <resources>
     <string name="base_area">基础专区</string>
     <string name="file_area">文件专区</string>
+    <string name="plugin_area">插件化专区</string>
 </resources>

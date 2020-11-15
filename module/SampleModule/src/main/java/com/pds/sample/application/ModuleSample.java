@@ -30,7 +30,7 @@ public class ModuleSample {
     public void onCreate(Application application) {
         mApplication = application;
         ModuleRouter.init(application);
-        SkinManager.init(mApplication);
+        // SkinManager.init(mApplication);
         X5SDK.init(application);
         ToolApplicationManager.onCreate(application);
         application.registerActivityLifecycleCallbacks(ActivityLifecycle.getInstance());

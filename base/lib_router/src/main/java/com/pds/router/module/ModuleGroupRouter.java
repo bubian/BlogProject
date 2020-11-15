@@ -23,4 +23,7 @@ public class ModuleGroupRouter {
     private static final String LIB_STUDY = "/study";
     public static final String UI_STUDY = LIB_STUDY + "/uiStudy";
     public static final String UI_AUDIO_RECORD = LIB_STUDY + "/audioRecord";
+
+    private static final String LIB_PLUGIN = "/plugin";
+    public static final String PLUGIN_PHONE_PROXY = LIB_PLUGIN + "/proxy";
 }

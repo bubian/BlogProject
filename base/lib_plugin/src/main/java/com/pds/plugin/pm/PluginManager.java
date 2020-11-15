@@ -79,7 +79,7 @@ public class PluginManager implements ServiceConnection {
     private Context mHostContext;
     private static PluginManager sInstance = null;
 
-    private List<WeakReference<ServiceConnection>> sServiceConnection = Collections.synchronizedList(new ArrayList<WeakReference<ServiceConnection>>(1));
+    private List<WeakReference<ServiceConnection>> sServiceConnection = Collections.synchronizedList(new ArrayList<>(1));
 
     @Override
     public void onServiceConnected(final ComponentName componentName, final IBinder iBinder) {

@@ -1,0 +1,7 @@
+apply from: "$rootDir/config/module.gradle"
+apply from: "$rootDir/config/kotlin.gradle"
+
+dependencies {
+    implementation deps.ax.appcompat
+    implementation project(path: ':base:lib_splugin')
+}

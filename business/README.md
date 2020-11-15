@@ -1,7 +1,9 @@
-### 动态换肤方法
+### 简介
 
-[Android-skin-support](https://github.com/ximsfei/Android-skin-support)
+介绍相关库使用
 
-[AndroidChangeSkin](https://github.com/hongyangAndroid/AndroidChangeSkin)
+### phonequery
 
-[Android-Skin-Loader](https://github.com/fengjundev/Android-Skin-Loader)
+查询号码归属地，是否诈骗、广告、营销电话
+
+- 调用方式：插件化

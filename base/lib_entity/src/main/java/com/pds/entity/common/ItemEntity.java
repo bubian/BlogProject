@@ -32,4 +32,5 @@ public class ItemEntity extends DataEntity {
     public String title;
     public String url;
     public String fileUrl;
+    public String extra;
 }

@@ -5,9 +5,16 @@ import android.content.Context;
 
 import com.pds.flutter.ModuleFlutter;
 import com.pds.kotlin.study.ModuleKotlin;
+import com.pds.log.core.Lg;
 import com.pds.rn.ModuleRn;
 import com.pds.router.ModuleRouter;
 import com.pds.sample.application.ModuleSample;
+import com.pds.splugin.PluginManager;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author: pengdaosong
@@ -28,6 +35,10 @@ public class ModuleApplication {
         return sModuleApplication;
     }
 
+    public void attachBaseContext(Context base) {
+        ModuleSample.instance().attachBaseContext(base);
+    }
+
     public void onCreate(Application application) {
         mApplication = application;
         ModuleRouter.init(application);
@@ -35,9 +46,44 @@ public class ModuleApplication {
         ModuleFlutter.init(application);
         ModuleSample.instance().onCreate(application);
         ModuleKotlin.instance().init(application);
+        initPlugin(application);
+
     }
 
-    public void attachBaseContext(Context base) {
-        ModuleSample.instance().attachBaseContext(base);
+    private void initPlugin(Application application) {
+        InputStream is = null;
+        FileOutputStream os = null;
+        try {
+            String name = "phonequery.apk";
+            is = application.getAssets().open(name);
+            Lg.d(TAG, "11111");
+            File filePath = application.getDir("plugin", Context.MODE_PRIVATE);
+            Lg.d(TAG, "22222");
+            if (!filePath.exists()) {
+                filePath.mkdir();
+            }
+            File file = new File(filePath, name);
+            os = new FileOutputStream(file);
+            int len;
+            byte[] buffer = new byte[1024];
+            while ((len = is.read(buffer)) != -1) {
+                os.write(buffer, 0, len);
+            }
+            File f = new File(file.getAbsolutePath());
+            if (f.exists()) {
+                Lg.d(TAG, "dex file exists");
+            }
+            PluginManager.getInstance().loadPath(application, name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                os.close();
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 }

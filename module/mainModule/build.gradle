@@ -20,6 +20,8 @@ dependencies {
     api project(path: ':react:RnModule')
     implementation project(path: ':flutter:FlutterModule')
 
+    implementation project(path: ':base:lib_splugin')
+
     implementation deps.jw.butterknife
     kapt deps.jw.butterknifeCompiler
 

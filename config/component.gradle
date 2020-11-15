@@ -8,6 +8,7 @@ ext {
             xposed_hook       : 11,
             antidebug         : 11,
 //            addresslookup     : 11,
+            phonequery        : 11,
             socket_app        : 1,
             nettyim           : 1,
             fmod              : 1,
@@ -47,6 +48,7 @@ ext {
 //            addresslookup     : "com.pds.address",
 //            download          : "com.pds.download",
 //            mode_ui           : "com.pds.ui",
+            phonequery        : "com.pds.phone.query",
     ]
 
 }

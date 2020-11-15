@@ -1,0 +1,8 @@
+apply from: "$rootDir/config/module.gradle"
+
+dependencies {
+    implementation deps.ax.appcompat
+    annotationProcessor deps.alibaba.arouterCompiler
+    implementation project(path: ':base:lib_router')
+    implementation project(path: ':base:lib_res')
+}
