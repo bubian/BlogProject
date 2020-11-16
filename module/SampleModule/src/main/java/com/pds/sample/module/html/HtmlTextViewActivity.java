@@ -56,7 +56,7 @@ public class HtmlTextViewActivity extends BaseActivity {
         htmlTextView.blockQuoteBackgroundColor = getResources().getColor(R.color.color_f684033);
         htmlTextView.blockQuoteStripColor = Color.BLUE;
 
-        htmlTextView.setHtml(R.raw.example, new HtmlResImageGetter(getBaseContext()));
+        htmlTextView.setHtml(getResources().getString(R.string.h5_html), new HtmlResImageGetter(getBaseContext()));
     }
 
     class ClickableTableSpanImpl extends ClickableTableSpan {
