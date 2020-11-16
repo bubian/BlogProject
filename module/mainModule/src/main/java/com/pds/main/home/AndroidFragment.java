@@ -51,6 +51,7 @@ public class AndroidFragment extends BaseFragment {
         mUIAreaData = new ArrayList<>();
         mUIAreaData.add(buildItemEntity(R.mipmap.ic_ui, "UI学习", ModuleGroupRouter.UI_STUDY));
         mUIAreaData.add(buildItemEntity(R.mipmap.ic_record, "音频录制", ModuleGroupRouter.UI_AUDIO_RECORD));
+        mUIAreaData.add(buildItemEntity(R.mipmap.ic_sample, "例子展示", SampleGroupRouter.SAMPLE_HOME));
         mSparseArray.append(mTitle[0], mUIAreaData);
         // 文件专区
         mFileAreaData = new ArrayList<>();

@@ -2,10 +2,10 @@ apply from: "$rootDir/config/module.gradle"
 apply from: "$rootDir/config/kotlin.gradle"
 // 自定义插件
 apply plugin: 'aspect'
-try {
+// try {
     // 可以根据具体业务，加if判断是否引入
-    // apply from:"$rootDir/base/lib_tools/config/tools.gradle"
-} catch (e) {}
+     // apply from:"$rootDir/base/lib_tools/config/tools.gradle"
+// } catch (e) {}
 dependencies {
     implementation deps.ax.appcompat
     implementation project(path: ":module:MainApplication")

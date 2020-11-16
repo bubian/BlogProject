@@ -1,7 +1,12 @@
 package com.pds.util.app;
 
+import android.app.ActivityManager;
 import android.content.Context;
+import android.os.Process;
+
 import com.pds.util.BuildConfig;
+
+import java.util.List;
 
 /**
  * @author pengdaosong
@@ -30,5 +35,20 @@ public final class PackageUtils {
 
     public static String getPackageName(Context mContext) {
         return "BuildConfig.APPLICATION_ID";
+    }
+
+    public static boolean isMainProcess(Context context) {
+        ActivityManager am = ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE));
+        List<ActivityManager.RunningAppProcessInfo> processInfos = am.getRunningAppProcesses();
+        if (null != processInfos) {
+            String mainProcessName = context.getPackageName();
+            int myPid = Process.myPid();
+            for (ActivityManager.RunningAppProcessInfo info : processInfos) {
+                if (info.pid == myPid && mainProcessName.equals(info.processName)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

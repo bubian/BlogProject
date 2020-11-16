@@ -22,10 +22,13 @@ dependencies {
     api project(path: ':base:lib_hilt')
     api project(path: ':base:lib_router')
     implementation project(path: ':base:lib_pdf')
+    implementation project(path: ':base:lib_help')
     // 下拉刷新和加载更多
     implementation deps.list.ptrLoadMore
     // 每个module都要配置的，为了应对单个module 分别编译的场景
     kapt deps.alibaba.arouterCompiler
     // 启动优化
     implementation deps.optimum.startup
+    // TextView Html
+    implementation deps.html.htmltextview
 }

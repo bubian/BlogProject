@@ -14,6 +14,10 @@
         <activity android:name=".module.pdf.PDFX5Activity" />
         <activity android:name=".module.pdf.QBX5Activity" />
         <activity android:name=".module.pdf.PDFViewActivity" />
+        <activity android:name=".ModuleActivity"
+            android:theme="@style/AppTheme.MaterialComponents"/>
+        <activity android:name=".module.html.HtmlCompatActivity"/>
+        <activity android:name=".module.html.HtmlTextViewActivity"/>
     </application>
 
 </manifest>

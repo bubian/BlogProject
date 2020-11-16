@@ -15,4 +15,8 @@ public class SampleGroupRouter {
     public static final String X5_QB = SAMPLE +"/x5-qb";
     public static final String PDF_JS = SAMPLE +"/pdsJs";
 
+    // TextView ComPat html
+    public static final String SAMPLE_HOME = SAMPLE +"/home";
+    public static final String TV_COMPAT_HTML = SAMPLE +"/tvCompatHtml";
+    public static final String TV_HTML = SAMPLE +"/tvHtml";
 }

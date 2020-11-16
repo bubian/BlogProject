@@ -1,5 +1,6 @@
 package com.pds.blog;
 
+import android.app.Application;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -7,11 +8,13 @@ import android.content.pm.Signature;
 import android.util.Log;
 
 import com.pds.application.BaseApplication;
+import com.pds.util.app.PackageUtils;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -46,6 +49,23 @@ public class BlogApplication extends BaseApplication {
             }
             Log.e("", "程序被串改");
             android.os.Process.killProcess(android.os.Process.myPid());
+        }
+        boolean isMainProcess = PackageUtils.isMainProcess(getApplicationContext());
+        if (isMainProcess){
+            // initToolsLib();
+        }
+    }
+
+    /**
+     * 工具库
+     */
+    private void initToolsLib() {
+        try {
+            Class<?> clazz = Class.forName("com.pds.tools.ModuleTools");
+            Method method = clazz.getMethod("init", Application.class);
+            method.setAccessible(true);
+            method.invoke(clazz, this);
+        } catch (Exception ignored) {
         }
     }
 

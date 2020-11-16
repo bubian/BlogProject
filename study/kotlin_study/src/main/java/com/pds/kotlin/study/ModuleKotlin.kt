@@ -33,26 +33,11 @@ class ModuleKotlin {
      */
     fun init(application: Application) {
         mApplication = application
-        initToolsLib()
         // xCrash 能为安卓 app 提供捕获 java 崩溃，native 崩溃和 ANR 的能力。不需要 root 权限或任何系统权限。（https://github.com/iqiyi/xCrash）
         // 日志保存目录：/data/data/PACKAGE_NAME/files/tombstones
         XCrash.init(application)
         // logan:美团日志上报库
         initLogan()
-    }
-
-
-    /**
-     * 工具库
-     */
-    private fun initToolsLib() {
-        try {
-            val clazz = Class.forName("com.pds.tools.ModuleTools")
-            val method = clazz.getMethod("init", Application::class.java)
-            method.isAccessible = true
-            method.invoke(clazz, this)
-        } catch (ignored: Exception) {
-        }
     }
 
     /**

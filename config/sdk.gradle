@@ -192,6 +192,10 @@ ext {
             ],
             'plugin' : [
                     'virtualapk': "com.didi.virtualapk:core:0.9.8",
+            ],
+            'html' : [
+                    // https://github.com/SufficientlySecure/html-textview
+                    'htmltextview':"org.sufficientlysecure:html-textview:4.0"
             ]
     ]
 

@@ -18,6 +18,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.pds.router.module.SampleGroupRouter;
 import com.pds.sample.R;
 import com.pds.util.unit.UnitConversionUtils;
 
@@ -26,6 +28,8 @@ import org.xml.sax.XMLReader;
 
 import blog.pds.com.three.htmlcompat.HtmlCompat;
 
+// https://developer.android.google.cn/reference/androidx/core/text/HtmlCompat
+@Route(path = SampleGroupRouter.TV_COMPAT_HTML)
 public class HtmlCompatActivity extends AppCompatActivity {
 
     private static final String TAG = HtmlCompatActivity.class.getSimpleName();
@@ -137,10 +141,12 @@ public class HtmlCompatActivity extends AppCompatActivity {
         return drawable;
     }
 
+    private HtmlTagHandler mHtmlTagHandler = new HtmlTagHandler("myfont");
     public void handleTag(boolean opening, String tag, Attributes attributes, Editable output,
                           XMLReader xmlReader) {
         // Manipulate the output here for otherwise unsupported tags
         Log.d(TAG, "Unhandled tag <" + tag + ">");
+        mHtmlTagHandler.handleTag(opening,tag,output,xmlReader);
     }
 
 }
