@@ -6,7 +6,7 @@ import android.content.res.Configuration
 import android.os.IBinder
 import android.util.Log
 import androidx.annotation.Nullable
-import com.pds.splugin.common.InterfaceService
+import com.pds.splugin.model.InterfaceService
 
 open class BaseService : Service(), InterfaceService {
     private var that: Service? = null

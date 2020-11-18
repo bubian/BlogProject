@@ -7,14 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.pds.base.adapter.viewhold.ViewHolder;
 import com.pds.base.adapter.vlayout.VLayoutSingleAdapter;
 import com.pds.entity.common.ItemEntity;
 import com.pds.main.R;
 import com.pds.router.core.ARouterHelper;
-import com.pds.splugin.PluginManager;
+import com.pds.splugin.manager.PluginManager;
 import com.pds.ui.gvp.GVPAdapter;
 import com.pds.ui.gvp.GridViewPager;
 import com.pds.ui.gvp.OnItemClickListener;
@@ -93,19 +92,18 @@ public class AndroidAdapter extends VLayoutSingleAdapter<List<ItemEntity>> {
         }
     }
 
-    private OnItemClickListener<ItemEntity> mOnItemGridClick = new OnItemClickListener<ItemEntity>() {
-        @Override
-        public void onItemClick(View view, int position, ItemEntity data) {
-            if (data.iconId == R.mipmap.ic_plugin) {
-                if (!PluginManager.getInstance().isLoadComplete()){
-                    ToastUtil.showMessage("插件未加载成功");
-                    return;
-                }
-                String extra = PluginManager.getInstance().getPackageInfo().activities[0].name;
-                ARouterHelper.navWith((Activity) view.getContext(), data.url,"className",extra);
-            }else {
-                ARouterHelper.nav((Activity) view.getContext(), data.url,data.extra);
+    private OnItemClickListener<ItemEntity> mOnItemGridClick = (view, position, data) -> {
+        if (data.iconId == R.mipmap.ic_plugin) {
+            if (!PluginManager.getInstance().isLoadComplete()){
+                ToastUtil.showMessage("插件未加载成功");
+                return;
             }
+            String extra = PluginManager.getInstance().getPackageInfo().activities[0].name;
+            ARouterHelper.navWith((Activity) view.getContext(), data.url,"className",extra);
+        }else if (data.iconId == R.mipmap.ic_a2b) {
+            ARouterHelper.navWith((Activity) view.getContext(), data.url,"className","com.pds.sample.module.splugin.SPluginReplaceActivity");
+        } else{
+            ARouterHelper.nav((Activity) view.getContext(), data.url,data.extra);
         }
     };
 }

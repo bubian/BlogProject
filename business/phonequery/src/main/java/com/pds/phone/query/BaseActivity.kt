@@ -8,7 +8,7 @@ import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import android.view.*
 import androidx.annotation.NonNull
-import com.pds.splugin.common.InterfaceActivity
+import com.pds.splugin.model.InterfaceActivity
 
 /**
  * @author: pengdaosong

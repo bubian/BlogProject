@@ -3,7 +3,8 @@
     package="com.pds.splugin">
 
     <application>
-        <activity android:name=".ProxyActivity"/>
-        <service android:name=".ProxyService"/>
+        <activity android:name=".proxy.ProxyActivity"/>
+        <service android:name=".proxy.ProxyService"/>
+        <activity android:name=".proxy.ProxyReplaceActivity"/>
     </application>
 </manifest>

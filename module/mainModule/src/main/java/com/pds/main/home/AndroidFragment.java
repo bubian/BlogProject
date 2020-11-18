@@ -16,6 +16,8 @@ import com.pds.ui.view.vlayout.VLayoutRecycleView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.pds.entity.common.ItemEntity.buildItemEntity;
+
 /**
  * @author: pengdaosong
  * @CreateTime: 2020/10/30 5:19 PM
@@ -60,17 +62,8 @@ public class AndroidFragment extends BaseFragment {
         // 插件化专区
         mPluginAreaData = new ArrayList<>();
         mPluginAreaData.add(buildItemEntity(R.mipmap.ic_plugin, "号码查询", ModuleGroupRouter.PLUGIN_PHONE_PROXY));
+        mPluginAreaData.add(buildItemEntity(R.mipmap.ic_a2b, "Activity替换", ModuleGroupRouter.PLUGIN_ACTIVITY_REPLACE));
         mSparseArray.append(mTitle[2], mPluginAreaData);
-    }
-
-    private ItemEntity buildItemEntity(int icon, String title, String router) {
-        ItemEntity entity = new ItemEntity(icon, title, router);
-        return entity;
-    }
-
-    private ItemEntity buildItemEntity(int icon, String title, String router,String extra) {
-        ItemEntity entity = new ItemEntity(icon, title, router,extra);
-        return entity;
     }
 
     /**

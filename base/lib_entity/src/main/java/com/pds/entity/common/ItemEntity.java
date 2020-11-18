@@ -33,4 +33,14 @@ public class ItemEntity extends DataEntity {
     public String url;
     public String fileUrl;
     public String extra;
+
+    public static ItemEntity buildItemEntity(int icon, String title, String router) {
+        ItemEntity entity = new ItemEntity(icon, title, router);
+        return entity;
+    }
+
+    public static ItemEntity buildItemEntity(int icon, String title, String router,String extra) {
+        ItemEntity entity = new ItemEntity(icon, title, router,extra);
+        return entity;
+    }
 }
