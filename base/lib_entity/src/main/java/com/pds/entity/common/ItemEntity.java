@@ -39,6 +39,11 @@ public class ItemEntity extends DataEntity {
         return entity;
     }
 
+    public static ItemEntity buildItemEntity(int icon, String title) {
+        ItemEntity entity = new ItemEntity(icon, title);
+        return entity;
+    }
+
     public static ItemEntity buildItemEntity(int icon, String title, String router,String extra) {
         ItemEntity entity = new ItemEntity(icon, title, router,extra);
         return entity;

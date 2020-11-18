@@ -56,8 +56,6 @@ class UiStudyActivity : AppCompatActivity() {
                     baseViewHolder
                         .setText(R.id.title_tv, itemData.title)
                         .setText(R.id.des_tv, itemData.content)
-
-
                 }
             }
         }.apply {

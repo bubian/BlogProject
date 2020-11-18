@@ -29,10 +29,12 @@ public class AndroidFragment extends BaseFragment {
     private VLayoutRecycleView mRecycleView;
     private DelegateAdapter mDelegateAdapter;
 
-    private static final int[] mTitle = {R.string.base_area, R.string.file_area, R.string.plugin_area};
+    private static final int[] mTitle = {R.string.base_area, R.string.file_area, R.string.plugin_area, R.string.google_view_widget};
     private List<ItemEntity> mUIAreaData;
     private List<ItemEntity> mFileAreaData;
     private List<ItemEntity> mPluginAreaData;
+    private List<ItemEntity> mHotFixAreaData;
+    private List<ItemEntity> mGoogleAreaData;
     private SparseArray<List<ItemEntity>> mSparseArray = new SparseArray<List<ItemEntity>>();
 
     @Override
@@ -64,6 +66,14 @@ public class AndroidFragment extends BaseFragment {
         mPluginAreaData.add(buildItemEntity(R.mipmap.ic_plugin, "号码查询", ModuleGroupRouter.PLUGIN_PHONE_PROXY));
         mPluginAreaData.add(buildItemEntity(R.mipmap.ic_a2b, "Activity替换", ModuleGroupRouter.PLUGIN_ACTIVITY_REPLACE));
         mSparseArray.append(mTitle[2], mPluginAreaData);
+        // 热修复专区
+        // mHotFixAreaData = new ArrayList<>();
+        // mHotFixAreaData.add(buildItemEntity(R.mipmap.ic_hotfix, "美团热修改", ModuleGroupRouter.PLUGIN_PHONE_PROXY));
+        // mSparseArray.append(mTitle[3], mHotFixAreaData);
+        // google例子专区
+        mGoogleAreaData = new ArrayList<>();
+        mGoogleAreaData.add(buildItemEntity(R.mipmap.ic_widgets, "view组件"));
+        mSparseArray.append(mTitle[3], mGoogleAreaData);
     }
 
     /**

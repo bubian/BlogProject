@@ -3,4 +3,6 @@
     <string name="base_area">基础专区</string>
     <string name="file_area">文件专区</string>
     <string name="plugin_area">插件化专区</string>
+    <string name="hot_fix_area">热修复专区</string>
+    <string name="google_view_widget">google例子专区</string>
 </resources>

@@ -2,6 +2,7 @@ package com.pds.main.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -34,10 +35,13 @@ public class AndroidAdapter extends VLayoutSingleAdapter<List<ItemEntity>> {
     private GirdAdapter mGridAdapter;
     private static final int GRID_HEIGHT = 160;
     private List<ItemEntity> mGridList;
+    private SparseArray<Class<?>> mClazz = new SparseArray<>();
 
     public AndroidAdapter(int id, List<ItemEntity> data) {
         super(id, data);
         mGridList = data;
+
+        // mClazz.append(R.mipmap.ic_widgets,MotionL);
     }
 
     @Override
