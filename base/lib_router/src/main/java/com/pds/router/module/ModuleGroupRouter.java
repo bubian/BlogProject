@@ -32,6 +32,9 @@ public class ModuleGroupRouter {
     public static final String PLUGIN_PHONE_PROXY = LIB_PLUGIN + "/proxy";
     public static final String PLUGIN_ACTIVITY_REPLACE = LIB_PLUGIN + "/activityReplace";
 
+    private static final String LIB_GOOGLE = "/google";
+    public static final String GOOGLE_VIEW_WIDGET = LIB_GOOGLE + "/viewWidget";
+
     // 其它
     public static final String LINK_HYBRID = "/link/hybrid";
 }

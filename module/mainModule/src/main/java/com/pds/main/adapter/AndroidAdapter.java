@@ -40,8 +40,6 @@ public class AndroidAdapter extends VLayoutSingleAdapter<List<ItemEntity>> {
     public AndroidAdapter(int id, List<ItemEntity> data) {
         super(id, data);
         mGridList = data;
-
-        // mClazz.append(R.mipmap.ic_widgets,MotionL);
     }
 
     @Override

@@ -72,7 +72,7 @@ public class AndroidFragment extends BaseFragment {
         // mSparseArray.append(mTitle[3], mHotFixAreaData);
         // google例子专区
         mGoogleAreaData = new ArrayList<>();
-        mGoogleAreaData.add(buildItemEntity(R.mipmap.ic_widgets, "view组件"));
+        mGoogleAreaData.add(buildItemEntity(R.mipmap.ic_widgets, "view组件",ModuleGroupRouter.GOOGLE_VIEW_WIDGET));
         mSparseArray.append(mTitle[3], mGoogleAreaData);
     }
 

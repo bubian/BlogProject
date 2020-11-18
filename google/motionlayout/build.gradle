@@ -1,0 +1,15 @@
+apply from: "$rootDir/config/module.gradle"
+apply from: "$rootDir/config/kotlin.gradle"
+
+dependencies {
+    implementation deps.ax.appcompat
+    implementation deps.ui.constraintlayout
+    implementation deps.kt.lifecycleExtensions
+    implementation deps.ui.material
+    implementation deps.ui.lottie
+    implementation project(path:':base:lib_glide')
+
+    implementation project(path: ':base:lib_router')
+    kapt deps.alibaba.arouterCompiler
+
+}

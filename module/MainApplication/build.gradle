@@ -4,4 +4,7 @@ dependencies {
     api deps.ax.multidex
     implementation deps.ax.appcompat
     api project(path : ":module:mainModule")
+
+    // google
+    implementation project(path : ":google:motionlayout")
 }
