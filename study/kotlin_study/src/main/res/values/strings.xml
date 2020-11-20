@@ -150,4 +150,8 @@ limitations under the License. Lorem ipsum dolor sit amet, consectetuer adipisci
     <string name="record_prompt">开始录音</string>
     <string name="record_in_progress">录音中</string>
     <string name="send_to">发送到</string>
+
+    <string name="flex_one">美女</string>
+    <string name="flex_two">豪车</string>
+    <string name="flex_three">豪宅</string>
 </resources>
