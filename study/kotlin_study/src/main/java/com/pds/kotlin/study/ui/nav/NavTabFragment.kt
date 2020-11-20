@@ -17,11 +17,18 @@ import kotlinx.android.synthetic.main.textview.*
 class NavTabFragment : BaseFragment() {
 
     private var mContent: String? = ""
-    private var mLayoutId: Int? = null
+    private var mLayoutId: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContent = arguments?.getString("content")
-        mLayoutId = arguments?.getInt("layoutId")
+        arguments?.let {
+            mLayoutId = it.getInt("layoutId",0)
+        }
+
+        if (mLayoutId <= 0){
+            mLayoutId = R.layout.textview
+        }
     }
 
     override fun onCreateView(
@@ -30,7 +37,7 @@ class NavTabFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(mLayoutId ?: R.layout.textview, container, false)
+        return inflater.inflate(mLayoutId , container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
