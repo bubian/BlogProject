@@ -43,6 +43,7 @@
         <activity android:name=".recorder.RecordActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ui.nav.FlexTabActivity" />
+        <activity android:name=".ui.recyclerview.RLAnimaActivity" />
 
         <service android:name=".recorder.core.RecordService"/>
 

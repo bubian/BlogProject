@@ -14,6 +14,7 @@ import com.pds.kotlin.study.ui.constraint.ConstraintMainActivity
 import com.pds.kotlin.study.ui.entity.MainEntity
 import com.pds.kotlin.study.ui.material.MaterialDesignActivity
 import com.pds.kotlin.study.ui.nav.FlexTabActivity
+import com.pds.kotlin.study.ui.recyclerview.RLAnimaActivity
 import com.pds.router.module.ModuleGroupRouter
 import kotlinx.android.synthetic.main.constraint_common.*
 import org.jetbrains.anko.internals.AnkoInternals
@@ -32,21 +33,24 @@ class UiStudyActivity : AppCompatActivity() {
         ConstraintMainActivity::class.java,
         ViewActivity::class.java,
         MaterialDesignActivity::class.java,
-        FlexTabActivity::class.java
+        FlexTabActivity::class.java,
+        RLAnimaActivity::class.java
     )
 
     private val titleArray = arrayOf(
         "Constraint",
         "Custom View 基础",
         "Material Design",
-        "flex tab"
+        "flex tab",
+        "RecyclerView使用"
     )
 
     private val contentArray = arrayOf(
         "简介：包含Constraint基本布局使用，CoordinatorLayout与AppBarLayout，CollapsingToolbarLayout结合使用的各种效果展示；bottom sheet使用，包含大量demo展示，不同属性对比演示等",
         "简介：参考HenCoder - 扔物线自定义View系列文章，亲自实践，通过例子学习不同api之间的差异，结合自己的理解，加一注释。",
         "简介：通过demo讲解material库组件使用，文章参考：https://material.io/develop/android/components/cards/，demo参考：https://github.com/material-components/material-components-android",
-        "简介：自定义tab组件，添加样式更加灵活，可以实现多种tab切换样式"
+        "简介：自定义tab组件，添加样式更加灵活，可以实现多种tab切换样式",
+        "简介：主要展示RecyclerView基本使用，包括动画等"
     )
 
     private val contentAdapter =
