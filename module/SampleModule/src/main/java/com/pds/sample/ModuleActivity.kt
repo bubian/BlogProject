@@ -11,6 +11,7 @@ import com.pds.base.adapter.viewhold.ViewHolder
 import com.pds.router.module.SampleGroupRouter
 import com.pds.sample.module.html.HtmlCompatActivity
 import com.pds.sample.module.html.HtmlTextViewActivity
+import com.pds.sample.module.interpolatorplayground.InterpolatorActivity
 import kotlinx.android.synthetic.main.recyclerview.*
 import org.jetbrains.anko.internals.AnkoInternals
 import java.util.*
@@ -26,17 +27,20 @@ class ModuleActivity : AppCompatActivity() {
 
     private val clzArray = arrayOf(
         HtmlCompatActivity::class.java,
-        HtmlTextViewActivity::class.java
+        HtmlTextViewActivity::class.java,
+        InterpolatorActivity::class.java
     )
 
     private val titleArray = arrayOf(
         "TextView Compat Html",
-        "TextView Html"
+        "TextView Html",
+        "插值器使用"
     )
 
     private val contentArray = arrayOf(
         "简介：TextView对Html字符串扩展，支持系统不支持的Html标签",
-        "简介：自定义TextView，扩展对Html各种标签支持，功能比系统自带的更加全面和强大"
+        "简介：自定义TextView，扩展对Html各种标签支持，功能比系统自带的更加全面和强大",
+        "简介：包含各种插值器使用，通过动画形式展示，形象易理解"
     )
 
     private val contentAdapter =

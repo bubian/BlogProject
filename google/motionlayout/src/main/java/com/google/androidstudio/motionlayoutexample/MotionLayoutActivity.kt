@@ -2,11 +2,13 @@ package com.google.androidstudio.motionlayoutexample
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.example.androidstudio.motionlayoutintegrations.MotionInterActivity
 import com.google.androidstudio.motionlayoutexample.fragmentsdemo.FragmentExample2Activity
 import com.google.androidstudio.motionlayoutexample.fragmentsdemo.FragmentExampleActivity
 import com.google.androidstudio.motionlayoutexample.histogramdemo.HistogramActivity
@@ -64,7 +66,10 @@ class MotionLayoutActivity : AppCompatActivity(), CompoundButton.OnCheckedChange
             layoutManager = viewManager
             adapter = viewAdapter
         }
-
+        motion.setOnClickListener {
+            val intent = Intent(this@MotionLayoutActivity, MotionInterActivity::class.java)
+            startActivity(intent)
+        }
         showPaths.setOnCheckedChangeListener(this)
     }
 

@@ -1,0 +1,15 @@
+apply from: "$rootDir/config/module.gradle"
+apply from: "$rootDir/config/kotlin.gradle"
+
+android {
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+    implementation deps.ax.appcompat
+    implementation deps.ui.material
+    api deps.ui.constraintlayout
+    implementation deps.kt.core
+}

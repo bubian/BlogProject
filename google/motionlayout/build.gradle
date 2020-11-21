@@ -12,4 +12,6 @@ dependencies {
     implementation project(path: ':base:lib_router')
     kapt deps.alibaba.arouterCompiler
 
+    implementation project(path: ':google:motionlayoutintegrations')
+
 }

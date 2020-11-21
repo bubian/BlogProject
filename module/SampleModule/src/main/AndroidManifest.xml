@@ -18,6 +18,7 @@
             android:theme="@style/AppTheme.MaterialComponents"/>
         <activity android:name=".module.html.HtmlCompatActivity"/>
         <activity android:name=".module.html.HtmlTextViewActivity"/>
+        <activity android:name=".module.interpolatorplayground.InterpolatorActivity"/>
     </application>
 
 </manifest>

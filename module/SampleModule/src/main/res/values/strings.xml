@@ -1,8 +1,19 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">BlogProject</string>
 
     <string name="use_native">Use native conversion</string>
     <string name="refresh">refresh</string>
     <string name="crc">classes.dex crc 值</string>
-    
+
+    <string-array name ="interpolators" tools:ignore="ExtraTranslation">
+        <item>Linear</item>
+        <item>Accelerate</item>
+        <item>AccelerateDecelerate</item>
+        <item>Decelerate</item>
+        <item>Quadratic Path</item>
+        <item>Cubic Path</item>
+        <item>Bounce</item>
+        <item>Overshoot</item>
+        <item>Anticipate</item>
+    </string-array>
 </resources>

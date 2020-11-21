@@ -77,6 +77,7 @@ include ':ndk:idcardrecognitioon'
 include ':ndk:webrtc'
 // google
 include ':google:motionlayout'
+include ':google:motionlayoutintegrations'
 // test
 include ':test_app'
 // components
