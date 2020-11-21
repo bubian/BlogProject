@@ -82,7 +82,7 @@ public class RVAdapter extends RecyclerView.Adapter implements ItemTouchHelperAd
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Activity activity = (Activity) mRecyclerView.getContext();
         View container = activity.getLayoutInflater().inflate(R.layout.rl_slide_item, parent, false);
-        container.setOnClickListener(mItemAction);
+        // container.setOnClickListener(mItemAction);
         return new MyViewHolder(container);
     }
 
