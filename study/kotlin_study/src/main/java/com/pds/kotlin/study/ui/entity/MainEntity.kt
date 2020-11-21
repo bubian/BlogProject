@@ -1,6 +1,7 @@
 package com.pds.kotlin.study.ui.entity
 
 import android.app.Activity
+import com.pds.base.act.BaseActivity
 
 /**
  * @author: pengdaosong
@@ -8,4 +9,9 @@ import android.app.Activity
  * Email：pengdaosong@medlinker.com
  * Description:
  */
-data class MainEntity(var clz : Class<out Activity>, var title : String = "", var content : String = "")
+data class MainEntity(
+    var clz: Class<out Activity> = BaseActivity::class.java,
+    var title: String = "",
+    var content: String = "",
+    var type : Int = 0
+)

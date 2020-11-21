@@ -43,7 +43,10 @@
         <activity android:name=".recorder.RecordActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ui.nav.FlexTabActivity" />
-        <activity android:name=".ui.recyclerview.RLAnimaActivity" />
+        <activity android:name=".ui.recyclerview.ConcatAdapterActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
+        <activity android:name=".ui.recyclerview.LayoutManagerActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
 
         <service android:name=".recorder.core.RecordService"/>
 
