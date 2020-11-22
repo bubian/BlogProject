@@ -5,18 +5,11 @@ import android.content.Context;
 
 import com.pds.flutter.ModuleFlutter;
 import com.pds.kotlin.study.ModuleKotlin;
-import com.pds.log.core.Lg;
 import com.pds.plugin.ModulePlugin;
 import com.pds.rn.ModuleRn;
 import com.pds.router.ModuleRouter;
 import com.pds.sample.application.ModuleSample;
 import com.pds.splugin.ModuleSPlugin;
-import com.pds.splugin.manager.PluginManager;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * @author: pengdaosong
