@@ -90,8 +90,6 @@ public class IActivityManagerHookHandle extends BaseClassHandle {
 
                 Intent newIntent = new Intent();
                 ClassLoader pluginClassLoader = PluginProcessManager.getPluginClassLoader(componentName.getPackageName());
-//                ComponentName componentName = new ComponentName(mHostContext,ActivityMode.P02.Standard00.class);
-//            ActivityMode.P02.Standard00)  process   给你新开进程
                 newIntent.setComponent(componentName);
 //                真实的意图 被我隐藏到了  键值对
                 newIntent.putExtra("oldIntent", intent);

@@ -6,6 +6,7 @@ import android.content.Context;
 import com.pds.flutter.ModuleFlutter;
 import com.pds.kotlin.study.ModuleKotlin;
 import com.pds.log.core.Lg;
+import com.pds.plugin.ModulePlugin;
 import com.pds.rn.ModuleRn;
 import com.pds.router.ModuleRouter;
 import com.pds.sample.application.ModuleSample;
@@ -48,5 +49,6 @@ public class ModuleApplication {
         ModuleSample.instance().onCreate(application);
         ModuleKotlin.instance().init(application);
         ModuleSPlugin.init(application);
+        ModulePlugin.init(application);
     }
 }

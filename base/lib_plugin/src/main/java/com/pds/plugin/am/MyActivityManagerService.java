@@ -160,6 +160,7 @@ public class MyActivityManagerService extends BaseActivityManagerService {
                                 return stubInfo;
                             } else if (!mRunningProcessList.isStubInfoUsed(stubInfo, targetInfo, stubProcessName1)) {
                                 mRunningProcessList.setTargetProcessName(stubInfo, targetInfo);
+                                logStubInfo(stubInfo);
                                 return stubInfo;
                             }
                         }
@@ -172,9 +173,13 @@ public class MyActivityManagerService extends BaseActivityManagerService {
                     if (stubInfo.launchMode == targetInfo.launchMode) {
                         if (stubInfo.launchMode == ActivityInfo.LAUNCH_MULTIPLE) {
                             mRunningProcessList.setTargetProcessName(stubInfo, targetInfo);
+                            android.util.Log.i(TAG, "selectStubActivityInfo:     6: ");
+                            logStubInfo(stubInfo);
                             return stubInfo;
                         } else if (!mRunningProcessList.isStubInfoUsed(stubInfo, targetInfo, stubProcessName1)) {
                             mRunningProcessList.setTargetProcessName(stubInfo, targetInfo);
+                            android.util.Log.i(TAG, "selectStubActivityInfo:     7: "+ stubInfo.targetActivity);
+                            logStubInfo(stubInfo);
                             return stubInfo;
                         }
                     }
@@ -183,6 +188,21 @@ public class MyActivityManagerService extends BaseActivityManagerService {
             }
         }
         throw throwException("没有可用的进程了");
+    }
+    private void logStubInfo(ActivityInfo stubInfo){
+        android.util.Log.i(TAG, "stubInfo:name=" + stubInfo.name  +
+                "\ntargetActivity= " + stubInfo.targetActivity +
+                "\npackageName= " + stubInfo.packageName +
+                "\nparentActivityName= " + stubInfo.parentActivityName +
+                "\npermission= " + stubInfo.permission +
+                "\nprocessName= " + stubInfo.processName +
+                "\ntaskAffinity= " + stubInfo.taskAffinity +
+                "\napplicationInfo$className= " + stubInfo.applicationInfo.className +
+                "\napplicationInfo$name= " + stubInfo.applicationInfo.name +
+                "\napplicationInfo$packageName= " + stubInfo.applicationInfo.packageName +
+                "\nlaunchMode= " + stubInfo.launchMode +
+                "\nclass= " + stubInfo.getClass()
+        );
     }
 
     private static final Comparator<RunningAppProcessInfo> sProcessComparator = new Comparator<RunningAppProcessInfo>() {

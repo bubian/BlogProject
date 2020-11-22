@@ -19,6 +19,7 @@
         <activity android:name=".module.html.HtmlCompatActivity"/>
         <activity android:name=".module.html.HtmlTextViewActivity"/>
         <activity android:name=".module.interpolatorplayground.InterpolatorActivity"/>
+        <activity android:name=".module.plugin.CommercialPluginActivity"/>
     </application>
 
 </manifest>

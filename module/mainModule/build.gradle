@@ -21,6 +21,7 @@ dependencies {
     implementation project(path: ':flutter:FlutterModule')
 
     implementation project(path: ':base:lib_splugin')
+    implementation project(path: ':base:lib_plugin')
 
     implementation deps.jw.butterknife
     kapt deps.jw.butterknifeCompiler

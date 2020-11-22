@@ -65,6 +65,7 @@ public class AndroidFragment extends BaseFragment {
         mPluginAreaData = new ArrayList<>();
         mPluginAreaData.add(buildItemEntity(R.mipmap.ic_plugin, "号码查询", ModuleGroupRouter.PLUGIN_PHONE_PROXY));
         mPluginAreaData.add(buildItemEntity(R.mipmap.ic_a2b, "Activity替换", ModuleGroupRouter.PLUGIN_ACTIVITY_REPLACE));
+        mPluginAreaData.add(buildItemEntity(R.mipmap.ic_bu_plugin, "商用插件", ModuleGroupRouter.PLUGIN_COMMERCIAL_PLUGIN));
         mSparseArray.append(mTitle[2], mPluginAreaData);
         // 热修复专区
         // mHotFixAreaData = new ArrayList<>();

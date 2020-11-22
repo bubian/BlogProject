@@ -6,8 +6,9 @@ package com.pds.router.module;
  * @Email: pengdaosong@medlinker.com
  * @Description:
  *
- * 分组名称必须和module所在的文件夹名称相同，比如business目录下的module使用的路由，路由组名要用business，不然跳转失败，找不到对应的组。
- * 如果在相同的目录下，可以不用。
+ * 分组名重要注意事项：根据平时使用过程发现：相同"组"里定义的路由不能使用在不同module中，不然先定义的"路由"跳转失败，最后定义的可以正常跳转。
+ * 比如下面定义了分组LIB = "/base"和路由HYBRID = LIB + "/hybrid"，而路由在web module中使用，如果这时候路由XXXX = LIB + "/xxx"，
+ * 在除web module的其它module中使用，那么会导致跳转web module路由失败，而跳转定义路由所在的module跳转成功。
  */
 public class ModuleGroupRouter {
     private static final String LIB = "/base";
@@ -28,9 +29,12 @@ public class ModuleGroupRouter {
     public static final String UI_STUDY = LIB_STUDY + "/uiStudy";
     public static final String UI_AUDIO_RECORD = LIB_STUDY + "/audioRecord";
 
+    private static final String LIB_S_PLUGIN = "/splugin";
+    public static final String PLUGIN_PHONE_PROXY = LIB_S_PLUGIN + "/proxy";
+    public static final String PLUGIN_ACTIVITY_REPLACE = LIB_S_PLUGIN + "/activityReplace";
+
     private static final String LIB_PLUGIN = "/plugin";
-    public static final String PLUGIN_PHONE_PROXY = LIB_PLUGIN + "/proxy";
-    public static final String PLUGIN_ACTIVITY_REPLACE = LIB_PLUGIN + "/activityReplace";
+    public static final String PLUGIN_COMMERCIAL_PLUGIN = LIB_PLUGIN + "/commercial";
 
     private static final String LIB_GOOGLE = "/google";
     public static final String GOOGLE_VIEW_WIDGET = LIB_GOOGLE + "/viewWidget";

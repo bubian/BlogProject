@@ -32,20 +32,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ApkFragment extends ListFragment implements ServiceConnection {
     private ArrayAdapter<ApkItem> adapter;
     final Handler handler = new Handler();
 
-    public ApkFragment() {
-    }
-
+    public ApkFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         adapter = new ArrayAdapter<ApkItem>(getActivity(), 0) {
             @Override
             public View getView(final int position, View convertView, final ViewGroup parent) {
@@ -65,13 +60,7 @@ public class ApkFragment extends ListFragment implements ServiceConnection {
 
                 TextView btn3 = (TextView) convertView.findViewById(R.id.button3);
                 btn3.setText("删除");
-                btn3.setOnClickListener(new OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        onListItemClick(getListView(), view, position, getItemId(position));
-                    }
-                });
+                btn3.setOnClickListener(view -> onListItemClick(getListView(), view, position, getItemId(position)));
                 TextView btn = (TextView) convertView.findViewById(R.id.button2);
                 try {
                     if (item.installing) {
@@ -86,15 +75,7 @@ public class ApkFragment extends ListFragment implements ServiceConnection {
                 } catch (Exception e) {
                     btn.setText("安装1");
                 }
-                btn.setOnClickListener(new OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        onListItemClick(getListView(), view, position, getItemId(position));
-                    }
-                });
-
-
+                btn.setOnClickListener(view -> onListItemClick(getListView(), view, position, getItemId(position)));
                 return convertView;
             }
         };
@@ -179,12 +160,7 @@ public class ApkFragment extends ListFragment implements ServiceConnection {
     }
 
     private void startLoadInner() {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                setListShown(true);
-            }
-        });
+        handler.post(() -> setListShown(true));
         if (!isViewCreated) {
             return;
         }
@@ -192,7 +168,6 @@ public class ApkFragment extends ListFragment implements ServiceConnection {
             @Override
             public void run() {
                 File file = Environment.getExternalStorageDirectory();
-
                 List<File> apks = new ArrayList<File>(10);
                 File[] files = file.listFiles();
                 if (files != null) {
@@ -202,8 +177,6 @@ public class ApkFragment extends ListFragment implements ServiceConnection {
                         }
                     }
                 }
-
-
                 file = new File(Environment.getExternalStorageDirectory(), "360Download");
                 if (file.exists() && file.isDirectory()) {
                     File[] files1 = file.listFiles();
@@ -214,7 +187,6 @@ public class ApkFragment extends ListFragment implements ServiceConnection {
                             }
                         }
                     }
-
                 }
                 PackageManager pm = getActivity().getPackageManager();
                 for (final File apk : apks) {
@@ -223,12 +195,7 @@ public class ApkFragment extends ListFragment implements ServiceConnection {
                             final PackageInfo info = pm.getPackageArchiveInfo(apk.getPath(), 0);
                             if (info != null && isViewCreated) {
                                 try {
-                                    handler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            adapter.add(new ApkItem(getActivity(), info, apk.getPath()));
-                                        }
-                                    });
+                                    handler.post(() -> adapter.add(new ApkItem(getActivity(), info, apk.getPath())));
                                 } catch (Exception e) {
                                 }
                             }
@@ -278,27 +245,18 @@ public class ApkFragment extends ListFragment implements ServiceConnection {
 
     private synchronized void doInstall(ApkItem item) {
         item.installing = true;
-
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                adapter.notifyDataSetChanged();
-            }
-        });
+        handler.post(() -> adapter.notifyDataSetChanged());
         try {
             final int re = PluginManager.getInstance().installPackage(item.apkfile, 0);
             item.installing = false;
 
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    switch (re) {
-                        case PluginManager.INSTALL_FAILED_NO_REQUESTEDPERMISSION:
-                            Toast.makeText(getActivity(), "安装失败，文件请求的权限太多", Toast.LENGTH_SHORT).show();
-                            break;
-                    }
-
+            handler.post(() -> {
+                switch (re) {
+                    case PluginManager.INSTALL_FAILED_NO_REQUESTEDPERMISSION:
+                        Toast.makeText(getActivity(), "安装失败，文件请求的权限太多", Toast.LENGTH_SHORT).show();
+                        break;
                 }
+
             });
         } catch (RemoteException e) {
             e.printStackTrace();

@@ -98,23 +98,12 @@ public class InstalledFragment extends ListFragment implements ServiceConnection
                     final List<PackageInfo> infos = PluginManager.getInstance().getInstalledPackages(0);
                     final PackageManager pm = getActivity().getPackageManager();
                     for (final PackageInfo info : infos) {
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                adapter.add(new ApkItem(pm, info, info.applicationInfo.publicSourceDir));
-                            }
-                        });
+                        handler.post(() -> adapter.add(new ApkItem(pm, info, info.applicationInfo.publicSourceDir)));
                     }
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
-
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        setListShown(true);
-                    }
-                });
+                handler.post(() -> setListShown(true));
             }
         }.start();
     }
@@ -148,23 +137,10 @@ public class InstalledFragment extends ListFragment implements ServiceConnection
 
                 TextView btn = (TextView) convertView.findViewById(R.id.button2);
                 btn.setText("打开");
-                btn.setOnClickListener(new OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        onListItemClick(getListView(), view, position, getItemId(position));
-                    }
-                });
-
+                btn.setOnClickListener(view -> onListItemClick(getListView(), view, position, getItemId(position)));
                 btn = (TextView) convertView.findViewById(R.id.button3);
                 btn.setText("卸载");
-                btn.setOnClickListener(new OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        onListItemClick(getListView(), view, position, getItemId(position));
-                    }
-                });
+                btn.setOnClickListener(view -> onListItemClick(getListView(), view, position, getItemId(position)));
 
                 return convertView;
             }

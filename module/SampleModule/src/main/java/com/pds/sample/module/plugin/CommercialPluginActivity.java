@@ -1,20 +1,24 @@
 package com.pds.sample.module.plugin;
 
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PermissionInfo;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.View;
+import android.os.Handler;
+import android.os.RemoteException;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pds.plugin.helper.Log;
+import com.pds.plugin.pm.PluginManager;
+import com.pds.router.module.ModuleGroupRouter;
 import com.pds.sample.R;
 
 import java.io.File;
@@ -24,11 +28,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class MyActivity extends AppCompatActivity {
+@Route(path = ModuleGroupRouter.PLUGIN_COMMERCIAL_PLUGIN)
+public class CommercialPluginActivity extends AppCompatActivity {
 
-
-    private static final String TAG = "MyActivity";
-
+    private static final String TAG = "CommercialPluginActivity";
 
     private ViewPager mViewPager;
     private FragmentStatePagerAdapter mFragmentStatePagerAdapter = new FragmentStatePagerAdapter(getSupportFragmentManager()) {
@@ -120,9 +123,18 @@ public class MyActivity extends AppCompatActivity {
         }.start();
     }
 
+    private Handler mHandler = new Handler();
 
-    public void jump(View view) {
-        Intent intent = new Intent(this, SccondActivity.class);
-        startActivity(intent);
+    private void doInstall(final File apkPath) {
+        try {
+            final PackageInfo info = getPackageManager().getPackageArchiveInfo(apkPath.getAbsolutePath(), PackageManager.GET_ACTIVITIES);
+            if (info == null) {
+                mHandler.post(() -> Toast.makeText(this, "apk损坏\n" + apkPath.getAbsolutePath(), Toast.LENGTH_SHORT).show());
+                return;
+            }
+            final int re = PluginManager.getInstance().installPackage(apkPath.getAbsolutePath(), 0);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 }

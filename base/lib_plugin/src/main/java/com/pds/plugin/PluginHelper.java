@@ -67,7 +67,7 @@ public class PluginHelper implements ServiceConnection {
         long b = System.currentTimeMillis();
         try {
             try {
-//                fixMiUiLbeSecurity();
+                fixMiUiLbeSecurity();
             } catch (Throwable e) {
                 Log.e(TAG, "fixMiUiLbeSecurity has error", e);
             }
