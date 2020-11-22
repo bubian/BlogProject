@@ -12,7 +12,6 @@ android {
 //            assets.srcDirs = ['assets']
 //            jniLibs.srcDirs = ['libs']
 //        }
-//
 //        instrumentTest.setRoot('tests')
 //        debug.setRoot('build-types/debug')
 //        release.setRoot('build-types/release')
@@ -22,13 +21,12 @@ android {
         abortOnError false
     }
 
-    defaultConfig{
-
+    defaultConfig {
         // 建议改为自己的 packageName + .plugin_stub ，防止跟其它本插件使用者冲突
         def authorityName = "com.pds.plugin_stub"
         buildConfigField "String", "AUTHORITY_NAME", "\"${authorityName}\""
         manifestPlaceholders = [
-                authorityName:"${authorityName}",
+                authorityName: "${authorityName}",
         ]
     }
 }
