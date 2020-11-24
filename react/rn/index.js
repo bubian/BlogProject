@@ -1,25 +1,11 @@
+/** @format */
+import app  from './app'
 import React from "react";
 import { AppRegistry, StyleSheet, Text, View } from "react-native";
+import  AppHome from './js/AppHome'
 
-class HelloWorld extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.hello}>Hello, World</Text>
-      </View>
-    );
-  }
-}
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center"
-  },
-  hello: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10
-  }
-});
+AppRegistry.registerComponent(app.name, () => AppHome);
 
-AppRegistry.registerComponent("ReactNativeApp", () => HelloWorld);
+// RN学习网站
+// https://book.flutterchina.club/chapter6/gridview.html
+// https://reactnative.cn/docs/flatlist
