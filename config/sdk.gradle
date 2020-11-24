@@ -201,6 +201,9 @@ ext {
             'html'   : [
                     // https://github.com/SufficientlySecure/html-textview
                     'htmltextview': "org.sufficientlysecure:html-textview:4.0"
+            ],
+            'anima'  : [
+                    'dynamicanimation': 'androidx.dynamicanimation:dynamicanimation:1.0.0'
             ]
     ]
 

@@ -1,8 +1,12 @@
 package com.pds.kotlin.study.ui.material
 
 import android.app.Activity
+import android.graphics.Outline
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.ViewOutlineProvider
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.PopupMenu
 import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
@@ -28,7 +32,11 @@ class MaterialDesignActivity : Activity() {
         "BottomAppBar,Button,Checkboxes,Chips",
         "Text fields",
         "DrawerLayout,NavigationView",
-        "RadioButton,SwitchMaterial"
+        "RadioButton,SwitchMaterial",
+        // ViewOutlineProvider是Android在5.0之后提出的对Shape处理的标准API，
+        // 其效率会比传统的通过Xfermode进行裁剪的方式高很多，代码如下viewOutline方法所示
+        "ShapeableImageView",
+        "Material Components——Shape的处理"
     )
 
     private val layoutIdArray = arrayOf(
@@ -36,7 +44,9 @@ class MaterialDesignActivity : Activity() {
         R.layout.material_bottomappbar,
         R.layout.material_textfields,
         R.layout.material_navigationview,
-        R.layout.material_radiobutton
+        R.layout.material_radiobutton,
+        R.layout.material_shapeable_imageview,
+        R.layout.material_shape
     )
 
     private val clzArray = arrayOf(
@@ -44,8 +54,23 @@ class MaterialDesignActivity : Activity() {
         CommonMaterialComponentActivity::class.java,
         CommonMaterialComponentActivity::class.java,
         CommonMaterialComponentActivity::class.java,
-        CommonMaterialComponentActivity::class.java
+        CommonMaterialComponentActivity::class.java,
+        CommonMaterialComponentActivity::class.java,
+        MaterialShapeActivity::class.java
     )
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    private fun viewOutline(view: View){
+        view.outlineProvider = object : ViewOutlineProvider() {
+            override fun getOutline(view: View, outline: Outline) {
+                // 绘制圆角矩形
+                 outline.setRoundRect(0, 0, view.width, view.height, 32f)
+                // 绘制圆形
+                 outline.setOval(0, 0, view.width, view.height)
+            }
+        }
+        view.clipToOutline = true
+    }
 
     private val contentAdapter = ContentAdapter1(this@MaterialDesignActivity,R.layout.item_main).apply {
         setItemChildOnClickListener(object : SimpleItemOnClickListener<Entity>(){

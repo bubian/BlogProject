@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="@dimen/dp_172"
+        android:layout_height="@dimen/dp_100"
+        android:layout_marginTop="@dimen/sp_16"
+        app:srcCompat="@mipmap/hospital"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.circle" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="@dimen/dp_172"
+        android:layout_height="@dimen/dp_100"
+        app:srcCompat="@mipmap/hospital"
+        android:layout_marginTop="@dimen/sp_16"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.cut" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="@dimen/dp_172"
+        android:layout_height="@dimen/dp_100"
+        app:srcCompat="@mipmap/hospital"
+        android:layout_marginTop="@dimen/sp_16"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.mix" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="@dimen/dp_172"
+        android:layout_height="@dimen/dp_100"
+        app:strokeColor="@color/colorAccent"
+        android:layout_marginTop="@dimen/sp_16"
+        app:strokeWidth="4dp"
+        app:srcCompat="@mipmap/hospital" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"
+        android:layout_marginTop="@dimen/sp_16"
+        android:padding="4dp"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.circle50"
+        app:srcCompat="@mipmap/hospital"
+        app:strokeColor="@color/colorAccent"
+        app:strokeWidth="4dp" />
+
+</LinearLayout>

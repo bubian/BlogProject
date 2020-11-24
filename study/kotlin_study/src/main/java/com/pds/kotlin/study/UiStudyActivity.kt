@@ -10,6 +10,7 @@ import com.pds.base.adapter.callback.SimpleItemOnClickListener
 import com.pds.base.adapter.viewhold.ViewHolder
 import com.pds.kotlin.study.ui.ViewActivity
 import com.pds.kotlin.study.ui.constraint.ConstraintMainActivity
+import com.pds.kotlin.study.ui.damp.DampActivity
 import com.pds.kotlin.study.ui.entity.MainEntity
 import com.pds.kotlin.study.ui.material.MaterialDesignActivity
 import com.pds.kotlin.study.ui.nav.FlexTabActivity
@@ -33,7 +34,8 @@ class UiStudyActivity : AppCompatActivity() {
         ViewActivity::class.java,
         MaterialDesignActivity::class.java,
         FlexTabActivity::class.java,
-        ConcatAdapterActivity::class.java
+        ConcatAdapterActivity::class.java,
+        DampActivity::class.java
     )
 
     private val titleArray = arrayOf(
@@ -41,7 +43,8 @@ class UiStudyActivity : AppCompatActivity() {
         "Custom View 基础",
         "Material Design",
         "flex tab",
-        "RecyclerView使用"
+        "RecyclerView使用",
+        "Spring Animation"
     )
 
     private val contentArray = arrayOf(
@@ -49,7 +52,8 @@ class UiStudyActivity : AppCompatActivity() {
         "简介：参考HenCoder - 扔物线自定义View系列文章，亲自实践，通过例子学习不同api之间的差异，结合自己的理解，加一注释。",
         "简介：通过demo讲解material库组件使用，文章参考：https://material.io/develop/android/components/cards/，demo参考：https://github.com/material-components/material-components-android",
         "简介：自定义tab组件，添加样式更加灵活，可以实现多种tab切换样式",
-        "简介：主要展示RecyclerView基本使用(优秀开源库：https://github.com/cymcsg/UltimateRecyclerView))"
+        "简介：主要展示RecyclerView基本使用(优秀开源库：https://github.com/cymcsg/UltimateRecyclerView))",
+        "简介：主要介绍弹性与阻尼动画的一些用法和例子"
     )
 
     private val contentAdapter =

@@ -45,6 +45,8 @@ dependencies {
     implementation 'com.cocosw:bottomsheet:1.5.0@aar'
     implementation 'com.cocosw:query:0.2.2'
 
+    implementation deps.anima.dynamicanimation
+
     // [日志分析](https://github.com/JakeWharton/timber)
     implementation 'com.jakewharton.timber:timber:4.7.1'
     // [xCrash](https://github.com/iqiyi/xCrash)

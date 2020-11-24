@@ -132,4 +132,28 @@
         <item name="android:layout_gravity">center</item>
     </style>
 
+    <style name="ShapeAppearance.circle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <!--  cornerSize可以设置多种不同的数值，比如百分百，dp等等。例如50%，即为圆形。-->
+        <item name="cornerSize">10%</item>
+    </style>
+
+    <style name="ShapeAppearance.circle50" parent="">
+        <item name="cornerFamily">rounded</item>
+        <!--  cornerSize可以设置多种不同的数值，比如百分百，dp等等。例如50%，即为圆形。-->
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="ShapeAppearance.cut" parent="">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">10%</item>
+    </style>
+
+    <style name="ShapeAppearance.mix" parent="">
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerFamilyBottomRight">cut</item>
+        <item name="cornerSizeTopLeft">24%</item>
+        <item name="cornerSizeBottomRight">36%</item>
+    </style>
+
 </resources>
