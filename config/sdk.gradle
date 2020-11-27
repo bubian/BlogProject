@@ -250,5 +250,11 @@ ext {
                     'virtualapk': "com.didi.virtualapk:gradle:0.9.8.6"
             ]
     ]
+
+    rn = [
+            'fb': [
+                    'reactNative': "com.facebook.react:react-native:0.56.0"
+            ]
+    ]
 }
 

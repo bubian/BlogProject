@@ -17,13 +17,14 @@ allprojects {
 }
 dependencies {
     implementation deps.ax.appcompat
-    api "com.facebook.react:react-native:0.56.0"
+    api rn.fb.reactNative
     implementation deps.ax.swiperefreshlayout
 
     // api project(':react-native-gesture-handler')
     api project(':react-native-vector-icons')
 
     api project(path: ':base:lib_res')
+    implementation project(path: ':react:LibRNCodePush')
     implementation project(path: ':base:lib_router')
     annotationProcessor deps.alibaba.arouterCompiler
 }
