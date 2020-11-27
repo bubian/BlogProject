@@ -16,6 +16,7 @@ import com.pds.kotlin.study.ui.material.MaterialDesignActivity
 import com.pds.kotlin.study.ui.nav.FlexTabActivity
 import com.pds.kotlin.study.ui.recyclerview.ConcatAdapterActivity
 import com.pds.router.module.ModuleGroupRouter
+import com.pds.kotlin.study.ui.shadow.ShadowActivity
 import kotlinx.android.synthetic.main.constraint_common.*
 import org.jetbrains.anko.internals.AnkoInternals
 import java.util.*
@@ -35,7 +36,8 @@ class UiStudyActivity : AppCompatActivity() {
         MaterialDesignActivity::class.java,
         FlexTabActivity::class.java,
         ConcatAdapterActivity::class.java,
-        DampActivity::class.java
+        DampActivity::class.java,
+        ShadowActivity::class.java
     )
 
     private val titleArray = arrayOf(
@@ -44,7 +46,8 @@ class UiStudyActivity : AppCompatActivity() {
         "Material Design",
         "flex tab",
         "RecyclerView使用",
-        "Spring Animation"
+        "Spring Animation",
+        "shadow学习"
     )
 
     private val contentArray = arrayOf(
@@ -53,7 +56,8 @@ class UiStudyActivity : AppCompatActivity() {
         "简介：通过demo讲解material库组件使用，文章参考：https://material.io/develop/android/components/cards/，demo参考：https://github.com/material-components/material-components-android",
         "简介：自定义tab组件，添加样式更加灵活，可以实现多种tab切换样式",
         "简介：主要展示RecyclerView基本使用(优秀开源库：https://github.com/cymcsg/UltimateRecyclerView))",
-        "简介：主要介绍弹性与阻尼动画的一些用法和例子"
+        "简介：主要介绍弹性与阻尼动画的一些用法和例子",
+        "简介：给View添加阴影的一些方式，以及自定义阴影方式"
     )
 
     private val contentAdapter =
