@@ -1,4 +1,4 @@
-include ':FlutterModule'// app
+// app
 include ':app'
 // mainModule
 include ':module:MainApplication'
@@ -44,6 +44,7 @@ include ':base:lib_preloader'
 include ':base:lib_plugin'
 include ':base:vapk'
 include ':base:lib_splugin'
+include ':base:lib_debug'
 // netty
 include ':nettyim'
 // plugin
