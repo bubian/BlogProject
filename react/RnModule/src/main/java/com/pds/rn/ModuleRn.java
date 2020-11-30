@@ -43,6 +43,19 @@ public class ModuleRn implements ReactApplication {
         protected String getJSMainModuleName() {
             return "index";
         }
+
+        @javax.annotation.Nullable
+        @Override
+        protected String getJSBundleFile() {
+            return super.getJSBundleFile();
+            // try {
+                //加载rn页面时，才会执行
+                // return CodePush.getJSBundleFile(Constants.JS_BUNDLE_FILE_NAME);
+                // return RNCodePush.getJSBundleFile();
+            // } catch (Exception e) {
+                // return null;
+            // }
+        }
     };
 
     @Override
@@ -69,6 +82,11 @@ public class ModuleRn implements ReactApplication {
                 e.printStackTrace();
             }
         });
+    }
+
+    private void checkRnUpdate(){
+        RNCodePush.getInstance().checkReload();
+        RNCodePush.getInstance().checkUpdate(appContext(), BuildConfig.DEBUG);
     }
 
     public static final ModuleRn instance() {
