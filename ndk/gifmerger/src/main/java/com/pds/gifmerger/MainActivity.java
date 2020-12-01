@@ -22,7 +22,6 @@ import androidx.core.content.ContextCompat;
 import java.io.File;
 import java.io.IOException;
 
-import md.edu.pds.kt.gifmerge.R;
 import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
 
