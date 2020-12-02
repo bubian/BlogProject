@@ -25,6 +25,8 @@ public class FFragment extends Fragment {
     public static final String ARG_ROUTE = "route";
     private String mRoute = "/";
 
+    private FlutterView mFlutterView;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +37,19 @@ public class FFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FlutterView flutterView = Flutter.createView(getActivity(), getLifecycle(), mRoute);
+        mFlutterView = Flutter.createView(getActivity(), getLifecycle(), mRoute);
         // 解决黑屏问题
-        flutterView.setZOrderOnTop(true);
-        flutterView.getHolder().setFormat(PixelFormat.TRANSLUCENT);
-        return flutterView;
+        mFlutterView.setZOrderOnTop(true);
+        mFlutterView.getHolder().setFormat(PixelFormat.TRANSLUCENT);
+        return mFlutterView;
     }
 
+    public boolean onBackPressed() {
+        if (mFlutterView != null) {
+            mFlutterView.popRoute();
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

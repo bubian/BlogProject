@@ -13,10 +13,19 @@ class BlogApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Blog Flutter',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        textTheme: TextTheme(
+          //设置Material的默认字体样式
+          body1: TextStyle(
+              color: Colors.black,
+              fontSize: 12.0,
+              fontWeight: FontWeight.normal,
+              decoration: TextDecoration.none),
+        ),
       ),
       home: BlogHome(title: 'Flutter Home'),
       onGenerateRoute: Application.router.generator,

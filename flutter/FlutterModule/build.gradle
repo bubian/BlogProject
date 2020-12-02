@@ -6,4 +6,6 @@ dependencies {
 
     annotationProcessor deps.alibaba.arouterCompiler
     implementation project(path: ':base:lib_router')
+
+    implementation project(path: ':base:lib_res')
 }

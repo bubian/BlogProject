@@ -41,6 +41,7 @@ public class MainActivity extends BaseActivity implements DefaultHardwareBackBtn
     ViewPager2 mVp2;
     @BindView(R2.id.bnv)
     BottomNavigationView mBnv;
+    private FFragment mFFragment;
 
     private static final String ROOT_ROUTE = "ReactNativeApp";
 
@@ -62,7 +63,7 @@ public class MainActivity extends BaseActivity implements DefaultHardwareBackBtn
                     case 0:
                         return new AndroidFragment();
                     case 1:
-                        return new FFragment();
+                        return mFFragment = new FFragment();
                     case 2:
                         return ARouterHelper.navFrag(ModuleGroupRouter.RN_FRAGMENT, BundleKey.URL, ROOT_ROUTE);
                     case 3:
@@ -111,6 +112,9 @@ public class MainActivity extends BaseActivity implements DefaultHardwareBackBtn
 
     @Override
     public void onBackPressed() {
+        if (null != mFFragment && mFFragment.onBackPressed()){
+            return;
+        }
         System.exit(0);
     }
 

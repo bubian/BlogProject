@@ -1,0 +1,3 @@
+List getWidgets() {
+  List result = [];
+}
