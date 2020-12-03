@@ -4,6 +4,7 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_module/routers/Application.dart';
+import 'package:flutter_module/routers/custom_page_route.dart';
 
 /// 跳转路由帮助类
 class AnRouter {
@@ -41,5 +42,9 @@ class AnRouter {
         .push(MaterialPageRoute(builder: (BuildContext context) {
       return null;
     }));
+  }
+
+  static Future navigateToByFade3(BuildContext context, String path) {
+    return Navigator.of(context).push(CustomPageRoute(path));
   }
 }

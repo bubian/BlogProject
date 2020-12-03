@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_module/routers/routers.dart';
 
 class CustomPageRoute extends PageRouteBuilder {
-  final Widget widget;
+  final String router;
 
-  CustomPageRoute(this.widget)
+  CustomPageRoute(this.router)
       : super(
-            transitionDuration: Duration(seconds: 2),
+            transitionDuration: Duration(milliseconds: 300),
             pageBuilder: (BuildContext context, Animation<double> animation1,
                 Animation<double> animation2) {
-              return widget;
+              return Routers.getWidgetsGroupRouter(router, context);
             },
             transitionsBuilder: (BuildContext context,
                 Animation<double> animation1,

@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/services.dart' show rootBundle;
+
 //const createSql = {
 //  'cat': """
 //      CREATE TABLE "cat" (
@@ -14,7 +15,7 @@ import 'package:flutter/services.dart' show rootBundle;
 //      `desc`	TEXT
 //    );
 //  """,
-//  'collectio': """
+//  'collection': """
 //    CREATE TABLE collection (id INTEGER PRIMARY KEY NOT NULL UNIQUE, name TEXT NOT NULL, router TEXT);
 //  """,
 //  'widget': """

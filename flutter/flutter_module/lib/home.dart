@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_module/item/item_gv_tb.dart';
-
-import 'widgets/elements/Form/Text/Text/demo.dart';
+import 'package:flutter_module/module/widget_demo_home.dart';
 
 class BlogHome extends StatefulWidget {
   BlogHome({Key key, this.title}) : super(key: key);
@@ -14,7 +13,7 @@ class BlogHome extends StatefulWidget {
 
 class _BlogHomeState extends State<BlogHome> {
   List<ItemModel> _icons = [
-    ItemModel("assets/home/ic_widgets.png", "组件view", TextDemo.routeName)
+    ItemModel("assets/home/ic_widgets.png", "组件view", WidgetDemoHome.routeName)
   ]; //保存Icon数据
   @override
   Widget build(BuildContext context) {

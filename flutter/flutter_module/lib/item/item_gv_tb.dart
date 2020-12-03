@@ -12,7 +12,7 @@ class ItemGvTb extends StatelessWidget {
     return GestureDetector(
       child: getItemView(),
       onTap: () {
-        AnRouter.navigateToBySlide(context, data.router);
+        AnRouter.navigateToByFade3(context, data.router);
       },
     );
   }

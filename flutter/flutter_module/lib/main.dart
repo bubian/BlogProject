@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_module/home.dart';
 import 'package:flutter_module/routers/Application.dart';
 import 'package:flutter_module/routers/routers.dart';
+import 'package:flutter_module/utils/provider.dart';
+import 'package:flutter_module/utils/shared_preferences.dart';
 
 class BlogApp extends StatelessWidget {
   BlogApp() {
@@ -13,7 +15,6 @@ class BlogApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       title: 'Blog Flutter',
       theme: ThemeData(
@@ -33,4 +34,12 @@ class BlogApp extends StatelessWidget {
   }
 }
 
-void main() => runApp(BlogApp());
+SpUtil sp;
+var db;
+void main() async {
+  final provider = new Provider();
+  await provider.init(true);
+  sp = await SpUtil.getInstance();
+  db = Provider.db;
+  runApp(BlogApp());
+}
