@@ -17,6 +17,7 @@ ext {
             godeye                  : "3.4.2",
             core_version            : "1.2.0",
             datastore               : "1.0.0-alpha02",
+            work                    : "2.5.0-beta02",
     ]
 
 
@@ -35,14 +36,22 @@ ext {
 
             'jp'     : [
                     // 注解
-                    'hilt'              : "com.google.dagger:hilt-android:${versions.hilt}",
-                    'hiltCompiler'      : "com.google.dagger:hilt-android-compiler:${versions.hilt}",
+                    'hilt'                 : "com.google.dagger:hilt-android:${versions.hilt}",
+                    'hiltCompiler'         : "com.google.dagger:hilt-android-compiler:${versions.hilt}",
                     // VM
-                    'lifecycleViewmodel': "androidx.lifecycle:lifecycle-viewmodel:${versions.lifecycleVersion}",
-                    'lifecycleLivedata' : "androidx.lifecycle:lifecycle-livedata:${versions.lifecycleVersion}",
+                    'lifecycleViewmodel'   : "androidx.lifecycle:lifecycle-viewmodel:${versions.lifecycleVersion}",
+                    'lifecycleLivedata'    : "androidx.lifecycle:lifecycle-livedata:${versions.lifecycleVersion}",
                     // 分页
-                    'pagingRuntime'     : "androidx.paging:paging-runtime:${versions.paging_version}",
-                    'pagingRxjava2'     : "androidx.paging:paging-rxjava2:${versions.paging_version}", // For Kotlin use paging-rxjava2-ktx,如果不用，可以不依赖
+                    'pagingRuntime'        : "androidx.paging:paging-runtime:${versions.paging_version}",
+                    'pagingRxjava2'        : "androidx.paging:paging-rxjava2:${versions.paging_version}", // For Kotlin use paging-rxjava2-ktx,如果不用，可以不依赖
+                    // work
+                    'work'                 : "androidx.work:work-runtime-ktx:${versions.work}",
+                    'workGcm'              : "androidx.work:work-gcm:${versions.work}",
+                    'workRxjava2'          : "androidx.work:work-rxjava2:2.2.0",
+                    'firebaseJobdispatcher': "com.firebase:firebase-jobdispatcher:0.8.6",
+                    //
+                    'concurrentFutures'    : "androidx.concurrent:concurrent-futures"
+
             ],
 
             'ax'     : [
@@ -163,6 +172,8 @@ ext {
                     'truth2'      : "com.google.truth:truth:0.42",
                     'junit'       : "androidx.test.ext:junit:1.1.1",
                     'espressoCore': "androidx.test.espresso:espresso-core:3.2.0",
+                    //work
+
             ],
             'other'  : [
                     'rxpermissions'  : "com.github.tbruyelle:rxpermissions:0.12",

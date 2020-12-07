@@ -1,5 +1,12 @@
 apply from: "../../config/module.gradle"
 apply from: "../../config/kotlin.gradle"
+
+android{
+    // work-runtime-ktx 2.1.0 and above now requires Java 8
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
 dependencies {
 
     implementation project(path: ':base:frame')
@@ -31,4 +38,9 @@ dependencies {
     implementation deps.optimum.startup
     // TextView Html
     implementation deps.html.htmltextview
+    // work
+    implementation deps.jp.work
+    implementation deps.jp.workGcm
+    implementation deps.jp.firebaseJobdispatcher
+    implementation deps.jp.workRxjava2
 }
