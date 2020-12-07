@@ -29,12 +29,13 @@ public class AndroidFragment extends BaseFragment {
     private VLayoutRecycleView mRecycleView;
     private DelegateAdapter mDelegateAdapter;
 
-    private static final int[] mTitle = {R.string.base_area, R.string.file_area, R.string.plugin_area, R.string.google_view_widget};
+    private static final int[] mTitle = {R.string.base_area, R.string.file_area, R.string.plugin_area, R.string.google_view_widget,R.string.ndk_area};
     private List<ItemEntity> mUIAreaData;
     private List<ItemEntity> mFileAreaData;
     private List<ItemEntity> mPluginAreaData;
     private List<ItemEntity> mHotFixAreaData;
     private List<ItemEntity> mGoogleAreaData;
+    private List<ItemEntity> mNDKAreaData;
     private SparseArray<List<ItemEntity>> mSparseArray = new SparseArray<List<ItemEntity>>();
 
     @Override
@@ -76,6 +77,10 @@ public class AndroidFragment extends BaseFragment {
         mGoogleAreaData = new ArrayList<>();
         mGoogleAreaData.add(buildItemEntity(R.mipmap.ic_widgets, "view组件",ModuleGroupRouter.GOOGLE_VIEW_WIDGET));
         mSparseArray.append(mTitle[3], mGoogleAreaData);
+        // NDK专区
+        mNDKAreaData = new ArrayList<>();
+        mNDKAreaData.add(buildItemEntity(R.mipmap.ic_change_sound,"变声",ModuleGroupRouter.NDK_CHANGE_SOUND));
+        mSparseArray.append(mTitle[4],mNDKAreaData);
     }
 
     /**

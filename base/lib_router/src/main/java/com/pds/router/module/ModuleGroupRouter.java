@@ -44,6 +44,8 @@ public class ModuleGroupRouter {
     private static final String LIB_ML = "/MotionLayout";
     public static final String GOOGLE_VIEW_WIDGET = LIB_ML + "/viewWidget";
 
+    private static final String NDK = "/ndk";
+    public static final String NDK_CHANGE_SOUND = NDK + "/changeSound";
     // 其它
     public static final String LINK_HYBRID = "/link/hybrid";
 }
