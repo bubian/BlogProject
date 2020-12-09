@@ -1,4 +1,6 @@
 import React, { Component, PureComponent } from "react";
+import { StackNavigator } from 'react-navigation';
+import lg from "../login/login";
 import {
   FlatList,
   SafeAreaView,
@@ -11,12 +13,19 @@ import {
   View,
 } from "react-native";
 
+
 const DATA = [
   {
     icon: require("../../img/ic_widgets.png"),
     title: "React组件",
   },
+  {
+    icon: require("../../img/ic_login.png"),
+    title: "React登录",
+    router: 'Login',
+  },
 ];
+
 
 const Item = ({ item, onPress, style }) => {
   return (
