@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_module/components/widget_item.dart';
+import 'package:flutter_module/routers/router_helper.dart';
 
 import '../routers/application.dart';
 import '../widgets/index.dart';
@@ -43,9 +44,9 @@ class WidgetItemContainer extends StatelessWidget {
                         targetRouter = item.routerName;
                       }
                     });
-                    Application.router.navigateTo(context, "$targetRouter");
+                    AnRouter.navigateToByFade(context, "$targetRouter");
                   } else {
-                    Application.router.navigateTo(context, "/category/${item.name}");
+                    AnRouter.navigateToByFade(context, "/category/${item.name}");
                   }
                 },
                 index: addI,
