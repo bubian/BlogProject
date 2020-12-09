@@ -1,17 +1,29 @@
 package com.pds.flutter;
 
+import android.graphics.Color;
 import android.graphics.PixelFormat;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pds.router.module.ModuleGroupRouter;
 
+import io.flutter.embedding.android.DrawableSplashScreen;
+import io.flutter.embedding.android.FlutterFragment;
+import io.flutter.embedding.android.FlutterSurfaceView;
+import io.flutter.embedding.android.FlutterTextureView;
+import io.flutter.embedding.android.RenderMode;
+import io.flutter.embedding.android.SplashScreen;
+import io.flutter.embedding.engine.FlutterEngine;
+import io.flutter.plugins.GeneratedPluginRegistrant;
 import io.flutter.view.FlutterView;
 
 /**
@@ -21,11 +33,10 @@ import io.flutter.view.FlutterView;
  * DO NOT EDIT.</p>
  */
 @Route(path = ModuleGroupRouter.FLUTTER_FRAGMENT)
-public class FFragment extends Fragment {
+public class FFragment extends FlutterFragment {
     public static final String ARG_ROUTE = "route";
-    private String mRoute = "/";
-
-    private FlutterView mFlutterView;
+    private static final String ROOT = "/";
+    private String mRoute = ROOT;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,21 +46,70 @@ public class FFragment extends Fragment {
         }
     }
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mFlutterView = Flutter.createView(getActivity(), getLifecycle(), mRoute);
-        // 解决黑屏问题
-        mFlutterView.setZOrderOnTop(true);
-        mFlutterView.getHolder().setFormat(PixelFormat.TRANSLUCENT);
-        return mFlutterView;
+    public static FFragment createDefault() {
+        return createDefault(ROOT);
     }
 
-    public boolean onBackPressed() {
-        if (mFlutterView != null) {
-            mFlutterView.popRoute();
-            return true;
-        } else {
-            return false;
+    public static FFragment createDefault(String path) {
+        return createDefault(path,1);
+    }
+
+    public static FFragment createDefault(String path, int type) {
+        NewEngineFragmentBuilder builder = new NewEngineFragmentBuilder(FFragment.class)
+                .initialRoute(path)
+                .renderMode(getRenderMode(type));
+        return builder.build();
+    }
+
+    private static RenderMode getRenderMode(int type){
+        if (1 == type){
+            return RenderMode.surface;
+        }else if (2 == type){
+            return RenderMode.image;
+        }else {
+            return RenderMode.texture;
         }
     }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onFlutterSurfaceViewCreated(@NonNull FlutterSurfaceView flutterSurfaceView) {
+        super.onFlutterSurfaceViewCreated(flutterSurfaceView);
+        // 解决黑屏问题
+        flutterSurfaceView.setZOrderOnTop(true);
+        flutterSurfaceView.getHolder().setFormat(PixelFormat.TRANSLUCENT);
+    }
+
+    @Override
+    public void onFlutterTextureViewCreated(@NonNull FlutterTextureView flutterTextureView) {
+        super.onFlutterTextureViewCreated(flutterTextureView);
+    }
+
+    @Override
+    public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
+        GeneratedPluginRegistrant.registerWith(flutterEngine);
+//        new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), "CHANNEL")
+//                .setMethodCallHandler(
+//                        (call, result) -> {
+//                            // Note: this method is invoked on the main thread.
+//                            // TODO
+//                        }
+//                );
+    }
+
+
+    // 显示过渡图片
+//    @Override
+//    public SplashScreen provideSplashScreen() {
+//        // Load the splash Drawable.
+//        Drawable splash = new ColorDrawable(Color.WHITE);
+//        // Construct a DrawableSplashScreen with the loaded splash Drawable and
+//        // return it.
+//        return new DrawableSplashScreen(splash);
+//    }
 }

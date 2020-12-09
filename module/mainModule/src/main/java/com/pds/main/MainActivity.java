@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity implements DefaultHardwareBackBtn
                     case 0:
                         return new AndroidFragment();
                     case 1:
-                        return mFFragment = new FFragment();
+                        return mFFragment = FFragment.createDefault();
                     case 2:
                         return ARouterHelper.navFrag(ModuleGroupRouter.RN_FRAGMENT, BundleKey.URL, ROOT_ROUTE);
                     case 3:
@@ -112,7 +112,8 @@ public class MainActivity extends BaseActivity implements DefaultHardwareBackBtn
 
     @Override
     public void onBackPressed() {
-        if (null != mFFragment && mFFragment.onBackPressed()){
+        if (null != mFFragment){
+            mFFragment.onBackPressed();
             return;
         }
         System.exit(0);

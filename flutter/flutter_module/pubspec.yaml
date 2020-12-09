@@ -14,7 +14,7 @@ description: A new Flutter module.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: ">=2.1.2-dev.0.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -26,6 +26,9 @@ dependencies:
 
   # 本地存储、收藏功能
   shared_preferences: ^0.4.3
+  # json(https://github.com/google/json_serializable.dart/blob/master/example/pubspec.yaml)
+  # flutter 执行构建命令：通过在我们的项目根目录下运行flutter packages pub run build_runner build
+  json_annotation: ^2.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -34,6 +37,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  #json
+  build_runner: ^1.0.0
+  json_serializable: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

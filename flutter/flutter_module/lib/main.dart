@@ -8,7 +8,7 @@ import 'package:flutter_module/utils/shared_preferences.dart';
 
 class BlogApp extends StatelessWidget {
   BlogApp() {
-    final router = new Router();
+    final router = new FluroRouter();
     Routers.configureRouters(router);
     Application.router = router;
   }
@@ -18,6 +18,7 @@ class BlogApp extends StatelessWidget {
     return MaterialApp(
       title: 'Blog Flutter',
       theme: ThemeData(
+        brightness: Brightness.light,
         primarySwatch: Colors.blue,
         textTheme: TextTheme(
           //设置Material的默认字体样式
@@ -37,6 +38,7 @@ class BlogApp extends StatelessWidget {
 SpUtil sp;
 var db;
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   final provider = new Provider();
   await provider.init(true);
   sp = await SpUtil.getInstance();
