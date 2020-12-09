@@ -10,8 +10,12 @@ import 'package:flutter_module/module/index.dart' as moduleWidget;
 
 class Routers {
   static String root = "/";
+  static String home = "/home";
+  static String widgetDemo = '/widget-demo';
+  static String codeView = '/code-view';
+  static String webViewPage = '/web-view-page';
   static void configureRouters(FluroRouter router) {
-    List<WidgetPoint> widgetList = new WidgetList().getWidget();
+    List<dynamic> widgetList = new WidgetDemoList().getDemos();
     router.notFoundHandler = new Handler(
       // ignore: missing_return
       handlerFunc: (BuildContext context,Map<String, List<String>> params){

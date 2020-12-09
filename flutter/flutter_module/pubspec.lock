@@ -106,6 +106,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.4"
+  city_pickers:
+    dependency: "direct main"
+    description:
+      name: city_pickers
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.30"
   clock:
     dependency: transitive
     description:
@@ -134,6 +141,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.1"
+  cookie_jar:
+    dependency: transitive
+    description:
+      name: cookie_jar
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.8"
   crypto:
     dependency: transitive
     description:
@@ -162,6 +176,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.2.9"
+  dio:
+    dependency: "direct main"
+    description:
+      name: dio
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.17"
+  event_bus:
+    dependency: "direct main"
+    description:
+      name: event_bus
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.1"
   fake_async:
     dependency: transitive
     description:
@@ -195,11 +223,32 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_markdown:
+    dependency: "direct main"
+    description:
+      name: flutter_markdown
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.2.0"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.11"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_webview_plugin:
+    dependency: "direct main"
+    description:
+      name: flutter_webview_plugin
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.3.11"
   front_end:
     dependency: transitive
     description:
@@ -249,13 +298,27 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.1.4"
-  intl:
+  image_picker:
+    dependency: "direct main"
+    description:
+      name: image_picker
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.6.7+14"
+  image_picker_platform_interface:
     dependency: transitive
+    description:
+      name: image_picker_platform_interface
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.1"
+  intl:
+    dependency: "direct main"
     description:
       name: intl
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.16.1"
+    version: "0.15.7"
   io:
     dependency: transitive
     description:
@@ -298,6 +361,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.11.4"
+  lpinyin:
+    dependency: transitive
+    description:
+      name: lpinyin
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.0"
+  markdown:
+    dependency: transitive
+    description:
+      name: markdown
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.8"
   matcher:
     dependency: transitive
     description:
@@ -361,6 +438,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.9.2"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.3"
   pool:
     dependency: transitive
     description:
@@ -499,6 +583,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.3.0-nullsafety.5"
+  url_launcher:
+    dependency: "direct main"
+    description:
+      name: url_launcher
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.2.0+3"
   vector_math:
     dependency: transitive
     description:

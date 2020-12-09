@@ -42,6 +42,7 @@ public class MainActivity extends BaseActivity implements DefaultHardwareBackBtn
     @BindView(R2.id.bnv)
     BottomNavigationView mBnv;
     private FFragment mFFragment;
+    private int mCurrentTabId = R.id.page1;
 
     private static final String ROOT_ROUTE = "ReactNativeApp";
 
@@ -86,7 +87,8 @@ public class MainActivity extends BaseActivity implements DefaultHardwareBackBtn
                 if (!menuItem.isChecked()) {
                     mBnv.getMenu().getItem(position).setChecked(true);
                 }
-                if (R.id.page2 == menuItem.getItemId()) {
+                mCurrentTabId = menuItem.getItemId();
+                if (R.id.page2 == mCurrentTabId) {
                     mVp2.postDelayed(() -> ImmersiveModeUtil.setStatusBarDarkMode(MainActivity.this, true), 2_000);
                 }
             }
@@ -112,9 +114,10 @@ public class MainActivity extends BaseActivity implements DefaultHardwareBackBtn
 
     @Override
     public void onBackPressed() {
-        if (null != mFFragment){
+        if (mCurrentTabId == R.id.page2 && null != mFFragment){
             mFFragment.onBackPressed();
             return;
+
         }
         System.exit(0);
     }

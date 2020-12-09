@@ -15,7 +15,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=2.1.2-dev.0.0 <3.0.0"
-
+# https://flutter.cn/docs/development/packages-and-plugins/androidx-compatibility
 dependencies:
   flutter:
     sdk: flutter
@@ -34,6 +34,17 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
+  flutter_markdown: ^0.2.0
+  event_bus: ^1.0.1
+
+  flutter_webview_plugin: ^0.3.11
+  # 日期格式化
+  intl: 0.15.7
+  city_pickers: ^0.1.0
+
+  image_picker: ^0.6.1+4
+  dio: ^1.0.6
+  url_launcher: ^4.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -97,3 +108,14 @@ flutter:
   assets:
     - assets/app.db
     - assets/home/
+    - assets/fonts/
+
+  fonts:
+    - family: FlamanteRoma
+      fonts:
+        - asset: assets/fonts/Flamante-Roma-Medium.ttf
+        - asset: assets/fonts/Flamante-Roma-MediumItalic.ttf
+
+    - family: LatoBold
+      fonts:
+        - asset: assets/fonts/Lato-Bold.ttf

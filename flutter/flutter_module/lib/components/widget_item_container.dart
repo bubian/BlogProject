@@ -11,7 +11,7 @@ class WidgetItemContainer extends StatelessWidget {
   final bool isWidgetPoint;
 
   // 所有的可用demos;
-  final List widgetDemosList = new WidgetList().getWidget();
+  final List widgetDemosList = new WidgetDemoList().getDemos();
 
   WidgetItemContainer(
       {Key key,

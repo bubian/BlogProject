@@ -41,10 +41,12 @@
         <!--        如果放在其它module，使用Qbsdk打开文件时会出现问题-->
         <provider
             android:name="androidx.core.content.FileProvider"
+            tools:replace="android:authorities"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
+                tools:replace="android:resource"
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths">
             </meta-data>

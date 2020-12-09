@@ -28,7 +28,7 @@ class _CategoryHome extends State<CategoryHome> {
   CatControlModel catControl = new CatControlModel();
   WidgetControlModel widgetControl = new WidgetControlModel();
   // 所有的可用demos;
-  List widgetDemosList = new WidgetList().getWidget();
+  List widgetDemosList = new WidgetDemoList().getDemos();
 
   @override
   void initState() {
