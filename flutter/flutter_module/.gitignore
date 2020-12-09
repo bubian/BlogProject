@@ -41,3 +41,4 @@ build/
 .flutter-plugins
 
 *.log
+/.flutter-plugins-dependencies
