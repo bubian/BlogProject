@@ -209,9 +209,9 @@ public class JsonViewerAdapter extends BaseJsonViewerAdapter<JsonViewerAdapter.J
         if (appendComma) {
             valueBuilder.append(",");
         }
-        if (isPrimitiveAndString(value)) {
-            itemView.setValueClickListener(new JsonItemClickListener(value, itemView, appendComma, hierarchy + 1, valueBuilder.toString()));
-        }
+//        if (isPrimitiveAndString(value)) {
+//            itemView.setValueClickListener(new JsonItemClickListener(value, itemView, appendComma, hierarchy + 1, valueBuilder.toString()));
+//        }
         itemView.showRight(valueBuilder);
     }
 
