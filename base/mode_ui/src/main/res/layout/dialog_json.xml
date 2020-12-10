@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/dp_16"
+    android:paddingStart="@dimen/dp_16"
+    android:paddingEnd="@dimen/dp_16"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <TextView
+        android:id="@+id/json_key"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="key:"/>
+
+    <TextView
+        android:id="@+id/json_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_green_light"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="value"
+        tools:paddingStart="@dimen/dp_40"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:divider="@color/c_f1f1f5"
+        android:showDividers="middle"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/json_key" >
+
+        <TextView
+            android:id="@+id/all"
+            android:layout_weight="1"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:text="all"/>
+
+        <TextView
+            android:id="@+id/key"
+            android:layout_weight="1"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:text="key"/>
+
+        <TextView
+            android:id="@+id/value"
+            android:layout_weight="1"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:text="value"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

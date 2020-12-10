@@ -29,13 +29,21 @@ public class AndroidFragment extends BaseFragment {
     private VLayoutRecycleView mRecycleView;
     private DelegateAdapter mDelegateAdapter;
 
-    private static final int[] mTitle = {R.string.base_area, R.string.file_area, R.string.plugin_area, R.string.google_view_widget,R.string.ndk_area};
+    private static final int[] mTitle = {
+            R.string.base_area,
+            R.string.widget_area,
+            R.string.file_area,
+            R.string.plugin_area,
+            R.string.google_view_widget,
+            R.string.ndk_area};
+
     private List<ItemEntity> mUIAreaData;
     private List<ItemEntity> mFileAreaData;
     private List<ItemEntity> mPluginAreaData;
     private List<ItemEntity> mHotFixAreaData;
     private List<ItemEntity> mGoogleAreaData;
     private List<ItemEntity> mNDKAreaData;
+    private List<ItemEntity> mWidgetAreaData;
     private SparseArray<List<ItemEntity>> mSparseArray = new SparseArray<List<ItemEntity>>();
 
     @Override
@@ -59,28 +67,32 @@ public class AndroidFragment extends BaseFragment {
         mUIAreaData.add(buildItemEntity(R.mipmap.ic_sample, "例子展示", SampleGroupRouter.SAMPLE_HOME));
         mUIAreaData.add(buildItemEntity(R.mipmap.ic_task, "服务任务", SampleGroupRouter.TV_SERVICE_TASK));
         mSparseArray.append(mTitle[0], mUIAreaData);
+        // 控件专区
+        mWidgetAreaData = new ArrayList<>();
+        mWidgetAreaData.add(buildItemEntity(R.mipmap.ic_json, "JSON预览", SampleGroupRouter.WIDGET_PREVIEW,"json"));
+        mSparseArray.append(mTitle[1], mWidgetAreaData);
         // 文件专区
         mFileAreaData = new ArrayList<>();
         mFileAreaData.add(buildItemEntity(R.mipmap.ic_file_browse, "文件浏览", SampleGroupRouter.FILE_LOAD));
-        mSparseArray.append(mTitle[1], mFileAreaData);
+        mSparseArray.append(mTitle[2], mFileAreaData);
         // 插件化专区
         mPluginAreaData = new ArrayList<>();
         mPluginAreaData.add(buildItemEntity(R.mipmap.ic_plugin, "号码查询", ModuleGroupRouter.PLUGIN_PHONE_PROXY));
         mPluginAreaData.add(buildItemEntity(R.mipmap.ic_a2b, "Activity替换", ModuleGroupRouter.PLUGIN_ACTIVITY_REPLACE));
         mPluginAreaData.add(buildItemEntity(R.mipmap.ic_bu_plugin, "商用插件", ModuleGroupRouter.PLUGIN_COMMERCIAL_PLUGIN));
-        mSparseArray.append(mTitle[2], mPluginAreaData);
+        mSparseArray.append(mTitle[3], mPluginAreaData);
         // 热修复专区
         // mHotFixAreaData = new ArrayList<>();
         // mHotFixAreaData.add(buildItemEntity(R.mipmap.ic_hotfix, "美团热修改", ModuleGroupRouter.PLUGIN_PHONE_PROXY));
         // mSparseArray.append(mTitle[3], mHotFixAreaData);
         // google例子专区
         mGoogleAreaData = new ArrayList<>();
-        mGoogleAreaData.add(buildItemEntity(R.mipmap.ic_widgets, "view组件",ModuleGroupRouter.GOOGLE_VIEW_WIDGET));
-        mSparseArray.append(mTitle[3], mGoogleAreaData);
+        mGoogleAreaData.add(buildItemEntity(R.mipmap.ic_widgets, "view组件", ModuleGroupRouter.GOOGLE_VIEW_WIDGET));
+        mSparseArray.append(mTitle[4], mGoogleAreaData);
         // NDK专区
         mNDKAreaData = new ArrayList<>();
-        mNDKAreaData.add(buildItemEntity(R.mipmap.ic_change_sound,"变声",ModuleGroupRouter.NDK_CHANGE_SOUND));
-        mSparseArray.append(mTitle[4],mNDKAreaData);
+        mNDKAreaData.add(buildItemEntity(R.mipmap.ic_change_sound, "变声", ModuleGroupRouter.NDK_CHANGE_SOUND));
+        mSparseArray.append(mTitle[5], mNDKAreaData);
     }
 
     /**

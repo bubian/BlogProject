@@ -29,6 +29,7 @@
             android:name=".module.service.SampleServiceActivity"
             android:theme="@style/AppTheme.MaterialComponents" />
         <activity android:name=".module.service.workmanager.WorkerManagerActivity"/>
+        <activity android:name=".module.widget.WidgetPreviewActivity"/>
     </application>
 
 </manifest>

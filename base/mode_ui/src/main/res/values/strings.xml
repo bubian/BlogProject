@@ -17,4 +17,8 @@
     <string name="get_verify_code">获取验证码</string>
     <string name="error_phone">手机号格式错误</string>
     <string name="get_again">再次获取</string>
+
+    <!--jsonviewer-->
+    <string name="jsonViewer_icon_plus">expand</string>
+    <string name="jsonViewer_icon_minus">collapse</string>
 </resources>

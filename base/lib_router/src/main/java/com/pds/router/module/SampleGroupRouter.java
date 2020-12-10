@@ -30,4 +30,5 @@ public class SampleGroupRouter {
     public static final String TV_COMPAT_HTML = SAMPLE +"/tvCompatHtml";
     public static final String TV_HTML = SAMPLE +"/tvHtml";
     public static final String TV_SERVICE_TASK = SAMPLE +"/serviceTask";
+    public static final String WIDGET_PREVIEW = SAMPLE +"/widgetPreview";
 }
