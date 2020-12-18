@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
+
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
 //const createSql = {
 //  'cat': """
@@ -31,9 +31,10 @@ class Provider {
     if (db == null) {
       return Future.value([]);
     }
-    List tables = await db.rawQuery('SELECT name FROM sqlite_master WHERE type = "table"');
-    List<String> targetList = [];
-    tables.forEach((item)  {
+    List tables = await db
+        .rawQuery('SELECT name FROM sqlite_master WHERE type = "table"');
+    var targetList = <String>[];
+    tables.forEach((item) {
       targetList.add(item['name']);
     });
     return targetList;
@@ -41,42 +42,40 @@ class Provider {
 
   // 检查数据库中, 表是否完整, 在部份android中, 会出现表丢失的情况
   Future checkTableIsRight() async {
-    List<String> expectTables = ['cat', 'widget', 'collection'];
+    var expectTables = <String>['cat', 'widget', 'collection'];
 
     List<String> tables = await getTables();
 
-    for(int i = 0; i < expectTables.length; i++) {
+    for (var i = 0; i < expectTables.length; i++) {
       if (!tables.contains(expectTables[i])) {
         return false;
       }
     }
-   return true;
-
+    return true;
   }
 
   //初始化数据库
 
   Future init(bool isCreate) async {
     //Get a location using getDatabasesPath
-    String databasesPath = await getDatabasesPath();
-    String path = join(databasesPath, 'flutter.db');
+    var databasesPath = await getDatabasesPath();
+    var path = join(databasesPath, 'flutter.db');
     print(path);
     try {
       db = await openDatabase(path);
     } catch (e) {
-      print("Error $e");
+      print('Error $e');
     }
-    bool tableIsRight = await this.checkTableIsRight();
+    bool tableIsRight = await checkTableIsRight();
 
     if (!tableIsRight) {
       // 关闭上面打开的db，否则无法执行open
-      db.close();
+      await db.close();
       // Delete the database
       await deleteDatabase(path);
-      ByteData data = await rootBundle.load(join("assets", "app.db"));
-      List<int> bytes =
-          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-      await new File(path).writeAsBytes(bytes);
+      var data = await rootBundle.load(join('assets', 'app.db'));
+      List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+      await File(path).writeAsBytes(bytes);
 
       db = await openDatabase(path, version: 1,
           onCreate: (Database db, int version) async {
@@ -85,8 +84,7 @@ class Provider {
         print('new db opened');
       });
     } else {
-      print("Opening existing database");
+      print('Opening existing database');
     }
   }
-
 }

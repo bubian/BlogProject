@@ -8,7 +8,7 @@ import 'package:flutter_module/utils/shared_preferences.dart';
 
 class BlogApp extends StatelessWidget {
   BlogApp() {
-    final router = new FluroRouter();
+    final router = FluroRouter();
     Routers.configureRouters(router);
     Application.router = router;
   }
@@ -39,7 +39,7 @@ SpUtil sp;
 var db;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final provider = new Provider();
+  final provider = Provider();
   await provider.init(true);
   sp = await SpUtil.getInstance();
   db = Provider.db;

@@ -17,6 +17,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
                     android:host="${applicationId}"
+                    android:pathPrefix="/"
                     android:scheme="blog" />
             </intent-filter>
         </activity>

@@ -1,0 +1,4 @@
+# 参考：https://pub.dev/packages/pedantic
+include: package:pedantic/analysis_options.yaml
+# 引入特定版本
+# include: package:pedantic/analysis_options.1.9.0.yaml

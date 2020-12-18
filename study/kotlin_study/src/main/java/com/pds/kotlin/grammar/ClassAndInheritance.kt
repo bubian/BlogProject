@@ -92,7 +92,7 @@ interface Base {
     fun printMessageLine()
 }
 
-class BaseImpl(val x: Int) : Base {
+class BaseImpl(private val x: Int) : Base {
     override fun printMessage() { print(x) }
     override fun printMessageLine() { println(x) }
 }
