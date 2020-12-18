@@ -47,7 +47,7 @@ ext {
                     // work
                     'work'                 : "androidx.work:work-runtime-ktx:${versions.work}",
                     'workGcm'              : "androidx.work:work-gcm:${versions.work}",
-                    'workRxjava2'          : "androidx.work:work-rxjava2:2.2.0",
+                    'workRxjava2'          : "androidx.work:work-rxjava2:${versions.work}",
                     'firebaseJobdispatcher': "com.firebase:firebase-jobdispatcher:0.8.6",
                     //
                     'concurrentFutures'    : "androidx.concurrent:concurrent-futures"
