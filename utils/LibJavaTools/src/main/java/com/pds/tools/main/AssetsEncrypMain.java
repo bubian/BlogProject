@@ -22,16 +22,32 @@ public class AssetsEncrypMain {
     private static final Key KEY = DesEncryptUtil.getKey("medrn1580977272874");
 
     public static void main(String[] args) {
-        FileTools.deleteFiles(DEST_PATH);
-        try {
-            ZipTools.zipEncrypt(SRC_PATH,DEST_PATH,null,true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        FileTools.deleteFiles(DEST_PATH);
+//        try {
+//            ZipTools.zipEncrypt(SRC_PATH,DEST_PATH,null,true);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            DesEncryptUtil.encryptFile(new File(DEST_PATH),new File(DEST_ENCRYP_PATH),KEY);
+//            FileTools.deleteFiles(DEST_PATH);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
+        decode(DesEncryptUtil.getKey("medrn1580977272874"));
+    }
+
+
+    private static void decode(Key key){
+        File src = new File(USER_DIR + "/utils/LibJavaTools/android.meta");
+        File de = new File(USER_DIR + "/utils/LibJavaTools/android_de.meta");
         try {
-            DesEncryptUtil.encryptFile(new File(DEST_PATH),new File(DEST_ENCRYP_PATH),KEY);
-            FileTools.deleteFiles(DEST_PATH);
+            if (!de.exists()){
+                de.createNewFile();
+            }
+            DesEncryptUtil.decryptFile(src,de,key);
         } catch (Exception e) {
             e.printStackTrace();
         }

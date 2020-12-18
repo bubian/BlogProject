@@ -6,7 +6,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * @author: pengdaosong CreateTime:  2020-04-09 15:50 Email：pengdaosong@medlinker.com Description:
@@ -64,4 +66,19 @@ public class MD5Tools {
         return swapStream.toByteArray();
     }
 
+
+    public static String md5Java(String message) {
+        String digest = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] hash = md.digest(message.getBytes("UTF-8"));
+            StringBuilder sb = new StringBuilder(2 * hash.length);
+            for (byte b : hash) {
+                sb.append(String.format("%02x", b & 0xff));
+            }
+            digest = sb.toString();
+
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException ignored) {}
+        return digest;
+    }
 }
