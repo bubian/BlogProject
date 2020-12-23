@@ -1,4 +1,4 @@
-package com.pds.kotlin.grammar
+package com.pds.demo.grammar
 
 /**
  * @author: pengdaosong
@@ -59,7 +59,7 @@ fun withTest() {
  * 在let中不能像with那样操作，因为{}并没有持有调用者实例，可以去看一下T.()和()的区别。
  */
 fun  letTest(){
-    val a =User()
+    val a = User()
     a?.let {
         println("a = $it")
     }

@@ -15,3 +15,13 @@ publishing {
         }
     }
 }
+
+//apply plugin: 'maven'
+//uploadArchives {
+//    repositories.mavenDeployer {
+//        repository(url: uri("../repo"))
+//        pom.groupId = 'com.medlinker.base'
+//        pom.artifactId = 'volley'
+//        pom.version = '1.0.0'
+//    }
+//}

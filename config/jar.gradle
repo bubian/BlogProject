@@ -54,3 +54,11 @@ static def getGroupId(String id) {
     return id.substring(0, index)
 }
 
+task makeReleaseJar(type: Jar, dependsOn: ['assembleRelease']){
+    archiveName = 'TestSdk.jar'
+    from ('build/intermediates/classes/release')
+    from ('../test-common/build/intermediates/classes/release')
+    from (project.zipTree('../../../libs/test_api.jar'))
+    destinationDir = file('build/libs')
+}
+

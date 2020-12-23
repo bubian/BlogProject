@@ -53,6 +53,12 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
+
+                // Creates a new MyArgsProvider object, specifies the input and
+                // output paths for the constructor, and passes the object
+                // to the Android plugin.
+                // Android Gradle 插件 3.2.0 及更高版本时，您需要使用 Gradle 的 CommandLineArgumentProvider 接口传递表示文件或目录的处理器参数
+                // compilerArgumentProvider new BlogArgsProvider(files("input/path"), new File("output/path"))
             }
         }
 
@@ -95,5 +101,38 @@ android {
     /**主module一定要加,不然会出问题 */
     dataBinding {
         enabled true
+    }
+}
+
+/**
+ * 自定义class
+ */
+
+class BlogArgsProvider implements CommandLineArgumentProvider {
+    // Annotates each directory as either an input or output for the
+    // annotation processor.
+    @InputFiles
+    // Using this annotation helps Gradle determine which part of the file path
+    // should be considered during up-to-date checks.
+    @PathSensitive(PathSensitivity.RELATIVE)
+    FileCollection inputDir
+
+    @OutputDirectory
+    File outputDir
+
+    // The class constructor sets the paths for the input and output directories.
+    BlogArgsProvider(FileCollection input, File output) {
+        inputDir = input
+        outputDir = output
+    }
+
+    // Specifies each directory as a command line argument for the processor.
+    // The Android plugin uses this method to pass the arguments to the
+    // annotation processor.
+    @Override
+    Iterable<String> asArguments() {
+        // Use the form '-Akey[=value]' to pass your options to the Java compiler.
+        ["-AinputDir=${inputDir.singleFile.absolutePath}",
+         "-AoutputDir=${outputDir.absolutePath}"]
     }
 }

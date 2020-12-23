@@ -80,6 +80,15 @@ android {
             }
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        // staging{
+            // Specifies a sorted list of fallback build types that the
+            // plugin should try to use when a dependency does not include a
+            // "staging" build type. You may specify as many fallbacks as you
+            // like, and the plugin selects the first build type that's
+            // available in the dependency.
+            // 回退机制
+            // matchingFallbacks = ['debug', 'release']
+        // }
     }
 
     // 测试相关配置
@@ -88,6 +97,25 @@ android {
             events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
         }
     }
+
+//    flavorDimensions 'tier'
+//    productFlavors {
+//        paid {
+//            dimension 'tier'
+//            // Because the dependency already includes a "paid" flavor in its
+//            // "tier" dimension, you don't need to provide a list of fallbacks
+//            // for the "paid" flavor.
+//        }
+//        free {
+//            dimension 'tier'
+//            // Specifies a sorted list of fallback flavors that the plugin
+//            // should try to use when a dependency's matching dimension does
+//            // not include a "free" flavor. You may specify as many
+//            // fallbacks as you like, and the plugin selects the first flavor
+//            // that's available in the dependency's "tier" dimension.
+//            matchingFallbacks = ['demo', 'trial']
+//        }
+//    }
 }
 
 repositories {

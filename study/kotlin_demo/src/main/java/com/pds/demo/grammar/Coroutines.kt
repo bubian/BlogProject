@@ -1,4 +1,4 @@
-package com.pds.kotlin.grammar
+package com.pds.demo.grammar
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.GlobalScope.coroutineContext
@@ -11,9 +11,9 @@ import kotlin.system.measureTimeMillis
  * Description:
  */
 
-//fun main() = runBlocking<Unit>{
-//    test4()
-//}
+fun main() = runBlocking<Unit>{
+    test12()
+}
 
 private fun test(){
     GlobalScope.launch { // 在后台启动一个新的协程并继续
@@ -139,11 +139,13 @@ private fun time() = runBlocking{
 
 suspend fun doSomethingUsefulOne(): Int {
     delay(1000L) // 假设我们在这里做了一些有用的事
+    println("doSomethingUsefulOne")
     return 13
 }
 
 suspend fun doSomethingUsefulTwo(): Int {
     delay(1000L) // 假设我们在这里也做了一些有用的事
+    println("doSomethingUsefulTwo")
     return 29
 }
 
@@ -182,8 +184,8 @@ private fun lazyAsyncTest() = runBlocking{
         val one = async(start = CoroutineStart.LAZY) { doSomethingUsefulOne() }
         val two = async(start = CoroutineStart.LAZY) { doSomethingUsefulTwo() }
         // 执行一些计算
-        one.start() // 启动第一个
-        two.start() // 启动第二个
+//        one.start() // 启动第一个
+//        two.start() // 启动第二个
         println("The answer is ${one.await() + two.await()}")
     }
     println("Completed in $time ms")
@@ -320,8 +322,4 @@ fun test14() = runBlocking<Unit> {
     }
     job.join()
     println("Post-main, current thread: ${Thread.currentThread()}, thread local value: '${threadLocal.get()}'")
-}
-
-fun main() {
-    lazyAsyncTest()
 }
