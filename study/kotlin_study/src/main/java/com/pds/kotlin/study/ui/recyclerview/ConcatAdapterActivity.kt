@@ -1,6 +1,7 @@
 package com.pds.kotlin.study.ui.recyclerview
 
 import android.os.Bundle
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.*
 import com.pds.base.act.BaseActivity
@@ -35,7 +36,7 @@ class ConcatAdapterActivity : BaseActivity() {
         mConcatAdapter = ConcatAdapter(adapters)
         // 分割线
         val decoration = DividerItemDecoration(this,LinearLayoutManager.VERTICAL)
-        ContextCompat.getDrawable(this,R.drawable.custom_divider)?.let {
+        ContextCompat.getDrawable(this,R.drawable.divider_dash_line)?.let {
             decoration.setDrawable(it)
         }
         recyclerView.apply {
@@ -44,6 +45,8 @@ class ConcatAdapterActivity : BaseActivity() {
                     return true
                 }
             }
+            // 如果不加 会显示成实线
+            setLayerType(View.LAYER_TYPE_SOFTWARE, null)
             adapter = mConcatAdapter
             // itemAnimator = MyChangeAnimator()
             itemAnimator = DefaultItemAnimator()

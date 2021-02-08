@@ -10,6 +10,9 @@ dependencies {
     implementation 'com.heaven7.core.util:util-v1:1.1.2'
     implementation 'com.heaven7.core.util:util-extra:1.0'
 
+
+    compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
+
     //工程lib
     implementation project(':base:lib_util')
     implementation (deps.list.vlayout) {transitive = true}

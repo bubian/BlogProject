@@ -1,6 +1,7 @@
 package com.pds.base.adapter.vlayout;
 
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 
 import java.util.List;
@@ -53,6 +54,12 @@ public abstract class VLayoutDiffListAdapter<T> extends VLayoutListAdapter<T> {
                         return isContentsTheSame(oldItemPosition, newItemPosition);
                     }
                     return false;
+                }
+
+                @Nullable
+                @Override
+                public Object getChangePayload(int oldItemPosition, int newItemPosition) {
+                    return super.getChangePayload(oldItemPosition, newItemPosition);
                 }
             });
             super.setDataList(dataList);

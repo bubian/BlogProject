@@ -42,4 +42,13 @@ public abstract class BaseAsyncListDifferAdapter<T> extends RecyclerView.Adapter
     public int getItemCount() {
         return mDiffer.getCurrentList().size();
     }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, @NonNull List<Object> payloads) {
+        if (payloads.isEmpty()){
+            super.onBindViewHolder(holder, position, payloads);
+        }else {
+            Object object = payloads.get(0);
+        }
+    }
 }

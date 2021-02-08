@@ -51,6 +51,7 @@
         <activity android:name=".ui.damp.DampActivity" />
         <activity android:name=".ui.material.MaterialShapeActivity" />
         <activity android:name=".ui.shadow.ShadowActivity" />
+        <activity android:name=".ui.gradient.GradientActivity" />
 
         <service android:name=".recorder.core.RecordService"/>
 

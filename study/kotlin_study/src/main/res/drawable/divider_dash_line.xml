@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><!--<rotate xmlns:android="http://schemas.android.com/apk/res/android"-->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="line">
+    <stroke
+        android:width="2px"
+        android:color="#FFff0000"
+        android:dashWidth="8dp"
+        android:dashGap="8dp" />
+    <!--    如果不加，不会显示-->
+    <size android:height="@dimen/dp_1" />
+
+</shape>
