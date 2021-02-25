@@ -1,4 +1,8 @@
-def publishArchivesType = rootProject.ext.config["publishArchivesType"]
+def publishArchivesType = 0
+// 本地需要这样写
+String localRepoURL = "file://localhost$rootDir/repo"
+def pluginVersionName = "3.1.6"
+
 apply plugin: 'maven'
 if (publishArchivesType == 1) {
     uploadArchives {
@@ -7,7 +11,7 @@ if (publishArchivesType == 1) {
                 pom.project {
                     groupId "com.didichuxing.doraemonkit"
                     artifactId "dokitx-plugin"
-                    version rootProject.ext.android["pluginVersionName"]
+                    version pluginVersionName
                 }
 
                 pom.withXml {
@@ -29,14 +33,13 @@ if (publishArchivesType == 1) {
         }
     }
 } else if (publishArchivesType == 0) {
-    def localRepoURL = uri(rootProject.ext.config["localRepoURL"])
     uploadArchives {
         repositories {
             mavenDeployer {
                 pom.project {
                     groupId "com.didichuxing.doraemonkit"
                     artifactId "dokitx-plugin"
-                    version rootProject.ext.android["pluginVersionName"]
+                    version pluginVersionName
                 }
                 pom.withXml {
                     def node = it.asElement()
