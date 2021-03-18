@@ -1,7 +1,13 @@
 apply from: "$rootDir/config/module.gradle"
 apply from: "$rootDir/config/kotlin.gradle"
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
 // 自定义插件
-apply plugin: 'aspect'
+// apply plugin: 'aspect'
 // try {
     // 可以根据具体业务，加if判断是否引入
      // apply from:"$rootDir/base/lib_tools/config/tools.gradle"
