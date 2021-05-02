@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.auto.value/auto-value/1.7/fe8387764ed19460eda4f106849c664f51c07121/auto-value-1.7.jar" />
+        </processorPath>
+        <module name="BlogProject.utils.lib_arsc" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.7">
+      <module name="BlogProject.android_intent" target="1.8" />
+      <module name="BlogProject.app" target="1.8" />
+      <module name="BlogProject.base.debug_tool" target="1.8" />
+      <module name="BlogProject.base.download" target="1.8" />
+      <module name="BlogProject.base.frame" target="1.8" />
+      <module name="BlogProject.base.lib_api" target="1.8" />
+      <module name="BlogProject.base.lib_base" target="1.8" />
+      <module name="BlogProject.base.lib_compat" target="1.8" />
+      <module name="BlogProject.base.lib_debug" target="1.8" />
+      <module name="BlogProject.base.lib_entity" target="1.8" />
+      <module name="BlogProject.base.lib_env" target="1.8" />
+      <module name="BlogProject.base.lib_glide" target="1.8" />
+      <module name="BlogProject.base.lib_gson" target="1.8" />
+      <module name="BlogProject.base.lib_help" target="1.8" />
+      <module name="BlogProject.base.lib_hilt" target="1.8" />
+      <module name="BlogProject.base.lib_log" target="1.8" />
+      <module name="BlogProject.base.lib_net" target="1.8" />
+      <module name="BlogProject.base.lib_package" target="1.8" />
+      <module name="BlogProject.base.lib_pay" target="1.8" />
+      <module name="BlogProject.base.lib_pdf" target="1.8" />
+      <module name="BlogProject.base.lib_plugin" target="1.8" />
+      <module name="BlogProject.base.lib_preloader" target="1.8" />
+      <module name="BlogProject.base.lib_record" target="1.8" />
+      <module name="BlogProject.base.lib_res" target="1.8" />
+      <module name="BlogProject.base.lib_router" target="1.8" />
+      <module name="BlogProject.base.lib_splugin" target="1.8" />
+      <module name="BlogProject.base.lib_storage" target="1.8" />
+      <module name="BlogProject.base.lib_tools" target="1.8" />
+      <module name="BlogProject.base.lib_util" target="1.8" />
+      <module name="BlogProject.base.mode_ui" target="1.8" />
+      <module name="BlogProject.base.skin" target="1.8" />
+      <module name="BlogProject.base.vapk" target="1.8" />
+      <module name="BlogProject.base.web" target="1.8" />
+      <module name="BlogProject.business.addresslookup" target="1.8" />
+      <module name="BlogProject.business.phonequery" target="1.8" />
+      <module name="BlogProject.city_pickers" target="1.8" />
+      <module name="BlogProject.components.ImageEdit" target="1.8" />
+      <module name="BlogProject.flutter.FlutterModule" target="1.8" />
+      <module name="BlogProject.flutter_plugin_android_lifecycle" target="1.8" />
+      <module name="BlogProject.flutter_webview_plugin" target="1.8" />
+      <module name="BlogProject.google.motionlayout" target="1.8" />
+      <module name="BlogProject.google.motionlayoutintegrations" target="1.8" />
+      <module name="BlogProject.IM.socket" target="1.8" />
+      <module name="BlogProject.IM.socket_app" target="1.8" />
+      <module name="BlogProject.IM.socket_control" target="1.8" />
+      <module name="BlogProject.IM.socket_data" target="1.8" />
+      <module name="BlogProject.image_picker" target="1.8" />
+      <module name="BlogProject.module.MainApplication" target="1.8" />
+      <module name="BlogProject.module.mainModule" target="1.8" />
+      <module name="BlogProject.module.SampleModule" target="1.8" />
+      <module name="BlogProject.ndk.bzip2" target="1.8" />
+      <module name="BlogProject.ndk.facerecognition" target="1.8" />
+      <module name="BlogProject.ndk.ffmpeg" target="1.8" />
+      <module name="BlogProject.ndk.fmod" target="1.8" />
+      <module name="BlogProject.ndk.gif" target="1.8" />
+      <module name="BlogProject.ndk.gifmerger" target="1.8" />
+      <module name="BlogProject.ndk.h264rtmp2" target="1.8" />
+      <module name="BlogProject.ndk.idcardrecognitioon" target="1.8" />
+      <module name="BlogProject.ndk.ndkStudy" target="1.8" />
+      <module name="BlogProject.ndk.webrtc" target="1.8" />
+      <module name="BlogProject.nettyim" target="1.8" />
+      <module name="BlogProject.plugin.lib_aspect_annotations" target="1.8" />
+      <module name="BlogProject.plugin.lib_aspect_runtime" target="1.8" />
+      <module name="BlogProject.plugin.plugin_aspect" target="1.8" />
+      <module name="BlogProject.plugin.plugin_webP" target="1.8" />
+      <module name="BlogProject.react-native-gesture-handler" target="1.8" />
+      <module name="BlogProject.react-native-vector-icons" target="1.8" />
+      <module name="BlogProject.react.LibRNCodePush" target="1.8" />
+      <module name="BlogProject.react.RnModule" target="1.8" />
+      <module name="BlogProject.shared_preferences" target="1.8" />
+      <module name="BlogProject.sqflite" target="1.8" />
+      <module name="BlogProject.study.kotlin_demo" target="1.8" />
+      <module name="BlogProject.study.kotlin_study" target="1.8" />
+      <module name="BlogProject.study.lib_java_study" target="1.8" />
+      <module name="BlogProject.study.sdk_use" target="1.8" />
+      <module name="BlogProject.test_app" target="1.8" />
+      <module name="BlogProject.uni_links" target="1.8" />
+      <module name="BlogProject.url_launcher" target="1.8" />
+      <module name="BlogProject.utils.antidebug" target="1.8" />
+      <module name="BlogProject.utils.LibJavaTools" target="1.8" />
+      <module name="BlogProject.xposed.xposed_hook" target="1.8" />
+      <module name="BlogProject.xposed.xposed_restart" target="1.8" />
+      <module name="com.example.flutter_vb.BlogProject.flutter" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -18,7 +18,7 @@ buildscript {
 
         classpath plugin.db.realm
 
-        // classpath plugin.custom.aspect
+        classpath plugin.custom.aspect
         // classpath plugin.custom.webp
 
         classpath plugin.tools.methodcanary

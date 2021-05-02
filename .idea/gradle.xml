@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="PLATFORM" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="1.8" />
+        <option name="modules">
+          <set>
+            <option value="$USER_HOME$/AS/flutter/.pub-cache/hosted/pub.flutter-io.cn/android_intent-0.3.7+7/android" />
+            <option value="$USER_HOME$/AS/flutter/.pub-cache/hosted/pub.flutter-io.cn/city_pickers-0.1.30/android" />
+            <option value="$USER_HOME$/AS/flutter/.pub-cache/hosted/pub.flutter-io.cn/flutter_plugin_android_lifecycle-1.0.11/android" />
+            <option value="$USER_HOME$/AS/flutter/.pub-cache/hosted/pub.flutter-io.cn/flutter_webview_plugin-0.3.11/android" />
+            <option value="$USER_HOME$/AS/flutter/.pub-cache/hosted/pub.flutter-io.cn/image_picker-0.6.7+22/android" />
+            <option value="$USER_HOME$/AS/flutter/.pub-cache/hosted/pub.flutter-io.cn/shared_preferences-0.4.3/android" />
+            <option value="$USER_HOME$/AS/flutter/.pub-cache/hosted/pub.flutter-io.cn/sqflite-1.3.2+4/android" />
+            <option value="$USER_HOME$/AS/flutter/.pub-cache/hosted/pub.flutter-io.cn/uni_links-0.4.0/android" />
+            <option value="$USER_HOME$/AS/flutter/.pub-cache/hosted/pub.flutter-io.cn/url_launcher-4.2.0+3/android" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/IM" />
+            <option value="$PROJECT_DIR$/IM/socket" />
+            <option value="$PROJECT_DIR$/IM/socket_app" />
+            <option value="$PROJECT_DIR$/IM/socket_control" />
+            <option value="$PROJECT_DIR$/IM/socket_data" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/base" />
+            <option value="$PROJECT_DIR$/base/debug_tool" />
+            <option value="$PROJECT_DIR$/base/download" />
+            <option value="$PROJECT_DIR$/base/frame" />
+            <option value="$PROJECT_DIR$/base/lib_api" />
+            <option value="$PROJECT_DIR$/base/lib_base" />
+            <option value="$PROJECT_DIR$/base/lib_compat" />
+            <option value="$PROJECT_DIR$/base/lib_debug" />
+            <option value="$PROJECT_DIR$/base/lib_entity" />
+            <option value="$PROJECT_DIR$/base/lib_env" />
+            <option value="$PROJECT_DIR$/base/lib_glide" />
+            <option value="$PROJECT_DIR$/base/lib_gson" />
+            <option value="$PROJECT_DIR$/base/lib_help" />
+            <option value="$PROJECT_DIR$/base/lib_hilt" />
+            <option value="$PROJECT_DIR$/base/lib_log" />
+            <option value="$PROJECT_DIR$/base/lib_net" />
+            <option value="$PROJECT_DIR$/base/lib_package" />
+            <option value="$PROJECT_DIR$/base/lib_pay" />
+            <option value="$PROJECT_DIR$/base/lib_pdf" />
+            <option value="$PROJECT_DIR$/base/lib_plugin" />
+            <option value="$PROJECT_DIR$/base/lib_preloader" />
+            <option value="$PROJECT_DIR$/base/lib_record" />
+            <option value="$PROJECT_DIR$/base/lib_res" />
+            <option value="$PROJECT_DIR$/base/lib_router" />
+            <option value="$PROJECT_DIR$/base/lib_splugin" />
+            <option value="$PROJECT_DIR$/base/lib_storage" />
+            <option value="$PROJECT_DIR$/base/lib_tools" />
+            <option value="$PROJECT_DIR$/base/lib_util" />
+            <option value="$PROJECT_DIR$/base/mode_ui" />
+            <option value="$PROJECT_DIR$/base/skin" />
+            <option value="$PROJECT_DIR$/base/vapk" />
+            <option value="$PROJECT_DIR$/base/web" />
+            <option value="$PROJECT_DIR$/business" />
+            <option value="$PROJECT_DIR$/business/addresslookup" />
+            <option value="$PROJECT_DIR$/business/phonequery" />
+            <option value="$PROJECT_DIR$/components" />
+            <option value="$PROJECT_DIR$/components/ImageEdit" />
+            <option value="$PROJECT_DIR$/flutter/FlutterModule" />
+            <option value="$PROJECT_DIR$/flutter/flutter_module" />
+            <option value="$PROJECT_DIR$/flutter/flutter_module/.android/Flutter" />
+            <option value="$PROJECT_DIR$/google" />
+            <option value="$PROJECT_DIR$/google/motionlayout" />
+            <option value="$PROJECT_DIR$/google/motionlayoutintegrations" />
+            <option value="$PROJECT_DIR$/module" />
+            <option value="$PROJECT_DIR$/module/MainApplication" />
+            <option value="$PROJECT_DIR$/module/SampleModule" />
+            <option value="$PROJECT_DIR$/module/mainModule" />
+            <option value="$PROJECT_DIR$/ndk" />
+            <option value="$PROJECT_DIR$/ndk/bzip2" />
+            <option value="$PROJECT_DIR$/ndk/facerecognition" />
+            <option value="$PROJECT_DIR$/ndk/ffmpeg" />
+            <option value="$PROJECT_DIR$/ndk/fmod" />
+            <option value="$PROJECT_DIR$/ndk/gif" />
+            <option value="$PROJECT_DIR$/ndk/gifmerger" />
+            <option value="$PROJECT_DIR$/ndk/h264rtmp2" />
+            <option value="$PROJECT_DIR$/ndk/idcardrecognitioon" />
+            <option value="$PROJECT_DIR$/ndk/ndkStudy" />
+            <option value="$PROJECT_DIR$/ndk/webrtc" />
+            <option value="$PROJECT_DIR$/nettyim" />
+            <option value="$PROJECT_DIR$/plugin" />
+            <option value="$PROJECT_DIR$/plugin/lib_aspect_annotations" />
+            <option value="$PROJECT_DIR$/plugin/lib_aspect_runtime" />
+            <option value="$PROJECT_DIR$/plugin/plugin_aspect" />
+            <option value="$PROJECT_DIR$/plugin/plugin_webP" />
+            <option value="$PROJECT_DIR$/react" />
+            <option value="$PROJECT_DIR$/react/LibRNCodePush" />
+            <option value="$PROJECT_DIR$/react/RnModule" />
+            <option value="$PROJECT_DIR$/react/rn/node_modules/react-native-gesture-handler/android" />
+            <option value="$PROJECT_DIR$/react/rn/node_modules/react-native-vector-icons/android" />
+            <option value="$PROJECT_DIR$/study" />
+            <option value="$PROJECT_DIR$/study/kotlin_demo" />
+            <option value="$PROJECT_DIR$/study/kotlin_study" />
+            <option value="$PROJECT_DIR$/study/lib_java_study" />
+            <option value="$PROJECT_DIR$/study/sdk_use" />
+            <option value="$PROJECT_DIR$/test_app" />
+            <option value="$PROJECT_DIR$/utils" />
+            <option value="$PROJECT_DIR$/utils/LibJavaTools" />
+            <option value="$PROJECT_DIR$/utils/antidebug" />
+            <option value="$PROJECT_DIR$/utils/lib_arsc" />
+            <option value="$PROJECT_DIR$/utils/lib_res_guard" />
+            <option value="$PROJECT_DIR$/xposed" />
+            <option value="$PROJECT_DIR$/xposed/xposed_hook" />
+            <option value="$PROJECT_DIR$/xposed/xposed_restart" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+        <option name="useQualifiedModuleNames" value="true" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

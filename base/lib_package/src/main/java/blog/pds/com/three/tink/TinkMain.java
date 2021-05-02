@@ -7,6 +7,7 @@ import android.util.Log;
 import com.google.crypto.tink.*;
 import com.google.crypto.tink.aead.AeadKeyTemplates;
 import com.google.crypto.tink.config.TinkConfig;
+import com.google.crypto.tink.integration.android.AndroidKeysetManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,14 +25,36 @@ public class TinkMain extends Activity {
     private static final String PATH = Environment.getExternalStorageDirectory().getPath();
     private static final String KEY_SET_FILE_NAME = "my_keyset.txt";
 
-    static {
+
+    private static final String PREF_FILE_NAME = "hello_world_pref";
+    private static final String TINK_KEYSET_NAME = "hello_world_keyset";
+    private static final String MASTER_KEY_URI = "android-keystore://hello_world_master_key";
+    public static Aead aead;
+
+    {
+//        try {
+//            TinkConfig.register();
+//            // Register a custom implementation of AEAD.
+//            // Registry.registerKeyManager(new MyAeadKeyManager());
+//        } catch (GeneralSecurityException e) {
+//            e.printStackTrace();
+//        }
+
         try {
-            TinkConfig.register();
-            // Register a custom implementation of AEAD.
-            // Registry.registerKeyManager(new MyAeadKeyManager());
-        } catch (GeneralSecurityException e) {
-            e.printStackTrace();
+            Config.register(TinkConfig.TINK_1_0_0);
+            aead = getOrGenerateNewKeysetHandle().getPrimitive(Aead.class);
+        } catch (GeneralSecurityException | IOException e) {
+            throw new RuntimeException(e);
         }
+    }
+
+    private KeysetHandle getOrGenerateNewKeysetHandle() throws IOException, GeneralSecurityException {
+        return new AndroidKeysetManager.Builder()
+                .withSharedPref(getApplicationContext(), TINK_KEYSET_NAME, PREF_FILE_NAME)
+                .withKeyTemplate(AeadKeyTemplates.AES256_GCM)
+                .withMasterKeyUri(MASTER_KEY_URI)
+                .build()
+                .getKeysetHandle();
     }
 
     @Override

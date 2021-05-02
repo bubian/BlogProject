@@ -1,0 +1,26 @@
+apply plugin: 'maven'
+//支持对库文件数字签名的插件，可以通过签名知道文件的创建者，创建时间等信息
+apply plugin: 'signing'
+
+String localRepoURL = "http://nexus.medlinker.com/repository/local-android-snapshot/"
+def pluginVersionName = "1.0.0-SNAPSHOT"
+def gid = "com.medlinker"
+def pn = "dokitx-plugin"
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.project {
+                name project.name
+                groupId gid
+                artifactId pn
+                packaging = 'jar'
+                version pluginVersionName
+                description = 'dokit plugin'
+            }
+            repository(url: localRepoURL){
+                authentication(userName:getRepositoryUserName(), password: getRepositoryPassword())
+            }
+        }
+    }
+}
