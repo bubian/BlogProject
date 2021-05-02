@@ -20,11 +20,6 @@
             <option value="$USER_HOME$/AS/flutter/.pub-cache/hosted/pub.flutter-io.cn/uni_links-0.4.0/android" />
             <option value="$USER_HOME$/AS/flutter/.pub-cache/hosted/pub.flutter-io.cn/url_launcher-4.2.0+3/android" />
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/IM" />
-            <option value="$PROJECT_DIR$/IM/socket" />
-            <option value="$PROJECT_DIR$/IM/socket_app" />
-            <option value="$PROJECT_DIR$/IM/socket_control" />
-            <option value="$PROJECT_DIR$/IM/socket_data" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/base" />
             <option value="$PROJECT_DIR$/base/debug_tool" />
