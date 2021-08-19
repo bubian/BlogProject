@@ -2,7 +2,7 @@
 //String ROOT_DIR = System.getProperty("user.dir")
 def module_name = project.name
 def id = id[module_name]
-def cMakeListPath = "$rootDir + ${project.path.replaceAll(':', '/')} + /CMakeLists.txt"
+def cMakeListPath = "$rootDir${project.path.replaceAll(':', '/')}/CMakeLists.txt"
 def hasCMakeListFile = new File(cMakeListPath).exists()
 android {
     compileSdkVersion app.compileSdkVersion
@@ -29,7 +29,7 @@ android {
 
             ndk {
                 moduleName "app"
-                abiFilters "armeabi-v7a", "x86" //指定平台
+                abiFilters "armeabi-v7a" //指定平台
                 cFlags "-DANDROID_NDK"
             }
         }

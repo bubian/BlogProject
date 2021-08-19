@@ -1,4 +1,11 @@
 apply from: "../../config/module.gradle"
+android {
+    // 中配置打包规则，有冲突选择就第一个最为打包内容：
+    packagingOptions {
+        pickFirst "**/libfmod.so"
+        pickFirst "**/libfmodL.so"
+    }
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation deps.ax.appcompat
