@@ -3,6 +3,8 @@ package com.pds.kotlin.study.ui.constraint
 import android.app.Activity
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.*
 import com.pds.base.adapter.callback.SimpleItemOnClickListener
 import com.pds.kotlin.study.R
@@ -10,7 +12,8 @@ import com.pds.kotlin.study.ui.adapter.ContentAdapter1
 import com.pds.kotlin.study.ui.entity.Entity
 import kotlinx.android.synthetic.main.constraint_common.*
 import org.jetbrains.anko.internals.AnkoInternals
-import java.util.ArrayList
+import java.util.*
+
 
 class ConstraintMainActivity : Activity(){
 
@@ -44,7 +47,7 @@ class ConstraintMainActivity : Activity(){
         "bottomSheetBehavior",
         "CustomBottomSheetBehavior",
         "BottomSheet"
-        )
+    )
     private val layoutArray = arrayOf(
         R.layout.constraint_1,
         R.layout.constraint_2,
@@ -68,7 +71,23 @@ class ConstraintMainActivity : Activity(){
     }
 
     private fun initView() {
-        val flm =  FlexboxLayoutManager(this).apply {
+        val flm =  object : FlexboxLayoutManager(this){
+            // 解决：ClassCastException: android.support.v7.widget.RecyclerView$LayoutParams cannot be cast to com.google.android.flexbox.FlexItem
+            // 在添加自己的header或者foot时出现
+            override fun generateLayoutParams(lp: ViewGroup.LayoutParams?): RecyclerView.LayoutParams? {
+                return when (lp) {
+                    is RecyclerView.LayoutParams -> {
+                        LayoutParams(lp as RecyclerView.LayoutParams?)
+                    }
+                    is ViewGroup.MarginLayoutParams -> {
+                        LayoutParams(lp as ViewGroup.MarginLayoutParams?)
+                    }
+                    else -> {
+                        LayoutParams(lp)
+                    }
+                }
+            }
+        }.apply {
             flexDirection = FlexDirection.ROW
             alignItems = AlignItems.STRETCH
             justifyContent = JustifyContent.FLEX_START
@@ -82,11 +101,11 @@ class ConstraintMainActivity : Activity(){
 
     private fun initData() {
         val data: MutableList<Entity> = ArrayList()
-        for ((i ,value) in textArray.withIndex()) {
+        for ((i, value) in textArray.withIndex()) {
             val entity : Entity = if (i >6){
-                Entity(value,layoutArray[i],R.color.colorAccent)
+                Entity(value, layoutArray[i], R.color.colorAccent)
             }else{
-                Entity(value,layoutArray[i])
+                Entity(value, layoutArray[i])
             }
             data.add(entity)
         }
@@ -95,19 +114,35 @@ class ConstraintMainActivity : Activity(){
             setItemChildOnClickListener(object : SimpleItemOnClickListener<Entity>() {
                 override fun onItemClick(v: View?, position: Int, data: Entity?) {
                     when (data?.layoutId) {
-                        R.layout.barrier_1,R.layout.constraint_7,R.layout.template_impl ->{
-                            AnkoInternals.internalStartActivity(this@ConstraintMainActivity,ConstraintActivity::class.java, arrayOf(Pair("layout_id", data?.layoutId),
-                                Pair("title",data?.text)
-                            ))
+                        R.layout.barrier_1, R.layout.constraint_7, R.layout.template_impl -> {
+                            AnkoInternals.internalStartActivity(
+                                this@ConstraintMainActivity,
+                                ConstraintActivity::class.java,
+                                arrayOf(
+                                    Pair(
+                                        "layout_id",
+                                        data?.layoutId
+                                    ),
+                                    Pair("title", data?.text)
+                                )
+                            )
                         }
                         R.layout.behavior_custom_activity -> {
-                            AnkoInternals.internalStartActivity(this@ConstraintMainActivity, CustomBehaviorActivity::class.java, emptyArray())
+                            AnkoInternals.internalStartActivity(
+                                this@ConstraintMainActivity,
+                                CustomBehaviorActivity::class.java,
+                                emptyArray()
+                            )
                         }
                         R.layout.ui_main -> {
-                            AnkoInternals.internalStartActivity(this@ConstraintMainActivity, BottomSheetActivity::class.java, emptyArray())
+                            AnkoInternals.internalStartActivity(
+                                this@ConstraintMainActivity,
+                                BottomSheetActivity::class.java,
+                                emptyArray()
+                            )
                         }
 
-                        R.layout.behavior_1 ->{
+                        R.layout.behavior_1 -> {
                             AnkoInternals.internalStartActivity(
                                 this@ConstraintMainActivity, BehaviorActivity::class.java, arrayOf(
                                     Pair("layout_id", data?.layoutId),
@@ -117,9 +152,17 @@ class ConstraintMainActivity : Activity(){
                         }
 
                         else -> {
-                            AnkoInternals.internalStartActivity(this@ConstraintMainActivity,ConstraintLayoutActivity::class.java, arrayOf(Pair("layout_id", data?.layoutId),
-                                Pair("title",data?.text)
-                            ))
+                            AnkoInternals.internalStartActivity(
+                                this@ConstraintMainActivity,
+                                ConstraintLayoutActivity::class.java,
+                                arrayOf(
+                                    Pair(
+                                        "layout_id",
+                                        data?.layoutId
+                                    ),
+                                    Pair("title", data?.text)
+                                )
+                            )
                         }
                     }
                 }
