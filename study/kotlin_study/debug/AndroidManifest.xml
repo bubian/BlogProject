@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        package="com.pds.kotlin.study">
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="com.pds.kotlin.DebugApp"
+        android:allowBackup="true"
+        android:extractNativeLibs="false"
+        android:fullBackupContent="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.pds.kotlin.study.UiStudyActivity"
+            android:theme="@style/AppTheme.MaterialComponents">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name="com.pds.kotlin.study.ui.constraint.ConstraintLayoutActivity"/>
+        <activity
+            android:name="com.pds.kotlin.study.ui.constraint.BehaviorActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.pds.kotlin.study.ui.constraint.CustomBehaviorActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name="com.pds.kotlin.study.ui.constraint.BottomSheetActivity"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name="com.pds.kotlin.study.ui.constraint.ListActivity"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name="com.pds.kotlin.study.ui.constraint.ConstraintActivity" />
+        <activity
+            android:name=".ui.constraint.ConstraintMainActivity"
+            android:theme="@style/Theme.MaterialComponents"/>
+        <activity
+            android:name=".ui.ViewActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".ui.material.MaterialDesignActivity" />
+        <activity android:name=".ui.material.BottomNavigationActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight"/>
+        <activity android:name=".ui.material.CommonMaterialComponentActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
+
+        <!-- record-->
+        <activity android:name=".recorder.RecordActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".ui.nav.FlexTabActivity" />
+        <activity android:name=".ui.recyclerview.ConcatAdapterActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
+        <activity android:name=".ui.recyclerview.LayoutManagerActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
+
+        <activity android:name=".ui.damp.DampActivity" />
+        <activity android:name=".ui.material.MaterialShapeActivity" />
+        <activity android:name=".ui.shadow.ShadowActivity" />
+        <activity android:name=".ui.gradient.GradientActivity" />
+
+        <service android:name=".recorder.core.RecordService"/>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+
+</manifest>
