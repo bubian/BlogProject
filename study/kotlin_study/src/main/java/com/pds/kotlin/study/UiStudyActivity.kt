@@ -21,6 +21,8 @@ import com.pds.kotlin.study.ui.shadow.ShadowActivity
 import kotlinx.android.synthetic.main.constraint_common.*
 import org.jetbrains.anko.internals.AnkoInternals
 import java.util.*
+import com.google.androidstudio.motionlayoutexample.MotionLayoutActivity
+import com.pds.sample.ModuleActivity
 
 /**
  * @author: pengdaosong
@@ -39,7 +41,9 @@ class UiStudyActivity : AppCompatActivity() {
         ConcatAdapterActivity::class.java,
         DampActivity::class.java,
         ShadowActivity::class.java,
-        GradientActivity::class.java
+        GradientActivity::class.java,
+        MotionLayoutActivity::class.java,
+        ModuleActivity::class.java
     )
 
     private val titleArray = arrayOf(
@@ -50,7 +54,9 @@ class UiStudyActivity : AppCompatActivity() {
         "RecyclerView使用",
         "Spring Animation",
         "shadow学习",
-        "Gradient（渐变）学习"
+        "Gradient（渐变）学习",
+        "Google MotionLayout",
+        "个人UI使用集合"
     )
 
     private val contentArray = arrayOf(
@@ -61,7 +67,9 @@ class UiStudyActivity : AppCompatActivity() {
         "简介：主要展示RecyclerView基本使用(优秀开源库：https://github.com/cymcsg/UltimateRecyclerView))",
         "简介：主要介绍弹性与阻尼动画的一些用法和例子",
         "简介：给View添加阴影的一些方式，以及自定义阴影方式",
-        "简介：通过实例带你走进渐变的世界"
+        "简介：通过实例带你走进渐变的世界",
+        "简介：MotionLayout各种效果展示",
+        "简介：个人UI使用集合,包含很多使用技巧"
     )
 
     private val contentAdapter =
