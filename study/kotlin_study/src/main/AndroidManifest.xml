@@ -38,6 +38,8 @@
             android:theme="@style/Theme.MaterialComponents.DayNight"/>
         <activity android:name=".ui.material.CommonMaterialComponentActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
+        <activity android:name=".ui.material.BottomSheetDialogActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight"/>
 
         <!-- record-->
         <activity android:name=".recorder.RecordActivity"

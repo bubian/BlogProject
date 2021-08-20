@@ -36,7 +36,8 @@ class MaterialDesignActivity : Activity() {
         // ViewOutlineProvider是Android在5.0之后提出的对Shape处理的标准API，
         // 其效率会比传统的通过Xfermode进行裁剪的方式高很多，代码如下viewOutline方法所示
         "ShapeableImageView",
-        "Material Components——Shape的处理"
+        "Material Components——Shape的处理",
+        "BottomSheetDialogFragment"
     )
 
     private val layoutIdArray = arrayOf(
@@ -46,7 +47,8 @@ class MaterialDesignActivity : Activity() {
         R.layout.material_navigationview,
         R.layout.material_radiobutton,
         R.layout.material_shapeable_imageview,
-        R.layout.material_shape
+        R.layout.material_shape,
+        R.layout.material_bottom_sheet_dialog_fragment
     )
 
     private val clzArray = arrayOf(
@@ -56,7 +58,8 @@ class MaterialDesignActivity : Activity() {
         CommonMaterialComponentActivity::class.java,
         CommonMaterialComponentActivity::class.java,
         CommonMaterialComponentActivity::class.java,
-        MaterialShapeActivity::class.java
+        MaterialShapeActivity::class.java,
+        BottomSheetDialogActivity::class.java
     )
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)

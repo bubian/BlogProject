@@ -60,6 +60,8 @@
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
         <activity android:name=".ui.recyclerview.LayoutManagerActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
+        <activity android:name=".ui.material.BottomSheetDialogActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight"/>
 
         <activity android:name=".ui.damp.DampActivity" />
         <activity android:name=".ui.material.MaterialShapeActivity" />
