@@ -2,6 +2,7 @@ package com.pds.fmod;
 
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -16,6 +17,7 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
+  private static final String TAG = "MainActivity";
   private ImageView mImageViewN;
   private ImageView mImageViewL;
   private ImageView mImageViewD;
@@ -51,11 +53,14 @@ public class MainActivity extends AppCompatActivity {
   public void mFix(View view){
     switch (view.getId()){
       case R.id.btn_normal:
-        fix(Environment.getExternalStorageDirectory() + File.separator +"fix.wav",0);
+        new Thread(() -> {
+          File file = new File(Environment.getExternalStorageDirectory() + File.separator +"hongdou.mp3");
+          Log.d(TAG,"path = "+ file.getAbsolutePath());
+          fix(file.getAbsolutePath(),0);
+        }).start();
         break;
     }
 
   }
-
 
 }
