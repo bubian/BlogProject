@@ -51,3 +51,21 @@ abstract class CurrentVersionInfo extends DefaultTask {
         }
     }
 }
+
+
+// 参考：https://docs.gradle.org/current/userguide/caching_java_projects.html
+class CiEnvironmentProvider implements CommandLineArgumentProvider {
+    @org.gradle.api.tasks.Internal
+    String agentNumber = System.getenv().get("AGENT_NUMBER") ?: "1"
+
+    @Override
+    Iterable<String> asArguments() {
+        ["-DagentNumber=${agentNumber}".toString()]
+    }
+}
+
+tasks.named('integTest') {
+    jvmArgumentProviders.add(
+            new CiEnvironmentProvider()
+    )
+}

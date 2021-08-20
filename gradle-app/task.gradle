@@ -26,20 +26,3 @@ tasks.register('showRepos') {
         println repositories.collect { it.name }
     }
 }
-
-// 参考：https://docs.gradle.org/current/userguide/caching_java_projects.html
-class CiEnvironmentProvider implements CommandLineArgumentProvider {
-    @Internal
-    String agentNumber = System.getenv().get("AGENT_NUMBER") ?: "1"
-
-    @Override
-    Iterable<String> asArguments() {
-        ["-DagentNumber=${agentNumber}".toString()]
-    }
-}
-
-tasks.named('integTest') {
-    jvmArgumentProviders.add(
-            new CiEnvironmentProvider()
-    )
-}
