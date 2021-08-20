@@ -1,4 +1,4 @@
-// app
+include ':gradle-app'// app
 include ':app'
 // mainModule
 include ':module:MainApplication'

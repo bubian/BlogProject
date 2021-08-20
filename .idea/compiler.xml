@@ -53,6 +53,7 @@
       <module name="BlogProject.flutter_webview_plugin" target="1.8" />
       <module name="BlogProject.google.motionlayout" target="1.8" />
       <module name="BlogProject.google.motionlayoutintegrations" target="1.8" />
+      <module name="BlogProject.gradle-app" target="1.8" />
       <module name="BlogProject.IM.socket" target="1.8" />
       <module name="BlogProject.IM.socket_app" target="1.8" />
       <module name="BlogProject.IM.socket_control" target="1.8" />

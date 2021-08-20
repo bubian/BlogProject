@@ -64,6 +64,7 @@
             <option value="$PROJECT_DIR$/google" />
             <option value="$PROJECT_DIR$/google/motionlayout" />
             <option value="$PROJECT_DIR$/google/motionlayoutintegrations" />
+            <option value="$PROJECT_DIR$/gradle-app" />
             <option value="$PROJECT_DIR$/module" />
             <option value="$PROJECT_DIR$/module/MainApplication" />
             <option value="$PROJECT_DIR$/module/SampleModule" />
