@@ -3,7 +3,7 @@ def module_name = project.name
 //  使用gradle打包指定包名和类的jar
 task clearJar(type: Delete) {
     String d = "$rootDir/repo/$group_id/$module_name"
-    printf("============path = $d")
+    // printf("============path = $d")
     delete d
 }
 

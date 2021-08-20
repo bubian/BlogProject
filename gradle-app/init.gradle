@@ -1,0 +1,18 @@
+// import org.apache.commons.math.fraction.Fraction
+allprojects {
+    repositories {
+        mavenLocal()
+    }
+}
+
+initscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.apache.commons:commons-math:2.0'
+    }
+}
+
+
+// println Fraction.ONE_FIFTH.multiply(2)
