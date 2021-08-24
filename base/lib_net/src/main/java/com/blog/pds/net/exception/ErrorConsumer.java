@@ -4,11 +4,6 @@ import com.blog.pds.net.utils.ResponseUtil;
 
 import io.reactivex.functions.Consumer;
 
-/**
- * 网络请求错误捕获
- *
- * @author hmy
- */
 public class ErrorConsumer implements Consumer<Throwable> {
     @Override
     public void accept(Throwable throwable) {

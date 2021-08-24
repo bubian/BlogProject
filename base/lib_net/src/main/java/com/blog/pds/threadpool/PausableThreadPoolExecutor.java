@@ -6,12 +6,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-/**
- * @author: pengdaosong
- * CreateTime:  2019/1/24 12:57 PM
- * Email：pengdaosong@medlinker.com
- * Description:
- */
 public class PausableThreadPoolExecutor extends ThreadPoolExecutor {
 
 	private boolean isPaused;

@@ -22,12 +22,6 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @author <a href="mailto:ganyu@medlinker.net">ganyu</a>
- * @version 3.0
- * @description 网络状态相关工具类
- * @time 2015/10/31 12:48
- */
 public class NetworkUtil {
 
     private static final String TAG = "NetworkUtil";

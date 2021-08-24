@@ -7,22 +7,10 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/**
- * @author <a href="mailto:ganyu@medlinker.com">ganyu</a>
- * @version 1.0
- * @description 默认网络请求参数拦截器
- * @time 2016/10/24 15:50
- */
 public class ParamsInterceptor implements Interceptor {
-//    // 客户端应用版本号
-//    private static String mVersionName;
-//    // 手机设备号
-//    private String mChannelId;
-//    private String mClientId;
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-//        initRequestParams();
         Request request = addDefaultParams(chain.request());
         return chain.proceed(request);
     }

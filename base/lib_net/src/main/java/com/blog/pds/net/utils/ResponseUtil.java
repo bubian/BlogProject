@@ -21,9 +21,6 @@ import javax.net.ssl.SSLHandshakeException;
 
 import retrofit2.HttpException;
 
-/**
- * @author hmy
- */
 public class ResponseUtil {
 
 

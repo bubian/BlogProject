@@ -21,9 +21,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * @author hmy
- */
 public class RetrofitProvide {
 
     private static final long CONNECT_TIMEOUT = 30L;
@@ -33,9 +30,6 @@ public class RetrofitProvide {
 
     private static RetrofitProvide sInstance;
 
-    /**
-     *
-     */
     public static synchronized RetrofitProvide getInstance() {
         if (sInstance == null) {
             sInstance = new RetrofitProvide();
@@ -87,9 +81,6 @@ public class RetrofitProvide {
         return builder.build();
     }
 
-    /**
-     *
-     */
     public Retrofit buildRetrofit(String baseUrl) {
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -99,9 +90,6 @@ public class RetrofitProvide {
                 .build();
     }
 
-    /**
-     * 公共参数放到header中
-     */
     public Retrofit buildRetrofit2(String baseUrl) {
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -111,12 +99,6 @@ public class RetrofitProvide {
                 .build();
     }
 
-    /**
-     * @param retrofit
-     * @param cls
-     * @param <T>
-     * @return
-     */
     public <T> T build(Retrofit retrofit, Class<T> cls) {
         if (retrofit == null) {
             throw new NullPointerException("retrofit is null");

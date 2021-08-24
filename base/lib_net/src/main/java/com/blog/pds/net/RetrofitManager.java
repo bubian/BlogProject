@@ -3,13 +3,6 @@ package com.blog.pds.net;
 import com.pds.env.blog.AppEnv;
 import retrofit2.Retrofit;
 
-/**
- * Author: KindyFung.
- * CreateTime:  2016/12/5 14:37
- * Email：fangjing@medlinker.com.
- * Description: Retrofit+okHttp
- */
-
 public class RetrofitManager {
     private static RetrofitManager mInstance;
     private static Retrofit mRetrofit;

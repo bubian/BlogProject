@@ -22,12 +22,6 @@ import java.util.List;
 import static android.content.Context.CONNECTIVITY_SERVICE;
 import static androidx.lifecycle.Lifecycle.State.DESTROYED;
 
-/**
- * @author: pengdaosong.
- * CreateTime:  2018/12/12 1:50 PM
- * Email：pengdaosong@medlinker.com.
- * Description:
- */
 public class NetworkStatusDispatcher {
 
   private static final String TAG = "NetworkStatusDispatcher";

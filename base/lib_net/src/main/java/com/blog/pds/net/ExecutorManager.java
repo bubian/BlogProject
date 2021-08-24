@@ -15,13 +15,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * @author <a href="mailto:tql@medlinker.net">tqlmorepassion</a>
- * @version 4.0
- * @description
- * @time 2016-11-21-16:32
- */
-
 public class ExecutorManager {
     public static final int DEVICE_INFO_UNKNOWN = 0;
     public static ExecutorService eventExecutor;
