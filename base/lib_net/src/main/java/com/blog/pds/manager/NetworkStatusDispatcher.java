@@ -35,7 +35,7 @@ public class NetworkStatusDispatcher {
   }
 
   @RequiresApi(api = Build.VERSION_CODES.N)
-  private void initOne(Application application){
+  private void initN(Application application){
     ConnectivityManager  connectivityManager = (ConnectivityManager) application.getSystemService(CONNECTIVITY_SERVICE);
     connectivityManager.registerDefaultNetworkCallback(new ConnectivityManager.NetworkCallback(){
 
