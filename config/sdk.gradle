@@ -157,6 +157,9 @@ ext {
                     'cardview'        : "androidx.cardview:cardview:1.0.0",
                     'gifDrawable'     : "pl.droidsonroids.gif:android-gif-drawable:1.2.+",
                     'lottie'          : "com.airbnb.android:lottie:2.5.6",
+                    // https://github.com/google/flexbox-layout
+                    'flexbox'         : 'com.google.android.flexbox:flexbox:3.0.0'
+
             ],
             'kt'     : [
                     'core'               : "androidx.core:core-ktx:${versions.core_version}",

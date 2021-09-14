@@ -12,7 +12,7 @@ import kotlin.system.measureTimeMillis
  */
 
 fun main() = runBlocking<Unit>{
-    test12()
+    test()
 }
 
 private fun test(){
